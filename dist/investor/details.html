@@ -78,11 +78,7 @@
 
 
             var waste_8912372 = function () {
-                var href, $loginBtn, loginBtnAttr;
-                $loginBtn = $(".login-btn");
-                href = escape(location.href),
-                loginBtnAttr = settings.loginPageURL || $loginBtn.attr("data-href");
-                if (loginBtnAttr) $loginBtn.attr("data-href", loginBtnAttr + href);
+                $(".login-btn").attr("data-href", $.Angelcrunch.url.redirect2LoginUrl());
             };
 
             var waste_2012932 = function () {
@@ -400,11 +396,11 @@
                 <p class="declare can-not-view-marked">想查看项目详细信息、成长数据、商业计划书等重要信息，你需要在电脑上打开天使汇网站申请投资人身份。</p>
                 <div class="control-module">
                     <em><i></i>天使汇认证投资人</em>
-                    <button class="btn btn-small login-btn ci-link" data-href="/html/user/login.html?source=">登录</button>
+                    <button class="btn btn-small login-btn">登录</button>
                 </div>
                 <div class="control-module can-not-view-marked">
                     <em><i></i>换一个账号登录？</em>
-                    <button class="btn btn-small login-btn ci-link" data-href="/html/user/login.html?source=">登录</button>
+                    <button class="btn btn-small login-btn">登录</button>
                 </div>
                 <!--<div class="control-module">
                     <em><i></i>未认证投资人</em>

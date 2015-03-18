@@ -11,7 +11,7 @@
 
 .slogan {
   text-align:center;
-  padding:32px 10% 34px 10%;
+  padding:32px 2% 34px 2%;
   background:#F5F5F5;
 }
 
@@ -22,6 +22,15 @@
   line-height:46px;
 }
 
+@media only screen and (max-width: 345px) {
+  .avatar-area h1,
+  .stars section h1,
+  .slogan h1 {
+    font-size:26px;
+    line-height:42px;
+  }
+}
+
 .slogan h1 {
   line-height:34px;
   margin-bottom:5px;
@@ -29,6 +38,12 @@
 
 .slogan p {
   line-height:18px;
+  margin:0 5%;
+}
+@media only screen and (max-width: 345px) {
+  .slogan p {
+    margin:0 2%;
+  }
 }
 
 

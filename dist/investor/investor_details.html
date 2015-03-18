@@ -49,7 +49,16 @@
                 url: "http://" + settings.AjaxDomain + "/v2/user/m_detail",
                 basic_data: {}
             },
+            Ajax_follow: {                     // Follow
+                url: "http://" + settings.AjaxDomain + "/v2/follow",
+                basic_data: {}
+            },
+            Ajax_unfollow: {                     // Unfollow
+                url: "http://" + settings.AjaxDomain + "/v2/unfollow",
+                basic_data: {}
+            },
             API: {
+                changeFellowState: ""
             }
         };
 
@@ -70,6 +79,7 @@
                 $.post(url, _data, function (data) {
                     var times = 50;
                     avalonNS.model.details.data = data;
+                    I.API.changeFellowState(data.user.isfollow);
                     // Delay calculation method
                     sliderTimeHandle = setInterval(function () {
                         if ($album.find("ul > li").length > 0) {
@@ -86,13 +96,85 @@
             }).call(this);
         };
 
-        var waste12398712 = function () {
+        var waste_3920123 = function () {
+            var className = {
+                notification: "#login-failed",
 
-        }
+                followState: "reverse",
+                sending: "sending-state"
+            };
+            var txt = {
+                isFollow: "已关注",
+                notFollow: "关注该投资人"
+            };
+            var $btn, $notification;
+            $btn = $("#follow-btn"),
+            $notification = $(className.notification);
+
+            var changeFellowState =
+                I.API.changeFellowState = function (isFollow) {
+                    if (isFollow)
+                        $btn.addClass(className.followState).text(txt.isFollow);
+                    else
+                        $btn.removeClass(className.followState).text(txt.notFollow);
+                };
+
+            $btn.click(function () {
+                if (!$COOKIE.operation.isLogin())
+                    location.href = $.Angelcrunch.url.redirect2LoginUrl();
+
+                if ($(this).hasClass(className.sending)) return 0;
+                if ($(this).hasClass(className.followState))
+                    unfollowAjax();
+                else followAjax();
+            });
+
+            // Follow
+            var followAjax = function () {
+                var url = I.Ajax_follow.url,
+                    basic_data = I.Ajax_follow.basic_data,
+                          type = "jsonp";
+                var _data = $.extend(true, {}, basic_data);
+                var userId = $.Angelcrunch.url.getUserId();
+                _data[$COOKIE.cookieName.token] = $.cookie($COOKIE.cookieName.token);
+                _data[$COOKIE.cookieName.user_id] = $.cookie($COOKIE.cookieName.user_id);
+
+                if (userId) _data["id"] = userId;
+                $btn.addClass(className.sending);
+                $.post(url, _data, function (data) {
+                    if (data.success)
+                        changeFellowState(true);
+                    else $notification.notificationToggle();
+                    $btn.removeClass(className.sending);
+                }, type);
+            };
+            // Unfollow
+            var unfollowAjax = function () {
+                var url = I.Ajax_unfollow.url,
+                    basic_data = I.Ajax_unfollow.basic_data,
+                          type = "jsonp";
+                var _data = $.extend(true, {}, basic_data);
+                var userId = $.Angelcrunch.url.getUserId();
+                _data[$COOKIE.cookieName.token] = $.cookie($COOKIE.cookieName.token);
+                _data[$COOKIE.cookieName.user_id] = $.cookie($COOKIE.cookieName.user_id);
+
+                if (userId) _data["id"] = userId;
+                $btn.addClass(className.sending);
+                $.post(url, _data, function (data) {
+                    if (data.success)
+                        changeFellowState(false);
+                    else $notification.notificationToggle();
+                    $btn.removeClass(className.sending);
+                }, type);
+            };
+
+        };
+
 
         return {
             attackEvent: function () {
                 waste_2012932();
+                waste_3920123();
             },
 
             pageLoad_Init: function () {
@@ -128,6 +210,8 @@
 </head>
 <body>
     <div class="details" ms-controller="investor-details">
+        <div id="login-failed" class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
+        <div id="personal-item" class="notification orange"><i class="txt">正在拉取您的项目列表...</i><i class="close">×</i></div>
         <div class="pesonal-summary">
             <div class="layer">
                 <div class="avatar"><img src="" ms-src="data.user.avatar||''" /></div>
@@ -167,7 +251,7 @@
             <div ms-if="data.user.tag">
                 <h3>擅长领域</h3>
                 <ul class="mark-list">
-                    <li ms-repeat="data.user.tag.split('·')" ms-text="el">移动互联网</li>
+                    <li ms-repeat="data.user.tag.split('·')" ms-text="el">互联网金融</li>
                 </ul>
             </div>
         </div>
@@ -194,7 +278,7 @@
         </div>
         <div class="page-action">
             <div class="btn-group">
-                <button class="btn btn-small white-border" data-redirect="" data-btn-reverse-text="已关注">关注该投资人</button>
+                <button id="follow-btn" class="btn btn-small white-border" data-btn-reverse-text="已关注">关注该投资人</button>
                 <button class="btn btn-small orange ci-link" data-href="www.baidu.com" data-target="_self">提交项目</button>
             </div>
         </div>

@@ -135,6 +135,9 @@ $.Angelcrunch.dataSet = $.Angelcrunch.dataSet || {};
             var domain = location.host.match(/.+\.(.+\.[a-zA-Z0-9]+)/);
             return domain ? location.protocol+"//" + domain[0] : "";
         },
+        redirect2LoginUrl: function () {
+            return page.settings.loginPageURL + escape(location.href);
+        },
         isTestMode: function () {
             if (this.getQueryString("test_mode"))
                 return true;
@@ -287,7 +290,6 @@ $.Angelcrunch.Utilities.dialogueConfirm = function () {
                 _imgManipulation($image, options);
             };
             measure += $(this).outerWidth(true);
-            console.log(measure);
         });
 
         if (measure > globeWidth) {

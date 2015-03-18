@@ -1,0 +1,159 @@
+﻿/*/
+/*
+/* Rank: 3
+/* Standard：Google
+/*
+/*/
+
+.slogan {
+  width:100%;
+  padding:6% 0;
+  background:#EEE;
+}
+
+.slogan img {
+  display:block;
+  width:68.3%;
+  margin: 0 auto;
+  max-width:370px;
+}
+
+.about-data {
+  display:inline-block;
+  width:100%;
+  height:104px;
+  text-align:center;
+}
+
+.about-data ul {
+  display:inline-block;
+  margin-top:28px;
+}
+
+.about-data li {
+  float:left;
+  text-align:center;
+  margin: 0 1.5px;
+}
+
+.about-data li h3 {
+  height:40px;
+}
+
+.about-data li h3 em {
+  font-size:42px;
+  line-height:42px;
+  margin-right:4px;
+}
+
+.about-data li p {
+  font-size:12px;
+}
+
+.btn-container {
+  padding:14px 0;
+  background:#EEE;
+}
+
+.btn-container .btn {
+  display:block;
+  width:88.6%;
+  height:42px;
+  font-size:22px;
+  line-height:36px;
+  color:#F17A4F;
+  margin:0 auto;
+  border:1px solid #F17A4F;
+}
+
+.btn-container .btn:hover {
+  background:#EEE;
+}
+
+.stars h1 {
+  font-size:28px;
+  line-height:28px;
+  text-align:center;
+  margin-top:22px;
+}
+
+.stars section {
+  display:inline-block;
+  padding:0 5.3%;
+  padding-bottom:6px;
+  margin-top:58px;
+  background:#F5F5F5;
+}
+
+.stars section .avatar-area {
+  text-align:center;
+  margin-top:-35px;
+}
+
+.stars section .avatar {
+  display:inline-block;
+}
+
+.stars section .avatar img {
+  width:70px;
+  border-radius:0;
+}
+
+.stars .avatar-area p {
+  font-size:22px;
+  line-height:26px;
+}
+
+.stars p.desc {
+  color:#666;
+  line-height:18px;
+  margin-top:2px;
+}
+
+.stars .invested {
+  height: 47px;
+  margin-top: 10px;
+  padding-top:1px;
+  border-top: 1px solid #DDD;
+  background: url('/static/images/wapsite/for_app/129377198237.png') no-repeat 50px 11px;
+  background-size:264px;
+}
+
+.stars .invested em {
+  position:absolute;
+  font-size:12px;
+  color:#999;
+  line-height:48px;
+}
+
+.stars .invested.e12387123 {
+  background-image: url('/static/images/wapsite/for_app/12831723978123.png');
+}
+
+.stars .invested.e32387929 {
+  background-image: url('/static/images/wapsite/for_app/12837129837123.png');
+}
+
+.stars .milestone {
+  min-height:46px;
+  margin-top:10px;
+  padding-top:8px;
+  border-top:1px solid #DDD;
+}
+
+.stars .milestone p {
+  font-size:12px;
+  color:#999;
+  line-height:16px;
+}
+
+.activity {
+  padding: 20px 5.3% 8px;
+}
+
+.activity p {
+  font-size:16px;
+  line-height:18px;
+  margin-bottom:6px;
+  color:#F17A4F;
+}
