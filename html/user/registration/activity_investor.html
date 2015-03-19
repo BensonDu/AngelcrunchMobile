@@ -264,7 +264,7 @@
                     route_path: "data-route-path",
                     route_main_page: "data-route-path='?pageselect=mainpage'",
                     main_page_scroll_top: "data-page-scroll",
-
+                    to_ele_position: "data-go-to-top",
                     triggered_layer: "data-triggered-layer"
                 };
 
@@ -276,13 +276,13 @@
 
                         $trigger.click(function () {
                             $(window).attr(attr.main_page_scroll_top, $(window).scrollTop());
-                            $ele.main_page.delay(600).fadeOut(200);
+                            $ele.main_page.delay(300).fadeOut(200);
                             $this.addClass(state.page_show);
                         });
 
                         $this.find(attr.route_main_page.attrRetrievalMode())
                         .click(function () {
-                            $ele.main_page.show();
+                            $ele.main_page.stop(true).fadeIn(1);
                             $this.removeClass(state.page_show);
                             $(window).scrollTop($(window).attr(attr.main_page_scroll_top));
                         });
@@ -298,6 +298,7 @@
                             $layer_parent = $layer.parents(className.special_layer);
 
                         $(this).click(function () {
+                            var offset_top, currentTop, time_handle, factor = 6;
                             var $btn = $($current_page.attr(attr.page_trigger));
                             $current_page.find(attr.route_main_page.attrRetrievalMode()).click();
                             $ele.hidden_layer.show();
@@ -313,6 +314,19 @@
                             $btn.attr(attr.page_trigger_result, $item.attr(attr.triggered_layer));
                             $btn.find("p").html($item.find("h3").html());
                             $layer.show();
+
+                            // Scroll Event
+                            if ($btn.attr(attr.to_ele_position)) {
+                                offset_top = $btn.offset().top;
+                                currentTop = $(window).scrollTop();
+                                time_handle = setInterval(function () {
+                                    currentTop = currentTop + factor;
+                                    var top = currentTop > offset_top
+                                              ? offset_top : currentTop + factor;
+                                    if (top >= offset_top) clearInterval(time_handle);
+                                    $(window).scrollTop(top);
+                                }, factor);
+                            }
                         });
                     });
                 }).call(this);                          // The Logic Of Selection Display Ended
@@ -406,7 +420,7 @@
             <div class="avatar-area">
                 <h1>申请成为天使汇认证投资人</h1>
                 <p>申请成功后可查看项目详细信息、约谈项目，参与投资2015年，天使汇诚邀你的加入，成为下一个孙正义</p>
-                <div id="investortype" class="investor-type layer-btn" data-route-path="?pageselect=investortype" data-selector-result="">
+                <div id="investortype" class="investor-type layer-btn" data-route-path="?pageselect=investortype" data-selector-result="" data-go-to-top="true">
                     <p>选择投资人类型</p>
                     <i class="vector-icons arrow-left"></i>
                 </div>

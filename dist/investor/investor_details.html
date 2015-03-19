@@ -255,8 +255,8 @@
                 </ul>
             </div>
         </div>
-        <div class="fund-paln">
-            <ul class="plan">
+        <div ms-if="data.user" class="fund-paln">
+            <ul class="plan" ms-if="data.user.count">
                 <li>
                     <i></i>
                     <div class="desc">
@@ -280,6 +280,50 @@
             <div class="btn-group">
                 <button id="follow-btn" class="btn btn-small white-border" data-btn-reverse-text="已关注">关注该投资人</button>
                 <button class="btn btn-small orange ci-link" data-href="www.baidu.com" data-target="_self">提交项目</button>
+            </div>
+        </div>
+    </div>
+    <div id="submit-item" class="new-page center">
+        <div class="title-container">
+            <p class="float-left prev-page"><i class="vector-icons arrow-up-bold"></i>返回</p>
+            <p class="title">对投资人提交项目</p>
+        </div>
+        <div class="selection">
+            <div class="e-block">
+                <h1>我的项目</h1>
+                <div class="section-list">
+                    <section>
+                        <div class="logo">
+                            <div class="hide-border"></div>
+                            <img src="/static/images/wapsite/129837123987.jpg" />
+                        </div>
+                        <h3>嘀嘀打车</h3>
+                        <div class="tag">已提交</div>
+                    </section>
+                    <section class="active">
+                        <div class="logo">
+                            <div class="hide-border"></div>
+                            <img src="/static/images/wapsite/1283712387.jpg" />
+                        </div>
+                        <h3>健康防火墙</h3>
+                        <div class="tag">已提交</div>
+                    </section>
+                    <section>
+                        <div class="logo">
+                            <div class="hide-border"></div>
+                            <img src="/static/images/wapsite/129837892173.jpg" />
+                        </div>
+                        <h3>迈卡车生活</h3>
+                        <div class="tag">已提交</div>
+                    </section>
+                </div>
+            </div>
+            <div class="submit-area">
+                <div class="summary">
+                    <p>未合投项目每天可向3人提交</p>
+                    <p>在电脑上完善项目信息并申请快速合投，通过后可升级至5人</p>
+                </div>
+                <button class="btn submit-btn submit-item ">提交<em>（该项目今日剩余<i>3</i>次）</em></button>
             </div>
         </div>
     </div>

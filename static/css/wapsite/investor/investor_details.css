@@ -331,6 +331,129 @@
   margin-top:1px;
 }
 
+/******************
+     new page
+ ******************/
+
+.new-page .selection .section-list {
+  display:inline-block;
+  padding-left:2.6%;
+}
+
+.new-page .selection section {
+  position:static;
+  display:inline-block;
+  width:100%;
+  float:left;
+  padding:10px 4.2% 10px 2.6%;
+  background-image:none;
+}
+
+.new-page .selection section.active {
+  border-color:rgba(33, 112, 205, 0.04);
+  background:rgba(33, 112, 205, 0.08);
+}
+
+.new-page section .logo {
+  height:65px;
+  float:left;
+}
+
+ .new-page section .logo .hide-border {
+  display:none;
+  width:67px;
+  height:67px;
+  margin-left:-2px;
+  margin-top:-2px;
+  position:absolute;
+  border:2px solid #3764ac;
+}
+
+.new-page section.active .hide-border {
+  display:block;
+}
+
+.new-page .selection section h3 {
+  float:left;
+  color:#666;
+  font-size:18px;
+  line-height:65px;
+  margin-left:12px;
+}
+
+.new-page .selection section img {
+  width:65px;
+}
+
+.new-page .selection section .tag {
+  height:20px;
+  float:right;
+  color:#E55534;
+  line-height:20px;
+  margin-top:22px;
+  padding: 0 5px;
+  border:1px solid #E55534;
+  border-radius:3px;
+}
+
+.new-page .selection section .tag:empty {
+  display:none;
+}
+
+.submit-area {
+  width:100%;
+  position:fixed;
+  bottom:0;
+  background:#F5F5F5;
+}
+
+@media only screen and (min-width: 998px) {
+  .submit-area {
+    width:360px;
+  }
+}
+
+.submit-area .summary {
+  margin-top:6px;
+  margin-bottom:4px;
+}
+
+.submit-area p {
+  font-size:12px;
+  color:#999;
+  line-height:14px;
+  padding-left:2%;
+}
+
+.submit-area .submit-item {
+  color:#666;
+  font-size:22px;
+  background-image:none;
+}
+
+.submit-area .submit-item em {
+  display:none;
+}
+
+.submit-area .submit-item.active,
+.submit-area .submit-item.active em {
+  color:#FFF;
+}
+
+.submit-area .submit-item.active em {
+  display:inline-block;
+  color:#FFF;
+  font-size:18px;
+}
+
+.submit-area .submit-item.disable,
+.submit-area .submit-item.disable:hover,
+.submit-area .submit-item.disable em {
+  color:#999;
+  background:#DDD;
+}
+
+
 /*******************
        Keyframes
   ********************/

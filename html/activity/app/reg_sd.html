@@ -33,6 +33,7 @@
 
     <script src="/static/js/lib/jquery-1.11.1.min.js"></script>
     <script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
+    <script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
 
     <script type="text/javascript" id="page-interactive-init">
         var page = window.page || {};
@@ -40,14 +41,58 @@
         page.MethodObj.prototype = (function () {
             var settings = page.settings;
             var I = {
+                Ajax_is_reg_sd: {                     // Has been registration SD
+                    url: "http://" + settings.AjaxDomain + "/v2/user/is_reg_sd",
+                    basic_data: {}
+                },
+                Ajax_reg_sd: {                     // Join SD
+                    url: "http://" + settings.AjaxDomain + "/v2/user/reg_sd",
+                    basic_data: {}
+                }
             };
 
             var waste_9839213 = function () {
+                var txt = "第7期闪投活动您已报名";
+                var url = I.Ajax_is_reg_sd.url,
+                        basic_data = I.Ajax_is_reg_sd.basic_data,
+                              type = "jsonp";
+                var _data = $.extend(true, {}, basic_data);
+                var uid = $.Angelcrunch.url.getQueryString("uid");
+                var access_token = $.Angelcrunch.url.getQueryString("access_token");
+
+                _data["uid"] = uid;
+                _data["access_token"] = access_token;
+
+                $.post(url, _data, function (data) {
+                    if (data.is_reg) $("#join-sd").addClass("disable").text(txt);
+                }, type);
+            };
+
+            var waste_2378132 = function () {
+                $("#join-sd").click(function () {
+                    var url = I.Ajax_reg_sd.url,
+                        basic_data = I.Ajax_reg_sd.basic_data,
+                              type = "jsonp";
+                    var _data = $.extend(true, {}, basic_data);
+                    var uid = $.Angelcrunch.url.getQueryString("uid");
+                    var access_token = $.Angelcrunch.url.getQueryString("access_token");
+
+                    _data["uid"] = uid;
+                    _data["access_token"] = access_token;
+
+                    $.post(url, _data, function (data) {
+                        if (data.success)
+                            location.href = $("#join-sd").attr("data-redirect");
+                        else
+                            $(".notification").notificationToggle(data.message)
+                    }, type);
+                });
             };
 
             return {
                 attackEvent: function () {
                     waste_9839213();
+                    waste_2378132();
                 },
 
                 pageLoad_Init: function () {
@@ -97,7 +142,7 @@
             </ul>
         </div>
         <div class="btn-container">
-            <button class="btn">报名参加第7期闪投</button>
+            <button id="join-sd" class="btn ci-link" data-redirect="301815_success.html">报名参加第7期闪投</button>
         </div>
         <div class="stars">
             <h1>和投资大咖们一起合投</h1>

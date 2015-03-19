@@ -94,3 +94,33 @@
   color: #FFF;
   font-size:22px;
 }
+
+.no-button-module {
+            background-color:#F5F5F5;
+            padding-bottom:20px;
+        }
+
+        .no-button-module .control-module {
+            display:none;
+        }
+
+        .no-button-module .success-desc {
+            margin-bottom:120px;
+            padding-left:7%;
+            padding-right:7%;
+        }
+
+        .no-button-module .success-desc h1 {
+            font-size:32px;
+            line-height:52px;
+            margin-top:4px;
+        }
+
+        .no-button-module .success-desc .icon img {
+            width:56px;
+        }
+
+        .no-button-module .success-desc p {
+            line-height:22px;
+            margin-top:8px;
+        }
