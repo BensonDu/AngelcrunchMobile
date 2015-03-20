@@ -121,7 +121,7 @@
 
             $btn.click(function () {
                 if (!$COOKIE.operation.isLogin())
-                    location.href = $.Angelcrunch.url.redirect2LoginUrl();
+                    location.href = $.Angelcrunch.url.addedSouceUrl(settings.loginPageURL);
 
                 if ($(this).hasClass(className.sending)) return 0;
                 if ($(this).hasClass(className.followState))
@@ -283,47 +283,36 @@
             </div>
         </div>
     </div>
-    <div id="submit-item" class="new-page center">
+    <div id="submit-item" class="new-page white-style center">
         <div class="title-container">
-            <p class="float-left prev-page"><i class="vector-icons arrow-up-bold"></i>返回</p>
+            <p class="float-left prev-page"></p>
             <p class="title">对投资人提交项目</p>
         </div>
         <div class="selection">
             <div class="e-block">
                 <h1>我的项目</h1>
                 <div class="section-list">
-                    <section>
+                    <section class="already-submit">
                         <div class="logo">
-                            <div class="hide-border"></div>
                             <img src="/static/images/wapsite/129837123987.jpg" />
                         </div>
-                        <h3>嘀嘀打车</h3>
-                        <div class="tag">已提交</div>
-                    </section>
-                    <section class="active">
-                        <div class="logo">
-                            <div class="hide-border"></div>
-                            <img src="/static/images/wapsite/1283712387.jpg" />
+                        <div class="summary">
+                            <h3>约拍</h3>
+                            <p>创建于2015.3.2</p>
                         </div>
-                        <h3>健康防火墙</h3>
-                        <div class="tag">已提交</div>
-                    </section>
-                    <section>
-                        <div class="logo">
-                            <div class="hide-border"></div>
-                            <img src="/static/images/wapsite/129837892173.jpg" />
+                        <div class="item-state">
+                            <div class="tag">[已经提交，无需再次提交]</div>
+                            <div class="vector-icons success"></div>
                         </div>
-                        <h3>迈卡车生活</h3>
-                        <div class="tag">已提交</div>
                     </section>
                 </div>
             </div>
             <div class="submit-area">
                 <div class="summary">
-                    <p>未合投项目每天可向3人提交</p>
-                    <p>在电脑上完善项目信息并申请快速合投，通过后可升级至5人</p>
+                    <p>今天还有<i>5</i>次提交机会:</p>
+                    <p class="multiple">这个项目还有<i>5</i>次提交机会:</p>
                 </div>
-                <button class="btn submit-btn submit-item ">提交<em>（该项目今日剩余<i>3</i>次）</em></button>
+                <button class="btn submit-btn submit-item"></button>
             </div>
         </div>
     </div>

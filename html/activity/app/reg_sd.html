@@ -63,8 +63,10 @@
                 _data["uid"] = uid;
                 _data["access_token"] = access_token;
 
+                $("#join-sd-area").hide();
                 $.post(url, _data, function (data) {
                     if (data.is_reg) $("#join-sd").addClass("disable").text(txt);
+                    if (data.can_reg) $("#join-sd-area").show();
                 }, type);
             };
 
@@ -141,8 +143,8 @@
                 </li>
             </ul>
         </div>
-        <div class="btn-container">
-            <button id="join-sd" class="btn ci-link" data-redirect="/reg_sd_success">报名参加第7期闪投</button>
+        <div id="join-sd-area" class="btn-container">
+            <button id="join-sd" class="btn ci-link" data-redirect="301815_success.html">报名参加第7期闪投</button>
         </div>
         <div class="stars">
             <h1>和投资大咖们一起合投</h1>

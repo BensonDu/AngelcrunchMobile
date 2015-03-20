@@ -9,8 +9,10 @@
 // Page Settings
 var page = window.page || {};
 page.settings = {
-    AjaxDomain: "mobile.angelcrunch.com",
-    loginPageURL: "/html/user/login.html" + "?source="
+    AjaxDomain: "mobile.tonghs.me",
+    loginPageURL: "/html/user/login.html" + "?source=",
+    investorRegPageURL_longer: "/html/user/registration/investor.html" + "?source=",
+    investorRegPageURL_shortly: "/html/user/registration/extremely_short_investor.html" + "?source="
 }
 
 
@@ -135,8 +137,8 @@ $.Angelcrunch.dataSet = $.Angelcrunch.dataSet || {};
             var domain = location.host.match(/.+\.(.+\.[a-zA-Z0-9]+)/);
             return domain ? location.protocol+"//" + domain[0] : "";
         },
-        redirect2LoginUrl: function () {
-            return page.settings.loginPageURL + escape(location.href);
+        addedSouceUrl: function (str) {
+            return str + escape(location.href);
         },
         isTestMode: function () {
             if (this.getQueryString("test_mode"))

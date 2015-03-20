@@ -78,7 +78,9 @@
 
 
             var waste_8912372 = function () {
-                $(".login-btn").attr("data-href", $.Angelcrunch.url.redirect2LoginUrl());
+                $(".login-btn").attr("data-href", $.Angelcrunch.url.addedSouceUrl(settings.loginPageURL));
+                $("#shortly_reg").attr("data-href", $.Angelcrunch.url.addedSouceUrl(settings.investorRegPageURL_shortly));
+                $("#longer_reg").attr("data-href", $.Angelcrunch.url.addedSouceUrl(settings.investorRegPageURL_longer));
             };
 
             var waste_2012932 = function () {
@@ -402,10 +404,14 @@
                     <em><i></i>换一个账号登录？</em>
                     <button class="btn btn-small login-btn">登录</button>
                 </div>
-                <!--<div class="control-module">
+                <div class="control-module can-not-view-marked">
+                    <em><i></i>申请投资人账号</em>
+                    <button id="shortly_reg" class="btn btn-small" data-href="">申请认证</button>
+                </div>
+                <div class="control-module">
                     <em><i></i>未认证投资人</em>
-                    <button class="btn btn-small">申请认证</button>
-                </div>-->
+                    <button id="longer_reg" class="btn btn-small" data-href="">申请认证</button>
+                </div>
             </div>
             <div class="banner-footer">
                 <p>AngelCrunch.com</p>
