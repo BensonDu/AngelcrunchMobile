@@ -9,7 +9,7 @@
 // Page Settings
 var page = window.page || {};
 page.settings = {
-    AjaxDomain: "mobile.tonghs.me",
+    AjaxDomain: "mobile.angelcrunch.com",
     loginPageURL: "/html/user/login.html" + "?source=",
     investorRegPageURL_longer: "/html/user/registration/investor.html" + "?source=",
     investorRegPageURL_shortly: "/html/user/registration/extremely_short_investor.html" + "?source="
