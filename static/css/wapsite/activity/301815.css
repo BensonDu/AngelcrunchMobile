@@ -55,6 +55,10 @@
   background:#EEE;
 }
 
+.btn-container .btn.disable{
+    color: #ccc;
+}
+
 .btn-container .btn {
   display:block;
   width:88.6%;
@@ -157,3 +161,4 @@
   margin-bottom:6px;
   color:#F17A4F;
 }
+

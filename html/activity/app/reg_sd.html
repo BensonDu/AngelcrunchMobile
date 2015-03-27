@@ -52,7 +52,7 @@
             };
 
             var waste_9839213 = function () {
-                var txt = "第7期闪投活动您已报名";
+                var txt = "第10期闪投活动您已报名";
                 var url = I.Ajax_is_reg_sd.url,
                         basic_data = I.Ajax_is_reg_sd.basic_data,
                               type = "jsonp";
@@ -63,10 +63,14 @@
                 _data["uid"] = uid;
                 _data["access_token"] = access_token;
 
-                $("#join-sd-area").hide();
+                //$("#join-sd-area").hide();
                 $.post(url, _data, function (data) {
                     if (data.is_reg) $("#join-sd").addClass("disable").text(txt);
-                    if (data.can_reg) $("#join-sd-area").show();
+                    if (!data.can_reg) {
+                        $("#join-sd").addClass("disable").text('请注册为投资人后再报名');
+                        $("#join-sd").attr('disabled', "true");
+                    }
+                    //$("#join-sd-area").show();
                 }, type);
             };
 
@@ -144,7 +148,7 @@
             </ul>
         </div>
         <div id="join-sd-area" class="btn-container">
-            <button id="join-sd" class="btn ci-link" data-redirect="reg_sd_success">报名参加第7期闪投</button>
+            <button id="join-sd" class="btn ci-link" data-redirect="reg_sd_success">报名参加第10期闪投</button>
         </div>
         <div class="stars">
             <h1>和投资大咖们一起合投</h1>
@@ -203,7 +207,7 @@
             </section>
         </div>
         <div class="activity">
-            <p>举办时间：2015年3月11日，上午10：00~下午5：00</p>
+            <p>举办时间：待定</p>
             <p>天使汇大楼（原海淀图书城10号楼）3层。</p>
         </div>
         <div class="banner-footer">
