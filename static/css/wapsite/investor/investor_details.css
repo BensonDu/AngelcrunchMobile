@@ -51,17 +51,22 @@
 .pesonal-summary .avatar {
   display: inline-block;
   width: 100%;
-  min-height:93px;
+  min-height:94px;
   margin-top: 14px;
 }
 
 .pesonal-summary .avatar img {
+  display:none;
   width: 25%;
   min-width:90px;
   max-width:125px;
   min-height:90px;
   border-radius:50%;
   border:2px solid #FFF;
+}
+
+.pesonal-summary .avatar img.show {
+  display:inline-block;
 }
 
 .pesonal-summary .summary {
@@ -108,10 +113,14 @@
 }
 
 .pesonal-summary .rs-bkg {
-  position:absolute;
-  bottom:0;
+  position: absolute;
+  bottom: 0;
   background: #21395C;
-  z-index:1;
+  z-index: 1;
+  -moz-animation: 4s ease 0s normal forwards bkg-scale;
+  -o-animation: 4s ease 0s normal forwards bkg-scale;
+  -webkit-animation: 4s ease 0s normal forwards bkg-scale;
+  animation: 4s ease 0s normal forwards bkg-scale;
 }
 
 .pesonal-summary .rs-bkg img {
@@ -335,18 +344,6 @@
      new page
  ******************/
 
-.new-page.white-style {
-  background:#FFF;
-}
-
-.new-page.white-style .prev-page {
-  display:block;
-  width:28px;
-  height:24px;
-  background: url(/static/images/wapsite/cssimage/arrow-right-black.png) center scroll no-repeat;
-  background-size: 22px;
-}
-
 .new-page .selection .section-list {
   display:inline-block;
   width:100%;
@@ -359,8 +356,10 @@
   display:inline-block;
   width:100%;
   float:left;
+  margin-bottom:3px;
   padding:38px 7.2% 35px 5.3%;
-  border-top:1px solid ;
+  border-top:1px solid #F3F3F3;
+  border-bottom:1px solid #F3F3F3 !important;
   background-image:none;
 }
 
@@ -391,6 +390,19 @@
   color:#666;
   font-size:28px;
   line-height:36px;
+}
+
+.new-page .selection section h3.small-font {
+  font-size:22px;
+  line-height:32px;
+  margin-bottom:2px;
+}
+
+
+.new-page .selection section h3.minimum-font {
+  font-size:20px;
+  line-height:30px;
+  margin-bottom:4px;
 }
 
 .new-page section .item-state {
@@ -444,6 +456,29 @@
   margin-bottom:8px;
 }
 
+/*******************
+     Entrepreneurs
+  ********************/
+
+.entrepreneurs .pesonal-info {
+  display:block;
+  min-height:370px;
+  padding:0;
+}
+
+.entrepreneurs .pesonal-info section {
+  display:inline-block;
+  width:100%;
+  padding: 0px 5.2% 30px;
+}
+
+.entrepreneurs .pesonal-info section p {
+  line-height:18px;
+}
+
+.entrepreneurs .pesonal-info section:nth-child(2n+1) {
+  background:#FFF;
+}
 
 /*******************
        Keyframes
@@ -496,5 +531,77 @@
 
   100% {
     transform: rotate(-360deg) translateZ(-1px);
+  }
+}
+
+
+
+@-webkit-keyframes bkg-scale {
+  0% {
+    -moz-transform:scaleX(1.1) scaleY(1.1);
+    -webkit-transform:scaleX(1.1) scaleY(1.1);
+    transform:scaleX(1.1) scaleY(1.1);
+  }
+
+  100% {
+    -moz-transform: scaleX(1) scaleY(1);
+    -webkit-transform: scaleX(1) scaleY(1);
+    transform: scaleX(1) scaleY(1);
+  }
+}
+
+@-moz-keyframes bkg-scale {
+  0% {
+    -moz-transform:scaleX(1.1) scaleY(1.1);
+    -webkit-transform:scaleX(1.1) scaleY(1.1);
+    transform:scaleX(1.1) scaleY(1.1);
+  }
+
+  100% {
+    -moz-transform: scaleX(1) scaleY(1);
+    -webkit-transform: scaleX(1) scaleY(1);
+    transform: scaleX(1) scaleY(1);
+  }
+}
+
+@-o-keyframes bkg-scale {
+  0% {
+    -moz-transform:scaleX(1.1) scaleY(1.1);
+    -webkit-transform:scaleX(1.1) scaleY(1.1);
+    transform:scaleX(1.1) scaleY(1.1);
+  }
+
+  100% {
+    -moz-transform: scaleX(1) scaleY(1);
+    -webkit-transform: scaleX(1) scaleY(1);
+    transform: scaleX(1) scaleY(1);
+  }
+}
+
+@-ms-keyframes bkg-scale {
+  0% {
+    -moz-transform:scaleX(1.1) scaleY(1.1);
+    -webkit-transform:scaleX(1.1) scaleY(1.1);
+    transform:scaleX(1.1) scaleY(1.1);
+  }
+
+  100% {
+    -moz-transform: scaleX(1) scaleY(1);
+    -webkit-transform: scaleX(1) scaleY(1);
+    transform: scaleX(1) scaleY(1);
+  }
+}
+
+@keyframes bkg-scale {
+  0% {
+    -moz-transform:scaleX(1.1) scaleY(1.1);
+    -webkit-transform:scaleX(1.1) scaleY(1.1);
+    transform:scaleX(1.1) scaleY(1.1);
+  }
+
+  100% {
+    -moz-transform: scaleX(1) scaleY(1);
+    -webkit-transform: scaleX(1) scaleY(1);
+    transform: scaleX(1) scaleY(1);
   }
 }

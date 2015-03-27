@@ -1,0 +1,244 @@
+﻿/*/
+/*
+/* Rank: 3
+/* Standard：Google
+/*
+/*/
+
+/*******************
+    branding head
+  *******************/
+
+.details {
+  background:#F5F5F5;
+}
+
+.title-header {
+  width:100%;
+  height:48px;
+  background:#EEE;
+}
+
+.title-header h1 {
+  font-size:20px;
+  line-height:50px;
+  padding:0 5.6%;
+}
+
+.section-list {
+  display:inline-block;
+  width:100%;
+  min-height:424px;
+}
+
+.section-list section {
+  width:100%;
+  min-height:100px;
+  padding:17px 5.6% 4px;
+  margin-bottom:6px;
+  background:#FFF;
+}
+
+.section-list .logo {
+  display:block;
+  width:66px;
+  height:66px;
+  float:left;
+}
+
+.section-list .logo img {
+  width:66px;
+  height:66px;
+  border-radius:4px;
+}
+
+.section-list .summary {
+  float:right;
+  width:71.2%;
+  height:64px;
+}
+
+.section-list .summary h3 {
+  font-size:24px;
+  line-height:24px;
+}
+
+.section-list .summary p {
+  width:100%;
+  line-height:20px;
+  white-space:nowrap;
+  overflow:hidden;
+  -o-text-overflow:ellipsis;
+  -ms-text-overflow:ellipsis;
+  text-overflow:ellipsis;
+}
+
+.section-list .summary .item-state {
+  display:inline-block;
+  height:12px;
+  margin-top:10px;
+}
+
+.section-list .item-state li {
+  position:relative;
+  min-width:46px;
+  line-height:12px;
+  padding-left:12px;
+}
+
+.section-list .item-state li .vector-icons {
+  position:absolute;
+  color:#C7D1D6;
+  font-size:12px;
+  margin-top:-1px;
+  margin-left:-12px;
+}
+
+.section-list .item-state li .vector-icons.chat {
+  margin-top:0;
+}
+
+.section-list .item-state li span {
+  color:#C7D1D6;
+  font-size:12px;
+  margin-left:5px;
+}
+
+.section-list .progress-container {
+  display:inline-block;
+  width: 100%;
+  height: 52px;
+  padding: 14px 0 0;
+}
+
+.section-list .progress-container > p {
+  width: 100%;
+  text-align: left;
+  font-size:12px;
+  margin-top: 8px;
+  margin-left: -2px;
+}
+
+.section-list .progress-container > p em {
+  font-size: 12px;
+}
+
+.section-list .progress-container em.right {
+  float: right;
+  margin-right: -2px;
+}
+
+.section-list .loading-container {
+  width:100%;
+  text-align:center;
+  margin-top:52px;
+}
+
+.section-list .loading-container .loading {
+  display:inline-block;
+  width:40px;
+  height:40px;
+  margin:0;
+  background:url(/static/images/wapsite/cssimage/iconfont-iconloading.png) no-repeat scroll;
+  background-size:40px;
+  -moz-animation: 1s linear 0s normal forwards infinite rotate;
+  -o-animation: 1s linear 0s normal forwards infinite rotate;
+  -webkit-animation: 1s linear 0s normal forwards infinite rotate;
+  animation: 1s linear 0s normal forwards infinite rotate;
+}
+
+.page-turn {
+  width:100%;
+  height:64px;
+  text-align:center;
+  padding:16px 18.6% 0;
+}
+
+@media only screen and (max-width: 359px) {
+  .page-turn {
+    padding-left:12.4%;
+    padding-right:12.4%;
+  }
+}
+
+@media only screen and (max-width: 315px) {
+  .page-turn {
+    padding-left:5.4%;
+    padding-right:5.4%;
+  }
+}
+
+.page-turn p {
+  display:inline-block;
+  line-height:28px;
+}
+
+.page-turn .btn {
+  float:left;
+  width:85px;
+  height:26px;
+  font-size:16px;
+  padding-top:3px;
+  border-radius:4px;
+  border:none;
+  background:#FFF;
+}
+
+.page-turn .btn.next-page {
+  float:right;
+}
+
+
+/*******************
+       Keyframes
+  ********************/
+
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg) translateZ(-1px);
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg) translateZ(-1px);
+  }
+}
+
+@-moz-keyframes rotate {
+  0% {
+    -moz-transform: rotate(0deg) translateZ(-1px);
+  }
+
+  100% {
+    -moz-transform: rotate(360deg) translateZ(-1px);
+  }
+}
+
+@-o-keyframes rotate {
+  0% {
+    -o-transform: rotate(0deg) translateZ(-1px);
+  }
+
+  100% {
+    -o-transform: rotate(360deg) translateZ(-1px);
+  }
+}
+
+@-ms-keyframes rotate {
+  0% {
+    -ms-transform: rotate(0deg) translateZ(-1px);
+  }
+
+  100% {
+    -ms-transform: rotate(360deg) translateZ(-1px);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg) translateZ(-1px);
+  }
+
+  100% {
+    transform: rotate(360deg) translateZ(-1px);
+  }
+}

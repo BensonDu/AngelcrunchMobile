@@ -8,8 +8,10 @@
 
 // Page Settings
 var page = window.page || {};
+page.HOST = "angelcrunch.com";
 page.settings = {
-    AjaxDomain: "mobile.angelcrunch.com",
+    host: page.HOST,
+    AjaxDomain: "mobile." + page.HOST,
     loginPageURL: "/html/user/login.html" + "?source=",
     investorRegPageURL_longer: "/html/user/registration/investor.html" + "?source=",
     investorRegPageURL_shortly: "/html/user/registration/extremely_short_investor.html" + "?source="
@@ -132,6 +134,10 @@ $.Angelcrunch.dataSet = $.Angelcrunch.dataSet || {};
         },
         getUserId: function () {
             return this.getQueryString("userid") || "";
+        },
+        getPageNum: function () {
+            var num = parseInt(this.getQueryString("page"));
+            return num > 0 ? num : 1;
         },
         getDetailsPageDomainURL: function () {
             var domain = location.host.match(/.+\.(.+\.[a-zA-Z0-9]+)/);
@@ -368,18 +374,29 @@ $.Angelcrunch.notificationInit = function () {
     };
 }).call(this);
 
-$.Angelcrunch.linkBtnInit = function () {
-    $("[data-href]").click(function () {
+(function () {
+
+    var ele_handle = function () {
         var href = $(this).attr("data-href"),
-            test_mode_href = $(this).attr("data-test-mode-href"),
-            isRedirect = $(this).attr("data-confirm-donot-redirect"),
-            _target = $(this).attr("data-target");
-        if (!href||isRedirect) return 0;
+                test_mode_href = $(this).attr("data-test-mode-href"),
+                isRedirect = $(this).attr("data-confirm-donot-redirect"),
+                _target = $(this).attr("data-target");
+        if (!href || isRedirect) return 0;
         if (test_mode_href) href = test_mode_href;
         if (_target == "_blank") window.open(href);
         else location.href = href;
-    });
-};
+    };
+
+    $.fn.linkBtnInit = function () {
+        ele_handle.call(this);
+    };
+
+    $.Angelcrunch.linkBtnInit = function () {
+        $("[data-href]").click(function () {
+            ele_handle.call(this);
+        });
+    };
+}).call(this);
 
 $.Angelcrunch.wechatImg = function () {
     $("body").append('<div id="wx_pic"><img src="/static/images/wapsite/231937129837912.png" /></div>');

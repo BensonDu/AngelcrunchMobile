@@ -28,7 +28,7 @@
     <link rel="canonical" href="页面权威链接，待编辑" />
     <!-- META WT -->
 
-    <title>天使汇 | 投资人详情 | 让靠谱的项目找到靠谱的钱</title>
+    <title>天使汇 | 创业者详情 | 让靠谱的项目找到靠谱的钱</title>
     <link href="/static/css/wapsite/base-css.css" rel="stylesheet" />
     <link href="/static/css/wapsite/investor/investor_details.css" rel="stylesheet" />
 
@@ -63,13 +63,32 @@
         };
 
         var waste_2012932 = function () {
-            var sliderTimeHandle = "";
-            var $album = $("#album");
+
+            // Data processor
+            // Connecting data array to html string
+            var handleDataArr = function (arr, fieldArr) {
+                var obj;
+                var strArr;
+                var newArr=[];
+                for (var J in arr) {
+                    strArr = [];
+                    obj = arr[J];
+                    obj.htmlstr = "";
+                    for (var K in fieldArr) {
+                        var val = obj[fieldArr[K]];
+                        if (val) strArr.push(val);
+                    }
+                    obj.htmlstr = strArr.join(" · ");
+                    newArr.push(obj);
+                }
+                return newArr;
+            };
+
             // Details information
             (function () {
                 var url = I.Ajax_investor_details.url,
                     basic_data = I.Ajax_investor_details.basic_data,
-                            type = "jsonp";
+                          type = "jsonp";
                 var _data = $.extend(true, {}, basic_data);
                 var userid = $.Angelcrunch.url.getUserId();
                 _data[$COOKIE.cookieName.token] = $.cookie($COOKIE.cookieName.token);
@@ -77,18 +96,11 @@
 
                 if (userid) _data["user_id"] = userid;
                 $.post(url, _data, function (data) {
-                    var times = 50;
+                    data.user.career = handleDataArr(data.user.career, ["company", "title"]);
+                    data.user.edu = handleDataArr(data.user.edu, ["school", "degress", "major"]);
                     avalonNS.model.details.data = data;
                     I.API.changeFellowState(data.user.isfollow);
                     // Delay calculation method
-                    sliderTimeHandle = setInterval(function () {
-                        if ($album.find("ul > li").length > 0) {
-                            $album.calculateSliderModuleWidth({ rightSpaceWidth: 10 });
-                            times -= 10;
-                        }
-                        if (times < 1) clearInterval(sliderTimeHandle);
-                        times--;
-                    }, 40);
                 }, type);
             }).call(this);
         };
@@ -197,23 +209,20 @@
     var avalonNS = window.avalonNS || {};
     (function () {
         avalonNS.model = {
-            details: avalon.define("investor-details", function (vm) {
+            details: avalon.define("entrepreneurs-details", function (vm) {
                 vm.data = {};
             })
         };
     }).call(this);
     </script>
-
 </head>
 <body>
-    <div class="details" ms-controller="investor-details">
+    <div class="details entrepreneurs" ms-controller="entrepreneurs-details">
         <div id="login-failed" class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
         <div class="pesonal-summary">
             <div class="layer">
-                <div class="avatar">
-                    <img src="" ms-class="show:data.user.avatar"
-                         ms-src="data.user.avatar||''" />
-                </div>
+                <div class="avatar"><img src="" ms-class="show:data.user.avatar"
+                                         ms-src="data.user.avatar||''" /></div>
                 <div class="summary">
                     <h1 ms-text="data.user.name"></h1>
                     <p class="hidden2Visible" ms-text="data.user.company+' '+data.user.title"></p>
@@ -226,54 +235,19 @@
                 <div class="rs-bkg"><img src="/static/images/wapsite/bannerbox.jpg" /></div>
             </div>
         </div>
-        <div class="participation">
-            <h1>过往投资案例及个人经历</h1>
-            <div ms-if="data.user.invested_com.length" id="album" class="slider-container">
-                <ul>
-                    <li ms-repeat="data.user.invested_com">
-                        <div class="brand"><img ms-src="el.logo" /></div>
-                        <h3 ms-text="el.name"></h3>
-                        <p ms-text="el.part==1?'投资人':el.part==2?'领投人':''"></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
         <div class="pesonal-info">
-            <div ms-if="data.user.style.length">
-                <h1>投资理念</h1>
+            <section ms-if="data.user.style.length">
+                <h1>创业理念</h1>
                 <p ms-text="data.user.style"></p>
-            </div>
-            <div ms-if="data.user.service.length">
-                <h3>可提供的附加价值</h3>
-                <p ms-text="data.user.service"></p>
-            </div>
-            <div ms-if="data.user">
-                <h3>擅长领域</h3>
-                <ul ms-if="data.user.tag" class="mark-list">
-                    <li ms-repeat="data.user.tag.split('·')" ms-text="el">互联网金融</li>
-                </ul>
-            </div>
-        </div>
-        <div ms-if="data.user" class="fund-paln">
-            <ul class="plan" ms-if="data.user.count">
-                <li>
-                    <i></i>
-                    <div class="desc">
-                        <p ms-html="data.user.count+'<em>个</em>'">0<em>个</em></p>
-                        <span>1年内计划投资</span>
-                    </div>
-                </li>
-                <li>
-                    <i></i>
-                    <div class="desc">
-                        <p ms-html="(String(data.user.min_amount) +data.user.max_amount).length > 5 ?
-                           data.user.min_amount + '-' + data.user.max_amount + 'W':
-                           data.user.min_amount + 'W-' + data.user.max_amount + 'W'">0W</p>
-                        <span>单个项目投资额</span>
-                    </div>
-                </li>
-            </ul>
-            <p ms-if="data.user.business">我关注<i ms-html="data.user.region ? '<em>' + data.user.region.join('<b>·</b>') + '</em>的' : ''"></i><em ms-html="data.user.business.split('·').join('<b>·</b>')">移动互联网·在线教育·文化艺术</em>领域的创业项目。</p>
+            </section>
+            <section ms-if="data.user.career.length">
+                <h1>工作经历</h1>
+                <p ms-repeat="data.user.career" ms-text="el.htmlstr"></p>
+            </section>
+            <section ms-if="data.user.edu.length">
+                <h1>擅长领域</h1>
+                <p ms-repeat="data.user.edu" ms-text="el.htmlstr"></p>
+            </section>
         </div>
         <div class="page-action">
             <div class="btn-group">
@@ -282,51 +256,5 @@
             </div>
         </div>
     </div>
-    <!--<div id="submit-item" class="new-page white-style center">
-        <div class="title-container">
-            <p class="float-left prev-page"></p>
-            <p class="title">对投资人提交项目</p>
-        </div>
-        <div class="selection">
-            <div class="e-block">
-                <h1>我的项目</h1>
-                <div class="section-list">
-                    <section class="already-submit">
-                        <div class="logo">
-                            <img src="/static/images/wapsite/129837123987.jpg" />
-                        </div>
-                        <div class="summary">
-                            <h3>约拍</h3>
-                            <p>创建于2015.3.2</p>
-                        </div>
-                        <div class="item-state">
-                            <div class="tag">[已经提交]</div>
-                            <div class="vector-icons success"></div>
-                        </div>
-                    </section>
-                    <section class="already-submit">
-                        <div class="logo">
-                            <img src="/static/images/wapsite/129837123987.jpg" />
-                        </div>
-                        <div class="summary">
-                            <h3 class="small-font">滴滴打车系列产品</h3>
-                            <p>创建于2015.3.2</p>
-                        </div>
-                        <div class="item-state">
-                            <div class="tag">[已经提交]</div>
-                            <div class="vector-icons success"></div>
-                        </div>
-                    </section>
-                </div>
-            </div>
-            <div class="submit-area">
-                <div class="summary">
-                    <p>今天还有<i>5</i>次提交机会:</p>
-                    <p class="multiple">这个项目还有<i>5</i>次提交机会:</p>
-                </div>
-                <button class="btn submit-btn submit-item"></button>
-            </div>
-        </div>
-    </div>-->
 </body>
 </html>

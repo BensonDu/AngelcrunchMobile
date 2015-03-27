@@ -56,7 +56,7 @@
                     }
                 },
                 Ajax_form_submit: {             // Form submit
-                    url: "http://" + settings.AjaxDomain + "/v2/user/m_angel_apply",
+                    url: "http://" + settings.AjaxDomain + "/v2/user/v2/m_angel_apply",
                     basic_data: {
                     }
                 },
@@ -99,7 +99,8 @@
                     crop_data: "data-crop",
                     palyground_id: "data-playground-bind",
                     selector_result: "data-selector-result",
-
+                    selector_value: "data-select-value",
+                    triggered_layer: "data-triggered-layer",
                     disabled: "disabled"
                 };
 
@@ -183,15 +184,17 @@
                             basic_data = I.Ajax_form_submit.basic_data,
                                   type = "jsonp";
                         var _data = $.extend(true, {}, basic_data);
+
+                        _data["type_"] = $((attr.triggered_layer + '="' + $("#investortype").attr(attr.selector_result) + '"').attrRetrievalMode()).attr(attr.selector_value);
                         $(".registration input:visible").each(function () {
                             _data[$(this).attr("name")] = $(this).val();
                         });
-
+                        
                         _data["crop"] = $avatar.attr(attr.crop_data);
-                        $(attr.image_id.attrRetrievalMode()).each(function () {
+                        $(attr.image_id.attrRetrievalMode() + ":visible").each(function () {
                             _data[$(this).attr("name")] = $(this).attr(attr.image_id);
                         });
-
+                        
                         $.post(url, _data, function (data) {
                             if (data.success) {
                                 location.href = $btn.submit.attr("data-redirect");
@@ -562,7 +565,7 @@
                 <div class="special-layer b389123">
                     <label>
                         <span>上传投资协议证明</span>
-                        <i><button id="fund_cert" class="btn image-uploader" data-playground-bind="#rf123u812379" data-warning-text="需要上传投资协议证明" name="fund_cert" data-image-id="">开始上传</button></i>
+                        <i><button id="vc_agreement" class="btn image-uploader" data-playground-bind="#rf123u812379" data-warning-text="需要上传投资协议证明" name="vc_agreement" data-image-id="">开始上传</button></i>
                     </label>
                     <div id="rf123u812379" class="upload-playground">
                         <input accept="image/*" class="hidden" type="file" value="" />
@@ -664,16 +667,17 @@
         <div class="selection">
             <div class="e-block">
                 <h1>个人</h1>
+                <!-- The data-triggered-layer attr must be a unique value -->
                 <div class="section-list">
-                    <section data-triggered-layer=".a238293">
+                    <section data-select-value="10" data-triggered-layer=".a238293">
                         <h3>一般投资人</h3>
                         <p>没有天使投资经验，初涉TMT领域，或投资过项目但未超过<i>10万</i>（需要上传资产证明）。</p>
                     </section>
-                    <section data-triggered-layer=".b389123">
+                    <section data-select-value="20" data-triggered-layer=".b389123">
                         <h3>经验投资人</h3>
                         <p>有TMT行业<i>10万起</i>天使投资经验。需要上传<i>投资证明</i>，如<i>加盖公章</i>的投资协议或章程。</p>
                     </section>
-                    <section data-triggered-layer=".c1238723">
+                    <section data-select-value="30" data-triggered-layer=".c1238723">
                         <h3>价值投资人</h3>
                         <p>互联网或上市公司高管，有过多次（<i>3次以上</i>）天使投资经验，或有强大TMT领域资源，或能提供其他创业支持资源。</p>
                     </section>
@@ -682,11 +686,11 @@
             <div class="e-block">
                 <h1>机构</h1>
                 <div class="section-list">
-                    <section data-triggered-layer=".d2398712">
+                    <section data-select-value="40" data-triggered-layer=".d2398712">
                         <h3>一般机构</h3>
                         <p>投资机构、公司机构。</p>
                     </section>
-                    <section data-triggered-layer=".e1238233">
+                    <section data-select-value="50" data-triggered-layer=".e1238233">
                         <h3>直通机构</h3>
                         <p>基金业协会备案登记的私募股权基金免审，但要提供证明。</p>
                     </section>

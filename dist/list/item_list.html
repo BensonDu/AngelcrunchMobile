@@ -1,0 +1,215 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <meta name="description" content="天使汇 | 让靠谱的项目找到靠谱的钱 | 创业，投资，找VC就上天使汇 | 中国股权众筹第一平台" />
+    <meta name="keywords" content="天使汇,创业,投资,找VC,上天使汇,中国股权众筹第一平台" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+    <meta content="yes" name="apple-touch-fullscreen"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta name="author" content="http://angelcrunch.com" />
+    <meta name="copyright" content="Copyright &copy;http://angelcrunch.com 版权所有" />
+    <meta name="revisit-after"  content="1 days" />
+    <meta content="email=no" name="format-detection" />
+    <meta content="telephone=yes" name="format-detection" />
+
+    <!--iPhone vs retina screen -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="touch-icon-iphone-114.png" />
+    <!--iPad2 & older -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="touch-icon-ipad-144.png" />
+    <!--iPad3 & updated  -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="touch-icon-ipad-144.png" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
+    <link rel="Bookmark" href="/favicon.ico" />
+    <link rel="canonical" href="页面权威链接，待编辑" />
+    <!-- META WT -->
+
+    <title>天使汇 | 项目列表 | 让靠谱的项目找到靠谱的钱</title>
+    <link href="/static/css/wapsite/base-css.css" rel="stylesheet" />
+    <link href="/static/css/wapsite/list/style.css" rel="stylesheet" />
+
+    <script src="/static/js/lib/jquery-1.11.1.min.js"></script>
+    <script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
+    <script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
+    <script src="/static/js/lib/avalon.mobile.min.js"></script>
+
+    <script type="text/javascript" id="page-interactive-init">
+        var page = window.page || {};
+        page.MethodObj = function () { };
+        page.MethodObj.prototype = (function () {
+            var settings = page.settings;
+            var $COOKIE = $.Angelcrunch.COOKIE;
+
+            var I = {
+                Ajax_item_list: {                          // Item List
+                    url: "http://" + settings.AjaxDomain + "/v2/m_startup",
+                    basic_data: {}
+                },
+                API: {
+                    handleTurnPageModule: ""
+                },
+                page_size: 20,
+                listPage_url_params: "?" + "page="
+            };
+
+            var waste_1289371 = function () {
+                var $prev_page = $(".page-turn .btn.prev-page"),
+                    $next_page = $(".page-turn .btn.next-page"),
+                    $current_page = $(".page-turn i.current-page"),
+                    $total_page = $(".page-turn i.total-page");
+                var attr = {
+                    redirect_page_num: "data-page-num"
+                };
+
+                var redirect_page = function (num) {
+                    location.href = I.listPage_url_params + num;
+                }
+
+                // Page turn module
+                I.API.handleTurnPageModule = function (total_item) {
+                    var url_page_num=$.Angelcrunch.url.getPageNum();
+                    var total_page = Math.round(parseInt(parseInt(total_item) / I.page_size) + 0.5);
+                    var current_page = url_page_num > total_page ? total_page : url_page_num;
+
+                    $total_page.text(total_page);
+                    $current_page.text(current_page);
+                    $prev_page.click(function () {
+                        redirect_page($(this).attr(attr.redirect_page_num));
+                    }).attr(attr.redirect_page_num, current_page - 1 || 1);
+
+                    $next_page.click(function () {
+                        redirect_page($(this).attr(attr.redirect_page_num));
+                    }).attr(attr.redirect_page_num,
+                                    (current_page + 1) > total_page
+                                    ? total_page : (current_page + 1));
+
+
+                    if (url_page_num > total_page)
+                        redirect_page(total_page);
+
+                }
+            };
+
+            var waste_9839213 = function () {
+                var $loading = $(".loading-container");
+
+                // Data processor
+                var handle_item_url = function (arr) {
+                    var ele;
+                    for (var K in arr) {
+                        ele = arr[K];
+                        ele.item_url ="//" + ele.id + "." + settings.host;
+                    }
+                };
+
+                // Details information
+                var url = I.Ajax_item_list.url,
+                    basic_data = I.Ajax_item_list.basic_data,
+                            type = "jsonp";
+                var _data = $.extend(true, {}, basic_data);
+                var pageNum = $.Angelcrunch.url.getPageNum();
+                _data[$COOKIE.cookieName.token] = $.cookie($COOKIE.cookieName.token);
+                _data[$COOKIE.cookieName.user_id] = $.cookie($COOKIE.cookieName.user_id);
+
+                _data["pagesize"] = I.page_size || 10;
+
+                if (pageNum) _data["pageindex"] = pageNum;
+                $.post(url, _data, function (data) {
+                    if (data.list && data.list.length) $loading.hide();
+                    handle_item_url(data.list);
+                    I.API.handleTurnPageModule(data.total)
+                    avalonNS.model.list_info.data = data;
+
+                }, type);
+            }
+
+            return {
+                attackEvent: function () {
+                    waste_1289371();
+                    waste_9839213();
+                },
+
+                pageLoad_Init: function () {
+                },
+
+                initial: function () {
+                    this.pageLoad_Init();
+                    this.attackEvent();
+                }
+            };
+        })();
+
+        page.initialBridge = function () {
+            var o = new page.MethodObj();
+            o.initial();
+        };
+
+        $(function () {
+            page.initialBridge();
+        });
+    </script>
+    <script type="text/javascript" id="avalonInit">
+    var avalonNS = window.avalonNS || {};
+    (function () {
+        avalonNS.model = {
+            list_info: avalon.define("list-info", function (vm) {
+                vm.data = {};
+            })
+        };
+    }).call(this);
+    </script>
+
+</head>
+<body>
+    <div class="details" ms-controller="list-info">
+        <div class="title-header">
+            <h1>全部项目</h1>
+        </div>
+        <div class="section-list">
+            <div class="loading-container">
+                <div class="loading"></div>
+            </div>
+            <a ms-if="data.list" ms-repeat="data.list" ms-href="el.item_url">
+                <section>
+                    <div class="logo"><img src="" ms-src="el.logo||''" /></div>
+                    <div class="summary">
+                        <h3 ms-text="el.name"></h3>
+                        <p ms-text="el.concept"></p>
+                        <ul class="item-state">
+                            <li>
+                                <i class="vector-icons liked"></i>
+                                <span ms-text="el.viewercount"></span>
+                            </li>
+                            <li>
+                                <i class="vector-icons chat"></i>
+                                <span ms-text="el.fanscount"></span>
+                            </li>
+                            <li>
+                                <i class="vector-icons eye"></i>
+                                <span ms-text="el.viewercount"></span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div ms-if="el.process_bar" class="progress-container">
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-success progress-bar-striped active reverse" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" ms-css-width="{{el.finance_percent > 100 ? 100 : el.finance_percent}}%">
+                                <span class="sr-only">{{data.finance_percent}}% Complete</span>
+                            </div>
+                        </div>
+                        <p><em>投资意向: {{el.finishamount}}万（预融资{{el.amount}}万）</em><em class="right">剩余{{el.day}}天</em></p>
+                    </div>
+                </section>
+            </a>
+        </div>
+        <div class="page-turn">
+            <button class="btn prev-page">上一页</button>
+            <p><i class="current-page">0</i>/<i class="total-page">0</i></p>
+            <button class="btn next-page">下一页</button>
+        </div>
+    </div>
+</body>
+</html>
