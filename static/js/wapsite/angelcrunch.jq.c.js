@@ -8,7 +8,7 @@
 
 // Page Settings
 var page = window.page || {};
-page.HOST = "angelcrunch.com";
+page.HOST = "tonghs.me";
 page.settings = {
     host: page.HOST,
     AjaxDomain: "mobile." + page.HOST,
