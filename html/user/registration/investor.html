@@ -66,6 +66,7 @@
                 var className = {
                     input: {
                         user_name: "#user-name",
+                        wechat: "#wechat:",
                         phone: "#phone",
                         verify_code: "#verify-code",
                         pwd: "#pwd"
@@ -105,6 +106,7 @@
 
                 var $input = {
                     user_name: $(className.input.user_name),
+                    wechat: $(className.input.wechat),
                     phone: $(className.input.phone),
                     verify_code: $(className.input.verify_code),
                     pwd: $(className.input.pwd)
@@ -187,6 +189,7 @@
                         _data[$input.pwd.attr("name")] = $input.pwd.val().trim();
                         _data[$input.phone.attr("name")] = $input.phone.val().trim();
                         _data[$input.verify_code.attr("name")] = $input.verify_code.val().trim();
+                        _data[$input.wechat.attr("name")] = $input.wechat.val().trim();
 
                         _data["logo"] = $avatar.attr(attr.image_id);
                         _data["crop"] = $avatar.attr(attr.crop_data);
@@ -337,6 +340,11 @@
             <label>
                 <span>真实姓名</span>
                 <i><input id="user-name" type="text" name="name" value="" data-warning-text="需要填写姓名" /></i>
+            </label>
+
+            <label>
+                <span>微信</span>
+                <i><input id="wechat" type="text" name="wechat" value="" data-warning-text="需要填写本人的微信账号" /></i>
             </label>
 
             <label>

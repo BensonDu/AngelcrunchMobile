@@ -35,6 +35,7 @@
     <script src="/static/js/lib/jquery-1.11.1.min.js"></script>
     <script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
     <script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
+    <script src="/static/js/wapsite/angelcrunch.app_downloadbar.jq.c.js"></script>
     <script src="/static/js/lib/avalon.mobile.min.js"></script>
 
     <script type="text/javascript" id="page-interactive-init">
@@ -107,7 +108,6 @@
                 var $details;
                 var detailsIsExpand = false;
 
-                
                 $details = $("#details");
                 // Basic information
                 (function () {
@@ -398,11 +398,11 @@
                 <p class="declare can-not-view-marked">想查看项目详细信息、成长数据、商业计划书等重要信息，你需要在电脑上打开天使汇网站申请投资人身份。</p>
                 <div class="control-module">
                     <em><i></i>天使汇认证投资人</em>
-                    <button class="btn btn-small login-btn">登录</button>
+                    <button class="btn btn-small login-btn" data-href="">登录</button>
                 </div>
                 <div class="control-module can-not-view-marked">
                     <em><i></i>换一个账号登录？</em>
-                    <button class="btn btn-small login-btn">登录</button>
+                    <button class="btn btn-small login-btn" data-href="">登录</button>
                 </div>
                 <div class="control-module can-not-view-marked">
                     <em><i></i>申请投资人账号</em>

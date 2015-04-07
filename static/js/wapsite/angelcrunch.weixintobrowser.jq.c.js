@@ -11,7 +11,7 @@ $(function () {
     (function () {
         var ua = navigator.userAgent.toLowerCase();
         var isAndroid = ua.indexOf("android") != -1 ? 1 : 0
-        , isWeixin = navigator.userAgent.toLowerCase().indexOf("micromessenger") != -1 ? 1 : 0;
+        , isWeixin = ua.indexOf("micromessenger") != -1 ? 1 : 0;
 
         if (isWeixin) {
             if (isAndroid) $("#wechat-tag").removeClass("download-ios").addClass("download-android");

@@ -18,7 +18,8 @@ $.Angelcrunch = $.Angelcrunch || {};
         user_id: "uid",
         token: "access_token",
         defaultpart: "defaultpart",
-        detailsPageTipsNotView: "DP_TipsNotView"
+        detailsPageTipsNotView: "DP_TipsNotView",
+        withoutAppDownloadBanner: "WAD_DLB"
     };
 
     $COOKIE.settings = { expires: 7, path: "/", secure: false };
@@ -40,6 +41,14 @@ $.Angelcrunch = $.Angelcrunch || {};
                      true,
                      $COOKIE.settings);
         },
+        setAppdownloadBarNotExist: function (days) {
+            var settings = {};
+            $.extend(true, settings, $COOKIE.settings);
+            settings.expires = days || 3;
+            $.cookie($COOKIE.cookieName.withoutAppDownloadBanner,
+                     true,
+                     settings);
+        },
         clearUserKey: function () {
             $.removeCookie($COOKIE.cookieName.user_id,
                 $COOKIE.settings);
@@ -56,6 +65,10 @@ $.Angelcrunch = $.Angelcrunch || {};
             if ($.cookie($COOKIE.cookieName.user_id)
                && $.cookie($COOKIE.cookieName.token)) return true;
             else return false;
+        },
+        isShowAppdownloadBar: function () {
+            if ($.cookie($COOKIE.cookieName.withoutAppDownloadBanner)) return false;
+            else return true;
         },
         canViewProjectDetails: function () {
             if ($.cookie($COOKIE.cookieName.defaultpart) > 0)

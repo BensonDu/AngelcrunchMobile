@@ -28,9 +28,10 @@
     <link rel="canonical" href="页面权威链接，待编辑" />
     <!-- META WT -->
 
-    <title>天使汇 | 项目列表 | 让靠谱的项目找到靠谱的钱</title>
+    <title>天使汇 | 投资人列表 | 让靠谱的项目找到靠谱的钱</title>
     <link href="/static/css/wapsite/base-css.css" rel="stylesheet" />
     <link href="/static/css/wapsite/list/style.css" rel="stylesheet" />
+    <link href="/static/css/wapsite/list/investor.css" rel="stylesheet" />
 
     <script src="/static/js/lib/jquery-1.11.1.min.js"></script>
     <script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
@@ -46,8 +47,8 @@
             var $COOKIE = $.Angelcrunch.COOKIE;
 
             var I = {
-                Ajax_item_list: {                          // Item List
-                    url: "http://" + settings.AjaxDomain + "/v2/m_startup",
+                Ajax_item_list: {                          // Investor List
+                    url: "http://" + settings.AjaxDomain + "/v2/user",
                     basic_data: {}
                 },
                 API: {
@@ -125,7 +126,6 @@
                     handle_item_url(data.list);
                     I.API.handleTurnPageModule(data.total)
                     avalonNS.model.list_info.data = data;
-
                 }, type);
             }
 
@@ -169,7 +169,7 @@
 <body>
     <div class="details" ms-controller="list-info">
         <div class="title-header">
-            <h1>全部项目</h1>
+            <h1>全部投资人</h1>
         </div>
         <div class="section-list">
             <div class="loading-container">
@@ -177,6 +177,30 @@
             </div>
             <a ms-if="data.list" ms-repeat="data.list" ms-href="el.item_url">
                 <section>
+                    <div class="logo"><img src="" ms-src="el.avatar||''" /></div>
+                    <div class="summary">
+                        <h3 ms-text="el.name"></h3>
+                        <p ms-text="el.firmname + el.title
+                                ? '[' + el.firmname + el.title + ']'
+                                : ''"></p>
+                        <p class="sliver" ms-text="el.summary"></p>
+                        <ul class="item-state">
+                            <li>
+                                <i class="vector-icons liked"></i>
+                                <span ms-text="el.followercount"></span>
+                            </li>
+                            <li>
+                                <i class="vector-icons chat"></i>
+                                <span ms-text="el.meetingtimes"></span>
+                            </li>
+                            <li>
+                                <i class="vector-icons eye"></i>
+                                <span ms-text="el.view_count"></span>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <!--<section>
                     <div class="logo"><img src="" ms-src="el.logo||''" /></div>
                     <div class="summary">
                         <h3 ms-text="el.name"></h3>
@@ -184,11 +208,11 @@
                         <ul class="item-state">
                             <li>
                                 <i class="vector-icons liked"></i>
-                                <span ms-text="el.fanscount"></span>
+                                <span ms-text="el.viewercount"></span>
                             </li>
                             <li>
                                 <i class="vector-icons chat"></i>
-                                <span ms-text="el.meetingcount"></span>
+                                <span ms-text="el.fanscount"></span>
                             </li>
                             <li>
                                 <i class="vector-icons eye"></i>
@@ -196,15 +220,7 @@
                             </li>
                         </ul>
                     </div>
-                    <div ms-if="el.process_bar" class="progress-container">
-                        <div class="progress">
-                            <div class="progress-bar progress-bar-success progress-bar-striped active reverse" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" ms-css-width="{{el.finance_percent > 100 ? 100 : el.finance_percent}}%">
-                                <span class="sr-only">{{data.finance_percent}}% Complete</span>
-                            </div>
-                        </div>
-                        <p><em>投资意向: {{el.finishamount}}万（预融资{{el.amount}}万）</em><em class="right">剩余{{el.day}}天</em></p>
-                    </div>
-                </section>
+                </section>-->
             </a>
         </div>
         <div class="page-turn">

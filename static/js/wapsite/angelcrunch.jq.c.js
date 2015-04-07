@@ -12,7 +12,7 @@ page.HOST = "tonghs.me";
 page.settings = {
     host: page.HOST,
     AjaxDomain: "mobile." + page.HOST,
-    loginPageURL: "/html/user/login.html" + "?source=",
+    loginPageURL: "//auth." + page.HOST + "?source=",
     investorRegPageURL_longer: "/html/user/registration/investor.html" + "?source=",
     investorRegPageURL_shortly: "/html/user/registration/extremely_short_investor.html" + "?source="
 }

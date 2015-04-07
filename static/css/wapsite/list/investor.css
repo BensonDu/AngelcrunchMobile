@@ -1,0 +1,50 @@
+﻿/*/
+/*
+/* Rank: 3
+/* Standard：Google
+/*
+/*/
+
+/*******************
+    branding head
+  *******************/
+
+.section-list section {
+  float:left;
+  min-height:114px;
+  padding-top:16px;
+}
+
+.section-list .summary h3 {
+  font-size:25px;
+  margin-bottom:2px;
+}
+
+.section-list .logo {
+  width:70px;
+  height:70px;
+}
+
+.section-list .logo img {
+  width:70px;
+  height:70px;
+  border-radius:50%;
+}
+
+.section-list .summary p {
+  color:#666;
+  line-height:18px;
+}
+
+.section-list .summary p:empty {
+  display:inline-block;
+}
+
+.section-list .summary p.sliver {
+  color:#888;
+  font-weight:100;
+}
+
+.section-list .summary .item-state {
+  margin-top:6px;
+}
