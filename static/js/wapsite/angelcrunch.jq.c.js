@@ -13,7 +13,7 @@ page.settings = {
     host: page.HOST,
     AjaxDomain: "mobile." + page.HOST,
     loginPageURL: "//auth." + page.HOST + "?source=",
-    investorRegPageURL_longer: "/html/user/registration/investor.html" + "?source=",
+    investorRegPageURL_longer: "//m." + page.HOST + "/angel_vip_simple" + "?source=",
     investorRegPageURL_shortly: "/html/user/registration/extremely_short_investor.html" + "?source="
 }
 

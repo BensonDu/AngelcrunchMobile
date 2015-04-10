@@ -76,6 +76,7 @@
                 };
 
                 $btn.click(function () {
+                    checkActive();
                     if ($(this).hasClass(className.active)) {
                         var url = I.Ajax_login.url,
                             basic_data = I.Ajax_login.basic_data,
