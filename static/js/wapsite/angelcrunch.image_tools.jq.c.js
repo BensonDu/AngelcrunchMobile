@@ -181,7 +181,7 @@ $.Angelcrunch.ImageUploadInit = function (formChecked_fn) {
     };
 
     var getImageURL = function (image_id, r) {
-        return 'http://dn-tonghs.qbox.me/' + image_id + '?imageMogr2' + (r ? "/crop/!" + get_crop(r) : "") + "/auto-orient/thumbnail/480x";
+        return 'http://dn-xswe.qbox.me/' + image_id + '?imageMogr2' + (r ? "/crop/!" + get_crop(r) : "") + "/auto-orient/thumbnail/480x";
     };
 
     var getImage = function () {

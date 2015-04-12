@@ -39,9 +39,10 @@
         var page = window.page || {};
         page.MethodObj = function () { };
         page.MethodObj.prototype = (function () {
+            var settings = page.settings;
             var I = {
                 Ajax_login: {                     // Login service
-                    url: "http://mobile.tonghs.me/v2/home/login",
+                    url: "http://" + settings.AjaxDomain + "/v2/home/login",
                     basic_data: {
                         // uid: "10878516", access_token: "test"
                     }

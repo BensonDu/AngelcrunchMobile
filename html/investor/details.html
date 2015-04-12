@@ -40,14 +40,15 @@
     var page = window.page || {};
     page.MethodObj = function () { };
     page.MethodObj.prototype = (function () {
+        var settings = page.settings;
         var I = {
             Ajax_details: {                     // Details
-                url: "http://mobile.tonghs.me/v2/startup/detail",
+                url: "http://" + settings.AjaxDomain + "/v2/startup/detail",
                 basic_data: {
                 }
             },
             Ajax_basic_information: {                     // Basic information
-                url: "http://mobile.tonghs.me/v2/startup/base_info",
+                url: "http://" + settings.AjaxDomain + "/v2/startup/base_info",
                 basic_data: {
                 }
             },
