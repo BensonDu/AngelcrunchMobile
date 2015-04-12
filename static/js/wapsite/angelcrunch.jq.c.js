@@ -14,7 +14,7 @@ page.settings = {
     AjaxDomain: "mobile." + page.HOST,
     loginPageURL: "//auth." + page.HOST + "?source=",
     investorRegPageURL_longer: "//m." + page.HOST + "/angel_vip_simple" + "?source=",
-    investorRegPageURL_shortly: "/html/user/registration/extremely_short_investor.html" + "?source="
+    investorRegPageURL_shortly: "//0." + page.HOST + '/angel/new' + "?source="
 }
 
 
