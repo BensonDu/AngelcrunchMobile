@@ -27,7 +27,7 @@ $.Angelcrunch = $.Angelcrunch || {};
         if ($(".app-dowaload-banner").length) return 0;
         var $bar = $('<div class="app-dowaload-banner">' +
                         '<div class="close">×</div>' +
-                        '<div class="logo"></div>' +
+                        '<div class="logo ci-link" data-href="/html/homepage.html"></div>' +
                         '<div class="desc">' +
                             '<h3>天使汇</h3>' +
                             '<p>实时获得投融资最好的机会！</p>' +
