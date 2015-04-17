@@ -127,7 +127,9 @@ $.Angelcrunch.dataSet = $.Angelcrunch.dataSet || {};
             if (r != null) return unescape(r[2]); return null;
         },
         getSource: function () {
-            return unescape(this.getQueryString("source"));
+            var url = this.getQueryString("source");
+            if (url != null){url == unescape(url);}
+            return url;
         },
         getComid: function () {
             return this.getQueryString("comid") || "";
