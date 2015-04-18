@@ -447,6 +447,14 @@ input::-webkit-input-placeholder {
   background-color:transparent;
 }
 
+.btn-group.center {
+  text-align:center;
+}
+
+.btn-group.center .btn.white-border {
+  float:none;
+}
+
 .btn-group .btn.orange {
   color:#FFF;
   line-height:26px;
@@ -650,7 +658,7 @@ label.has-textarea > i {
 label > i textarea {
   width:262px;
   height:78px;
-  font-size:14px;
+  font-size:16px;
   margin-left:78px;
   margin-top:9px;
   padding:8px 0;

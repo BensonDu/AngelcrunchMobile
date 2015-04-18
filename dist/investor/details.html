@@ -397,7 +397,7 @@
                 <p class="hidden2Visible"><em>投资意向: {{data.amount}}万（预融资{{data.hope_amount}}万）</em><em class="right">剩余{{data.day}}天</em></p>
             </div>
         </div>
-        <div id="album" class="slider-container" ms-controller="basic-information">
+        <div id="album" class="slider-container" ms-controller="basic-information" ms-if="data.pics&&data.pics.length">
             <ul ms-each-el="data.pics">
                 <li><img ms-src="el.small" /></li>
             </ul>
@@ -430,7 +430,7 @@
         </div>
         <div class="logged-in">
             <div class="article-list" ms-controller="deatils">
-                <article class="intro" ms-if="data.descriptions">
+                <article class="intro" ms-if="data.descriptions&&data.descriptions.length">
                     <h1>项目描述</h1>
                     <p class="silver" ms-if="data.descriptions.user_case">用户场景</p>
                     <p ms-if="data.descriptions.user_case" ms-html="txt2html(data.descriptions.user_case)"></p>
@@ -473,7 +473,7 @@
                     <h1>成长数据</h1>
                     <div class="item" ms-repeat="data.growthdata">
                         <p class="date">
-                            <i>{{el.occurdate|date("dd")}}</i><em>{{el.occurdate|date("yyyy")}}</em>
+                            <i>{{el.occurdate|date("M")}}</i><em>{{el.occurdate|date("yyyy")}}</em>
                         </p>
                         <p class="gray">{{el.name}}{{el.quantity}}</p>
                     </div>
