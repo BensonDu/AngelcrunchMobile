@@ -286,7 +286,7 @@
 
 .fund-paln .plan li .desc {
   display:inline-block;
-  width:52%;
+  width:58%;
   text-align:center;
   margin-top:8px;
 }
@@ -297,7 +297,7 @@
 
 @media only screen and (max-width: 302px) {
   .fund-paln .plan li:last-child .desc {
-    width:52%;
+    width:58%;
     margin-left:4px;
   }
 }
@@ -311,6 +311,11 @@
   color:#666;
   height:24px;
   font-size:24px;
+}
+
+.fund-paln .plan li .desc.small-font p {
+  font-size:18px;
+  line-height:24px;
 }
 
 .fund-paln .desc span {
