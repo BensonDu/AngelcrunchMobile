@@ -33,7 +33,7 @@
     <link href="/static/css/wapsite/list/style.css" rel="stylesheet" />
     <link href="/static/css/wapsite/list/investor.css" rel="stylesheet" />
 
-    <script src="/static/js/lib/jquery-1.11.1.min.js"></script>
+    <script src="/static/js/lib/jquery-2.1.4.min.js"></script>
     <script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
     <script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
     <script src="/static/js/wapsite/angelcrunch.app_downloadbar.jq.c.js"></script>
@@ -237,4 +237,37 @@
         </div>
     </div>
 </body>
+<script>
+    /*页面滚动事件 翻页显示与隐藏*/
+    (function(){
+
+        this.scrolltrigger=function(){
+            var position=document.body.scrollTop,
+                    direction='',
+                    $tar=$('.page-turn'),t;
+
+            return function(){
+                var scrolltop=document.body.scrollTop;
+                if(t){
+                    clearTimeout(t);
+                }
+                t=setTimeout(function(){
+                    if(scrolltop>position && direction!='down'){
+                        $tar.animate({'bottom':-65});
+                        direction='down';
+                    }
+                    if(scrolltop<position && direction!='up'){
+                        $tar.animate({'bottom':0});
+                        direction='up';
+                    }
+
+                    position=scrolltop;
+                },300);
+            }
+        };
+
+        this.onscroll=scrolltrigger();
+
+    }).call(this);
+</script>
 </html>
