@@ -1,7 +1,8 @@
 (function(){
 
-    this.base_url='http://angelcrunch.com/';
-
+    this.base_protocol='http://';
+    this.base_host='angelcrunch.com/';
+    this.base_home=this.base_protocol+this.base_host;
     this.base_mobile='http://mobile.angelcrunch.com/';
 
     this.api={
@@ -12,12 +13,12 @@
     //localStorage存储管理
     this.base_local_data={
 
-        saveData:function(key,data){
+        savedata:function(key,data){
             var d=JSON.stringify(data);
             localStorage.setItem(key,d);
         },
 
-        getData:function(key){
+        getdata:function(key){
             var ret=null;
             if(localStorage.hasOwnProperty(key)){
                 var data=localStorage[key];
@@ -32,10 +33,14 @@
             return ret;
         },
 
-        delData:function(key){
+        deldata:function(key){
             if(localStorage.hasOwnProperty(key)){
                 return localStorage.removeItem(key);
             }
+        },
+
+        cleardata:function(){
+            localStorage.clear();
         }
     };
     //跨域获取数据方法

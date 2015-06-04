@@ -70,6 +70,7 @@ p {
   background:rgba(233, 67, 16, 0.76);
 }
 
+/*
 @media only screen and (min-width: 998px) {
   .head {
     width:360px;
@@ -77,6 +78,7 @@ p {
     margin-left:-180px;
   }
 }
+*/
 
 .head .logo {
   background:url(/static/images/wapsite/cssimage/108273189237.png) no-repeat left center;
