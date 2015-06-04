@@ -81,12 +81,12 @@ body {
 }
 
 /* pc */
-@media only screen and (min-width: 998px) {
+/*@media only screen and (min-width: 998px) {
   .details {
-    width:360px;    /* Logic resolution with iPhone6 */
+    width:360px;    /!* Logic resolution with iPhone6 *!/
     margin:0 auto;
   }
-}
+}*/
 
 /******************
         Fonts
@@ -98,7 +98,7 @@ body {
   font-family: "PingHei";
   font-style: normal;
   font-weight: 200;
-  src: local("☺︎"), url("/static/css/fonts/PingHei-light.woff") format("woff"), url("/static/css/fonts/PingHei-light.ttf") format("truetype");
+  src: local("☺︎"), url("https://dn-acac.qbox.me/PingHei-light.woff") format("woff");
 }
 
 @font-face {
@@ -1209,10 +1209,7 @@ body.footer-close-bottom .banner-footer {
 
 @font-face {
   font-family: 'iconfont';
-  src: url('//at.alicdn.com/t/font_1428987787_061766.eot'); /* IE9*/
-  src: url('//at.alicdn.com/t/font_1428987787_061766.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-  url('//at.alicdn.com/t/font_1428987787_061766.woff') format('woff'), /* chrome、firefox */
-  url('//at.alicdn.com/t/font_1428987787_061766.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  src: url('http://dn-acac.qbox.me/iconfont.woff') format('woff'), /* chrome、firefox */
   url('//at.alicdn.com/t/font_1428987787_061766.svg#iconfont') format('svg'); /* iOS 4.1- */
 }
 
