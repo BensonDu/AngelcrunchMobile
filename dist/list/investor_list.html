@@ -238,35 +238,70 @@
     </div>
 </body>
 <script>
-    /*页面滚动事件 翻页显示与隐藏*/
+    /*触摸移动事件事件 翻页显示与隐藏*/
     (function(){
+        this.$touchele=$('.page-turn');
 
-        this.scrolltrigger=function(){
-            var position=document.body.scrollTop,
-                    direction='',
-                    $tar=$('.page-turn'),t;
-
-            return function(){
-                var scrolltop=document.body.scrollTop;
-                if(t){
-                    clearTimeout(t);
-                }
-                t=setTimeout(function(){
-                    if(scrolltop>position && direction!='down'){
-                        $tar.animate({'bottom':-65});
-                        direction='down';
-                    }
-                    if(scrolltop<position && direction!='up'){
-                        $tar.animate({'bottom':0});
-                        direction='up';
-                    }
-
-                    position=scrolltop;
-                },300);
-            }
+        this.touchsta={
+            barheight:65,
+            eleshow:true,
+            isstart:false,
+            startY:0,
+            endY:0
         };
+        if(typeof document.body.ontouchstart!='undefined'){
+            document.body.ontouchstart=function(event){
+                var touch=event.touches[0];
+                if(touch){
+                    touchsta.startY=touch.clientY;
+                    touchsta.isstart=true;
+                }
+            };
+            document.body.ontouchmove=function(event){
+                var touch=event.touches[0],mY;
+                if(touch){
+                    mY=touch.clientY-touchsta.startY;
+                    if(Math.abs(mY)<touchsta.barheight){
+                        if(mY<0 && touchsta.eleshow){
+                            $touchele.css('bottom',mY);
+                        }
 
-        this.onscroll=scrolltrigger();
+                        if(mY>0 && !touchsta.eleshow){
+                            $touchele.css('bottom',mY-touchsta.barheight);
+                        }
+                    }
+
+                }
+            };
+            document.body.ontouchend=function(event){
+                var touch=event.changedTouches[0],endY=touch.clientY,moveabs=Math.abs(endY-touchsta.startY);
+                if(moveabs>10){
+                    if(endY-touchsta.startY>0 && !touchsta.eleshow){
+                        if(moveabs>touchsta.barheight/2){
+                            $touchele.animate({'bottom':0});
+                            touchsta.eleshow=true;
+                        }
+                        else{
+                            $touchele.animate({'bottom':-touchsta.barheight});
+                            touchsta.eleshow=false;
+                        }
+                    }
+                    if(endY-touchsta.startY<0 && touchsta.eleshow){
+                        if(moveabs>touchsta.barheight/2){
+                            $touchele.animate({'bottom':-touchsta.barheight});
+                            touchsta.eleshow=false;
+                        }
+                        else{
+                            $touchele.animate({'bottom':0});
+                            touchsta.eleshow=true;
+                        }
+                    }
+                }
+
+            };
+
+        }
+
 
     }).call(this);
 </script>

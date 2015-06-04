@@ -132,7 +132,7 @@ body {
 	clip:auto
 }
 
-@-webkit-keyframes progress-bar-stripes{
+/*@-webkit-keyframes progress-bar-stripes{
 	from{
 		background-position:40px 0
 	}
@@ -163,7 +163,7 @@ body {
 		background-position:0 0
 	}
 
-}
+}*/
 
 .progress{
   height:8px;
@@ -199,11 +199,11 @@ body {
   background-size:40px 40px
 }
 
-.progress-bar.active,.progress.active .progress-bar{
+/*.progress-bar.active,.progress.active .progress-bar{
   -webkit-animation:progress-bar-stripes 2s linear infinite;
   -o-animation:progress-bar-stripes 2s linear infinite;
   animation:progress-bar-stripes 2s linear infinite
-}
+}*/
 
 .progress-bar-success{
   background-color:#5cb85c
