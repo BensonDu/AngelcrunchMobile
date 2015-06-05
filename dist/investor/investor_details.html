@@ -210,12 +210,12 @@
     <div class="details" ms-controller="investor-details">
         <div id="login-failed" class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
         <div id="header" class="head">
-            <div class="logo ci-link" data-href="http://tonghs.me"></div>
+            <div class="logo ci-link" data-href="http://angelcrunch.com"></div>
             <div class="options">
                 <span></span>
                 <ul class="hidden-menu">
-                    <li class="ci-link" data-href="http://tonghs.me/startup_financing">创业项目</li>
-                    <li class="ci-link" data-href="http://tonghs.me/angel">投资人</li>
+                    <li class="ci-link" data-href="http://angelcrunch.com/startup_financing">创业项目</li>
+                    <li class="ci-link" data-href="http://angelcrunch.com/angel">投资人</li>
                 </ul>
             </div>
         </div>
@@ -252,7 +252,7 @@
         <div class="pesonal-info">
             <div ms-if="data.user.style.length">
                 <h1>投资理念</h1>
-                <p ms-text="data.user.style"></p>
+                <p ms-html="data.user.style"></p>
             </div>
             <div ms-if="data.user.service.length">
                 <h3>可提供的附加价值</h3>
@@ -276,7 +276,7 @@
                 </li>
                 <li>
                     <i></i>
-                    <div class="desc">
+                    <div class="desc" ms-class="small-font:(String(data.user.min_amount) +data.user.max_amount).length > 5">
                         <p ms-html="(String(data.user.min_amount) +data.user.max_amount).length > 5 ?
                            data.user.min_amount + '-' + data.user.max_amount + 'W':
                            data.user.min_amount + 'W-' + data.user.max_amount + 'W'">0W</p>

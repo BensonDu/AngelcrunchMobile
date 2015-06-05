@@ -40,6 +40,7 @@
         var page = window.page || {};
         page.MethodObj = function () { };
         page.MethodObj.prototype = (function () {
+            var settings = page.settings;
             var I = {
                 Ajax_login: {                     // Login service
                     url: api.login,
