@@ -56,13 +56,13 @@
                     <h3 ms-text="el.name"></h3>
                     <p ms-text="el.concept"></p>
                 </div>
-                <div ms-if="el.coinveststatus>40 && el.coinveststatus<80" ms-data-shit="el.coinveststatus" class="progress-container">
+                <div ms-if="el.coinveststatus>40 && el.coinveststatus<80" class="progress-container">
                     <div class="progress">
                         <div class="progress-bar progress-bar-success progress-bar-striped active reverse" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" ms-css-width="{{el.finishamount/el.amount > 1 ? 100 : el.finishamount/el.amount*100}}%">
                             <span class="sr-only">{{data.finance_percent}}% Complete</span>
                         </div>
                     </div>
-                    <p><em>投资意向: {{el.finishamount}}万（预融资{{el.amount}}万）</em><em class="right">剩余{{el.day}}天</em></p>
+                    <p><em ms-if="window.account_info.role>0">投资意向: {{el.finishamount}}万（预融资{{el.amount}}万）</em><em class="right">剩余{{el.day}}天</em></p>
                 </div>
             </section>
         </a>
@@ -141,8 +141,7 @@
 
             getcache=base_local_data.getdata(page_config.localprecacheprefix+this.page_config.currentpage);
             if(getcache){
-                data=JSON.parse(getcache);
-                call(data);
+                call(getcache);
             }
             else{
                 this.page_remote_data(call,index);
@@ -172,7 +171,7 @@
                     if(page_config.localprecachearray.indexOf(index)==-1){
                         page_config.localprecachearray.push(index);
                     }
-                    base_local_data.savedata(page_config.localprecacheprefix+index,JSON.stringify(data));
+                    base_local_data.savedata(page_config.localprecacheprefix+index,data);
                 }
                 call(data);
             },{'pagesize':this.page_config.perpage,'pageindex':index});

@@ -134,6 +134,26 @@
   margin-right: -2px;
 }
 
+.section-list .progress-done {
+    display:inline-block;
+    width: 100%;
+    height: 52px;
+    padding: 14px 0 0;
+}
+
+.section-list .progress-done > p {
+    width: 100%;
+    text-align: left;
+    font-size:12px;
+    margin-top: 8px;
+    margin-left: -2px;
+}
+
+.section-list .progress-done > p em {
+    font-size: 12px;
+}
+
+
 .section-list .loading-container {
   width:100%;
   text-align:center;
