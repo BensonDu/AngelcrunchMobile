@@ -10,11 +10,24 @@
         comlist:this.base_mobile+'v2/m_startup'
     };
 
+    this.base_config={
+        //缓存时间
+        cachetime:7*24*60*60*1000,
+        //账户信息保存字段名
+        account_save_key:'account_info'
+    };
+
     //localStorage存储管理
     this.base_local_data={
 
         savedata:function(key,data){
-            var d=JSON.stringify(data);
+
+            var d=data;
+
+            if(typeof  data == 'object'){
+                d=JSON.stringify(data);
+            }
+
             localStorage.setItem(key,d);
         },
 
@@ -111,11 +124,43 @@
     };
 }).call(this);
 
+//获取URL传参
 (function(){
+    this.$_GET={};
+
+    var url=window.location.href.split('?'), a, h, l, e, f={};
+
+    if(url.length>1){
+        h= url[1].split('#');
+        a=h[0].split('&');
+
+        l= a.length;
+        for(var i=0;i<l;i++){
+            e=a[i].split('=');
+            f[e[0]]= e.length>1?e[1]:'';
+        }
+        this.$_GET=f;
+    }
+}).call(this);
+
+//全局账户信息获取
+(function(){
+
     this.account_info={
-        isinvestor:false,
-        logintime:0
+        id:0,
+        name:'',
+        token:'',
+        role:0,
+        time:0
     };
-    //base_remote_data.ajaxjsonp(this.api.login,function(data){console.log(data)});
+
+    //过期删除
+    var now= $.now();
+    var localdata=base_local_data.getdata(base_config.account_save_key);
+    $.extend(true,this.account_info,localdata);
+
+    if(now-account_info.time>base_config.cachetime){
+        base_local_data.deldata(base_config.account_save_key);
+    }
 
 }).call(this);
