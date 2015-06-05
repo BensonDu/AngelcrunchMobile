@@ -40,8 +40,8 @@
         <div class="options">
             <span></span>
             <ul class="hidden-menu">
-                <li class="ci-link" data-href="http://tonghs.me/startup_financing">创业项目</li>
-                <li class="ci-link" data-href="http://tonghs.me/angel">投资人</li>
+                <li class="ci-link" data-href="http://angelcrunch.com/startup_financing">创业项目</li>
+                <li class="ci-link" data-href="http://angelcrunch.com/angel">投资人</li>
             </ul>
         </div>
     </div>
@@ -55,22 +55,8 @@
                 <div class="summary">
                     <h3 ms-text="el.name"></h3>
                     <p ms-text="el.concept"></p>
-                    <ul class="item-state">
-                        <li>
-                            <i class="vector-icons liked"></i>
-                            <span ms-text="el.fanscount"></span>
-                        </li>
-                        <li>
-                            <i class="vector-icons chat"></i>
-                            <span ms-text="el.meetingcount"></span>
-                        </li>
-                        <li>
-                            <i class="vector-icons eye"></i>
-                            <span ms-text="el.viewercount"></span>
-                        </li>
-                    </ul>
                 </div>
-                <div ms-if="el.process_bar" class="progress-container">
+                <div ms-if="el.coinveststatus>40 && el.coinveststatus<80" ms-data-shit="el.coinveststatus" class="progress-container">
                     <div class="progress">
                         <div class="progress-bar progress-bar-success progress-bar-striped active reverse" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" ms-css-width="{{el.finishamount/el.amount > 1 ? 100 : el.finishamount/el.amount*100}}%">
                             <span class="sr-only">{{data.finance_percent}}% Complete</span>
