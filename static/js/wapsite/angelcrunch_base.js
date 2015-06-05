@@ -7,14 +7,16 @@
 
     this.api={
         login:this.base_mobile+'v2/home/login',
-        comlist:this.base_mobile+'v2/m_startup'
+        comlist:this.base_mobile+'v2/m_startup',
+        log:'http://yx.dubaoxing.com/api/remotelog?msg=id_'
     };
 
     this.base_config={
         //缓存时间
         cachetime:7*24*60*60*1000,
         //账户信息保存字段名
-        account_save_key:'account_info'
+        account_save_key:'account_info',
+        last_log_time_key:'last_log_time'
     };
 
     //localStorage存储管理
@@ -150,7 +152,7 @@
         id:0,
         name:'',
         token:'',
-        role:0,
+        role:1,
         time:0
     };
 
@@ -163,4 +165,19 @@
         base_local_data.deldata(base_config.account_save_key);
     }
 
+
+}).call(this);
+
+//日志记录
+(function(){
+    $(document).ready(function(){
+        var save=base_local_data.getdata(base_config.last_log_time_key),now= $.now(),time;
+        time=!!save?save:0;
+        if(now-time>1000*60){
+            setTimeout(function(){
+                base_remote_data.ajaxjsonp(api.log+account_info.id,function(e){});
+                base_local_data.savedata(base_config.last_log_time_key,now);
+            },5000);
+        }
+    });
 }).call(this);
