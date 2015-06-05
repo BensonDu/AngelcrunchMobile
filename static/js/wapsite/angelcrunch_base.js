@@ -110,3 +110,12 @@
         }
     };
 }).call(this);
+
+(function(){
+    this.account_info={
+        isinvestor:false,
+        logintime:0
+    };
+    //base_remote_data.ajaxjsonp(this.api.login,function(data){console.log(data)});
+
+}).call(this);
