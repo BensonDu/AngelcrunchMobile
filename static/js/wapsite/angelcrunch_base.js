@@ -199,7 +199,7 @@
     $.fn.extend({
         touchtap:function(fn){
             if(base_status.support_touch){
-                $(this).bind('touchstart',fn);
+                $(this).bind('touchend',fn);
             }
             else{
                 $(this).click(fn);
