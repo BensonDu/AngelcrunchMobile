@@ -1254,3 +1254,206 @@ body.footer-close-bottom .banner-footer {
 .vector-icons.weibo::before {
   content: "";
 }
+
+/******************
+       New Head
+ ******************/
+
+.newhead {
+  height:46px;
+  right: 0px;
+  left: 0px;
+  top: 0px;
+  text-align:left;
+  background:#FFF;
+  z-index: 10;
+  cursor:default;
+}
+
+.newhead .logo {
+  width:84px;
+  height:20px;
+  float:left;
+  margin-top:12px;
+  margin-left:4.2%;
+  background:url(/static/images/wapsite/cssimage/18237192837.png) no-repeat left center;
+  background-size:auto 18px;
+}
+
+.newhead .logo[data-href] {
+  cursor:pointer;
+}
+
+.newhead .search {
+  position:absolute;
+  margin-top:6px;
+  right: 9%;
+  cursor:pointer;
+  z-index: 3;
+  -webkit-transition:right .3s ease;
+  -o-transition:right .3s ease;
+  -moz-transition:right .3s ease;
+  transition:right .3s ease;
+}
+.newhead .search i{
+  display:inline-block;
+  width:20px;
+  height:20px;
+  background:url(https://dn-acac.qbox.me/magnifier.svg) no-repeat center;
+  background-size:auto 18px;
+  padding: 17px;
+}
+.newhead .search i:active{
+  background:url(https://dn-acac.qbox.me/magnifier_act.svg) no-repeat center;
+  background-size:auto 18px;
+}
+.newhead .search-list{
+  display: block;
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+  opacity: 0;
+  -webkit-transition:opacity .3s ease;
+  -o-transition:opacity .3s ease;
+  -moz-transition:opacity .3s ease;
+  transition:opacity .3s ease;
+}
+.newhead .search-list .top{
+  height: 46px;
+  width: 100%;
+  border-bottom: 3px solid #d36b39;
+  padding: 8px 5%;
+  background: #fff;
+}
+.newhead .search-list .top .border{
+  overflow: hidden;
+}
+.newhead .search-list .top i{
+  background: url("https://dn-acac.qbox.me/close33.svg") no-repeat center;
+  background-size: auto 39px;
+  display: inline-block;
+  float: left;
+  height: 20px;
+  width: 20px;
+  margin: 6px 3px;
+}
+.newhead .search-list .top i:active{
+  background: url("https://dn-acac.qbox.me/close33_act.svg") no-repeat center;
+  background-size: auto 45px;
+}
+.newhead .search-list .top input{
+  display: inline-block;
+  float: left;
+  height: 30px;
+  width: 75%;
+  margin-left: 2%;
+  font-size: 16px;
+  border:none;
+}
+.newhead .search-list .top input:focus{
+  outline: none;
+}
+.newhead .search-list .list{
+  width: 100%;
+  padding: 8px 13% 0;
+  background: #fff;
+  opacity: .95;
+}
+.newhead .search-list .list a{
+  display: inline-block;
+  width: 100%;
+  height: 42px;
+  font-size: 18px;
+  vertical-align: middle;
+  padding: 13px 0;
+  border-bottom: 1px solid #ccc;
+}
+.newhead .search-list .list .clearhistory{
+  text-align: center;
+  color: #2170CD;
+}
+
+.newhead .options {
+  position:relative;
+  float:right;
+  padding: 0 4.2%;
+  margin-top:12px;
+  cursor:pointer;
+}
+
+.newhead .options span {
+  display:inline-block;
+  width:6px;
+  height:20px;
+  background:url(/static/images/wapsite/cssimage/18237192837.png) no-repeat right center;
+  background-size:auto 18px;
+}
+
+.newhead .options .hidden-menu {
+  position:absolute;
+  /*display:block;*/
+  width:154px;
+  padding:8px 0;
+  margin-top:-24px;
+  margin-left:-154px;
+  left:0;
+  border-radius:2px;
+  background:#FFF;
+  -webkit-box-shadow:rgba(0, 0, 0, 0.15) 0px 0px 4px;
+  -moz-box-shadow:rgba(0, 0, 0, 0.15) 0px 0px 4px;
+  box-shadow:rgba(0, 0, 0, 0.15) 0px 0px 4px;
+  -moz-user-select:none;
+  -webkit-user-select:none;
+  user-select:none;
+  z-index:999;
+}
+
+.newhead .hidden-menu li {
+  float:none;
+  height:28px;
+  font-size:16px;
+  color:#333;
+  line-height:30px;
+  padding-left:30px;
+  cursor:pointer;
+}
+
+.newhead .hidden-menu li:active {
+  background:#F5F5F5;
+}
+.bk{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  opacity: 0;
+  z-index: 1;
+  display: none;
+  -webkit-transition:opacity .5s ease;
+  -o-transition:opacity .5s ease;
+  -moz-transition:opacity .5s ease;
+  transition:opacity .5s ease
+
+}
+.search-result{
+  display: none;
+  width: 100%;
+  height: 42px;
+  background: #F5F5F5;
+}
+.search-result p{
+  float: left;
+  width: 80%;
+  font-size: 16px;
+  padding: 17px 0 0 5.6%;
+}
+.search-result p span{
+  color: #d36b39;
+  font-size: 15px;
+}
+.search-result a{
+  float: right;
+  font-size: 16px;
+  padding: 17px 5.6% 0 0;
+  color: #2170CD;
+}
