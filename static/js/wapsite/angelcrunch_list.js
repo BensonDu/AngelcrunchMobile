@@ -129,7 +129,7 @@
                 search_model_display.status.result=true;
             },
             hide:function(){
-                $searchresult.hide();
+                setTimeout(function(){ $searchresult.hide();},200);
                 search_model_display.status.result=false;
             }
         }
