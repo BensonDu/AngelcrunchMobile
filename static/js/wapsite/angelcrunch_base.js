@@ -4,11 +4,13 @@
     this.base_host='angelcrunch.com/';
     this.base_home=this.base_protocol+this.base_host;
     this.base_mobile='http://mobile.angelcrunch.com/';
+    this.base_ua=navigator.userAgent.toLowerCase();
 
     this.api={
         login:this.base_mobile+'v2/home/login',
         comlist:this.base_mobile+'v2/m_startup',
-        log:'http://yx.dubaoxing.com/api/remotelog?msg=id_'
+        log:'http://yx.dubaoxing.com/api/remotelog?msg=id_',
+        comlistsearch:this.base_mobile+'v2/startup_search'
     };
 
     this.base_config={
@@ -16,7 +18,17 @@
         cachetime:7*24*60*60*1000,
         //账户信息保存字段名
         account_save_key:'account_info',
-        last_log_time_key:'last_log_time'
+        last_log_time_key:'last_log_time',
+        search_com_history_key:'com_search_history'
+    };
+    this.base_status={
+        ua:navigator.userAgent.toLowerCase(),
+        support_touch:typeof document.body.ontouchstart!='undefined'/*,
+        isandorid: base_ua.indexOf("android") != -1 ? 1 : 0,
+        isios: !!base_ua.match(/\(i[^;]+;( u;)? cpu.+mac os x/),
+        isiphone: base_ua.indexOf('iphone') > -1 || ua.indexOf('mac') > -1,
+        isipad: base_ua.indexOf('ipad') > -1,
+        iswechat: base_ua.indexOf("micromessenger") != -1 ? 1 : 0*/
     };
 
     //localStorage存储管理
@@ -178,6 +190,21 @@
                 base_remote_data.ajaxjsonp(api.log+account_info.id,function(e){});
                 base_local_data.savedata(base_config.last_log_time_key,now);
             },5000);
+        }
+    });
+}).call(this);
+
+//移动设备触摸事件 随后扩展
+(function(){
+    $.fn.extend({
+        touchtap:function(fn){
+            if(base_status.support_touch){
+                $(this).bind('touchstart',fn);
+            }
+            else{
+                $(this).click(fn);
+            }
+
         }
     });
 }).call(this);

@@ -34,8 +34,9 @@
 
 </head>
 <body>
-<div class="details" ms-controller="list-info">
-    <div id="header" class="head">
+<div class="details">
+    <div class="bk"></div>
+    <div id="header" class="newhead">
         <div class="logo ci-link" data-href="/"></div>
         <div class="options">
             <span></span>
@@ -44,8 +45,22 @@
                 <li class="ci-link" data-href="http://angelcrunch.com/angel">投资人</li>
             </ul>
         </div>
+        <div class="search">
+            <i></i>
+        </div>
+
+        <div class="search-list">
+            <div class="top"><div class="border"><i></i><input title="Search" type="search" autocorrect="off"></div></div>
+            <div class="list" ms-controller="search-status" ms-if="data.length>0">
+                <a ms-on-tap="searchhistory" ms-repeat="data" >{{el}}</a>
+                <a ms-on-tap="clearhistory" class="clearhistory">清除历史记录</a>
+            </div>
+        </div>
     </div>
-    <div class="section-list">
+    <div class="search-result">
+        <p>共找到“<span></span>”相关项目<span></span>个</p><a class="cancelsearch">取消</a>
+    </div>
+    <div class="section-list" ms-controller="list-info">
         <div class="loading-container">
             <div class="loading"></div>
         </div>
@@ -80,229 +95,5 @@
 <script src="/static/js/wapsite/angelcrunch.app_downloadbar.jq.c.js"></script>
 <script src="/static/js/lib/avalon.mobile.min.js"></script>
 <script src="/static/js/wapsite/angelcrunch_base.js"></script>
-<script>
-    (function(){
-        this.avalonVM=avalon.define("list-info", function (vm) {
-            vm.data = {};
-        })
-    }).call(this);
-
-    (function(){
-        //页面列表属性
-        this.page_config={
-            perpage:10,
-            pagetotal:0,
-            currentpage:1,
-            pageindexcache:true,
-            pageindexkey:'comlist_pageindex',
-            localprecachearray:[],
-            localprecacheprefix:'comlist_precache_prefix'
-        };
-        //Dom元素
-        this.$page_ele={
-            page_num_current:$('.current-page'),
-            page_num_all:$('.total-page'),
-            btn_prev:$('.prev-page'),
-            btn_next:$('.next-page'),
-            loading:$(".loading-container")
-        };
-        //页码显示
-        this.page_num_update=function(){
-            $page_ele.page_num_current.html(this.page_config.currentpage);
-            $page_ele.page_num_all.html(this.page_config.pagetotal);
-        };
-        //翻页链接更新
-        this.page_btn_update=function(){
-            var index=parseInt(this.page_config.currentpage),prev,next,total=parseInt(this.page_config.pagetotal);
-
-            prev=this.base_hash.putdata({p:index>1?index-1:1});
-            next=this.base_hash.putdata({p:total>=index+1?index+1:index});
-            this.$page_ele.btn_prev.prop('href',prev);
-            this.$page_ele.btn_next.prop('href',next);
-        };
-        //滚动回顶部
-        this.page_scroll_top=function(){
-            var t=document.body.scrollTop, s, e;
-            if(t){
-                e=t/(200/13);
-                s=setInterval(function(){
-                    t-=e;
-                    if(t<0){
-                        t=0;
-                        clearInterval(s);
-                    }
-                    document.body.scrollTop=t;
-                },13);
-            }
-        };
-        //数据整理
-        this.page_data_get=function(call){
-            var getcache,todel,data,index=parseInt(page_config.currentpage),array=[];
-
-            getcache=base_local_data.getdata(page_config.localprecacheprefix+this.page_config.currentpage);
-            if(getcache){
-                call(getcache);
-            }
-            else{
-                this.page_remote_data(call,index);
-            }
-            array.push(index);
-            if(index>1){
-                this.page_remote_data(function(){},index-1);
-                array.push(index);
-            }
-            if(index<parseInt(page_config.pagetotal)){
-                this.page_remote_data(function(){},index+1);
-                array.push(index);
-            }
-            for(var i in page_config.localprecachearray){
-                if(array.indexOf(page_config.localprecachearray[i])==-1){
-                    base_local_data.deldata(page_config.localprecacheprefix+page_config.localprecachearray[i]);
-                }
-            }
-
-
-        };
-
-        //远程获取数据并保存
-        this.page_remote_data=function(call,index){
-            base_remote_data.ajaxjsonp(api.comlist,function(data){
-                if(index){
-                    if(page_config.localprecachearray.indexOf(index)==-1){
-                        page_config.localprecachearray.push(index);
-                    }
-                    base_local_data.savedata(page_config.localprecacheprefix+index,data);
-                }
-                call(data);
-            },{'pagesize':this.page_config.perpage,'pageindex':index});
-        };
-        //当前页面链接hash 绑定 页数
-        this.page_current_num=function(){
-
-            var p=base_hash.getdata('p'),cache;
-
-            if(p){
-                this.page_config.currentpage=p;
-            }
-            //页面初始化，无法获取hash页数，从缓存读取页数并补全链接，或首页开始
-            else{
-                cache=this.base_local_data.getdata(this.page_config.pageindexkey);
-
-                if(this.page_config.pageindexcache && cache!=null){
-                    this.page_config.currentpage=cache;
-                }
-
-                location.hash=this.base_hash.putdata({p:this.page_config.currentpage});
-
-                return false;
-            }
-
-        };
-        //页面处理
-        this.page_core=function(){
-
-            this.page_current_num();
-
-            this.page_scroll_top();
-
-            this.page_data_get(function(data){
-
-                if(data.hasOwnProperty('list')){
-                    avalonVM.data=data.list;
-                }
-                if(data.hasOwnProperty('total')){
-                    this.page_config.pagetotal=Math.ceil(data.total/this.page_config.perpage);
-                }
-
-                //更新页码数
-                this.page_num_update();
-                //更新翻页连接
-                this.page_btn_update();
-                //存储当前页数
-                this.base_local_data.savedata(this.page_config.pageindexkey,this.page_config.currentpage);
-                //loading动画隐藏
-                this.$page_ele.loading.hide();
-            });
-
-        };
-
-
-        this.page_core();
-
-        window.onhashchange=function(){
-            this.page_core();
-        };
-
-
-
-    }).call(this);
-
-    /*触摸移动事件事件 翻页显示与隐藏*/
-    (function(){
-        this.$touchele=$('.page-turn');
-
-        this.touchsta={
-            barheight:65,
-            eleshow:true,
-            isstart:false,
-            startY:0,
-            endY:0
-        };
-        if(typeof document.body.ontouchstart!='undefined'){
-            document.body.ontouchstart=function(event){
-                var touch=event.touches[0];
-                if(touch){
-                    touchsta.startY=touch.clientY;
-                    touchsta.isstart=true;
-                }
-            };
-            document.body.ontouchmove=function(event){
-                var touch=event.touches[0],mY;
-                if(touch){
-                    mY=touch.clientY-touchsta.startY;
-                    if(Math.abs(mY)<touchsta.barheight){
-                        if(mY<0 && touchsta.eleshow){
-                            $touchele.css('bottom',mY);
-                        }
-
-                        if(mY>0 && !touchsta.eleshow){
-                            $touchele.css('bottom',mY-touchsta.barheight);
-                        }
-                    }
-
-                }
-            };
-            document.body.ontouchend=function(event){
-                var touch=event.changedTouches[0],endY=touch.clientY,moveabs=Math.abs(endY-touchsta.startY);
-                if(moveabs>5){
-                    if(endY-touchsta.startY>0 && !touchsta.eleshow){
-                        if(moveabs>touchsta.barheight/2){
-                            $touchele.animate({'bottom':0});
-                            touchsta.eleshow=true;
-                        }
-                        else{
-                            $touchele.animate({'bottom':-touchsta.barheight});
-                            touchsta.eleshow=false;
-                        }
-                    }
-                    if(endY-touchsta.startY<0 && touchsta.eleshow){
-                        if(moveabs>touchsta.barheight/2){
-                            $touchele.animate({'bottom':-touchsta.barheight});
-                            touchsta.eleshow=false;
-                        }
-                        else{
-                            $touchele.animate({'bottom':0});
-                            touchsta.eleshow=true;
-                        }
-                    }
-                }
-
-            };
-
-        }
-
-
-    }).call(this);
-
-</script>
+<script src="/static/js/wapsite/angelcrunch_list.js"></script>
 </html>
