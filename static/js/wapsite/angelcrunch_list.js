@@ -83,16 +83,12 @@
         },
         history:{
             show:function(){
-                if(!search_model_display.status.history){
-                    avalonSearch.data=base_local_data.getdata(base_config.search_com_history_key)||[];
-                    search_model_display.status.history=true;
-                }
+                avalonSearch.data=base_local_data.getdata(base_config.search_com_history_key)||[];
+                search_model_display.status.history=true;
             },
             hide:function(){
-                if(search_model_display.status.history) {
-                    avalonSearch.data = [];
-                    search_model_display.status.history = false;
-                }
+                avalonSearch.data = [];
+                search_model_display.status.history = false;
             }
         },
         bk:{
@@ -139,7 +135,7 @@
         }
     };
     this.search_import=function(k){
-        location.hash=this.base_hash.putdata({p:1,k: encodeURI(k)});
+        location.hash=this.base_hash.putdata({p:1,k: encodeURI(k),t: $.now()});
     };
     this.search_cancel=function(){
         location.hash=this.base_hash.putdata({p:this.page_config.currentpage});
@@ -160,6 +156,7 @@
         }
         else{
             var k=decodeURI(k);
+
             if(!search_model_display.status.searching){
 
                 search_config_cache={};
@@ -167,8 +164,6 @@
 
                 page_config.currentpage=1;
                 page_config.remote_current_api=api.comlistsearch;
-                page_config.page_data_param.keyword=k;
-                page_config.pagination_param.k=encodeURI(k);
                 page_config.pagelistcache=false;
                 page_config.localprecacheprefix='searchlist';
                 page_config.page_hook=function(data){
@@ -179,6 +174,9 @@
                     search_model_display.result.show(k,n);
                 };
             }
+            page_config.page_data_param.keyword=k;
+            page_config.pagination_param.k=encodeURI(k);
+
             search_model_display.status.searching=true;
             search_model_display.topbar.show();
             search_model_display.bk.hide();
@@ -230,7 +228,11 @@
         if(e.keyCode==13){
             search_import($input.val());
         }
-    })
+    });
+    $input.focus(function(){
+       search_model_display.history.show();
+       search_model_display.bk.show();
+    });
 }).call(this);
 
 (function(){
