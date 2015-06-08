@@ -51,7 +51,7 @@
         $input=$searchmodel.find('input'),
         $close=$searchmodel.find('i'),sta=false,
         $cancelsearch=$('.cancelsearch'),
-        $searchresult=$('.search-result'),
+        $searchresult=$('#search-result'),
         domain=this;
     this.search_config_cache={};
     this.search_model_display={
