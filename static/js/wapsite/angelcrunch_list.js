@@ -51,7 +51,7 @@
         $input=$searchmodel.find('input'),
         $close=$searchmodel.find('i'),sta=false,
         $cancelsearch=$('.cancelsearch'),
-        $searchresult=$('#search-result'),
+        $searchresult=$('.search-result'),
         domain=this;
     this.search_config_cache={};
     this.search_model_display={
@@ -166,14 +166,14 @@
                 page_config.remote_current_api=api.comlistsearch;
                 page_config.pagelistcache=false;
                 page_config.localprecacheprefix='searchlist';
-                page_config.page_hook=function(data){
-                    var n=0;
-                    if(data.hasOwnProperty('total')){
-                        n=data['total'];
-                    }
-                    search_model_display.result.show(k,n);
-                };
             }
+            page_config.page_hook=function(data){
+                var n=0;
+                if(data.hasOwnProperty('total')){
+                    n=data['total'];
+                }
+                search_model_display.result.show(k,n);
+            };
             page_config.page_data_param.keyword=k;
             page_config.pagination_param.k=encodeURI(k);
 
