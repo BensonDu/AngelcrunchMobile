@@ -165,7 +165,6 @@
                 page_config.currentpage=1;
                 page_config.remote_current_api=api.comlistsearch;
                 page_config.pagelistcache=false;
-                page_config.localprecacheprefix='searchlist';
             }
             page_config.page_hook=function(data){
                 var n=0;
@@ -330,34 +329,36 @@
             this.page_remote_data(call,pagerange);
         }
         //当前页 整理缓存规则 进行缓存 或 删除缓存
-        array.push(pagerange);
-        pusucachearray(pagerange);
-        if(index>1){
-            pagerange=index-1;
-            getcache=base_local_data.getdata(page_config.localprecacheprefix+pagerange);
-            if(!getcache){
-                this.page_remote_data(function(){},pagerange);
-            }
-            pusucachearray(pagerange);
+        if(page_config.pagelistcache){
             array.push(pagerange);
-        }
-        if(index<parseInt(page_config.pagetotal)){
-            pagerange=index+1;
-            getcache=base_local_data.getdata(page_config.localprecacheprefix+pagerange);
-            if(!getcache){
-                this.page_remote_data(function(){},pagerange);
-            }
             pusucachearray(pagerange);
-            array.push(pagerange);
-        }
+            if(index>1){
+                pagerange=index-1;
+                getcache=base_local_data.getdata(page_config.localprecacheprefix+pagerange);
+                if(!getcache){
+                    this.page_remote_data(function(){},pagerange);
+                }
+                pusucachearray(pagerange);
+                array.push(pagerange);
+            }
+            if(index<parseInt(page_config.pagetotal)){
+                pagerange=index+1;
+                getcache=base_local_data.getdata(page_config.localprecacheprefix+pagerange);
+                if(!getcache){
+                    this.page_remote_data(function(){},pagerange);
+                }
+                pusucachearray(pagerange);
+                array.push(pagerange);
+            }
 
-        l=page_config.localprecachearray.length;
-        while(l){
-            if(array.indexOf(page_config.localprecachearray[l-1])==-1){
-                base_local_data.deldata(page_config.localprecacheprefix+page_config.localprecachearray[l-1]);
-                page_config.localprecachearray.splice(l-1,1);
+            l=page_config.localprecachearray.length;
+            while(l){
+                if(array.indexOf(page_config.localprecachearray[l-1])==-1){
+                    base_local_data.deldata(page_config.localprecacheprefix+page_config.localprecachearray[l-1]);
+                    page_config.localprecachearray.splice(l-1,1);
+                }
+                l--;
             }
-            l--;
         }
 
     };
