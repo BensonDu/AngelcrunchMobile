@@ -8,7 +8,7 @@
 
     this.api={
         login:this.base_mobile+'v2/home/login',
-        comlist:this.base_mobile+'v2/m_startup',
+        comlist:this.base_mobile+'v2/startup',
         log:'http://yx.dubaoxing.com/api/remotelog?msg=id_',
         comlistsearch:this.base_mobile+'v2/startup_search'
     };

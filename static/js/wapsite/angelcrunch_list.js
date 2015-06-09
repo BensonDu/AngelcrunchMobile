@@ -252,7 +252,19 @@
         page_data_param:{},
         pagination_param:{},
         remote_current_api:api.comlist,
-        page_hook:function(){}
+        page_hook:function(){},
+        page_data_render:function(data){
+            var render=data,l;
+            if(render.hasOwnProperty('list')){
+                l=render.list.length;
+                while(l){
+                    render.list[l-1].finishamount=parseInt(render.list[l-1].finishamount.replace(/\,/g,'').replace(/0{4}$/,''));
+                    render.list[l-1].amount=parseInt(render.list[l-1].amount.replace(/\,/g,'').replace(/0{4}$/,''));
+                    l--;
+                }
+            }
+            return render;
+        }
     };
     //Dom元素
     this.$page_ele={
@@ -348,11 +360,13 @@
     //远程获取数据并保存
     this.page_remote_data=function(call,index){
 
-        var param={'pagesize':this.page_config.perpage,'pageindex':index};
+        var param={'pagesize':this.page_config.perpage,'pageindex':index},renderdata={};
 
         $.extend(true,param,page_config.page_data_param);
 
         base_remote_data.ajaxjsonp(page_config.remote_current_api,function(data){
+            //数据整理
+            renderdata = page_config.page_data_render(data);
             if(index && page_config.pagelistcache){
                 base_local_data.savedata(page_config.localprecacheprefix+index,data);
             }
