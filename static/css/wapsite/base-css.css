@@ -1308,7 +1308,7 @@ body.footer-close-bottom .banner-footer {
   background-size:auto 18px;
 }
 .newhead .search-list{
-  display: block;
+  display: none;
   width: 100%;
   position: absolute;
   z-index: 2;
