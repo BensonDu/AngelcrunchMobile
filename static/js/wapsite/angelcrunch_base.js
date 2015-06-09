@@ -23,7 +23,7 @@
     };
     this.base_status={
         ua:navigator.userAgent.toLowerCase(),
-        support_touch:typeof document.body.ontouchstart!='undefined'/*,
+        support_touch:typeof document.ontouchstart!='undefined'/*,
         isandorid: base_ua.indexOf("android") != -1 ? 1 : 0,
         isios: !!base_ua.match(/\(i[^;]+;( u;)? cpu.+mac os x/),
         isiphone: base_ua.indexOf('iphone') > -1 || ua.indexOf('mac') > -1,
