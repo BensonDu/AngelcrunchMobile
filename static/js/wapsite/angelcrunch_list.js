@@ -258,8 +258,12 @@
             if(render.hasOwnProperty('list')){
                 l=render.list.length;
                 while(l){
-                    render.list[l-1].finishamount=parseInt(render.list[l-1].finishamount.replace(/\,/g,'').replace(/0{4}$/,''));
-                    render.list[l-1].amount=parseInt(render.list[l-1].amount.replace(/\,/g,'').replace(/0{4}$/,''));
+                    if(typeof render.list[(l-1)].finishamount=='string'){
+                        render.list[(l-1)].finishamount=parseInt(render.list[(l-1)].finishamount.replace(/\,/g,'').replace(/0{4}$/,''));
+                    }
+                    if(typeof render.list[(l-1)].amount == 'string'){
+                        render.list[(l-1)].amount=parseInt(render.list[(l-1)].amount.replace(/\,/g,'').replace(/0{4}$/,''));
+                    }
                     l--;
                 }
             }

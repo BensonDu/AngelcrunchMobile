@@ -172,6 +172,17 @@
     var now= $.now();
     var localdata=base_local_data.getdata(base_config.account_save_key);
     $.extend(true,this.account_info,localdata);
+    //同步旧的登陆信息
+    if(!localdata){
+        var $COOKIE=$.Angelcrunch.COOKIE || {};
+        if($.cookie($COOKIE.cookieName.user_id)){
+            account_info.id     = $.cookie($COOKIE.cookieName.user_id) || account_info.id;
+            account_info.token  = $.cookie($COOKIE.cookieName.token) || account_info.token;
+            account_info.role   = $.cookie($COOKIE.cookieName.defaultpart) || account_info.role;
+            account_info.time   = now;
+            base_local_data.savedata(base_config.account_save_key,account_info);
+        }
+    }
 
     if(now-account_info.time>base_config.cachetime){
         base_local_data.deldata(base_config.account_save_key);
