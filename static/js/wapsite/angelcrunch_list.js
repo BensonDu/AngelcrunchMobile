@@ -165,6 +165,7 @@
                 page_config.currentpage=1;
                 page_config.remote_current_api=api.comlistsearch;
                 page_config.pagelistcache=false;
+                page_config.localprecacheprefix='searchlist';
             }
             page_config.page_hook=function(data){
                 var n=0;
