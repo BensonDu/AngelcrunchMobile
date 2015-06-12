@@ -10,7 +10,13 @@
         login:this.base_mobile+'v2/home/login',
         comlist:this.base_mobile+'v2/startup',
         log:'http://yx.dubaoxing.com/api/remotelog?msg=id_',
-        comlistsearch:this.base_mobile+'v2/startup_search'
+        comlistsearch:this.base_mobile+'v2/startup_search',
+        com_details:this.base_mobile+'v2/startup/m_detail',
+        com_finace_info:this.base_mobile+'v2/startup/m_finance',
+        com_basic_info:this.base_mobile+'v2/startup/base_info',
+        com_bp:this.base_mobile+'v2/startup/pb',
+        com_follow:this.base_mobile+'v2/follow',
+        com_unfollow:this.base_mobile+'v2/unfollow'
     };
 
     this.base_config={
@@ -164,8 +170,9 @@
         id:0,
         name:'',
         token:'',
-        role:1,
-        time:0
+        role:0,
+        time:0,
+        is_login:false
     };
 
     //过期删除
@@ -187,13 +194,17 @@
     if(now-account_info.time>base_config.cachetime){
         base_local_data.deldata(base_config.account_save_key);
     }
-
+    //登陆状态
+    if(account_info.token.length>5){
+        account_info.is_login=true;
+    }
 
 }).call(this);
 
 //日志记录
 (function(){
     $(document).ready(function(){
+        if(/dubaoxing/g.test(location.href.toLocaleLowerCase()))return false;
         var save=base_local_data.getdata(base_config.last_log_time_key),now= $.now(),time;
         time=!!save?save:0;
         if(now-time>1000*60){
