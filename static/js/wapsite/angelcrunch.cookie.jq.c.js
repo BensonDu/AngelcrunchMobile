@@ -23,7 +23,13 @@ $.Angelcrunch = $.Angelcrunch || {};
     };
 
     $COOKIE.settings = { expires: 7, path: "/", secure: false };
-    var domain = location.host.match(/.+\.(.+\.[a-zA-Z0-9]+)/);
+    if(/dubaoxing/g.test(location.href.toLocaleLowerCase())){
+        var domain='.dubaoxing.com';
+    }
+    else{
+        var domain='.angelcrunch.com'
+    }
+    /*var domain = location.host.match(/.+\.(.+\.[a-zA-Z0-9]+)/);*/
     if (domain) $COOKIE.settings.domain = domain[1];
 
     $COOKIE.operation = {
