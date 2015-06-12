@@ -105,7 +105,7 @@
                     <p ms-html="txt2html(data.descriptions.plan)"></p>
                 </div>
             </article>
-            <article class="team" ms-if="data.team" ms-if="data.team.length">
+            <article class="team" ms-if="data.team"">
                 <h1>团队成员</h1>
                 <div class="item" ms-repeat="data.team">
                     <h3 ms-text="el.name"></h3>
@@ -114,7 +114,7 @@
                     <p class="gray" ms-html="txt2html(el.summary)"></p>
                 </div>
             </article>
-            <article class="milestone" ms-if="window.account_info.role>0 && data.milestone.length">
+            <article class="milestone" ms-if="window.account_info.role>0 && data.milestone">
                 <h1>项目大事记</h1>
                 <div class="item" ms-repeat="data.milestone">
                     <p class="date">
@@ -123,7 +123,7 @@
                     <p class="gray" ms-text="el.content"></p>
                 </div>
             </article>
-            <article class="growing-up" ms-if="window.account_info.role>0 && data.growthdata.length">
+            <article class="growing-up" ms-if="window.account_info.role>0 && data.growthdata">
                 <h1>成长数据</h1>
                 <div class="item" ms-repeat="data.growthdata">
                     <p class="date">
@@ -132,7 +132,7 @@
                     <p class="gray">{{el.content}}</p>
                 </div>
             </article>
-            <article class="news" ms-if="window.account_info.role>0 && data.news.length">
+            <article class="news" ms-if="window.account_info.role>0 && data.news">
                 <h1>新闻</h1>
                 <div ms-each-el="data.news">
                     <p class="date">
