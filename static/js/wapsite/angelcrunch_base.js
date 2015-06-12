@@ -179,10 +179,10 @@
     //过期删除
     var now= $.now();
     var localdata=base_local_data.getdata(base_config.account_save_key);
+    var $COOKIE=$.Angelcrunch.COOKIE || {};
     $.extend(true,this.account_info,localdata);
     //同步旧的登陆信息
     if(!localdata){
-        var $COOKIE=$.Angelcrunch.COOKIE || {};
         if($.cookie($COOKIE.cookieName.user_id)){
             account_info.id     = $.cookie($COOKIE.cookieName.user_id) || account_info.id;
             account_info.token  = $.cookie($COOKIE.cookieName.token) || account_info.token;
