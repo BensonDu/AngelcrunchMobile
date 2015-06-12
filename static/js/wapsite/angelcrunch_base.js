@@ -25,7 +25,8 @@
         //账户信息保存字段名
         account_save_key:'account_info',
         last_log_time_key:'last_log_time',
-        search_com_history_key:'com_search_history'
+        search_com_history_key:'com_search_history',
+        client_version_key:'client_version'
     };
     this.base_status={
         ua:navigator.userAgent.toLowerCase(),
@@ -190,7 +191,13 @@
             base_local_data.savedata(base_config.account_save_key,account_info);
         }
     }
-
+    //跨版本清除旧数据
+    var getclientversion=base_local_data.getdata(base_config.client_version_key);
+    if(getclientversion!=account_info.version){
+        base_local_data.cleardata();
+        $COOKIE.operation.clearUserKey();
+        base_local_data.savedata(base_config.client_version_key,account_info.version);
+    }
     if(now-account_info.time>base_config.cachetime){
         base_local_data.deldata(base_config.account_save_key);
     }
