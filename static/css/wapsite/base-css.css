@@ -57,7 +57,7 @@ i {
 p:empty {
   display:none;
 }
-
+.default-hidden,
 .can-not-view-marked,
 .hidden2Visible {
   display:none;
@@ -418,9 +418,10 @@ input::-webkit-input-placeholder {
 
 .page-action {
   width:100%;
-  height:44px;
-  padding: 8px 4.52% 0;
+  height:56px;
+  padding: 14px 4.52%;
   background:#EEE;
+  border-top: 1px solid #fff;
 }
 
 .btn-group {
@@ -505,22 +506,21 @@ input::-webkit-input-placeholder {
   min-height:20px;
   padding:6px 2px;
   background:#FFF;
-  overflow-x:auto;
-  overflow-y:hidden;
-  z-index:2;
 }
 
 .slider-container > ul {
   display:inline-block;
-  position:absolute;
-  height:auto;
-  z-index:1;
+  height:100%;
+  width: 100%;
+  white-space: nowrap;
+  overflow-x:auto;
+  overflow-y:hidden;
 }
 
 .slider-container li {
-  display: inline-block;
-  height: auto;
-  float: left;
+  display: inline;
+  white-space: nowrap;
+  float: none;
   text-align: center;
   margin-left:10px;
 }
@@ -1420,6 +1420,12 @@ body.footer-close-bottom .banner-footer {
 
 .newhead .hidden-menu li:active {
   background:#F5F5F5;
+}
+.transition{
+  -webkit-transition:all .5s ease;
+  -o-transition:all .5s ease;
+  -moz-transition:all .5s ease;
+  transition:all .5s ease
 }
 .bk{
   position: fixed;

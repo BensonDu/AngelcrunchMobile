@@ -28,331 +28,210 @@
     <link rel="canonical" href="页面权威链接，待编辑" />
     <!-- META WT -->
 
-    <title>碰见 - 边聊边做, 下个时代的记事本</title>
+    <title>天使汇 | 项目页面 | 让靠谱的项目找到靠谱的钱</title>
     <link href="/static/css/wapsite/base-css.css" rel="stylesheet" />
     <link href="/static/css/wapsite/investor/details.css" rel="stylesheet" />
-
-    <script src="/static/js/lib/jquery-1.11.1.min.js"></script>
-    <script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
-    <script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
-
-    <script type="text/javascript" id="page-interactive-init">
-    var page = window.page || {};
-    page.MethodObj = function () { };
-    page.MethodObj.prototype = (function () {
-        var settings = page.settings;
-        var I = {
-            Ajax_details: {                     // Details
-                url: "http://" + settings.AjaxDomain + "/v2/startup/detail",
-                basic_data: {
-                }
-            },
-            Ajax_basic_information: {                     // Basic information
-                url: "http://" + settings.AjaxDomain + "/v2/startup/base_info",
-                basic_data: {
-                }
-            },
-            API: {
-                calculateInvesterEleWidth: ""
-            }
-        };
-
-        var waste_8912372 = function () {
-            var href, $loginBtn, loginBtnAttr;
-            $loginBtn = $("#login-btn");
-            href = escape(location.href),
-            loginBtnAttr = $loginBtn.attr("data-href");
-            if (loginBtnAttr) $loginBtn.attr("data-href", loginBtnAttr + href);
-        };
-
-        var waste_2012932 = function () {
-            var calculateItemWidth = function () {
-                var Factor = 3, Divisor = 3, itemNum;
-                var $container, $ul, $item;
-                $container = $("#invester"),
-                $ul = $container.find("ul");
-                $item = $ul.find("li");
-                itemNum = $item.length,
-                Divisor = itemNum > Factor ? Divisor : itemNum;
-                if (itemNum < 1) $container.hide();
-                $item.outerWidth((parseInt($container.width() / Divisor) - 0.2));
-            };
-            var initial = I.API.calculateInvesterEleWidth = function () {
-                calculateItemWidth();
-                $("#invester").calculateSliderModuleWidth({ rightSpaceWidth: 0 })
-            };
-
-            window.onresize = initial;
-            initial();
-        };
-
-        var waste_9839213 = function () {
-            var $COOKIE, $details;
-            $COOKIE = $.Angelcrunch.COOKIE;
-            $details = $("#details");
-            // Basic information
-            (function () {
-                var url = I.Ajax_basic_information.url,
-                    basic_data = I.Ajax_basic_information.basic_data,
-                          type = "jsonp";
-                var _data = $.extend(true, {}, basic_data);
-                var comid = $.Angelcrunch.url.getComid();
-
-                if (comid) _data["com_id"] = comid;
-                $.post(url, _data, function (data) {
-                    $.Angelcrunch.dataSet.Model.projectBasicInformation = data;
-                    // avalonNS.model.basicInformation.data = data;
-                }, type);
-            }).call(this);
-
-            // Details information
-            (function () {
-                if ($COOKIE.operation.isLogin()) {
-                    var url = I.Ajax_details.url,
-                        basic_data = I.Ajax_details.basic_data,
-                              type = "jsonp";
-                    var _data = $.extend(true, {}, basic_data);
-                    var comid = $.Angelcrunch.url.getComid();
-                    _data[$COOKIE.cookieName.token] = $.cookie($COOKIE.cookieName.token);
-                    _data[$COOKIE.cookieName.user_id] = $.cookie($COOKIE.cookieName.user_id);
-
-                    if (comid) _data["com_id"] = comid;
-                    $.post(url, _data, function (data) {
-                        $.Angelcrunch.dataSet.Model.projectDetails = data;
-                        // avalonNS.model.details.data = data;
-                        $details.addClass("logged");
-                        I.API.calculateInvesterEleWidth();
-                    }, type);
-                }
-            }).call(this);
-        };
-
-        return {
-            attackEvent: function () {
-                waste_2012932();
-
-                waste_9839213();
-                waste_8912372();
-            },
-
-            pageLoad_Init: function () {
-                $("#album").calculateSliderModuleWidth();
-            },
-
-            initial: function () {
-                this.pageLoad_Init();
-                this.attackEvent();
-            }
-        };
-    })();
-
-    page.initialBridge = function () {
-        var o = new page.MethodObj();
-        o.initial();
-    }
-
-    $(function () {
-        page.initialBridge();
-    })
-    </script>
-
 </head>
 <body>
-    <div class="details logged">
-        <div class="branding-head">
-            <div class="icon"><img src="/static/images/wapsite/brandicon2910282.png" /></div>
-            <div class="brand-info">
-                <h1>碰见</h1>
-                <p>边聊边做，下个时代的记事本</p>
-                <p class="extra">移动互联网，O2O，教育，社交网络，互联网金融</p>
-            </div>
-            <div class="progress-container">
-                <div class="progress">
-                    <div class="progress-bar progress-bar-success progress-bar-striped active reverse" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%">
-                        <span class="sr-only">45% Complete</span>
-                    </div>
-                </div>
-                <p><em>投资意向: 65万（预融资100万）</em><em class="right">剩余21天</em></p>
-            </div>
-        </div>
-        <div id="album" class="slider-container">
-            <ul>
-                <li><img src="/static/images/wapsite/123kaskjdhasd.jpg" /></li>
-                <li><img src="/static/images/wapsite/12asjdhkjh123uyasd.jpg" /></li>
-                <li><img src="/static/images/wapsite/jhjaskjdh1iu23hjknasdkjh.jpg" /></li>
-                <li><img src="/static/images/wapsite/kjashdkh12n3kjhasd.jpg" /></li>
-                <li><img src="/static/images/wapsite/123kaskjdhasd.jpg" /></li>
-                <li><img src="/static/images/wapsite/jhjaskjdh1iu23hjknasdkjh.jpg" /></li>
+<div class="bk"></div>
+<div id="qrcode" class="qrcode transition">
+</div>
+
+<div id="details" class="details">
+    <div class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
+    <div id="header" class="newhead">
+        <div class="logo ci-link" data-href="/"></div>
+        <div class="options">
+            <span></span>
+            <ul class="hidden-menu">
+                <li class="ci-link" data-href="http://angelcrunch.com/startup_financing">创业项目</li>
+                <li class="ci-link" data-href="http://angelcrunch.com/angel">投资人</li>
             </ul>
         </div>
-        <div class="not-logged-in">
-            <div class="login-options">
-                <p class="declare">详细信息只对<i>天使汇认证投资人</i>可见，请选择您的身份:</p>
-                <div class="control-module">
-                    <em><i></i>天使汇认证投资人</em>
-                    <button class="btn btn-small" data-href="/html/user/login.html?source=">登录</button>
-                </div>
-                <div class="control-module">
-                    <em><i></i>未认证投资人</em>
-                    <button class="btn btn-small">申请认证</button>
-                </div>
-            </div>
-            <div class="banner-footer">
-                <p>AngelCrunch.com</p>
-                <p>天使汇 - 让靠谱的项目找到靠谱的钱</p>
-            </div>
+    </div>
+
+    <div class="branding-head" ms-controller="basic-info">
+        <div class="icon"><img ms-src="data.logo||''" /></div>
+        <div class="brand-info">
+            <h1 ms-text="data.name"></h1>
+            <p ms-text="data.concept"></p>
+            <p class="extra" ms-text="data.industry"></p>
         </div>
-        <div class="logged-in">
-            <div class="article-list">
-                <article class="intro">
-                    <h1>项目描述</h1>
-                    <p class="silver">用户场景</p>
-                    <p>针对不同阶段的用户，我们采用不同是数据方案，为用户提供不同的服务。采用个性化推荐的方式。</p>
-                    <div class="item">
-                        <p class="silver">市场调研</p>
-                        <p>调研了市面上现存的3种同类型产品，我们的产品具有巨大的优势。</p>
-                    </div>
-                    <div class="item">
-                        <p class="silver">项目优势</p>
-                        <p>技术研发能力，团队凝聚力，优秀的设计师与先进的商业模式用户提供不同的服务。采用个性化推荐的方式。</p>
-                    </div>
-                    <div class="item">
-                        <p class="silver">商业模式</p>
-                        <p>免费+广告收益</p>
-                    </div>
-                    <div class="item">
-                        <p class="silver">发展规划</p>
-                        <p>在三个月内实现月活跃用户10万，1年内日活跃用户100万，初步实现盈利。</p>
-                    </div>
-                </article>
-                <article class="team">
-                    <h1>团队成员</h1>
-                    <div class="item">
-                        <h3>徐霖</h3>
-                        <p class="avatar"><img src="/static/images/wapsite/avatar129837222223.jpg" /></p>
-                        <p class="experience">中央电视台 · 媒体顾问</p>
-                        <p class="gray">中国美容行业的非著名领袖，美容行业店务、股权专家，5年美容行业创业经验，曾打造著名专业线口服美容品牌“简美”。美容行业最懂互联网，互联网领域最懂美容。曾就职于计算机世界，中央电视台。</p>
-                    </div>
-                    <div class="item">
-                        <h3>叶春源</h3>
-                        <p class="avatar"><img src="/static/images/wapsite/avatar29812982223.jpg" /></p>
-                        <p>美团网 · 技术大拿</p>
-                        <p class="gray">清华大学计算机硕士，高级工程师，美团网前技术大拿，十几年开发经验，精通产品。</p>
-                    </div>
-                </article>
-                <article class="milestone">
-                    <h1>项目大事记</h1>
-                    <div class="item">
-                        <p class="date">
-                            <i>4.25</i><em>2014</em>
-                        </p>
-                        <p class="gray">前往西安某厂, 了解到国内现商用探空火箭的发动机参数</p>
-                    </div>
-                    <div class="item">
-                        <p class="date">
-                            <i>12.26</i><em>2013</em>
-                        </p>
-                        <p class="gray">在高邮成功进行3000N级火箭, 发射很成功</p>
-                    </div>
-                    <div class="item">
-                        <p class="date">
-                            <i>8.23</i><em>2013</em>
-                        </p>
-                        <p class="gray">在内蒙古科左后旗的一处荒漠成功发射首枚由大学生独立设计制造的探空火箭领导表示很关注</p>
-                    </div>
-                </article>
-                <article class="growing-up">
-                    <h1>成长数据</h1>
-                    <div class="item">
-                        <p class="date">
-                            <i>8</i><em>2014</em>
-                        </p>
-                        <p class="gray">手机注册用户突破两万人, 每日线下活动超过1000场，每日现金流超过一万元。</p>
-                    </div>
-                    <div class="item">
-                        <p class="date">
-                            <i>12</i><em>2013</em>
-                        </p>
-                        <p class="gray">碰见安卓客户端经过100天的内测,  终于正式发布。</p>
-                    </div>
-                </article>
-                <article class="news">
-                    <h1>新闻</h1>
+        <div class="progress-container">
+            <div class="progress">
+                <div class="progress-bar progress-bar-success progress-bar-striped active reverse" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" ms-css-width="{{data.finance_percent > 100 ? 100 : data.finance_percent}}%">
+                    <span class="sr-only">{{data.finance_percent}}% Complete</span>
+                </div>
+            </div>
+            <p class="hidden2Visible"><em ms-if="window.account_info.role>0">投资意向: {{data.amount}}万（预融资{{data.hope_amount}}万）</em><em class="right" ms-if="data.day>0">剩余{{data.day}}天</em></p>
+        </div>
+    </div>
+    <div class="page-action default-hidden">
+        <div class="btn-group">
+            <div class="btn-group-social">
+                <a id="follow-btn" class="follow-btn"><i></i><span>关注</span></a>
+                <a id="share-wechat" class="share-wechat"><i></i><span>分享</span></a>
+            </div>
+
+            <a id="send-investment-btn" class="btn btn-small orange ci-link" href="/vc_new">发送投资意向</a>
+        </div>
+    </div>
+    <div class="slider-container" ms-controller="basic-info" ms-if="data.pics && data.pics.length">
+        <ul ms-each-el="data.pics">
+            <li><img ms-src="el.small" /></li>
+        </ul>
+    </div>
+
+    <div class="logged-in">
+        <div class="article-list" ms-controller="deatils" >
+            <article class="intro" ms-if="window.account_info.role>0" ms-if="data.descriptions ">
+                <h1>项目描述</h1>
+                <p class="silver" ms-if="data.descriptions.user_case">用户场景</p>
+                <p ms-if="data.descriptions.user_case" ms-html="txt2html(data.descriptions.user_case)"></p>
+                <div class="item" ms-if="data.descriptions.market_research">
+                    <p class="silver">市场调研</p>
+                    <p ms-html="txt2html(data.descriptions.market_research)"></p>
+                </div>
+                <div class="item" ms-if="data.descriptions.advantage">
+                    <p class="silver">项目优势</p>
+                    <p ms-html="txt2html(data.descriptions.advantage)"></p>
+                </div>
+                <div class="item" ms-if="data.descriptions.pattern">
+                    <p class="silver">商业模式</p>
+                    <p ms-html="txt2html(data.descriptions.pattern)"></p>
+                </div>
+                <div class="item" ms-if="data.descriptions.plan">
+                    <p class="silver">发展规划</p>
+                    <p ms-html="txt2html(data.descriptions.plan)"></p>
+                </div>
+            </article>
+            <article class="team" ms-if="data.team" ms-if="data.team.length">
+                <h1>团队成员</h1>
+                <div class="item" ms-repeat="data.team">
+                    <h3 ms-text="el.name"></h3>
+                    <p class="avatar"><img ms-src="el.avatar||''" /></p>
+                    <p class="experience" ms-if="el.firmname!=''">{{el.firmname}}{{" · " + el.title || ''}}</p>
+                    <p class="gray" ms-html="txt2html(el.summary)"></p>
+                </div>
+            </article>
+            <article class="milestone" ms-if="window.account_info.role>0" ms-if="data.milestone.length">
+                <h1>项目大事记</h1>
+                <div class="item" ms-repeat="data.milestone">
                     <p class="date">
-                        <i>4.25</i><em>2013</em>
+                        <i>{{el.M_dd}}</i><em>{{el.yyyy}}</em>
+                    </p>
+                    <p class="gray" ms-text="el.content"></p>
+                </div>
+            </article>
+            <article class="growing-up" ms-if="window.account_info.role>0" ms-if="data.growthdata.length">
+                <h1>成长数据</h1>
+                <div class="item" ms-repeat="data.growthdata">
+                    <p class="date">
+                        <i>{{el.M_dd}}</i><em>{{el.yyyy}}</em>
+                    </p>
+                    <p class="gray">{{el.content}}</p>
+                </div>
+            </article>
+            <article class="news" ms-if="window.account_info.role>0" ms-if="data.news.length">
+                <h1>新闻</h1>
+                <div ms-each-el="data.news">
+                    <p class="date">
+                        <i>{{el.M_dd}}</i><em>{{el.yyyy}}</em>
                     </p>
                     <div class="item">
-                        <p>融资技术推广与合作：Open Garden 的下一步</p>
-                        <p class="gray" data-text-truncation="55">Liad公司是法国最大的电信运营商之一，运营着覆盖法国全境的移动网络，但这对他来说还不足够。这家公司迈出了...</p>
+                        <p>{{el.title}}</p>
+                        <p class="gray">{{el.content}}</p>
                     </div>
-                </article>
-            </div>
-            <div class="invest-info">
-                <article class="needs">
-                    <div class="info-table">
-                        <ul>
-                            <li class="hourglass"><aside><i>100W</i><em>预计融资</em></aside></li>
-                            <li class="pie-chat"><aside><i>10%</i><em>出让股权比例</em></aside></li>
-                        </ul>
-                        <ul>
-                            <li class="money"><aside><i>10W</i><em>最低投资额</em></aside></li>
-                            <li class="bar-chat"><aside><i>900W</i><em>融资前估值</em></aside></li>
-                        </ul>
-                    </div>
-                    <p><i>优先考虑的投资人：</i><em>拥有政府资源，市场BD资源，垂直搜索领域有过投资经验的投资人。</em></p>
-                </article>
-                <article class="invester">
-                    <h1>本轮投资意向<i>7</i></h1>
-                    <div id="invester" class="slider-container">
-                        <ul>
-                            <li>
-                                <p class="avatar"><img src="/static/images/wapsite/avatar29812982223.png" /></p>
-                                <p><i>左迁</i><em>百度COO</em></p>
-                                <div class="investment">20W</div>
-                            </li>
-                            <li>
-                                <p class="avatar"><img src="/static/images/wapsite/avatar29010283123235.png" /></p>
-                                <p><i>黄磊</i><em>黑石基金CEO</em></p>
-                                <div class="investment">20W</div>
-                            </li>
-                            <li>
-                                <p class="avatar"><img src="/static/images/wapsite/avatar129827129822.png" /></p>
-                                <p><i>刘东全</i><em>黑石基金投资人</em></p>
-                                <div class="investment">20W</div>
-                            </li>
-                        </ul>
-                    </div>
-                </article>
-                <article class="funds">
-                    <h1>资金用途</h1>
-                    <p>2014-2015年，需资金600万人民币。所需总资金中已有机构与个人认购420万，故需天使汇上融资180万。</p>
-                    <p>a. 产品研发与运营（12人）：180万; b. 购买云服务费用：100万;c. 客户端推广： 100万; d. 增加着装顾问师：100万; e. 品牌供应商拓展:120万;</p>
-                </article>
-                <article class="questions-answers">
-                    <h1>Q&A</h1>
-                    <div class="group">
-                        <div class="item">
-                            <p class="title-container"><i>Q</i><em>钱景·黑石基金COO</em></p>
-                            <p>针对核心问题：客户体验差“这个问题，我们怎么解决？</p>
-                        </div>
-                        <div class="item">
-                            <p class="title-container"><i>A</i><em>叶春原·CTO</em></p>
-                            <p>我们会通过各种方法来解决这个问题，包括补贴用户啊，调查用户深层次需求等。</p>
-                        </div>
-                    </div>
-                </article>
-                <article class="extra-files">
-                    <h1>商业企划书</h1>
-                    <div class="file PDF"><a data-confirm-dialogue="确定要下载商业计划书吗？[6.5M]" href="http://221.192.147.112/file.data.weipan.cn/53455904/5b698246abafcf941722f50f3a44f0b278e8904f?ssig=WRuoQ4MslX&Expires=1423059339&KID=sae,l30zoo1wmz&fn=冰与火之歌全集.pdf&skiprd=2&se_ip_debug=103.8.220.228&corp=1">下载商业计划书 [6.5M]</a></div>
-                </article>
-            </div>
-            <div class="page-action">
-                <div class="btn-group">
-                    <button class="btn btn-small white-border" data-btn-reverse-text="已关注">关注</button>
-                    <button class="btn btn-small orange" data-href="www.baidu.com" data-target="_self">发送投资意向</button>
                 </div>
+            </article>
+        </div>
+
+        <div class="invest-info" ms-controller="finance">
+            <article class="needs">
+                <div class="info-table">
+                    <ul>
+                        <li class="hourglass"><aside><i>{{data.hope_amount || 0}}W</i><em>预计融资</em></aside></li>
+                        <li class="pie-chat"><aside><i>{{data.stock_sale || 0}}%</i><em>出让股权比例</em></aside></li>
+                    </ul>
+                    <ul>
+                        <li class="money"><aside><i>{{data.min_quota || 0}}W</i><em>最低投资额</em></aside></li>
+                        <li class="bar-chat"><aside><i>{{data.price || 0}}W</i><em>融资前估值</em></aside></li>
+                    </ul>
+                </div>
+                <p ms-if="data.txt"><i>优先考虑的投资人：</i><em ms-text="data.txt"></em></p>
+            </article>
+            <article class="invester" ms-if="data.vc_list.length">
+                <h1>本轮投资意向<i ms-text="data.vc_list.length"></i></h1>
+                <div id="invester" class="investor-slider-container">
+                    <ul>
+                        <li ms-repeat="data.vc_list">
+                            <div>
+                                <p class="portrait"><img ms-src="el.avatar || ''" /></p>
+                                <p class="name">{{el.name}}</p>
+                                <p class="company">{{el.firmname}}</p>
+                                <p class="title">{{el.title}}</p>
+                                <div class="investment">{{el.amount}}W</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </article>
+            <article class="funds" ms-if="data.purpose">
+                <h1>资金用途</h1>
+                <div ms-html="txt2html(data.purpose)"></div>
+            </article>
+            <article class="questions-answers" ms-if="data.qa_list.length">
+                <h1>Q&A</h1>
+                <div class="group" ms-repeat="data.qa_list">
+                    <div class="item">
+                        <p class="title-container"><i>Q</i><em>{{el.name}}{{"·" + el.title}}</em></p>
+                        <p ms-text="el.q"></p>
+                    </div>
+                    <div class="item" ms-if="el.a">
+                        <p class="title-container"><i>A</i>{{el.a_name}}·项目创始人</p>
+                        <p ms-text="el.a"></p>
+                    </div>
+                </div>
+            </article>
+            <article class="extra-files">
+                <h1>商业企划书</h1>
+                <div class="file PDF"><a href="">查看商业计划书</a></div>
+            </article>
+        </div>
+    </div>
+    <div class="not-logged-in">
+        <div class="login-options">
+            <p class="declare">详细信息只对<i>天使汇认证投资人</i>可见，您可以选择：</p>
+            <div class="control-module">
+                <em><i></i>&nbsp;天使汇认证投资人</em>
+                <a class="btn btn-small login-btn">登录</a>
+            </div>
+            <div class="control-module">
+                <em><i></i>&nbsp;更换投资人账号登录？</em>
+                <a class="btn btn-small login-btn">登录</a>
+            </div>
+            <div class="control-module">
+                <em><i></i>&nbsp;申请投资人账号</em>
+                <a id="shortly_reg" class="btn btn-small" >立即申请</a>
+            </div>
+            <div class="control-module">
+                <em><i></i>&nbsp;进行投资人认证</em>
+                <a id="longer_reg" class="btn btn-small" >申请认证</a>
             </div>
         </div>
     </div>
+    <div class="banner-footer">
+        <p>AngelCrunch.com</p>
+        <p>天使汇 - 让靠谱的项目找到靠谱的钱</p>
+    </div>
+</div>
 </body>
+<script src="https://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
+<script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
+<script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
+<script src="/static/js/wapsite/angelcrunch.app_downloadbar.jq.c.js"></script>
+<script src="https://dn-acac.qbox.me/avalon.mobile.min.js"></script>
+<script src="/static/js/wapsite/angelcrunch_base.js"></script>
+<script src="/static/js/wapsite/angelcrunch_details.js"></script>
+<script src="https://dn-acac.qbox.me/qrcode.js" defer></script>
 </html>

@@ -434,9 +434,9 @@
 
     };
 
-
+    //初始页面处理
     this.page_core();
-
+    //hashchange事件触发页面重载
     window.onhashchange=function(){
         page_core();
     };
