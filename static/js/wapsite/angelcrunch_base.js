@@ -175,12 +175,20 @@
         is_login:false,
         version:'1.2.1'
     };
-
     //过期删除
     var now= $.now();
     var localdata=base_local_data.getdata(base_config.account_save_key);
     var $COOKIE=$.Angelcrunch.COOKIE || {};
     $.extend(true,this.account_info,localdata);
+
+    //跨版本清除旧数据
+    var getclientversion=base_local_data.getdata(base_config.client_version_key);
+    if(getclientversion!=account_info.version){
+        base_local_data.cleardata();
+        $COOKIE.operation.clearUserKey();
+        base_local_data.savedata(base_config.client_version_key,account_info.version);
+    }
+
     //同步旧的登陆信息
     if(!localdata){
         if($.cookie($COOKIE.cookieName.user_id)){
@@ -191,13 +199,7 @@
             base_local_data.savedata(base_config.account_save_key,account_info);
         }
     }
-    //跨版本清除旧数据
-    var getclientversion=base_local_data.getdata(base_config.client_version_key);
-    if(getclientversion!=account_info.version){
-        base_local_data.cleardata();
-        $COOKIE.operation.clearUserKey();
-        base_local_data.savedata(base_config.client_version_key,account_info.version);
-    }
+
     if(now-account_info.time>base_config.cachetime){
         base_local_data.deldata(base_config.account_save_key);
     }
