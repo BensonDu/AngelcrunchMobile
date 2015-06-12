@@ -165,14 +165,14 @@
 
 //全局账户信息获取
 (function(){
-
     this.account_info={
         id:0,
         name:'',
         token:'',
         role:0,
         time:0,
-        is_login:false
+        is_login:false,
+        version:'1.2.1'
     };
 
     //过期删除
