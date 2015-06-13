@@ -11,7 +11,7 @@
 $.Angelcrunch = $.Angelcrunch || {};
 
 (function () {
-    var $COOKIE, $dataSet;
+    var $COOKIE, $dataSet,domain;
     $dataSet = $.Angelcrunch.dataSet;
     $COOKIE = $.Angelcrunch.COOKIE = $.Angelcrunch.COOKIE || {};
     $COOKIE.cookieName = {
@@ -24,13 +24,13 @@ $.Angelcrunch = $.Angelcrunch || {};
 
     $COOKIE.settings = { expires: 7, path: "/", secure: false };
     if(/dubaoxing/g.test(location.href.toLocaleLowerCase())){
-        var domain='.dubaoxing.com';
+        domain='.dubaoxing.com';
     }
     else{
-        var domain='.angelcrunch.com'
+        domain='.angelcrunch.com'
     }
     /*var domain = location.host.match(/.+\.(.+\.[a-zA-Z0-9]+)/);*/
-    if (domain) $COOKIE.settings.domain = domain[1];
+    if (domain) $COOKIE.settings.domain = domain;
 
     $COOKIE.operation = {
         setUserKey: function () {
