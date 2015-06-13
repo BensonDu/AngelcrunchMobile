@@ -182,12 +182,12 @@
     $.extend(true,this.account_info,localdata);
 
     //跨版本清除旧数据
-    var getclientversion=base_local_data.getdata(base_config.client_version_key);
+    /*var getclientversion=base_local_data.getdata(base_config.client_version_key);
     if(getclientversion!=account_info.version){
         base_local_data.cleardata();
         $COOKIE.operation.clearUserKey();
         base_local_data.savedata(base_config.client_version_key,account_info.version);
-    }
+    }*/
 
     //同步旧的登陆信息
     if(!localdata){
