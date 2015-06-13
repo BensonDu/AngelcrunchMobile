@@ -317,7 +317,7 @@ input::-webkit-input-placeholder {
   border-radius: 2px;
   margin-left: 0em;
   -webkit-box-shadow: none;
-  -moz-box-shadow: inone;
+  -moz-box-shadow: none;
   box-shadow: none;
 /* Darken IE7 buttons by default so they stand out more given they won't have borders */
 

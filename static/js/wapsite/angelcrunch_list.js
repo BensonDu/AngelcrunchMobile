@@ -213,7 +213,7 @@
     });
     $close.touchtap(function(){
         //正常显示关闭
-        setTimeout(function(){
+
             search_model_display.history.hide();
             search_model_display.topbar.hide();
             search_model_display.bk.hide();
@@ -221,7 +221,6 @@
             search_model_display.input.fill();
             //取消搜索
             search_model_display.status.searching && search_cancel();
-        },200);
 
     });
     $cancelsearch.touchtap(function(){

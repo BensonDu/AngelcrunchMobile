@@ -225,17 +225,42 @@
     });
 }).call(this);
 
-//移动设备触摸事件 随后扩展
+//移动设备触摸事件
 (function(){
     $.fn.extend({
         touchtap:function(fn){
+            var start, x,y;
             if(base_status.support_touch){
-                $(this).bind('touchend',fn);
+                $(this).bind('touchstart',function(e){
+                    start= e.originalEvent.timeStamp;
+                    x= e.originalEvent.pageX;
+                    y= e.originalEvent.pageY;
+                });
+                $(this).bind('touchend',function(e){
+                    var event=e.originalEvent,during=event.timeStamp-start,move=Math.pow(event.pageX-x,2)+Math.pow(event.pageY-y,2);
+                    if(during<200 && move<100){
+                        fn.call($(this));
+                    }
+                });
             }
             else{
                 $(this).click(fn);
             }
 
         }
+    });
+}).call(this);
+
+//绑定touch-link元素
+(function(){
+    var $ele;
+    $(document).ready(function(){
+        $ele=$('.touch-href');
+        $ele.touchtap(function(){
+            var link=$(this).data('link');
+            if(link!=''){
+                location.href=link;
+            }
+        })
     });
 }).call(this);
