@@ -33,9 +33,10 @@
     <link href="/static/css/wapsite/investor/details.css" rel="stylesheet" />
     <link href="/static/css/wapsite/investor/send_investment.css" rel="stylesheet" />
 
-    <script src="/static/js/lib/jquery-1.11.1.min.js"></script>
+    <script src="/static/js/lib/jquery-2.1.4.min.js"></script>
     <script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
     <script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
+    <script src="/static/js/wapsite/angelcrunch_base.js"></script>
     <script src="/static/js/wapsite/angelcrunch.app_downloadbar.jq.c.js"></script>
     <script src="/static/js/lib/avalon.mobile.min.js"></script>
 
@@ -117,14 +118,15 @@
                     service: "#ci-service",
                     legal: "#legal-terms",
                     btn: "#submit-btn",
-                    notification: ".notification"
+                    notification: ".notification",
+                    checkbox:'#checkbox'
                 };
                 var txt = {
                     canNotSubmit: "投资金额需填写一个有效的值",
                     needToAgreelegal: "需要同意天使汇服务条款中的内容",
                     failed: "投资意向发送失败，请重新发送"
                 };
-                var $amount, $service, $legal, $btn;
+                var $amount, $service, $legal, $btn,$checkbox;
                 var $notification;
                 var redirect;
                 $amount = $(className.amount),
@@ -132,12 +134,38 @@
                 $legal = $(className.legal),
                 $btn = $(className.btn);
                 $notification = $(className.notification);
-
+                $checkbox=$(className.checkbox);
                 redirect = $btn.attr("data-redirect");
+                //竟然没有，临时加
+                var  checkval=function(){
+                    var amount=$amount.val(),issign=$checkbox.hasClass('checked');
+                    if(amount>0 && issign){
+                        return true;
+                    }
+                    else{
+                        return false;
+                    }
+                };
+                $amount.change(function(){
+                    if(checkval()){
+                        $btn.addClass('active');
+                    }
+                    else{
+                        $btn.removeClass('active');
+                    }
+                });
+                $legal.change(function(){
+                   if(checkval()){
+                       $btn.addClass('active');
+                   }
+                    else{
+                       $btn.removeClass('active');
+                   }
+                });
                 $btn.click(function () {
                     if (!$amount.val().trim())
                         $notification.notificationToggle(txt.canNotSubmit);
-                    else if (!$legal.is(":checked"))
+                    else if (!$checkbox.hasClass("checked"))
                         $notification.notificationToggle(txt.needToAgreelegal);
                     else {
                         var url = I.Ajax_send_investment.url,
@@ -257,7 +285,7 @@
             <div class="addition-agreement">
                 <p>我已知晓 <a href="http://static.angelcrunch.com/agreement.pdf" target="_blank" data-confirm-dialogue="你确定要跳转至《天使汇在线投资服务协议》页面吗?">《天使汇在线投资服务协议》</a> 及其附件 <a class="ci-link" href="http://m.angelcrunch.com/risk_agreement" target="_blank" data-confirm-dialogue="你确定要跳转至《风险揭示书》页面吗?">《风险揭示书》</a> 中的所有内容 ，并愿意自己承担投资带来的风险。</p>
                 <div class="modules">
-                    <div class="mentos-container">
+                    <div id="checkbox" class="mentos-container">
                         <label class="label">
                             <input id="legal-terms" class="mentos" type="checkbox" name="additionalAgreement" value="1" />
                             <em class="tracks">
