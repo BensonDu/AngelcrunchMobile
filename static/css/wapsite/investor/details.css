@@ -599,7 +599,7 @@
   font-size: 14px;
 }
 .btn-group-social .follow-btn{
-  width: 43%;
+  width: 48%;
   line-height: 30px;
   border-right: 1px solid #eee;
 }
@@ -620,7 +620,7 @@
   background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAaCAMAAABxVtfCAAAAhFBMVEUAAADwYx7wZSLwZSLwZCHwZSLwZSLwZSLwZSLwYh3wYh7wZSLwZSLwZSLwZSLwZSLwZSLwZSLwZSLwZSLwZSLwZSLwYRzwZSLwZSLwZSLwZSLwZSLwZSLwXhjwZSLwZSLwYx/wZSLwZSLwZSLwZSLwZSLwZSLwZSLwZSLwZSLvVw7wZSKYp9RyAAAAK3RSTlMAEvXyBfrueF5BCNW2r5yOhFhUUC8qDuPZw7yMgEgjGQIB3c7Lk2lnOTcnVedscAAAALhJREFUKM+l0OcKwyAUhmFj9t57Nd3td//31wwa0SRQ6PtDkIdzEMnPSdaxeeEhxardH210AH3YtzsAOd2lLseYu0fKDVNUfM4p65KHirnCTHtrHTCNwC3AoldPD5NlqME22i6Dlr8hOVq31iLFZG3wt8TyVUZaRPhKZjoRujBrBMpyZp5gT41ZJfFmUIw59nTaKW8BgHOkSAEFZJM3F1o9r0ocFQZvVfn6fpKh6RxJbcYub9Mi//QB+9oh2PPF5LEAAAAASUVORK5CYII=');
 }
 .btn-group-social .share-wechat{
-  width: 53%;
+  width: 48%;
   line-height: 30px;
 }
 .btn-group-social .share-wechat span{
