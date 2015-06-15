@@ -183,6 +183,10 @@
   position: fixed;
   bottom: 0;
 }
+.page-turn-occupy{
+    height: 64px;
+    width: 100%;
+}
 
 @media only screen and (max-width: 359px) {
   .page-turn {
