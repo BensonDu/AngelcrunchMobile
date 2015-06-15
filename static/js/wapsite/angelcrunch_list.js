@@ -213,10 +213,12 @@
     });
     $close.touchtap(function(){
         //正常显示关闭
+            setTimeout(function(){
+                search_model_display.history.hide();
+                search_model_display.topbar.hide();
+                search_model_display.bk.hide();
+            },100);
 
-            search_model_display.history.hide();
-            search_model_display.topbar.hide();
-            search_model_display.bk.hide();
             search_model_display.input.blur();
             search_model_display.input.fill();
             //取消搜索
@@ -441,71 +443,5 @@
     };
 
 
-
-}).call(this);
-
-/*触摸移动事件事件 翻页显示与隐藏*/
-(function(){
-    this.$touchele=$('.page-turn');
-
-    this.touchsta={
-        barheight:65,
-        eleshow:true,
-        isstart:false,
-        startY:0,
-        endY:0
-    };
-    if(base_status.support_touch){
-        document.body.ontouchstart=function(event){
-            var touch=event.touches[0];
-            if(touch){
-                touchsta.startY=touch.clientY;
-                touchsta.isstart=true;
-            }
-        };
-        document.body.ontouchmove=function(event){
-            var touch=event.touches[0],mY;
-            if(touch){
-                mY=touch.clientY-touchsta.startY;
-                if(Math.abs(mY)<touchsta.barheight){
-                    if(mY<0 && touchsta.eleshow){
-                        $touchele.css('bottom',mY);
-                    }
-
-                    if(mY>0 && !touchsta.eleshow){
-                        $touchele.css('bottom',mY-touchsta.barheight);
-                    }
-                }
-
-            }
-        };
-        document.body.ontouchend=function(event){
-            var touch=event.changedTouches[0],endY=touch.clientY,moveabs=Math.abs(endY-touchsta.startY);
-            if(moveabs>5){
-                if(endY-touchsta.startY>0 && !touchsta.eleshow){
-                    if(moveabs>touchsta.barheight/2){
-                        $touchele.animate({'bottom':0});
-                        touchsta.eleshow=true;
-                    }
-                    else{
-                        $touchele.animate({'bottom':-touchsta.barheight});
-                        touchsta.eleshow=false;
-                    }
-                }
-                if(endY-touchsta.startY<0 && touchsta.eleshow){
-                    if(moveabs>touchsta.barheight/2){
-                        $touchele.animate({'bottom':-touchsta.barheight});
-                        touchsta.eleshow=false;
-                    }
-                    else{
-                        $touchele.animate({'bottom':0});
-                        touchsta.eleshow=true;
-                    }
-                }
-            }
-
-        };
-
-    }
 
 }).call(this);
