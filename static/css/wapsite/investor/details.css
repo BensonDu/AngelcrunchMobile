@@ -764,6 +764,7 @@
   width: 100%;
   border:none;
   font-size:14px;
+  text-align: center;
 }
 .wechat-PA p input:focus{
   outline: none;
