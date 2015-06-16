@@ -13,6 +13,7 @@
         com_id:'',
         follow:false,
         send_intention:false,
+        name:'',
         logo:'',
         get_com_id:function(){
             return page_status.com_id != ''?{com_id:page_status.com_id}:{};
@@ -132,6 +133,9 @@
         if(data.hasOwnProperty('logo')){
             page_status.logo=data.logo;
         }
+        if(data.hasOwnProperty('name')){
+            page_status.name=data.name;
+        }
     };
     page_remote_data();
 
@@ -146,7 +150,7 @@
         notification:$('.notification'),
         pb_file:$('.PDF').children('a'),
         bk:$('.bk'),
-        qrcode:$('#qrcode'),
+        qrcode:$('#PA-layer'),
         sharewechat:$('#share-wechat')
     };
     this.view_follow={
@@ -183,13 +187,20 @@
             setTimeout(function(){view_dom.bk.hide()},100);
         }
     };
+
+    var qr_close=view_dom.qrcode.find('.close'),
+        qr_container=view_dom.qrcode.find('.image-container'),
+        qr_title=view_dom.qrcode.find('.title'),
+        qr_link=view_dom.qrcode.find('input');
     this.view_qrcode={
         sta:false,
         show:function(){
-            view_dom.qrcode.show();
+            var url=location.href;
+            view_dom.qrcode.fadeIn(200);
+            qr_title.html("分享\""+page_status.name+"\"到微信");
+            qr_link.val(url);
             if(!view_qrcode.sta){
-                var url=location.href;
-                view_dom.qrcode.qrcode({
+                qr_container.qrcode({
                     render:'image',
                     width: 200,
                     height: 200,
@@ -202,7 +213,7 @@
 
         },
         hide:function(){
-            view_dom.qrcode.hide();
+            view_dom.qrcode.fadeOut(100);
         }
     };
     this.do_follow=function(){
@@ -248,14 +259,11 @@
             do_unfollow();
         }
     });
-    //BK事件
-    view_dom.bk.touchtap(function(){
-        view_bk.hide();
-        view_qrcode.hide();
-    });
     view_dom.sharewechat.touchtap(function(){
-        view_bk.show();
         view_qrcode.show();
+    });
+    qr_close.touchtap(function(){
+        view_qrcode.hide();
     });
     //关闭通知
     view_dom.notification.children('.close').touchtap(function(){
