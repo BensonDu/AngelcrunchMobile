@@ -412,7 +412,7 @@
             return {
                 email:$formemail.val(),
                 resource:$formresource.val(),
-                img:$formprove.children('img').attr('src')
+                img:$formprove.children('img').attr('src').match(/\d{7,}/)[0]
             }
         }
     };
