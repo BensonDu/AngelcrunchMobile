@@ -113,7 +113,9 @@
                     call(json);
                 },
                 error:function(e){
-                    error(e);
+                    if(typeof  error == 'function'){
+                        error(e);
+                    }
                 }
             });
         }
@@ -287,8 +289,8 @@
 //头部选项
 (function(){
     $(document).ready(function(){
-        var $head=$('.newhead'),$trigger=$head.children('.options'),$tar=$trigger.children('.hidden-menu'),sta=false,$bk=$('.bk');
-        this.headoption_display={
+        var $head=$('.newhead'),$trigger=$head.children('.options'),$tar=$trigger.children('.hidden-menu'),sta=false,$bk=$('.bk'),
+        headoption_display={
             show:function(){
                 $tar.slideDown(200,function(){sta=true});
                 $bk.show(0,function(){$(this).css('opacity',0.7)});
