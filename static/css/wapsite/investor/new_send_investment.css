@@ -31,9 +31,9 @@
     margin-top: 30px;
 }
 .value-info .before .text-container{
-    width: 70px;
+    width: 82px;
     height: 100%;
-    margin-right: 12%;
+    margin-right: 10%;
 }
 .value-info .before .text-container p{
     text-align: center;
@@ -58,7 +58,7 @@
 .value-info .percent .icon-container{
     width: 50px;
     height: 100%;
-    margin-left: 12%;
+    margin-left: 10%;
 }
 .value-info .percent .icon-container i{
     display: inline-block;
@@ -69,7 +69,7 @@
     margin-top: 30px;
 }
 .value-info .percent .text-container{
-    width: 75px;
+    width: 85px;
     height: 100%;
     margin-left: 3%;
 }
@@ -172,7 +172,7 @@
     padding-top:10px;
 }
 .calculate-result div .text-container{
-    width: 100px;
+    width: 106px;
     position: relative;
 }
 .calculate-result div .text-container p{
@@ -218,7 +218,7 @@
     height: 100%;
     border: none;
     background: #eee;
-    font-size: 14px;
+    font-size: 12px;
     padding: 10px 5%;
     resize: none;
 }
