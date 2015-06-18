@@ -39,8 +39,9 @@
         client_version_key:'client_version'
     };
     this.base_status={
-        support_touch:typeof document.ontouchstart!='undefined'/*,
-        isandorid: !!base_ua.indexOf("android") != -1 ? 1 : 0,
+        support_touch:typeof document.ontouchstart!='undefined',
+        fromapp:false
+        /*isandorid: !!base_ua.indexOf("android") != -1 ? 1 : 0,
         isios: !!base_ua.match(/\(i[^;]+;( u;)? cpu.+mac os x/),
         isiphone: !!base_ua.indexOf('iphone') > -1 || ua.indexOf('mac') > -1,
         isipad: !!base_ua.indexOf('ipad') > -1,
@@ -215,18 +216,7 @@
         account_info.role   = parseInt($_GET.role);
         account_info.time   = now;
         base_local_data.savedata(base_config.account_save_key,account_info);
-        //未传入role
-        /*if(account_info.role<1){
-            base_remote_data.ajaxjsonp(api.user_info,function(data){
-                if(data.hasOwnProperty('user')){
-                    if(data.user.defaultpart>0){
-                        account_info.role=data.user.defaultpart;
-                        base_local_data.savedata(base_config.account_save_key,account_info);
-                        location.href=location.href.split('?')[0];
-                    }
-                }
-            },{uid:$_GET.uid,access_token:$_GET.access_token});
-        }*/
+        base_status.fromapp=true;
     }
 
     if(now-account_info.time>base_config.cachetime){

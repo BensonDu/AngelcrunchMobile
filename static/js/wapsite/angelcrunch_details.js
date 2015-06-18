@@ -315,7 +315,7 @@
 
 /*天使汇此次单独*/
 (function(){
-    if(account_info.role<1 || !/^http:\/\/10909526\./.test(location.href.toLowerCase()) || page_status.com_id!='10909526'){return}
+    if(account_info.role<1 || !(/^http:\/\/10909526\./.test(location.href.toLowerCase()) || page_status.com_id=='10909526')){return}
     this.angel_api={
         is_apply:base_mobile+'v3/startup/is_bp_view_apply',
         apply:base_mobile+'v3/startup/bp_view_apply'
