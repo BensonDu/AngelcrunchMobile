@@ -22,36 +22,6 @@
 
 }).call(this);
 
-//头部选项
-(function(){
-    var $trigger=$('.newhead').children('.options'),$tar=$trigger.children('.hidden-menu'),sta=false,$bk=$('.bk');
-    this.headoption_display={
-        show:function(){
-            $tar.slideDown(200,function(){sta=true});
-            $bk.show(0,function(){$(this).css('opacity',0.7)});
-        },
-        hide:function(){
-            $tar.slideUp(200,function(){sta=false});
-            $bk.css('opacity',0);
-            setTimeout(function(){$bk.hide();},400);
-        }
-    };
-    $trigger.touchtap(function(){
-        if(!sta){
-            headoption_display.show();
-        }
-        else{
-            headoption_display.hide();
-        }
-
-    });
-    $bk.touchtap(function(){
-        if(sta){
-            headoption_display.hide();
-        }
-    })
-}).call(this);
-
 //链接补全当前链接 回调链接
 (function(){
     $(".login-btn").attr("href", page_config.login_url);
