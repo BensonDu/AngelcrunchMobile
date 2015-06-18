@@ -507,7 +507,7 @@
 .extra-files .file {
   height:50px;
   line-height:52px;
-  background:#F5F5F5 url(/static/images/wapsite/cssimage/213iouy123871239u9123.png) no-repeat 16px center;
+  background:#eee url(https://dn-acac.qbox.me/detail_icon_03.png) no-repeat 16px center;
   background-size:32px;
 }
 
@@ -521,6 +521,172 @@
 .extra-files .file a:active {
   background:rgba(82, 82, 82, 0.27);
 }
+/*天使汇此次*/
+.container-border{
+  border: 3px solid #aaa;
+}
+.angel-extra-files{
+  display: none;
+  border-bottom: 3px solid #AAA;
+}
+.angel-extra-files h1{
+  padding-top: 12px;
+  width: 100%;
+  height: 56px;
+  padding-left: 4.6%;
+}
+.angel-extra-files .angelfile {
+  height:50px;
+  line-height:52px;
+  background:#eee url(https://dn-acac.qbox.me/detail_icon_07.png) no-repeat 16px center;
+  background-size:32px;
+  border-left: 3px solid #AAA;
+  border-right: 3px solid #AAA;
+  border-top: 3px solid #AAA;
+}
+.angel-extra-files .angelfile button{
+  width: 80px;
+  height: 35px;
+  display: none;
+  float: right;
+  margin:8px 5% 0 0;
+  border: 1px solid #eee;
+  border-radius: 2px;
+  color: #aaa;
+  background: #fff;
+}
+.angel-extra-files .angelfile a {
+  display:inline-block;
+  width:70%;
+  height:96%;
+  padding-left:54px;
+  line-height: 50px;
+  vertical-align: top;
+}
+
+.angel-extra-files .angelfile a:active {
+  background:rgba(82, 82, 82, 0.27);
+}
+.angel-extra-files .angelfile i{
+  width: 50px;
+  height: 50px;
+  float: right;
+  margin-right: 5%;
+  display: none;
+  background: url("https://dn-acac.qbox.me/arrow_down_03.png") no-repeat 10px center;
+  background-size: 32px;
+  -webkit-transition: all 0.1s linear;
+  -moz-transition: all 0.1s linear;
+  -o-transition: all 0.1s linear;
+  transition: all 0.1s linear;
+
+}
+.angel-extra-files .form{
+  display: none;
+  width: 100%;
+  padding: 0 1px 30px;
+  background: #eee;
+  border-left: 3px solid #AAA;
+  border-right: 3px solid #AAA;
+ -webkit-transition: height 0.3s linear;
+  -moz-transition: height 0.3s linear;
+  -o-transition: height 0.3s linear;
+  transition: height 0.3s linear;
+}
+.angel-extra-files .form .email{
+  width: 100%;
+  height: 100px;
+}
+.angel-extra-files .form .email p{
+  background: #eee;
+  height: 50px;
+  width: 100%;
+  padding:16px 5%;
+}
+.angel-extra-files .form .email div{
+  width: 100%;
+  height: 50px;
+  background: #F5F5F5;
+}
+.angel-extra-files .form .email label{
+  display: block;
+  font-size: 14px;
+  width: 50px;
+  margin: 20px 0 0 5.5%;
+  float: left;
+}
+.angel-extra-files .form .email input{
+  width: 70%;
+  height: 40px;
+  margin-top: 7px;
+  display: block;
+  font-size: 14px;
+  border: none;
+  float: left;
+  background: #F5F5F5;
+}
+.angel-extra-files .form .email input:focus{
+  outline: none;
+}
+.angel-extra-files .form .other-value{
+  width: 100%;
+  height: 100px;
+  background: #f5f5f5;
+}
+.angel-extra-files .form .other-value textarea{
+  width: 100%;
+  height: 100%;
+  border: none;
+  background: #f5f5f5;
+  font-size: 14px;
+  padding: 15px 5%;
+  resize: none;
+  font-family: "PingHei","Lucida Grande","Lucida Sans Unicode","Helvetica","Arial","Verdana","sans-serif";
+}
+.angel-extra-files .form .other-value textarea:focus{
+  outline: none;
+}
+.angel-extra-files .form .prove{
+  width: 100%;
+  padding: 4% 5%;
+}
+.angel-extra-files .form>label{
+  background: #f5f5f5;
+}
+.angel-extra-files .form label>span{
+  margin-left: 5%;
+}
+.angel-extra-files .form .submit{
+  width: 100%;
+  height: 34px;
+  padding: 0 5%;
+}
+.angel-extra-files .form .submit a{
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  line-height: 34px;
+  background: #E65100;
+  color: #fff;
+  border-radius: 2px;
+  font-size: 14px;
+}
+.angel-extra-files .form .addition-agreement{
+  margin: 0;
+  padding: 15px 5%;
+}
+.angel-extra-files .form .addition-agreement .modules{
+  margin-top: 60px;
+}
+.rotate-animation{
+  transform:rotateX(180deg);
+  -ms-transform:rotateX(180deg); 	/* IE 9 */
+  -moz-transform:rotateX(180deg); 	/* Firefox */
+  -webkit-transform:rotateX(180deg); /* Safari 和 Chrome */
+  -o-transform:rotateX(180deg); 	/* Opera */
+}
+
 
 /******************
     Not Logged In

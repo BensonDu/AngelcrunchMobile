@@ -70,10 +70,10 @@
 
     <div class="logged-in">
 
-        <div class="value-info"  ms-controller="finance">
+        <div class="value-info"  ms-controller="buydetails">
             <div class="before">
                 <div class="text-container">
-                    <p class="amount">{{data.price || 0}}W</p>
+                    <p class="amount">{{data.totalprice || 0}}万</p>
                     <p class="desc">融资前估值</p>
                 </div>
                 <div class="icon-container"><i></i></div>
@@ -81,40 +81,40 @@
             <div class="percent">
                 <div class="icon-container"><i></i></div>
                 <div class="text-container">
-                    <p class="amount">{{data.stock_sale || 0}}%</p>
+                    <p class="amount">{{data.totalprecent || 0}}%</p>
                     <p class="desc">出让股权比例</p>
                 </div>
             </div>
         </div>
 
-        <div class="choose-bar">
+        <div class="choose-bar" ms-controller="buydetails">
             <p class="title">选择您的最高认购价格</p>
             <div class="bar-body">
-                <a class="min handle">-</a>
-                <a class="sta">100万元人民币/份</a>
-                <a class="add handle">+</a>
+                <a class="min handle" ms-on-tap="event.minnum()">-</a>
+                <a class="sta">{{data.partprice}}万元人民币/份</a>
+                <a class="add handle" ms-on-tap="event.addnum()">+</a>
             </div>
-            <p class="desc">每次加价为50万人民币</p>
+            <p class="desc">每次加价为{{data.unit}}万人民币</p>
         </div>
 
-        <div class="choose-bar">
+        <div class="choose-bar" ms-controller="buydetails">
             <p class="title">选择您要认购的份数</p>
             <div class="bar-body">
-                <a class="min handle">-</a>
-                <a class="sta">1份</a>
-                <a class="add handle">+</a>
+                <a class="min handle"  ms-on-tap="event.minparts()">-</a>
+                <a class="sta">{{data.parts}}份</a>
+                <a class="add handle"  ms-on-tap="event.addparts()">+</a>
             </div>
-            <p class="desc">每份占股0.5%，每份最低价格100万人民币</p>
+            <p class="desc">每份占股{{data.partprecent}}%，每份最低价格{{data.lowprice}}万人民币</p>
         </div>
 
-        <div class="calculate-result">
+        <div class="calculate-result" ms-controller="buydetails">
             <div class="left">
                 <div class="icon-container"><i></i></div>
-                <div class="text-container"><p>投资金额￥270万元</p></div>
+                <div class="text-container"><p>投资金额￥{{data.total}}万元</p></div>
             </div>
             <div class="right">
                 <div class="icon-container"><i></i></div>
-                <div class="text-container"><p>预计占股7.3%</p></div>
+                <div class="text-container"><p>预计占股{{data.precent}}%</p></div>
             </div>
         </div>
 

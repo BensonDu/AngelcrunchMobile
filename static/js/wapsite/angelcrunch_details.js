@@ -84,7 +84,7 @@
     this.page_remote_data_syn=function(url,call,data){
         base_remote_data.ajaxjsonp(url,function(data){
             call(data);
-        },$.extend(true,page_config.default_param,data));
+        },$.extend(true,page_config.default_param,data),function(){view_notification.show('网络错误');});
     }
 
 }).call(this);
@@ -166,6 +166,14 @@
     this.view_notification={
         show:function(text){
             view_dom.notification.fadeIn().children('.txt').html(text);
+            if(typeof arguments[1]!='undefined'){
+                if(!arguments[1]){
+                    view_dom.notification.removeClass('red').addClass('green');
+                }
+                else{
+                    view_dom.notification.removeClass('green').addClass('red');
+                }
+            }
             setTimeout(function(){view_dom.notification.fadeOut();},2000);
         },
         hide:function(){
@@ -302,4 +310,165 @@
             set_pb(data.pb);
         }
     },page_status.get_com_id())
+}).call(this);
+
+
+/*天使汇此次单独*/
+(function(){
+    if(account_info.role<1 || page_status.com_id !='10909526'){return}
+    this.angel_api={
+        is_apply:base_mobile+'v3/startup/is_bp_view_apply',
+        apply:base_mobile+'v3/startup/bp_view_apply'
+    };
+    var sta={
+        isfold:true
+    };
+    var $angelfile=$('.angelfile'),
+        $arrow=$('#angel-arrow'),
+        $disablebtn=$angelfile.children('button'),
+        $whole=$('.angel-extra-files'),
+        $form=$whole.children('.form'),
+        $imgpreview=$('#prove-files'),
+        $formemail=$('#form-email'),
+        $formprove=$('.image-container'),
+        $formagree=$('.mentos-container'),
+        $formsubmit=$('#form-submit'),
+        $formresource=$('#resource');
+
+    this.angel_view={
+        //招股模块是否显示
+        whole_model:{
+            show:function(){
+                $whole.show();
+            },
+            hide:function(){
+                $whole.hide();
+            }
+        },
+        //表单展开折叠
+        form:{
+            unfold:function(){
+                var scroll=document.body.scrollTop,time,speed,start= 0,every;
+                $arrow.addClass('rotate-animation');
+
+                $form.show(0,function(){
+                    $form.css({'height':'auto'});
+                });
+                setTimeout(function(){
+                    $form.children().show();
+                    $imgpreview.hide();
+                    speed=504/(200/13);
+                    time=setInterval(function(){
+
+                        if(start<504){
+                            every=scroll+start;
+                        }
+                        else{
+                            every=scroll+504;
+                            clearInterval(time);
+                        }
+                        start+=speed;
+                        document.body.scrollTop=every;
+                    },13);
+                    sta.isfold=false;
+                },300);
+
+            },
+            fold:function(){
+                $arrow.removeClass('rotate-animation');
+                $form.children().hide();
+                $form.hide();
+                sta.isfold=true;
+            }
+        },
+        //是否已经申请
+        apply:{
+            no:function(){
+                $arrow.show();
+                $disablebtn.hide();
+            },
+            yes:function(){
+                $arrow.hide();
+                $disablebtn.show();
+            }
+        }
+    };
+    this.angel_form_check={
+        email:function(){
+            var reg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;
+            return reg.test($formemail.val());
+        },
+        agree:function(){
+            return $formagree.hasClass('checked');
+        },
+        prove:function(){
+            var src=$formprove.children('img').attr('src');
+            if(!src){
+                return false;
+            }
+            return true
+        },
+        formcontent: function () {
+            return {
+                email:$formemail.val(),
+                resource:$formresource.val(),
+                img:$formprove.children('img').attr('src')
+            }
+        }
+    };
+    $arrow.touchtap(function(){
+        if(sta.isfold){
+            angel_view.form.unfold();
+
+        }
+        else{
+            angel_view.form.fold();
+        }
+    });
+    $formsubmit.touchtap(function(){
+        if(!angel_form_check.email()){
+            return view_notification.show('请填写正确E-mail');
+        }
+        if(!angel_form_check.prove()){
+            return view_notification.show('请上传资产证明');
+        }
+        if(!angel_form_check.agree()){
+            return view_notification.show('请认真阅读涉及协议内容并同意');
+        }
+        angel_apply_submit(angel_form_check.formcontent());
+    });
+
+    $(document).ready(function(){
+        $.Angelcrunch.ImageUploadInit(function(){});
+    });
+
+    angel_view.whole_model.show();
+    //获得是否申请状态
+    page_remote_data_syn(angel_api.is_apply,function(data){
+        if(data.hasOwnProperty('is_apply')){
+            angel_view.whole_model.show();
+            if(data.is_apply){
+               return angel_view.apply.yes();
+            }
+            else{
+                return angel_view.apply.no();
+            }
+        }
+    },page_status.get_com_id());
+    this.angel_apply_submit=function(data){
+        page_remote_data_syn(angel_api.apply,function(data){
+            if(data.hasOwnProperty('success')){
+                if(data.success){
+                    angel_view.form.fold();
+                    angel_view.apply.yes();
+                    view_notification.show('提交申请成功',false);
+                }
+                else{
+                    if(data.hasOwnProperty('message')){
+                        view_notification.show(data.message);
+                    }
+                }
+            }
+        },data);
+    };
 }).call(this);

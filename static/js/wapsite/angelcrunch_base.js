@@ -1,22 +1,32 @@
 (function(){
+    this.base_environment=(function(){
+        return location.href.toLowerCase().indexOf('angelcrunch')!=-1?'online':'development';
+    })();
+    this.base_mobile='http://mobile.angelcrunch.com/';
+
+    if(base_environment!='online'){
+        this.base_mobile='http://mobile.tonghs.me/';
+    }
+
 
     this.base_protocol='http://';
     this.base_host='angelcrunch.com/';
     this.base_home=this.base_protocol+this.base_host;
-    this.base_mobile='http://mobile.angelcrunch.com/';
     this.base_ua=navigator.userAgent.toLowerCase();
-
     this.api={
         login:this.base_mobile+'v2/home/login',
         comlist:this.base_mobile+'v2/startup',
         log:'http://yx.dubaoxing.com/api/remotelog?msg=id_',
+        user_info:this.base_mobile+'v2/home/user_info',
         comlistsearch:this.base_mobile+'v2/startup_search',
         com_details:this.base_mobile+'v2/startup/m_detail',
         com_finace_info:this.base_mobile+'v2/startup/m_finance',
         com_basic_info:this.base_mobile+'v2/startup/base_info',
         com_bp:this.base_mobile+'v2/startup/pb',
         com_follow:this.base_mobile+'v2/follow',
-        com_unfollow:this.base_mobile+'v2/unfollow'
+        com_unfollow:this.base_mobile+'v2/unfollow',
+        com_vc_info:this.base_mobile+'v3/startup/vc_info',
+        com_vc_query:this.base_mobile+'v3/startup/vc_query'
     };
 
     this.base_config={
@@ -78,7 +88,7 @@
     };
     //跨域获取数据方法
     this.base_remote_data={
-        ajaxjsonp:function(url,call,data){
+        ajaxjsonp:function(url,call,data,error){
             $.ajax({
                 url:url,
                 type:'get',
@@ -102,7 +112,7 @@
                     call(json);
                 },
                 error:function(e){
-
+                    error(e);
                 }
             });
         }
@@ -198,6 +208,26 @@
             base_local_data.savedata(base_config.account_save_key,account_info);
         }
     }
+    //URL传参授权 针对APP内嵌
+    if($_GET.hasOwnProperty('access_token') && $_GET.hasOwnProperty('uid') && $_GET.hasOwnProperty('role')){
+        account_info.id     = $_GET.uid;
+        account_info.token  = $_GET.access_token;
+        account_info.role   = parseInt($_GET.role);
+        account_info.time   = now;
+        base_local_data.savedata(base_config.account_save_key,account_info);
+        //未传入role
+        /*if(account_info.role<1){
+            base_remote_data.ajaxjsonp(api.user_info,function(data){
+                if(data.hasOwnProperty('user')){
+                    if(data.user.defaultpart>0){
+                        account_info.role=data.user.defaultpart;
+                        base_local_data.savedata(base_config.account_save_key,account_info);
+                        location.href=location.href.split('?')[0];
+                    }
+                }
+            },{uid:$_GET.uid,access_token:$_GET.access_token});
+        }*/
+    }
 
     if(now-account_info.time>base_config.cachetime){
         base_local_data.deldata(base_config.account_save_key);
@@ -212,7 +242,7 @@
 //日志记录
 (function(){
     $(document).ready(function(){
-        if(/dubaoxing/g.test(location.href.toLocaleLowerCase()))return false;
+        if(base_environment!='online')return false;
         var save=base_local_data.getdata(base_config.last_log_time_key),now= $.now(),time;
         time=!!save?save:0;
         if(now-time>1000*60){

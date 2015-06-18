@@ -1,16 +1,12 @@
 (function(){
-    var encode_current_url=encodeURIComponent(location.href);
     this.page_config={
-        reg_investor_long_url:"//m.angelcrunch.com/angel_vip_simple?source="+encode_current_url,
-        reg_investor_short_url:"//0.angelcrunch.com/angel/new?source="+encode_current_url,
-        login_url:"//auth.angelcrunch.com?source="+encode_current_url,
         default_param:{
             uid:account_info.id,
             access_token:account_info.token
         }
     };
     this.page_status={
-        com_id:'13065886',
+        com_id:'10909526',
         follow:false,
         send_intention:false,
         logo:'',
@@ -51,13 +47,78 @@
     })
 }).call(this);
 
+//显示逻辑
+(function(){
+    this.view_dom={
+        notification:$('.notification')
+    };
+    this.view_notification={
+        show:function(text){
+            view_dom.notification.fadeIn().children('.txt').html(text);
+            if(typeof arguments[1]!='undefined'){
+                if(!arguments[1]){
+                    view_dom.notification.removeClass('red').addClass('green');
+                }
+                else{
+                    view_dom.notification.removeClass('green').addClass('red');
+                }
+            }
+            setTimeout(function(){view_dom.notification.fadeOut();},2000);
+        },
+        hide:function(){
+            view_dom.notification.fadeOut();
+        }
+    };
+}).call(this);
 
 //框架绑定
 (function(){
     this.avalon_model={};
+    this.buydetailsdata={};
     avalon_model.basic_info=avalon.define("basic-info", function (vm) {vm.data = {};});
-    avalon_model.finance=avalon.define("finance", function (vm) {vm.data = {};});
-    avalon_model.finance=avalon.define("", function (vm) {vm.data = {};});
+
+    avalon_model.buydetails=avalon.define('buydetails',function(vm){
+        vm.data = {};
+        vm.event={
+            syn:function(){
+                //计算总出资
+                avalon_model.buydetails.data.total=buydetailsdata.total=buydetailsdata.partprice*buydetailsdata.parts;
+                //计算占股数
+                avalon_model.buydetails.data.precent=buydetailsdata.precent=buydetailsdata.parts*buydetailsdata.partprecent;
+                //计算估值
+                avalon_model.buydetails.data.totalprice=buydetailsdata.totalprice=buydetailsdata.partprice/(buydetailsdata.partprecent/100);
+            },
+            addnum:function(){
+                avalon_model.buydetails.data.partprice+=buydetailsdata.unit;
+                buydetailsdata.partprice+=buydetailsdata.unit;
+                vm.event.syn();
+
+            },
+            minnum:function(){
+                if(buydetailsdata.partprice>buydetailsdata.lowprice){
+                    avalon_model.buydetails.data.partprice-=buydetailsdata.unit;
+                    buydetailsdata.partprice-=buydetailsdata.unit;
+                    vm.event.syn();
+                }
+            },
+            addparts:function(){
+                if(buydetailsdata.parts<buydetailsdata.totalparts){
+                    avalon_model.buydetails.data.parts+=1;
+                    buydetailsdata.parts+=1;
+                    vm.event.syn();
+                }
+            },
+            minparts:function(){
+                if(buydetailsdata.parts>1){
+                    avalon_model.buydetails.data.parts-=1;
+                    buydetailsdata.parts-=1;
+                    vm.event.syn();
+
+                }
+            }
+        };
+
+    });
 }).call(this);
 
 
@@ -77,13 +138,12 @@
     this.page_remote_data_syn=function(url,call,data){
         base_remote_data.ajaxjsonp(url,function(data){
             call(data);
-        },$.extend(true,page_config.default_param,data));
+        },$.extend(true,page_config.default_param,data),function(){view_notification.show('网络错误');});
     }
 
 }).call(this);
 //页面初始化
 (function(){
-    if(account_info.role<1)return false;
     this.view_page_init_dom={
         limited:$('.not-logged-in'),
         invest_info:$('.invest-info')
@@ -113,7 +173,62 @@
 //融资详情
 (function(){
     if(account_info.role<1)return false;
-    page_remote_data_syn(api.com_finace_info,function(data){
-        avalon_model.finance.data=data;
+    //接口数据转换为所需数据
+    this.value_change=function(stocksale,parts,hope){
+        avalon_model.buydetails.data=buydetailsdata={
+            totalprice:hope/(stocksale/100),  //估值
+            totalprecent:stocksale,           //出让股权
+            totalparts:parts,                 //出让份数
+            unit:50,                          //每次加价
+            partprice:hope/parts,             //每份价格,
+            lowprice:hope/parts,              //每份最低价格
+            parts:1,                          //认购份数
+            total:hope/parts,                 //总出价
+            precent:stocksale/parts,          //占股
+            partprecent:stocksale/parts       //每份占股
+        };
+    };
+    page_remote_data_syn(api.com_vc_info,function(data){
+        if(data.hasOwnProperty('stock_sale') && data.hasOwnProperty('shares') && data.hasOwnProperty('finance_hope')){
+            value_change(data.stock_sale,data.shares,data.finance_hope);
+        }else{
+            value_change(0,1,0);
+        }
     },page_status.get_com_id());
+}).call(this);
+//提交投资意向
+(function(){
+    var $addition=$('.other-value').children('textarea'),
+        $agreement=$('.mentos-container'),
+        $submitbtn=$('.submit-btn');
+
+    $agreement.click(function(){
+       if($(this).hasClass('checked')){
+           $submitbtn.addClass('active');
+       }
+        else{
+           $submitbtn.removeClass('active');
+       }
+    });
+    $submitbtn.touchtap(function(){
+        if($(this).hasClass('active')){
+            var data={
+                amount:buydetailsdata.total,
+                stock:buydetailsdata.precent,
+                shares:buydetailsdata.parts,
+                service:$addition.val(),
+                max_amount:buydetailsdata.partprice
+            };
+            page_remote_data_syn(api.com_vc_query,function(data){
+                if(data.hasOwnProperty('success')){
+                    if(data.success){
+                        view_notification.show('发送投资意向成功',false);
+                    }
+                    else{
+                        view_notification.show(data.message);
+                    }
+                }
+            }, $.extend(true,page_status.get_com_id(),data));
+        }
+    });
 }).call(this);
