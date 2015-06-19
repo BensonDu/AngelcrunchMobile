@@ -144,7 +144,7 @@
                     view_dom.notification.removeClass('green').addClass('red');
                 }
             }
-            setTimeout(function(){view_dom.notification.fadeOut();},2000);
+            setTimeout(function(){view_dom.notification.fadeOut();},3000);
         },
         hide:function(){
             view_dom.notification.fadeOut();
@@ -431,7 +431,7 @@
                 if(data.success){
                     angel_view.form.fold();
                     angel_view.apply.yes();
-                    view_notification.show('提交申请成功',false);
+                    view_notification.show('申请已提交,请耐心等待工作人员审核',false);
                 }
                 else{
                     if(data.hasOwnProperty('message')){

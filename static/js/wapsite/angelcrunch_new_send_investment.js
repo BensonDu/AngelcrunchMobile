@@ -193,6 +193,7 @@
                 if(data.hasOwnProperty('success')){
                     if(data.success){
                         view_notification.show('发送投资意向成功',false);
+                        setTimeout(function(){location.href=location.origin},3000);
                     }
                     else{
                         view_notification.show(data.message);
