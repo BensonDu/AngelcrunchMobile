@@ -39,8 +39,7 @@
         client_version_key:'client_version'
     };
     this.base_status={
-        support_touch:typeof document.ontouchstart!='undefined',
-        fromapp:false
+        support_touch:typeof document.ontouchstart!='undefined'
         /*isandorid: !!base_ua.indexOf("android") != -1 ? 1 : 0,
         isios: !!base_ua.match(/\(i[^;]+;( u;)? cpu.+mac os x/),
         isiphone: !!base_ua.indexOf('iphone') > -1 || ua.indexOf('mac') > -1,
@@ -185,6 +184,7 @@
         role:0,
         time:0,
         is_login:false,
+        fromapp:false,
         version:'1.2.1'
     };
     //过期删除
@@ -217,8 +217,8 @@
         account_info.token  = $_GET.access_token;
         account_info.role   = parseInt($_GET.role);
         account_info.time   = now;
+        account_info.fromapp=true;
         base_local_data.savedata(base_config.account_save_key,account_info);
-        base_status.fromapp=true;
     }
 
     if(now-account_info.time>base_config.cachetime){
@@ -316,7 +316,7 @@
             }
         });
         //APP内嵌隐藏头部
-        if(base_status.fromapp){
+        if(account_info.fromapp){
             $head.hide();
         }
     });
