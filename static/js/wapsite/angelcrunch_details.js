@@ -173,7 +173,7 @@
     this.view_qrcode={
         sta:false,
         show:function(){
-            var url=location.href;
+            var url=location.href.split('?')[0];
             view_dom.qrcode.fadeIn(200);
             qr_title.html("分享\""+page_status.name+"\"到微信");
             qr_link.val(url);
