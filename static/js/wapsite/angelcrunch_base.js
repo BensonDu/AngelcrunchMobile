@@ -5,8 +5,8 @@
     this.base_mobile='http://mobile.angelcrunch.com/';
 
     if(base_environment!='online'){
-        this.base_mobile='http://mobile.tonghs.me/';
-        //this.base_mobile='http://mobile.ac-test.com/';
+        //this.base_mobile='http://mobile.tonghs.me/';
+        this.base_mobile='http://mobile.ac-test.com/';
     }
 
 
