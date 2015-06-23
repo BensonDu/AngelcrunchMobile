@@ -14,16 +14,6 @@
             return page_status.com_id != ''?{com_id:page_status.com_id}:{};
         }
     };
-    this.page_helper={
-        float_cut:function(x){
-            if(x % 1 === 0 || typeof x !== 'number'){
-                return x;
-            }
-            else{
-                return x.toFixed(2);
-            }
-        }
-    }
 
 }).call(this);
 
@@ -62,11 +52,11 @@
         vm.event={
             syn:function(){
                 //计算总出资
-                avalon_model.buydetails.data.total=buydetailsdata.total=page_helper.float_cut(buydetailsdata.partprice*buydetailsdata.parts);
+                avalon_model.buydetails.data.total=buydetailsdata.total=buydetailsdata.partprice*buydetailsdata.parts;
                 //计算占股数
-                avalon_model.buydetails.data.precent=buydetailsdata.precent=page_helper.float_cut(buydetailsdata.parts*buydetailsdata.partprecent);
+                avalon_model.buydetails.data.precent=buydetailsdata.precent=buydetailsdata.parts*buydetailsdata.partprecent;
                 //计算估值
-                avalon_model.buydetails.data.totalprice=buydetailsdata.totalprice=page_helper.float_cut(buydetailsdata.partprice/(buydetailsdata.partprecent/100));
+                avalon_model.buydetails.data.totalprice=buydetailsdata.totalprice=buydetailsdata.partprice/(buydetailsdata.partprecent/100);
             },
             addnum:function(){
                 avalon_model.buydetails.data.partprice+=buydetailsdata.unit;
@@ -160,12 +150,12 @@
             totalprecent:stocksale,           //出让股权
             totalparts:parts,                 //出让份数
             unit:50,                          //每次加价
-            partprice:page_helper.float_cut(hope/parts),             //每份价格,
-            lowprice:page_helper.float_cut(hope/parts),              //每份最低价格
+            partprice:hope/parts,             //每份价格,
+            lowprice:hope/parts,              //每份最低价格
             parts:1,                          //认购份数
-            total:page_helper.float_cut(hope/parts),                 //总出价
-            precent:page_helper.float_cut(stocksale/parts),          //占股
-            partprecent:page_helper.float_cut(stocksale/parts)       //每份占股
+            total:hope/parts,                 //总出价
+            precent:stocksale/parts,          //占股
+            partprecent:stocksale/parts       //每份占股
         };
     };
     page_remote_data_syn(api.com_vc_info,function(data){

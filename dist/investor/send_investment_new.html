@@ -104,7 +104,7 @@
                 <a class="sta">{{data.parts}}份</a>
                 <a class="add handle"  ms-on-tap="event.addparts()">+</a>
             </div>
-            <p class="desc">每份占股{{data.partprecent}}%，每份最低价格{{data.lowprice}}万人民币</p>
+            <p class="desc">每份占股{{data.partprecent.toFixed(2)}}%，每份最低价格{{data.lowprice}}万人民币</p>
         </div>
 
         <div class="calculate-result" ms-controller="buydetails">
@@ -114,7 +114,7 @@
             </div>
             <div class="right">
                 <div class="icon-container"><i></i></div>
-                <div class="text-container"><p>预计占股{{data.precent}}%</p></div>
+                <div class="text-container"><p>预计占股{{data.precent.toFixed(2)}}%</p></div>
             </div>
         </div>
 
