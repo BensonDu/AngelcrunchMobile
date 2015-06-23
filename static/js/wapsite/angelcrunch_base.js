@@ -6,6 +6,7 @@
 
     if(base_environment!='online'){
         this.base_mobile='http://mobile.tonghs.me/';
+        //this.base_mobile='http://mobile.ac-test.com/';
     }
 
 
@@ -25,6 +26,7 @@
         com_bp:this.base_mobile+'v2/startup/pb',
         com_follow:this.base_mobile+'v2/follow',
         com_unfollow:this.base_mobile+'v2/unfollow',
+        com_vc_standard:this.base_mobile+'v3/startup/vc',
         com_vc_info:this.base_mobile+'v3/startup/vc_info',
         com_vc_query:this.base_mobile+'v3/startup/vc_query'
     };
