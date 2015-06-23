@@ -1463,3 +1463,45 @@ body.footer-close-bottom .banner-footer {
   padding: 17px 5.6% 0 0;
   color: #2170CD;
 }
+
+/******************
+   New Page result
+ ******************/
+.new-page-result{
+  display: none;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.92);
+  padding: 0 5%;
+  z-index: 99;
+}
+.new-page-result .close{
+  position: absolute;
+  font-size: 36px;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+}
+.new-page-result .content{
+  width: 100%;
+  display: inline-block;
+  margin-top: 50%;
+}
+.new-page-result .content img{
+  display: inline-block;
+}
+.new-page-result .content h1{
+  font-size: 32px;
+  line-height: 52px;
+}
+.new-page-result .content h4,.new-page-result .content h4 *{
+  font-size: 16px;
+  line-height: 22px;
+}
+.new-page-result .content em{
+  color:#FC5830;
+}
