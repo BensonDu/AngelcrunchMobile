@@ -10,7 +10,7 @@
         }
     };
     this.page_status={
-        com_id:'',
+        com_id:'10909526',
         follow:false,
         send_intention:false,
         name:'',
@@ -341,10 +341,15 @@
                         document.body.scrollTop=every;
                     },13);
                     sta.isfold=false;
+
+                    $angelfile.css('border-color','#aaa');
+                    $whole.css('border-color','#aaa');
                 },300);
 
             },
             fold:function(){
+                $angelfile.css('border-color','#fff');
+                $whole.css('border-color','#fff');
                 $arrow.removeClass('rotate-animation');
                 $form.children().hide();
                 $form.hide();
