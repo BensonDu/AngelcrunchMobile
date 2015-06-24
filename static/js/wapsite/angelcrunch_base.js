@@ -190,10 +190,8 @@
         version:'1.2.1'
     };
     //过期删除
-    var now= $.now();
-    var localdata=base_local_data.getdata(base_config.account_save_key);
-    var $COOKIE=$.Angelcrunch.COOKIE || {};
-    $.extend(true,this.account_info,localdata);
+    var now= $.now(),
+        $COOKIE=$.Angelcrunch.COOKIE || {};
 
     //跨版本清除旧数据
     /*var getclientversion=base_local_data.getdata(base_config.client_version_key);
@@ -203,16 +201,14 @@
         base_local_data.savedata(base_config.client_version_key,account_info.version);
     }*/
 
-    //同步旧的登陆信息
-    if(!localdata){
-        if($.cookie($COOKIE.cookieName.user_id)){
-            account_info.id     = $.cookie($COOKIE.cookieName.user_id) || account_info.id;
-            account_info.token  = $.cookie($COOKIE.cookieName.token) || account_info.token;
-            account_info.role   = $.cookie($COOKIE.cookieName.defaultpart) || account_info.role;
-            account_info.time   = now;
-            base_local_data.savedata(base_config.account_save_key,account_info);
-        }
+    //登陆信息写入全局变量 放弃localstorage
+    if($.cookie($COOKIE.cookieName.user_id)){
+        account_info.id     = $.cookie($COOKIE.cookieName.user_id) || account_info.id;
+        account_info.token  = $.cookie($COOKIE.cookieName.token) || account_info.token;
+        account_info.role   = $.cookie($COOKIE.cookieName.defaultpart) || account_info.role;
+        account_info.time   = now;
     }
+
     //URL传参授权 针对APP内嵌
     if($_GET.hasOwnProperty('access_token') && $_GET.hasOwnProperty('uid') && $_GET.hasOwnProperty('role')){
         account_info.id     = $_GET.uid;
@@ -220,12 +216,8 @@
         account_info.role   = parseInt($_GET.role);
         account_info.time   = now;
         account_info.fromapp=true;
-        base_local_data.savedata(base_config.account_save_key,account_info);
     }
 
-    if(now-account_info.time>base_config.cachetime){
-        base_local_data.deldata(base_config.account_save_key);
-    }
     //登陆状态
     if(account_info.token.length>5){
         account_info.is_login=true;
