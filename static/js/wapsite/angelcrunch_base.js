@@ -1,11 +1,19 @@
 (function(){
     this.base_environment=(function(){
-        return location.href.toLowerCase().indexOf('angelcrunch')!=-1?'online':'development';
+        var href=location.href.toLowerCase();
+        if(href.indexOf('angelcrunch') != -1){
+            return 'online'
+        }
+        else if(href.indexOf('ac-test') != -1){
+            return 'test'
+        }
+        else{
+            return 'development'
+        }
     })();
     this.base_mobile='http://mobile.angelcrunch.com/';
 
     if(base_environment!='online'){
-        //this.base_mobile='http://mobile.tonghs.me/';
         this.base_mobile='http://mobile.ac-test.com/';
     }
 
@@ -247,11 +255,13 @@
             var start, x,y;
             if(base_status.support_touch){
                 $(this).bind('touchstart',function(e){
+                    e.preventDefault();
                     start= e.originalEvent.timeStamp;
                     x= e.originalEvent.pageX;
                     y= e.originalEvent.pageY;
                 });
                 $(this).bind('touchend',function(e){
+                    e.preventDefault();
                     var event=e.originalEvent,during=event.timeStamp-start,move=Math.pow(event.pageX-x,2)+Math.pow(event.pageY-y,2);
                     if(during<200 && move<100){
                         fn.call($(this));
