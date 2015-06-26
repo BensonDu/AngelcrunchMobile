@@ -57,12 +57,16 @@
             //显示message
             if($_GET.hasOwnProperty('message') && $_GET.hasOwnProperty('title')){
                 var $reason=$('#regist-reason'),
-                    $title=$reason.find('h1'),
+                    $title=$reason.find('h3'),
                     $msg=$reason.find('h4'),
-                    $close=$reason.children('.close');
+                    $close=$reason.find('.yesiknow'),
+                    $portrait=$reason.find('img');
                 $reason.show();
                 $msg.html(decodeURIComponent($_GET.message));
                 $title.html(decodeURIComponent($_GET.title));
+                if($_GET.hasOwnProperty('portrait') && $_GET.portrait!=''){
+                    $portrait.attr('src',decodeURIComponent($_GET.portrait));
+                }
                 $close.touchtap(function(){
                    $reason.fadeOut(100);
                 });
@@ -360,13 +364,13 @@
         </div>
         <!--消息提示-->
         <div id="regist-reason" class="new-page-result">
-            <div class="close">×</div>
+            <div class="close yesiknow">×</div>
+            <div class="portrait"><img src="http://dn-xswe.qbox.me/13065529?imageMogr2/crop/!690x690a0a0/thumbnail/75x"></div>
             <div class="content">
-                <h1></h1>
-                <label>
-                    <h4></h4>
-                </label>
+                <h3></h3>
+                <h4></h4>
             </div>
+            <div class="btn-group"><a class="yesiknow">知道了</a></div>
         </div>
         <div class="banner-footer">
             <p>AngelCrunch.com</p>

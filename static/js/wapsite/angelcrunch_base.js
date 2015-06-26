@@ -212,14 +212,6 @@
     var now= $.now(),
         $COOKIE=$.Angelcrunch.COOKIE || {};
 
-    //跨版本清除旧数据
-    /*var getclientversion=base_local_data.getdata(base_config.client_version_key);
-    if(getclientversion!=account_info.version){
-        base_local_data.cleardata();
-        $COOKIE.operation.clearUserKey();
-        base_local_data.savedata(base_config.client_version_key,account_info.version);
-    }*/
-
     //登陆信息写入全局变量 放弃localstorage
     if($.cookie($COOKIE.cookieName.user_id)){
         account_info.id     = $.cookie($COOKIE.cookieName.user_id) || account_info.id;
@@ -235,6 +227,11 @@
         account_info.role   = parseInt($_GET.role);
         account_info.time   = now;
         account_info.fromapp=true;
+        //保存用户信息
+        $.Angelcrunch.dataSet.Model.user.id             = account_info.id;
+        $.Angelcrunch.dataSet.Model.user.access_token   = account_info.token;
+        $.Angelcrunch.dataSet.Model.user.defaultpart    = account_info.role;
+        $.Angelcrunch.COOKIE.operation.setUserKey();
     }
 
     //登陆状态

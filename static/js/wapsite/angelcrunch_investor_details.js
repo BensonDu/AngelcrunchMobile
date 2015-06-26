@@ -30,7 +30,7 @@
         follow:false,
         send_intention:false,
         name:'',
-        logo:'',
+        portrait:'',
         get_user_id:function(){
             return page_status.user_id != ''?{user_id:page_status.user_id}:{};
         }
@@ -107,6 +107,7 @@
             avalon_model.details.data=data.user;
             page_status.name=data.user.name;
             page_status.id=data.user.id;
+            page_status.portrait=data.user.avatar;
             //关注状态
             follow_hook(data.user.isfollow);
             //判断是否为个人主页
@@ -257,8 +258,9 @@
             //跳转链接传参
             var linkparam={
                 source:location.href,
-                title:'',
-                message:'',
+                title:'谢谢你通过天使汇向我提交项目。',
+                message:'请先注册天使汇账户，以便我后续和你联系具体的投融资事宜。',
+                portrait:page_status.portrait,
                 id:page_status.user_id
             };
             location.href=page_link.reg+base_create_param(linkparam);
