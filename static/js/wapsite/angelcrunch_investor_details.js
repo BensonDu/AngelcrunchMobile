@@ -259,7 +259,7 @@
             var linkparam={
                 source:location.href,
                 title:'谢谢你通过天使汇向我提交项目。',
-                message:'请先注册天使汇账户，以便我后续和你联系具体的投融资事宜。',
+                message:'请先注册或登录天使汇账户，以便我后续和你联系具体的投融资事宜。',
                 portrait:page_status.portrait,
                 id:page_status.user_id
             };
