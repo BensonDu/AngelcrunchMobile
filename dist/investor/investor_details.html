@@ -117,31 +117,24 @@
         <p ms-if="data.business">我关注<i ms-html="data.region ? '<em>' + data.region.join('<b>·</b>') + '</em>的' : ''"></i><em ms-html="data.business.split('·').join('<b>·</b>')">移动互联网·在线教育·文化艺术</em>领域的创业项目。</p>
     </div>
 
-    <div id="sendresult" class="new-page-result">
-        <div class="close">×</div>
-        <div class="content">
-            <h1>提交项目给投资人</h1>
-            <h4>总共3步</h4>
-            <label>
-                <h3>第一步：创建项目</h3>
-                <h4>通过天使汇网站，在电脑上创建项目，创建项目的网址：http://angelcrunch.com/create</h4>
-            </label>
-            <label>
-                <h3>第二步：搜索投资人</h3>
-                <h4>在搜索框中通过姓名搜索对应的投资人，并点进投资人的个人主页。</h4>
-            </label>
-            <label>
-                <h3>第三步：提交项目</h3>
-                <h4>提交项目按钮在投资人个人主页的右侧，点击蓝色提交项目按钮，进行提交。</h4>
-            </label>
-        </div>
-    </div>
-
     <div class="page-action">
         <div class="btn-group">
             <a id="follow-btn" class="btn btn-small white-border">关注该投资人</a>
             <a id="submit-com" class="btn btn-small orange ci-link">提交项目</a>
+            <a id="share-self" class="btn btn-big orange">分享个人名片</a>
         </div>
+    </div>
+</div>
+<!--提交项目结果：文字提示页-->
+<div id="sendresult" class="new-page-result">
+    <div class="close">×</div>
+    <div class="content">
+        <h1>上传商业计划书</h1>
+        <h5>手机暂不支持直接上传</h5>
+        <label>
+            <h3>使用电脑访问：</h3>
+            <h4>http://angelcrunch.com/create#/login，上传您的商业计划书，并填写项目基本信息。</h4>
+        </label>
     </div>
 </div>
 <!--提交项目列表-->
@@ -157,10 +150,21 @@
                 </div>
                 <em></em>
             </li>
+            <div class="btn-group">
+                <a id="list-cancle" class="cancle">取消</a><a id="list-confirm" class="confirm">提交</a>
+            </div>
         </ul>
     </div>
-    <div class="btn-group">
-        <a id="list-cancle" class="cancle">取消</a><a id="list-confirm" class="confirm">提交</a>
+</div>
+<!--分享个人名片-->
+<div id="PA-layer" class="wechat-PA">
+    <div class="close">×</div>
+    <div class="summary">
+        <h2 class="title">分享个人名片</h2>
+        <div class="image-container">
+        </div>
+        <h5>截屏至相册后, 使用微信扫一扫</h5>
+        <p>手动复制链接:<input onclick="this.setSelectionRange(0, 999);"></p>
     </div>
 </div>
 </body>
@@ -170,5 +174,7 @@
 <script src="/static/js/wapsite/angelcrunch.app_downloadbar.jq.c.js"></script>
 <script src="/static/js/wapsite/angelcrunch_base.js"></script>
 <script src="/static/js/lib/avalon.mobile.min.js"></script>
+<script src="https://dn-acac.qbox.me/qrcode.js"></script>
 <script src="/static/js/wapsite/angelcrunch_investor_details.js"></script>
+
 </html>

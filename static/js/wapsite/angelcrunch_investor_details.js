@@ -15,13 +15,13 @@
     this.page_link={};
     switch (base_environment){
         case 'online':
-            page_link.reg='http://auth.angelcrunch.com/reg?source='+location.href;
+            page_link.reg='http://auth.angelcrunch.com/reg';
             break;
         case 'test':
-            page_link.reg='http://auth.ac-test.com/reg?source='+location.href;
+            page_link.reg='http://auth.ac-test.com/reg';
             break;
         default :
-            page_link.reg='http://angel.dubaoxing.com/html/user/registration/ordinary_user.html?source='+location.href;
+            page_link.reg='http://angel.dubaoxing.com/html/user/registration/ordinary_user.html';
     }
 
 
@@ -66,13 +66,12 @@
     this.view_notification={
         show:function(text){
             $dom.fadeIn().children('.txt').html(text);
-            if(typeof arguments[1]!='undefined'){
-                if(!arguments[1]){
-                    $dom.removeClass('red').addClass('green');
-                }
-                else{
-                    $dom.removeClass('green').addClass('red');
-                }
+            if(typeof arguments[1]!='undefined' && !arguments[1]){
+                $dom.removeClass('red').addClass('green');
+
+            }
+            else{
+                $dom.removeClass('green').addClass('red');
             }
             setTimeout(function(){$dom.fadeOut();},3000);
         },
@@ -107,23 +106,76 @@
         if(data.hasOwnProperty('user')){
             avalon_model.details.data=data.user;
             page_status.name=data.user.name;
+            page_status.id=data.user.id;
             //关注状态
             follow_hook(data.user.isfollow);
+            //判断是否为个人主页
+            view_self_hook(data.user.id);
         }
     },page_status.get_user_id());
 
 }).call((this));
-//关注Model
+
+//个人主页
+(function(){
+    //判断是否为个人主页
+    var $shareself=$('#share-self');
+    this.view_self_hook=function(id){
+        if(account_info.id != 0){
+            if(account_info.id==page_status.user_id || account_info.id ==id){
+                dom_follow_btn.hide();
+                dom_submit_btn.hide();
+                $shareself.show();
+            }
+        }
+    };
+    //二维码生成
+    this.view_dom_qrcode=$('#PA-layer');
+    var qr_close=view_dom_qrcode.find('.close'),
+        qr_container=view_dom_qrcode.find('.image-container'),
+        qr_link=view_dom_qrcode.find('input');
+    this.view_qrcode={
+        sta:false,
+        show:function(){
+            var url=location.href.split('?')[0];
+            view_dom_qrcode.fadeIn(200);
+            qr_link.val(url);
+            if(!view_qrcode.sta){
+                qr_container.qrcode({
+                    render:'image',
+                    width: 200,
+                    height: 200,
+                    color: "#3a3",
+                    text: url,
+                    showCloseButton: false
+                });
+                view_qrcode.sta=true;
+            }
+
+        },
+        hide:function(){
+            view_dom_qrcode.fadeOut(100);
+        }
+    };
+
+    $shareself.touchtap(function(){
+       view_qrcode.show();
+    });
+    qr_close.touchtap(function(){
+        view_qrcode.hide();
+    })
+}).call(this);
+//关注投资人
 (function(){
     this.follow_sta=false;
-    this.follow_btn=$('#follow-btn');
+    this.dom_follow_btn=$('#follow-btn');
     this.follow_view={
         follow:function(){
-            follow_btn.html('已关注').addClass('reverse');
+            dom_follow_btn.html('已关注').addClass('reverse');
             follow_sta=true;
         },
         unfollow:function(){
-            follow_btn.html('关注该投资人').removeClass('reverse');
+            dom_follow_btn.html('关注该投资人').removeClass('reverse');
             follow_sta=false;
         }
     };
@@ -159,7 +211,7 @@
             follow_view.unfollow();
         }
     };
-    follow_btn.touchtap(function(){
+    dom_follow_btn.touchtap(function(){
         if(!follow_sta){
             follow_model.follow();
         }
@@ -171,8 +223,8 @@
 }).call(this);
 //提交项目
 (function(){
-    var $dom=$('#submit-com'),$result=$('#sendresult'),$resultclose=$result.children('.close');
-
+    var $result=$('#sendresult'),$resultclose=$result.children('.close');
+    this.dom_submit_btn=$('#submit-com');
     this.my_com_list=function(call){
         page_remote_data_syn(page_config.api_com_list,function(data){
             call(data);
@@ -199,10 +251,17 @@
             }
         },data);
     };
-    $dom.touchtap(function(){
+    dom_submit_btn.touchtap(function(){
         //判断对应逻辑
         if(!account_info.is_login){
-            location.href=page_link.reg;
+            //跳转链接传参
+            var linkparam={
+                source:location.href,
+                title:'',
+                message:'',
+                id:page_status.user_id
+            };
+            location.href=page_link.reg+base_create_param(linkparam);
         }
         else{
             my_com_list(function(data){

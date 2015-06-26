@@ -91,7 +91,10 @@
                             if (data.user) {
                                 $.Angelcrunch.dataSet.operation.setUser(data.user);
                                 $.Angelcrunch.COOKIE.operation.setUserKey();
-                                location.href = $.Angelcrunch.url.getSource() || 'http://' + window.page.settings.host;
+                                if($_GET.hasOwnProperty('source')){
+                                    location.href=decodeURIComponent($_GET.source);
+                                }
+                                location.href = 'http://' + window.page.settings.host;
                             } else if (data.success == false)
                                 $notification.notificationToggle();
                             else

@@ -666,11 +666,12 @@ label > i textarea {
   resize:none;
   background-color:transparent;
 }
-label > a{
+label > .already-has-account{
   display: inline-block;
-  line-height: 100%;
-  color: #2170CD;
-  padding: 11px 4%;
+  text-decoration: underline;
+  text-align: center;
+  width: 100%;
+  padding: 18px 4%;
 }
 @media only screen and (max-width: 370px) {
   label > i textarea {
@@ -1488,8 +1489,9 @@ body.footer-close-bottom .banner-footer {
 .new-page-result .close{
   position: absolute;
   font-size: 36px;
-  top: 10px;
-  right: 20px;
+  top:0;
+  right: 0;
+  padding: 10px 20px;
   cursor: pointer;
 }
 .new-page-result .content{

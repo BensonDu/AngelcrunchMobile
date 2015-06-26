@@ -21,3 +21,28 @@
 .banner-footer {
   margin-top:116px;
 }
+.new-page-result .content{
+  margin-top: 40%;
+}
+.new-page-result .content h1{
+  color: #333;
+  line-height: 50px;
+}
+.new-page-result .content label{
+  padding: 6% 3%;
+}
+.new-page-result .content label h4{
+  font-size: 18px;
+  line-height: 2em;
+  text-align: left;
+  word-break: break-all;
+}
+.new-page-result .content label h3{
+  font-size: 18px;
+  line-height: 2em;
+  text-align: left;
+}
+.new-page-result .content h5{
+  font-size: 16px;
+  color: #666;
+}

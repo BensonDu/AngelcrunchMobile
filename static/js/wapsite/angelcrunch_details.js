@@ -136,13 +136,12 @@
     this.view_notification={
         show:function(text){
             view_dom.notification.fadeIn().children('.txt').html(text);
-            if(typeof arguments[1]!='undefined'){
-                if(!arguments[1]){
-                    view_dom.notification.removeClass('red').addClass('green');
-                }
-                else{
-                    view_dom.notification.removeClass('green').addClass('red');
-                }
+            if(typeof arguments[1]!='undefined' && !arguments[1]){
+                view_dom.notification.removeClass('red').addClass('green');
+
+            }
+            else{
+                view_dom.notification.removeClass('green').addClass('red');
             }
             setTimeout(function(){view_dom.notification.fadeOut();},3000);
         },

@@ -37,8 +37,37 @@
     <script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
     <script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
     <script src="/static/js/wapsite/angelcrunch.sendsms_verify.jq.c.js"></script>
+    <script src="/static/js/wapsite/angelcrunch_base.js"></script>
     
     <script type="text/javascript" id="page-interactive-init">
+        (function(){
+            this.page_config={
+                api_invite_record:base_mobile+'v3/invite'
+            };
+            this.record_invite=function(user,invitor){
+                base_remote_data.ajaxjsonp(page_config.api_invite_record,function(){},{user_id:invitor,new_id:user},function(){})
+            }
+        }).call(this);
+
+        $(document).ready(function(){
+            //跳转链接 传参同步
+            var $dom=$('.already-has-account'),href=$dom.attr('href'),split=location.href.split('?');
+            if(split.length>1)href+='?'+split[1];
+            $dom.attr('href',href);
+            //显示message
+            if($_GET.hasOwnProperty('message') && $_GET.hasOwnProperty('title')){
+                var $reason=$('#regist-reason'),
+                    $title=$reason.find('h1'),
+                    $msg=$reason.find('h4'),
+                    $close=$reason.children('.close');
+                $reason.show();
+                $msg.html(decodeURIComponent($_GET.message));
+                $title.html(decodeURIComponent($_GET.title));
+                $close.touchtap(function(){
+                   $reason.fadeOut(100);
+                });
+            }
+        });
         var page = window.page || {};
         page.MethodObj = function () { };
         page.MethodObj.prototype = (function () {
@@ -198,7 +227,17 @@
                                 $.Angelcrunch.COOKIE.operation.setUserKey();
                                 if (!$.Angelcrunch.COOKIE.operation.isLogin())
                                     $notification.notificationToggle(txt);
-                                location.href = $btn.submit.attr("data-redirect");
+                                //记录
+                                if($_GET.hasOwnProperty('id')){
+                                    record_invite(data.id,$_GET.id);
+                                }
+                                //回调
+                                if($_GET.hasOwnProperty('source')){
+                                    location.href=decodeURIComponent($_GET.source);
+                                }
+                                else{
+                                    location.href = $btn.submit.attr("data-redirect");
+                                }
                             } else
                                 $notification.notificationToggle(data.message);
                         }, type);
@@ -318,6 +357,16 @@
                 </div>
             </div>
             <button id="subbmit-btn" class="btn submit-btn ci-link" data-redirect="/reg_success"></button>
+        </div>
+        <!--消息提示-->
+        <div id="regist-reason" class="new-page-result">
+            <div class="close">×</div>
+            <div class="content">
+                <h1></h1>
+                <label>
+                    <h4></h4>
+                </label>
+            </div>
         </div>
         <div class="banner-footer">
             <p>AngelCrunch.com</p>

@@ -183,6 +183,17 @@
         }
         this.$_GET=f;
     }
+    //生成url字符串参数对
+    this.base_create_param=function(data){
+        var s='',c='?';
+        if(typeof data == 'object'){
+            for(var i in data){
+                s+=c+i+'='+encodeURIComponent(data[i]);
+                if(c='?')c='&';
+            }
+            return s;
+        }
+    }
 }).call(this);
 
 //全局账户信息获取

@@ -341,6 +341,11 @@
 .page-action {
   margin-top:1px;
 }
+.page-action .btn-group .btn-big{
+  width: 100%;
+  float: left;
+  display: none;
+}
 
 /******************
      new page
@@ -485,23 +490,29 @@
       Notice
   ********************/
 .new-page-result .content{
-  margin-top: 20%;
+  margin-top: 40%;
 }
 .new-page-result .content h1{
   color: #333;
+  line-height: 50px;
 }
 .new-page-result .content label{
-  padding: 3% 3%;
-  border-bottom: 1px solid #333;
-}
-.new-page-result .content label h3{
-  font-size: 22px;
-  line-height: 150%;
-  text-align: left;
+  padding: 6% 3%;
 }
 .new-page-result .content label h4{
-  color: #222;
+  font-size: 18px;
+  line-height: 2em;
   text-align: left;
+  word-break: break-all;
+}
+.new-page-result .content label h3{
+  font-size: 18px;
+  line-height: 2em;
+  text-align: left;
+}
+.new-page-result .content h5{
+  font-size: 16px;
+  color: #666;
 }
 /*******************
       Submit-com-list
@@ -531,7 +542,7 @@
   padding: 5px 5%;
 }
 .submit-com-list .list-container{
-  height: 300px;
+  height: 80%;
   width: 100%;
   border-top: 1px solid #e0e0e0;
   border-bottom: 1px solid #e0e0e0;
@@ -585,13 +596,16 @@
 }
 .submit-com-list .btn-group{
   text-align: center;
+  margin-top: 15px;
+  position: absolute;
+  bottom: 33px;
+  background:#f5f5f5 ;
 }
 .submit-com-list .btn-group a{
   display: inline-block;
   height: 30px;
   width: 45%;
   border-radius:3px;
-  margin-top: 25px;
   font-size: 18px;
   line-height: 32px;
 }
@@ -609,6 +623,70 @@
   background: #E65100;
   color: #fff;
   border: none;
+}
+/*******************
+    Share personal card
+  ********************/
+.wechat-PA {
+  display:none;
+  position:fixed;
+  width:100%;
+  height:100%;
+  text-align:center;
+  top:0;
+  left:0;
+  background:rgba(255, 255, 255, 0.92);
+  z-index:99;
+}
+
+.wechat-PA .summary {
+  position:absolute;
+  display:inline-block;
+  width:306px;
+  top:46%;
+  left:50%;
+  margin-left:-154px;
+  margin-top:-160px;
+}
+
+.wechat-PA h2 {
+  font-size:30px;
+}
+
+.wechat-PA h5 {
+  font-size:20px;
+  color:#FC5830;
+  line-height:32px;
+  margin-top:8px;
+}
+
+.wechat-PA p {
+  font-size:14px;
+}
+.wechat-PA p input{
+  width: 100%;
+  border:none;
+  font-size:14px;
+  text-align: center;
+}
+.wechat-PA p input:focus{
+  outline: none;
+}
+.wechat-PA .image-container {
+  margin-top:12px;
+}
+
+.wechat-PA .image-container img {
+  width:218px;
+}
+.wechat-PA .close {
+  position:absolute;
+  font-size:36px;
+  float:right;
+  top:0;
+  right:0;
+  padding: 10px 20px;
+  cursor:pointer;
 }
 /*******************
        Keyframes
