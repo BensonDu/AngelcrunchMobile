@@ -427,7 +427,7 @@ $.Angelcrunch.notificationInit = function () {
 }).call(this);
 
 $.Angelcrunch.wechatImg = function () {
-    $("body").append('<div id="wx_pic"><img src="/static/images/wapsite/231937129837912.png" /></div>');
+    $("body").prepend('<div id="wx_pic"><img src="/static/images/wapsite/231937129837912.png" /></div>');
 };
 
 
