@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -32,312 +32,149 @@
     <link href="/static/css/wapsite/base-css.css" rel="stylesheet" />
     <link href="/static/css/wapsite/investor/investor_details.css" rel="stylesheet" />
 
-    <script src="/static/js/lib/jquery-1.11.1.min.js"></script>
-    <script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
-    <script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
-    <script src="/static/js/wapsite/angelcrunch.app_downloadbar.jq.c.js"></script>
-    <script src="/static/js/lib/avalon.mobile.min.js"></script>
-
-    <script type="text/javascript" id="page-interactive-init">
-    var page = window.page || {};
-    page.MethodObj = function () { };
-    page.MethodObj.prototype = (function () {
-        var settings = page.settings;
-        var $COOKIE = $.Angelcrunch.COOKIE;
-
-        var I = {
-            Ajax_investor_details: {                          // Investor Details
-                url: "http://" + settings.AjaxDomain + "/v2/user/m_detail",
-                basic_data: {}
-            },
-            Ajax_follow: {                     // Follow
-                url: "http://" + settings.AjaxDomain + "/v2/follow",
-                basic_data: {}
-            },
-            Ajax_unfollow: {                     // Unfollow
-                url: "http://" + settings.AjaxDomain + "/v2/unfollow",
-                basic_data: {}
-            },
-            API: {
-                changeFellowState: ""
-            }
-        };
-
-        var waste_2012932 = function () {
-            var sliderTimeHandle = "";
-            var $album = $("#album");
-            // Details information
-            (function () {
-                var url = I.Ajax_investor_details.url,
-                    basic_data = I.Ajax_investor_details.basic_data,
-                            type = "jsonp";
-                var _data = $.extend(true, {}, basic_data);
-                var userid = $.Angelcrunch.url.getUserId();
-                _data[$COOKIE.cookieName.token] = $.cookie($COOKIE.cookieName.token);
-                _data[$COOKIE.cookieName.user_id] = $.cookie($COOKIE.cookieName.user_id);
-
-                if (userid) _data["user_id"] = userid;
-                $.post(url, _data, function (data) {
-                    var times = 50;
-                    avalonNS.model.details.data = data;
-                    I.API.changeFellowState(data.user.isfollow);
-                    // Delay calculation method
-                    sliderTimeHandle = setInterval(function () {
-                        if ($album.find("ul > li").length > 0) {
-                            $album.calculateSliderModuleWidth({ rightSpaceWidth: 10 });
-                            times -= 10;
-                        }
-                        if (times < 1) clearInterval(sliderTimeHandle);
-                        times--;
-                    }, 40);
-                }, type);
-            }).call(this);
-        };
-
-        var waste_3920123 = function () {
-            var className = {
-                notification: "#login-failed",
-
-                followState: "reverse",
-                sending: "sending-state"
-            };
-            var txt = {
-                isFollow: "已关注",
-                notFollow: "关注该投资人"
-            };
-            var $btn, $notification;
-            $btn = $("#follow-btn"),
-            $notification = $(className.notification);
-
-            var changeFellowState =
-                I.API.changeFellowState = function (isFollow) {
-                    if (isFollow)
-                        $btn.addClass(className.followState).text(txt.isFollow);
-                    else
-                        $btn.removeClass(className.followState).text(txt.notFollow);
-                };
-
-            $btn.click(function () {
-                if (!$COOKIE.operation.isLogin())
-                    location.href = $.Angelcrunch.url.addedSouceUrl(settings.loginPageURL);
-
-                if ($(this).hasClass(className.sending)) return 0;
-                if ($(this).hasClass(className.followState))
-                    unfollowAjax();
-                else followAjax();
-            });
-
-            // Follow
-            var followAjax = function () {
-                var url = I.Ajax_follow.url,
-                    basic_data = I.Ajax_follow.basic_data,
-                          type = "jsonp";
-                var _data = $.extend(true, {}, basic_data);
-                var userId = $.Angelcrunch.url.getUserId();
-                _data[$COOKIE.cookieName.token] = $.cookie($COOKIE.cookieName.token);
-                _data[$COOKIE.cookieName.user_id] = $.cookie($COOKIE.cookieName.user_id);
-
-                if (userId) _data["id"] = userId;
-                $btn.addClass(className.sending);
-                $.post(url, _data, function (data) {
-                    if (data.success)
-                        changeFellowState(true);
-                    else $notification.notificationToggle();
-                    $btn.removeClass(className.sending);
-                }, type);
-            };
-            // Unfollow
-            var unfollowAjax = function () {
-                var url = I.Ajax_unfollow.url,
-                    basic_data = I.Ajax_unfollow.basic_data,
-                          type = "jsonp";
-                var _data = $.extend(true, {}, basic_data);
-                var userId = $.Angelcrunch.url.getUserId();
-                _data[$COOKIE.cookieName.token] = $.cookie($COOKIE.cookieName.token);
-                _data[$COOKIE.cookieName.user_id] = $.cookie($COOKIE.cookieName.user_id);
-
-                if (userId) _data["id"] = userId;
-                $btn.addClass(className.sending);
-                $.post(url, _data, function (data) {
-                    if (data.success)
-                        changeFellowState(false);
-                    else $notification.notificationToggle();
-                    $btn.removeClass(className.sending);
-                }, type);
-            };
-
-        };
-
-
-        return {
-            attackEvent: function () {
-                waste_2012932();
-                waste_3920123();
-            },
-
-            pageLoad_Init: function () {
-            },
-
-            initial: function () {
-                this.pageLoad_Init();
-                this.attackEvent();
-            }
-        };
-    })();
-
-    page.initialBridge = function () {
-        var o = new page.MethodObj();
-        o.initial();
-    }
-
-    $(function () {
-        page.initialBridge();
-    })
-    </script>
-    <script type="text/javascript" id="avalonInit">
-    var avalonNS = window.avalonNS || {};
-    (function () {
-        avalonNS.model = {
-            details: avalon.define("investor-details", function (vm) {
-                vm.data = {};
-            })
-        };
-    }).call(this);
-    </script>
-
 </head>
 <body>
-    <div class="details" ms-controller="investor-details">
-        <div id="login-failed" class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
-        <div id="header" class="head">
-            <div class="logo ci-link" data-href="http://angelcrunch.com"></div>
-            <div class="options">
-                <span></span>
-                <ul class="hidden-menu">
-                    <li class="ci-link" data-href="http://angelcrunch.com/startup_financing">创业项目</li>
-                    <li class="ci-link" data-href="http://angelcrunch.com/angel">投资人</li>
-                </ul>
+<div class="bk"></div>
+<div class="details" ms-controller="investor-details">
+    <div id="login-failed" class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
+    <div id="header" class="newhead">
+        <div class="logo ci-link  touch-href" data-link="http://angelcrunch.com"></div>
+        <div class="options">
+            <span></span>
+            <ul class="hidden-menu">
+                <li class="ci-link touch-href" data-link="http://angelcrunch.com/startup_financing">创业项目</li>
+                <li class="ci-link touch-href" data-link="http://angelcrunch.com/angel">投资人</li>
+            </ul>
+        </div>
+    </div>
+    <div class="pesonal-summary">
+        <div class="layer">
+            <div class="avatar">
+                <img src="" ms-class="show:data.avatar"
+                     ms-src="data.avatar||''" />
+            </div>
+            <div class="summary">
+                <h1 ms-text="data.name"></h1>
+                <p class="hidden2Visible" ms-text="data.company+' '+data.title"></p>
+                <p class="extra" ms-class="bigger-font:data.summary.length < 34"
+                   ms-class-1="align-center:data.summary.length < 28"
+                   ms-text="data.summary.length > 160 ? data.summary.substr(0,160) + ' ...' : data.summary"></p>
             </div>
         </div>
-        <div class="pesonal-summary">
-            <div class="layer">
-                <div class="avatar">
-                    <img src="" ms-class="show:data.user.avatar"
-                         ms-src="data.user.avatar||''" />
-                </div>
-                <div class="summary">
-                    <h1 ms-text="data.user.name"></h1>
-                    <p class="hidden2Visible" ms-text="data.user.company+' '+data.user.title"></p>
-                    <p class="extra" ms-class="bigger-font:data.user.summary.length < 34"
-                       ms-class-1="align-center:data.user.summary.length < 28"
-                       ms-text="data.user.summary.length > 160 ? data.user.summary.substr(0,160) + ' ...' : data.user.summary"></p>
-                </div>
-            </div>
-            <div class="effect-card">
-                <div class="rs-bkg"><img src="/static/images/wapsite/bannerbox.jpg" /></div>
-            </div>
+        <div class="effect-card">
+            <div class="rs-bkg"><img src="/static/images/wapsite/bannerbox.jpg" /></div>
         </div>
-        <div class="participation">
-            <h1>过往投资案例及个人经历</h1>
-            <div ms-if="data.user.invested_com.length" id="album" class="slider-container">
-                <ul>
-                    <li ms-repeat="data.user.invested_com">
-                        <div class="brand"><img ms-src="el.logo" /></div>
+    </div>
+    <div class="participation">
+        <h1>过往投资案例及个人经历</h1>
+        <div ms-if="data.invested_com.length" id="album" class="slider-container">
+            <ul>
+                <li ms-repeat="data.invested_com">
+                    <div>
+                        <img ms-src="el.logo">
                         <h3 ms-text="el.name"></h3>
-                        <p ms-text="el.part==1?'投资人':el.part==2?'领投人':''"></p>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="pesonal-info">
-            <div ms-if="data.user.style.length">
-                <h1>投资理念</h1>
-                <p ms-html="data.user.style"></p>
-            </div>
-            <div ms-if="data.user.service.length">
-                <h3>可提供的附加价值</h3>
-                <p ms-text="data.user.service"></p>
-            </div>
-            <div ms-if="data.user">
-                <h3>擅长领域</h3>
-                <ul ms-if="data.user.tag" class="mark-list">
-                    <li ms-repeat="data.user.tag.split('·')" ms-text="el">互联网金融</li>
-                </ul>
-            </div>
-        </div>
-        <div ms-if="data.user" class="fund-paln">
-            <ul class="plan" ms-if="data.user.count">
-                <li>
-                    <i></i>
-                    <div class="desc">
-                        <p ms-html="data.user.count+'<em>个</em>'">0<em>个</em></p>
-                        <span>1年内计划投资</span>
-                    </div>
-                </li>
-                <li>
-                    <i></i>
-                    <div class="desc" ms-class="small-font:(String(data.user.min_amount) +data.user.max_amount).length > 5">
-                        <p ms-html="(String(data.user.min_amount) +data.user.max_amount).length > 5 ?
-                           data.user.min_amount + '-' + data.user.max_amount + 'W':
-                           data.user.min_amount + 'W-' + data.user.max_amount + 'W'">0W</p>
-                        <span>单个项目投资额</span>
+                        <p ms-text="el.part==1?'投资人':el.part==2?'领投人':''">投资人</p>
                     </div>
                 </li>
             </ul>
-            <p ms-if="data.user.business">我关注<i ms-html="data.user.region ? '<em>' + data.user.region.join('<b>·</b>') + '</em>的' : ''"></i><em ms-html="data.user.business.split('·').join('<b>·</b>')">移动互联网·在线教育·文化艺术</em>领域的创业项目。</p>
-        </div>
-        <div class="page-action">
-            <div class="btn-group">
-                <button id="follow-btn" class="btn btn-small white-border" data-btn-reverse-text="已关注">关注该投资人</button>
-                <button class="btn btn-small orange ci-link" data-href="/submit_com" data-target="_self">提交项目</button>
-            </div>
         </div>
     </div>
-    <!--<div id="submit-item" class="new-page white-style center">
-        <div class="title-container">
-            <p class="float-left prev-page"></p>
-            <p class="title">对投资人提交项目</p>
+    <div class="pesonal-info">
+        <div ms-if="data.style.length">
+            <h1>投资理念</h1>
+            <p ms-html="data.style"></p>
         </div>
-        <div class="selection">
-            <div class="e-block">
-                <h1>我的项目</h1>
-                <div class="section-list">
-                    <section class="already-submit">
-                        <div class="logo">
-                            <img src="/static/images/wapsite/129837123987.jpg" />
-                        </div>
-                        <div class="summary">
-                            <h3>约拍</h3>
-                            <p>创建于2015.3.2</p>
-                        </div>
-                        <div class="item-state">
-                            <div class="tag">[已经提交]</div>
-                            <div class="vector-icons success"></div>
-                        </div>
-                    </section>
-                    <section class="already-submit">
-                        <div class="logo">
-                            <img src="/static/images/wapsite/129837123987.jpg" />
-                        </div>
-                        <div class="summary">
-                            <h3 class="small-font">滴滴打车系列产品</h3>
-                            <p>创建于2015.3.2</p>
-                        </div>
-                        <div class="item-state">
-                            <div class="tag">[已经提交]</div>
-                            <div class="vector-icons success"></div>
-                        </div>
-                    </section>
-                </div>
-            </div>
-            <div class="submit-area">
-                <div class="summary">
-                    <p>今天还有<i>5</i>次提交机会:</p>
-                    <p class="multiple">这个项目还有<i>5</i>次提交机会:</p>
-                </div>
-                <button class="btn submit-btn submit-item"></button>
-            </div>
+        <div ms-if="data.service.length">
+            <h3>可提供的附加价值</h3>
+            <p ms-text="data.service"></p>
         </div>
-    </div>-->
+        <div ms-if="data.tag">
+            <h3>擅长领域</h3>
+            <ul class="mark-list">
+                <li ms-repeat="data.tag.split('·')">{{el}}</li>
+            </ul>
+        </div>
+    </div>
+    <div ms-if="data.count" class="fund-paln">
+        <ul class="plan" ms-if="data.count">
+            <li>
+                <i></i>
+                <div class="desc">
+                    <p ms-html="data.count+'<em>个</em>'">0<em>个</em></p>
+                    <span>1年内计划投资</span>
+                </div>
+            </li>
+            <li>
+                <i></i>
+                <div class="desc" ms-class="small-font:(String(data.min_amount) +data.max_amount).length > 5">
+                    <p ms-html="(String(data.min_amount) +data.max_amount).length > 5 ?
+                           data.min_amount + '-' + data.max_amount + 'W':
+                           data.min_amount + 'W-' + data.max_amount + 'W'">0W</p>
+                    <span>单个项目投资额</span>
+                </div>
+            </li>
+        </ul>
+        <p ms-if="data.business">我关注<i ms-html="data.region ? '<em>' + data.region.join('<b>·</b>') + '</em>的' : ''"></i><em ms-html="data.business.split('·').join('<b>·</b>')">移动互联网·在线教育·文化艺术</em>领域的创业项目。</p>
+    </div>
+
+    <div class="page-action">
+        <div class="btn-group">
+            <a id="follow-btn" class="btn btn-small white-border">关注该投资人</a>
+            <a id="submit-com" class="btn btn-small orange ci-link">提交项目</a>
+            <a id="share-self" class="btn btn-big orange">分享个人名片</a>
+        </div>
+    </div>
+</div>
+<!--提交项目结果：文字提示页-->
+<div id="sendresult" class="new-page-result">
+    <div class="close">×</div>
+    <div class="content">
+        <h1>上传商业计划书</h1>
+        <h5>手机暂不支持直接上传</h5>
+        <label>
+            <h3>使用电脑访问：</h3>
+            <h4>http://angelcrunch.com/create#/login，上传您的商业计划书，并填写项目基本信息。</h4>
+        </label>
+    </div>
+</div>
+<!--提交项目列表-->
+<div id="submit-com-list" class="submit-com-list"  ms-controller="entre-list">
+    <h4 class="title">向“{{data.name}}”提交项目</h4>
+    <div class="list-container">
+        <ul>
+            <li ms-if="data.list" ms-repeat="data.list" ms-data-id="el.id" ms-on-tap="data.select">
+                <img ms-src="el.logo">
+                <div>
+                    <h4>{{el.name}}</h4>
+                    <p>预融资额：{{el.amount}}</p>
+                </div>
+                <em></em>
+            </li>
+            <div class="btn-group">
+                <a id="list-cancle" class="cancle">取消</a><a id="list-confirm" class="confirm">提交</a>
+            </div>
+        </ul>
+    </div>
+</div>
+<!--分享个人名片-->
+<div id="PA-layer" class="wechat-PA">
+    <div class="close">×</div>
+    <div class="summary">
+        <h2 class="title">分享个人名片</h2>
+        <div class="image-container">
+        </div>
+        <h5>截屏至相册后, 使用微信扫一扫</h5>
+        <p>手动复制链接:<input onclick="this.setSelectionRange(0, 999);"></p>
+    </div>
+</div>
 </body>
+<script src="/static/js/lib/jquery-2.1.4.min.js"></script>
+<script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
+<script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
+<script src="/static/js/wapsite/angelcrunch.app_downloadbar.jq.c.js"></script>
+<script src="/static/js/wapsite/angelcrunch_base.js"></script>
+<script src="/static/js/lib/avalon.mobile.min.js"></script>
+<script src="https://dn-acac.qbox.me/qrcode.js"></script>
+<script src="/static/js/wapsite/angelcrunch_investor_details.js"></script>
+
 </html>

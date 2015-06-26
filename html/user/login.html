@@ -89,19 +89,12 @@
 
                         $.post(url, _data, function (data) {
                             if (data.user) {
-                                //保存登陆信息
-                                var account_info={
-                                    username:data.user.name,
-                                    id:data.user.id,
-                                    role:data.user.defaultpart,
-                                    time: $.now(),
-                                    token:data.user.access_token
-                                };
-                                base_local_data.savedata(base_config.account_save_key,account_info);
-
                                 $.Angelcrunch.dataSet.operation.setUser(data.user);
                                 $.Angelcrunch.COOKIE.operation.setUserKey();
-                                location.href = $.Angelcrunch.url.getSource() || 'http://' + window.page.settings.host;
+                                if($_GET.hasOwnProperty('source')){
+                                    location.href=decodeURIComponent($_GET.source);
+                                }
+                                location.href = 'http://' + window.page.settings.host;
                             } else if (data.success == false)
                                 $notification.notificationToggle();
                             else

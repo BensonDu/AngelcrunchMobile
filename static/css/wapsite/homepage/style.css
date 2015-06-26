@@ -110,6 +110,7 @@ p {
   text-align:center;
   background-color:#F5F5F5;
   cursor:pointer;
+  float: left;
 }
 
 .feature-list section.orange {
@@ -258,18 +259,24 @@ section.follow-us {
 }
 
 .footer {
+  float: left;
   height:138px;
   text-align:center;
   padding-top:54px;
+  width: 100%;
 }
 
 .footer p {
+  width: 100%;
   font-size:12px;
   line-height:14px;
+  text-align: center;
 }
 
 .footer p.gray {
+  width: 100%;
   color:#999;
+  text-align: center;
 }
 
 
@@ -327,6 +334,138 @@ section.follow-us {
   margin-top:10px;
   margin-right:20px;
   cursor:pointer;
+}
+/*Angelcrunch's time*/
+@font-face {
+  font-family: 'Teko';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Teko Regular'), local('Teko-Regular'), url(https://dn-acac.qbox.me/teko.woff) format('woff');
+}
+
+.first-screen.angelred{
+  background: url(https://dn-acac.qbox.me/angelself.png) no-repeat;
+  background-size: 100% 100%;
+  overflow: hidden;
+}
+.first-screen.angelred .img-div{
+  width: 100%;
+  height: 268px;
+  overflow: visible;
+  position: relative;
+}
+.first-screen.angelred .img-div div{
+  position: absolute;
+}
+.first-screen.angelred .img-div div img{
+  width: 100%;
+  height: 100%;
+}
+.first-screen.angelred .img-div .ipone{
+  top:50%;
+  left:1%;
+  width: 40%;
+  min-height: 165px;
+  max-width: 220px;
+  z-index: 2;
+}
+.first-screen.angelred .img-div .ipad{
+  top:14%;
+  left:6%;
+  width: 47%;
+  max-width: 260px;
+  min-width: 195px;
+  z-index: 1;
+}
+.first-screen.angelred .img-div .imac{
+  max-width: 460px;
+  min-width: 305px;
+  width: 81%;
+  right: -18%;
+  top:-26%
+}
+.first-screen.angelred .text-div{
+  width: 100%;
+  height: 200px;
+  position: relative;
+  z-index: 3;
+}
+.first-screen.angelred .text-div p{
+  text-align: left;
+  font-size: 24px;
+  color: #fff;
+  padding: 10px 5%;
+}
+.first-screen.angelred .text-div ul{
+  display: inline-block;
+  width: 100%;
+  height: 84px;
+  padding: 7px 5%;
+  letter-spacing: 2px;
+}
+.first-screen.angelred .text-div ul li{
+  height: 100%;
+  float: left;
+  position: relative;
+  display: inline-block;
+}
+.first-screen.angelred .text-div ul li.time{
+  width: 14%;
+  border-radius: 4px;
+  background: #fff;
+  color: #e34033;
+  font-size: 80px;
+  line-height: 83px;
+  font-family: 'Teko', sans-serif;
+}
+.first-screen.angelred .text-div ul li.time em{
+  display: block;
+  position: absolute;
+  width: 100%;
+  border-top: 1px solid #f1f1f1;
+  border-bottom:1px solid #f1f1f1 ;
+  border-left:3px solid #e34033;
+  border-right:3px solid #e34033;
+  top:35px;
+
+}
+.first-screen.angelred .text-div ul li.sep{
+  width: 5%;
+  color: #79281f;
+  font-size: 60px;
+  font-weight: 900;
+}
+.first-screen.angelred .text-div ul li.spa{
+  width: 2%;
+}
+.first-screen.angelred .text-div div{
+  display: inline-block;
+  width: 100%;
+  padding: 7px 5%;
+  height: 57px;
+}
+.first-screen.angelred .text-div div a{
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  border-radius: 2px;
+  background: #ffef00;
+  color: #e34033;
+  font-size: 22px;
+  font-weight: bold;
+  text-align: center;
+  line-height: 47px;
+  position: relative;
+}
+.first-screen.angelred .text-div div a:after{
+  position: absolute;
+  content: '';
+  top: 17px;
+  width: 0;
+  height: 0;
+  border-bottom: 5px solid transparent;
+  border-top: 5px solid transparent;
+  border-left: 10px solid #e34033;
 }
 
 @media only screen and (min-width:500px ){

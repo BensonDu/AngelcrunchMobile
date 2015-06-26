@@ -527,7 +527,8 @@
 }
 .angel-extra-files{
   display: none;
-  border-bottom: 3px solid #AAA;
+  border-bottom: 3px solid;
+  border-color: #fff;
 }
 .angel-extra-files h1{
   padding-top: 12px;
@@ -538,11 +539,12 @@
 .angel-extra-files .angelfile {
   height:50px;
   line-height:52px;
-  background:#eee url(https://dn-acac.qbox.me/detail_icon_07.png) no-repeat 16px center;
-  background-size:32px;
-  border-left: 3px solid #AAA;
-  border-right: 3px solid #AAA;
-  border-top: 3px solid #AAA;
+  background:#eee url(https://dn-acac.qbox.me/detail_icon_09.svg) no-repeat 12px center;
+  background-size:39px;
+  border-left: 3px solid;
+  border-right: 3px solid;
+  border-top: 3px solid;
+  border-color: #fff;
 }
 .angel-extra-files .angelfile button{
   width: 80px;
@@ -574,7 +576,7 @@
   margin-right: 5%;
   display: none;
   background: url("https://dn-acac.qbox.me/arrow_down_03.png") no-repeat 10px center;
-  background-size: 32px;
+  background-size: 21px;
   -webkit-transition: all 0.1s linear;
   -moz-transition: all 0.1s linear;
   -o-transition: all 0.1s linear;
@@ -949,8 +951,7 @@
   float:right;
   top:0;
   right:0;
-  margin-top:10px;
-  margin-right:20px;
+  padding: 10px 20px;
   cursor:pointer;
 }
 

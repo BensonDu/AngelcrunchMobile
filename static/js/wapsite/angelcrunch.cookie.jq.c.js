@@ -26,6 +26,9 @@ $.Angelcrunch = $.Angelcrunch || {};
     if(/dubaoxing/g.test(location.href.toLocaleLowerCase())){
         domain='.dubaoxing.com';
     }
+    else if(/ac-test/g.test(location.href.toLocaleLowerCase())){
+        domain='.ac-test.com';
+    }
     else{
         domain='.angelcrunch.com'
     }

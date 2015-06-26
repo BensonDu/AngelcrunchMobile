@@ -88,6 +88,7 @@
         </div>
 
         <div class="choose-bar" ms-controller="buydetails">
+            <p class="desc">每份占股{{data.partprecent}}%，每份最低价格{{data.lowprice}}万人民币</p>
             <p class="title">认购价格</p>
             <div class="bar-body">
                 <a class="sta">{{data.partprice}}万元人民币/份</a>
@@ -95,13 +96,12 @@
         </div>
 
         <div class="choose-bar" ms-controller="buydetails">
-            <p class="title">选择您要认购的份数</p>
+            <p class="title">选择认购的份数</p>
             <div class="bar-body">
                 <a class="min handle"  ms-on-tap="event.minparts()">-</a>
                 <a class="sta">{{data.parts}}份</a>
                 <a class="add handle"  ms-on-tap="event.addparts()">+</a>
             </div>
-            <p class="desc">每份占股{{data.partprecent}}%，每份最低价格{{data.lowprice}}万人民币</p>
         </div>
 
         <div class="calculate-result" ms-controller="buydetails">
@@ -145,7 +145,7 @@
         <div class="content">
             <img width="56px" height="43px" src="/static/images/wapsite/29812387234.png">
             <h1>意向已记录</h1>
-            <h4>因移动端暂不支持保证金支付，请您使用电脑登陆<em>&nbsp;http://angelcrunch.com&nbsp;&nbsp;</em>进入个人账户管理页面，支付保证金确认此意向。</h4>
+            <h4>因移动端暂不支持保证金支付，请您使用电脑登录<em>&nbsp;http://angelcrunch.com&nbsp;&nbsp;</em>进入个人账户管理页面，支付保证金确认此意向。</h4>
         </div>
     </div>
 

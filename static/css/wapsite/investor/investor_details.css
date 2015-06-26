@@ -39,13 +39,12 @@
   text-align: center;
   top:0;
   background:#21395C;
-  z-index:88;
   overflow:hidden;
 }
 
 .pesonal-summary .layer {
   position:relative;
-  z-index:88;
+  z-index: 2;
 }
 
 .pesonal-summary .avatar {
@@ -164,26 +163,24 @@
 }
 
 .slider-container {
-  height: 156px;
+  height: 160px;
 }
-
-.slider-container li {
-  margin-left:0;
-  margin:0 2px 0 0 ;
+.slider-container li div{
+  display: inline-block;
+  width: 102px;
 }
-
-.slider-container li .brand img {
+.slider-container li div img {
   width:102px;
   height: 102px;
   margin: 0;
   padding: 0;
 }
 
-.slider-container li h3 {
+.slider-container li div h3 {
   line-height:22px;
 }
 
-.slider-container li p {
+.slider-container li div p {
   color:#999;
   line-height:14px;
   margin-top:-2px;
@@ -344,6 +341,11 @@
 .page-action {
   margin-top:1px;
 }
+.page-action .btn-group .btn-big{
+  width: 100%;
+  float: left;
+  display: none;
+}
 
 /******************
      new page
@@ -484,7 +486,208 @@
 .entrepreneurs .pesonal-info section:nth-child(2n+1) {
   background:#FFF;
 }
+/*******************
+      Notice
+  ********************/
+.new-page-result .content{
+  margin-top: 40%;
+}
+.new-page-result .content h1{
+  color: #333;
+  line-height: 50px;
+}
+.new-page-result .content label{
+  padding: 6% 3%;
+}
+.new-page-result .content label h4{
+  font-size: 18px;
+  line-height: 2em;
+  text-align: left;
+  word-break: break-all;
+}
+.new-page-result .content label h3{
+  font-size: 18px;
+  line-height: 2em;
+  text-align: left;
+}
+.new-page-result .content h5{
+  font-size: 16px;
+  color: #666;
+}
+/*******************
+      Submit-com-list
+  ********************/
+.submit-com-list{
+  position: fixed;
+  height: 95%;
+  min-height: 320px;
+  width: 100%;
+  min-width: 320px;
+  border: 1px solid #eee;
+  top:100%;
+  left: 0;
+  right: 0;
+  margin: 46px auto auto;
+  z-index: 10;
+  background: #f5f5f5;
+  -webkit-transition:top .4s ease;
+  transition:top .4s ease
+}
+.submit-com-list .title{
+  display: inline-block;
+  width: 100%;
+  font-size: 16px;
+  color: #333;
+  line-height: 34px;
+  padding: 5px 5%;
+}
+.submit-com-list .list-container{
+  height: 80%;
+  width: 100%;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
+  display: inline-block;
+}
+.submit-com-list .list-container ul{
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+  overflow-x: auto;
+}
+.submit-com-list .list-container li{
+  display: inline-block;
+  width: 100%;
+  height: 85px;
+  background: #fff;
+  margin-bottom: 5px;
+  padding: 17px 10px;
+}
+.submit-com-list .list-container li img{
+  width: 50px;
+  height: 50px;
+  display: inline-block;
+  float: left;
+}
+.submit-com-list .list-container li div{
+  display: inline-block;
+  height: 50px;
+  float: left;
+  margin-left: 3%;
+}
+.submit-com-list .list-container li div h4{
+  font-size: 23px;
+  line-height: 30px;
+}
+.submit-com-list .list-container li div p{
+  font-size: 16px;
+  line-height: 25px;
+  color: #bdbdbd;
+}
+.submit-com-list .list-container em{
+  display: inline-block;
+  float: right;
+  height: 30px;
+  width: 30px;
+  margin: 10px 10px 0 0;
+  background: url("http://angelcrunch.qiniudn.com/sd-unselect.svg") no-repeat;
+}
+.submit-com-list .list-container em.active{
+  background: url("http://angelcrunch.qiniudn.com/sd-select.svg") no-repeat ;
+}
+.submit-com-list .btn-group{
+  text-align: center;
+  margin-top: 15px;
+  position: absolute;
+  bottom: 33px;
+  background:#f5f5f5 ;
+}
+.submit-com-list .btn-group a{
+  display: inline-block;
+  height: 30px;
+  width: 45%;
+  border-radius:3px;
+  font-size: 18px;
+  line-height: 32px;
+}
+.submit-com-list .btn-group a.cancle{
+  border: 1px #666 solid;
+  color: #666;
+  margin-right: 2%;
+}
+.submit-com-list .btn-group a.confirm{
+  margin-left: 2%;
+  border:1px solid #999;
+  color:#999
+}
+.submit-com-list .btn-group a.active{
+  background: #E65100;
+  color: #fff;
+  border: none;
+}
+/*******************
+    Share personal card
+  ********************/
+.wechat-PA {
+  display:none;
+  position:fixed;
+  width:100%;
+  height:100%;
+  text-align:center;
+  top:0;
+  left:0;
+  background:rgba(255, 255, 255, 0.92);
+  z-index:99;
+}
 
+.wechat-PA .summary {
+  position:absolute;
+  display:inline-block;
+  width:306px;
+  top:46%;
+  left:50%;
+  margin-left:-154px;
+  margin-top:-160px;
+}
+
+.wechat-PA h2 {
+  font-size:30px;
+}
+
+.wechat-PA h5 {
+  font-size:20px;
+  color:#FC5830;
+  line-height:32px;
+  margin-top:8px;
+}
+
+.wechat-PA p {
+  font-size:14px;
+}
+.wechat-PA p input{
+  width: 100%;
+  border:none;
+  font-size:14px;
+  text-align: center;
+}
+.wechat-PA p input:focus{
+  outline: none;
+}
+.wechat-PA .image-container {
+  margin-top:12px;
+}
+
+.wechat-PA .image-container img {
+  width:218px;
+}
+.wechat-PA .close {
+  position:absolute;
+  font-size:36px;
+  float:right;
+  top:0;
+  right:0;
+  padding: 10px 20px;
+  cursor:pointer;
+}
 /*******************
        Keyframes
   ********************/

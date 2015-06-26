@@ -666,6 +666,13 @@ label > i textarea {
   resize:none;
   background-color:transparent;
 }
+label > .already-has-account{
+  display: inline-block;
+  text-decoration: underline;
+  text-align: center;
+  width: 100%;
+  padding: 18px 4%;
+}
 @media only screen and (max-width: 370px) {
   label > i textarea {
     width:240px;
@@ -1266,7 +1273,7 @@ body.footer-close-bottom .banner-footer {
   top: 0px;
   text-align:left;
   background:#FFF;
-  z-index: 10;
+  z-index: 15;
   cursor:default;
 }
 
@@ -1289,7 +1296,7 @@ body.footer-close-bottom .banner-footer {
   margin-top:6px;
   right: 9%;
   cursor:pointer;
-  z-index: 3;
+  z-index: 20;
   -webkit-transition:right .3s ease;
   -o-transition:right .3s ease;
   -moz-transition:right .3s ease;
@@ -1311,7 +1318,7 @@ body.footer-close-bottom .banner-footer {
   display: none;
   width: 100%;
   position: absolute;
-  z-index: 2;
+  z-index: 20;
   opacity: 0;
   -webkit-transition:opacity .3s ease;
   -o-transition:opacity .3s ease;
@@ -1433,7 +1440,7 @@ body.footer-close-bottom .banner-footer {
   height: 100%;
   background: #000;
   opacity: 0;
-  z-index: 2;
+  z-index: 10;
   display: none;
   -webkit-transition:opacity .5s ease;
   -o-transition:opacity .5s ease;
@@ -1482,8 +1489,9 @@ body.footer-close-bottom .banner-footer {
 .new-page-result .close{
   position: absolute;
   font-size: 36px;
-  top: 10px;
-  right: 20px;
+  top:0;
+  right: 0;
+  padding: 10px 20px;
   cursor: pointer;
 }
 .new-page-result .content{

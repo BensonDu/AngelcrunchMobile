@@ -21,3 +21,55 @@
 .banner-footer {
   margin-top:116px;
 }
+.new-page-result{
+  background-color: #fff;
+}
+.new-page-result .portrait{
+  height: 75px;
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  margin-top: 35%;
+}
+.new-page-result .portrait img{
+  height: 75px;
+  width: 75px;
+  display: inline-block;
+  border-radius: 50% 50%;
+}
+
+.new-page-result .content{
+  margin-top: 15%;
+}
+.new-page-result .content h3{
+  color: #333;
+  font-size: 22px;
+  line-height: 1.3em;
+  text-align: center;
+  word-break: break-all;
+}
+.new-page-result .content h4{
+  color: #333;
+   font-size: 22px;
+   line-height: 1.3em;
+   text-align: center;
+   word-break: break-all;
+ }
+.new-page-result .btn-group{
+  height: 30px;
+  width: 100%;
+  margin-top: 20%;
+  display: inline-block;
+  text-align: center;
+}
+.new-page-result .btn-group a{
+  display: inline-block;
+  height: 100%;
+  width: 70%;
+  border: 1px solid #666;
+  color: #666;
+  font-size: 16px;
+  text-align: center;
+  line-height: 32px;
+  border-radius: 3px;
+}
