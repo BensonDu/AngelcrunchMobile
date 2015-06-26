@@ -26,7 +26,7 @@
 
 
     this.page_status={
-        user_id:'10813340',
+        user_id:'',
         follow:false,
         send_intention:false,
         name:'',

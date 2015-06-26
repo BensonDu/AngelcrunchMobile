@@ -10,7 +10,7 @@
         }
     };
     this.page_status={
-        com_id:'10909526',
+        com_id:'',
         follow:false,
         send_intention:false,
         name:'',
