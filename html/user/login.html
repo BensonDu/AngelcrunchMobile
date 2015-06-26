@@ -93,6 +93,7 @@
                                 $.Angelcrunch.COOKIE.operation.setUserKey();
                                 if($_GET.hasOwnProperty('source')){
                                     location.href=decodeURIComponent($_GET.source);
+                                    return
                                 }
                                 location.href = 'http://' + window.page.settings.host;
                             } else if (data.success == false)
