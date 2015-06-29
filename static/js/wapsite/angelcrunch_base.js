@@ -268,13 +268,11 @@
             var start, x,y;
             if(base_status.support_touch){
                 $(this).bind('touchstart',function(e){
-                    e.preventDefault();
                     start= e.originalEvent.timeStamp;
                     x= e.originalEvent.pageX;
                     y= e.originalEvent.pageY;
                 });
                 $(this).bind('touchend',function(e){
-                    e.preventDefault();
                     var event=e.originalEvent,during=event.timeStamp-start,move=Math.pow(event.pageX-x,2)+Math.pow(event.pageY-y,2);
                     if(during<200 && move<100){
                         fn.call($(this));
@@ -296,7 +294,7 @@
         $ele=$('.touch-href');
         $ele.touchtap(function(){
             var href=$(this).data('href');
-            if(href!=''){
+            if(href!='undefined'){
                 location.href=href;
             }
         })
