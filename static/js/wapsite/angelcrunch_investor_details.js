@@ -109,7 +109,7 @@
             page_status.portrait=data.user.avatar;
             //微信卡片制作
             wechat_card.img=page_status.portrait.replace(/\d{1,3}x$/,'310x');
-            wechat_card.title='向天使汇投资人提交项目：'+page_status.name;
+            wechat_card.title='向投资人'+page_status.name+'提交商业计划书';
             wechat_card.render();
             //关注状态
             follow_hook(data.user.isfollow);
