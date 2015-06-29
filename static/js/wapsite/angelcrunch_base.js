@@ -295,9 +295,9 @@
     $(document).ready(function(){
         $ele=$('.touch-href');
         $ele.touchtap(function(){
-            var link=$(this).data('link');
-            if(link!=''){
-                location.href=link;
+            var href=$(this).data('href');
+            if(href!=''){
+                location.href=href;
             }
         })
     });
