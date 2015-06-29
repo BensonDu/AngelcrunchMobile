@@ -23,9 +23,8 @@
         default :
             page_link.reg='http://angel.dubaoxing.com/html/user/registration/ordinary_user.html';
     }
-
-
     this.page_status={
+        //投资人预设ID
         user_id:'',
         follow:false,
         send_intention:false,
@@ -35,7 +34,8 @@
             return page_status.user_id != ''?{user_id:page_status.user_id}:{};
         }
     };
-
+    //微信卡片异步添加
+    this.wechat_card.deffer=true;
 }).call(this);
 //框架绑定
 (function(){
@@ -99,7 +99,6 @@
         },$.extend(true,page_config.default_param,data),function(){view_notification.show('网络错误');});
     };
 }).call(this);
-
 //投资人信息获取
 (function(){
     page_remote_data_syn(page_config.api_investor_details,function(data){
@@ -108,6 +107,10 @@
             page_status.name=data.user.name;
             page_status.id=data.user.id;
             page_status.portrait=data.user.avatar;
+            //微信卡片制作
+            wechat_card.img=page_status.portrait.replace(/\d{1,3}x$/,'310x');
+            wechat_card.title='提交项目到天使汇认证投资人：'+page_status.name;
+            wechat_card.render();
             //关注状态
             follow_hook(data.user.isfollow);
             //判断是否为个人主页
