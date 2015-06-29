@@ -52,6 +52,8 @@
         support_touch:typeof document.ontouchstart!='undefined',
         //微信嵌入
         iswechat: base_ua.indexOf("micromessenger") != -1,
+        //Android
+        isandroid:base_ua.indexOf("android") != -1,
         //APP嵌入
         isapp:false
         /*isandorid: !!base_ua.indexOf("android") != -1 ? 1 : 0,
@@ -338,7 +340,7 @@
 
 }).call(this);
 
-//微信卡片
+//微信分享卡片
 (function(){
     this.wechat_card={
         display:true,
