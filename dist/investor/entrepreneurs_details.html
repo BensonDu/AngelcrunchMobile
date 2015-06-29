@@ -33,15 +33,16 @@
     <link href="/static/css/wapsite/investor/investor_details.css" rel="stylesheet" />
 </head>
 <body>
+    <div class="bk"></div>
     <div class="details entrepreneurs" ms-controller="entrepreneurs-details">
         <div id="login-failed" class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
-        <div id="header" class="head">
-            <div class="logo ci-link" data-href="/"></div>
+        <div id="header" class="newhead">
+            <div class="logo touch-href" data-href="http://angelcrunch.com"></div>
             <div class="options">
                 <span></span>
                 <ul class="hidden-menu">
-                    <li class="ci-link" data-href="http://angelcrunch.com/startup_financing">创业项目</li>
-                    <li class="ci-link" data-href="http://angelcrunch.com/angel">投资人</li>
+                    <li class="touch-href" data-href="http://angelcrunch.com/startup_financing">创业项目</li>
+                    <li class="touch-href" data-href="http://angelcrunch.com/angel">投资人</li>
                 </ul>
             </div>
         </div>
@@ -86,8 +87,8 @@
 <script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
 <script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
 <script src="/static/js/wapsite/angelcrunch.app_downloadbar.jq.c.js"></script>
+<script src="/static/js/wapsite/angelcrunch_base.js"></script>
 <script src="/static/js/lib/avalon.mobile.min.js"></script>
-
 <script type="text/javascript" id="page-interactive-init">
     var page = window.page || {};
     page.MethodObj = function () { };
