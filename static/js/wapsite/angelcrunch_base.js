@@ -49,12 +49,16 @@
         client_version_key:'client_version'
     };
     this.base_status={
-        support_touch:typeof document.ontouchstart!='undefined'
+        support_touch:typeof document.ontouchstart!='undefined',
+        //微信嵌入
+        iswechat: base_ua.indexOf("micromessenger") != -1,
+        //APP嵌入
+        isapp:false
         /*isandorid: !!base_ua.indexOf("android") != -1 ? 1 : 0,
         isios: !!base_ua.match(/\(i[^;]+;( u;)? cpu.+mac os x/),
         isiphone: !!base_ua.indexOf('iphone') > -1 || ua.indexOf('mac') > -1,
         isipad: !!base_ua.indexOf('ipad') > -1,
-        iswechat: !!base_ua.indexOf("micromessenger") != -1 ? 1 : 0*/
+        */
     };
 
     //localStorage存储管理
@@ -205,7 +209,6 @@
         role:0,
         time:0,
         is_login:false,
-        fromapp:false,
         version:'1.2.1'
     };
     //过期删除
@@ -226,7 +229,7 @@
         account_info.token  = $_GET.access_token;
         account_info.role   = parseInt($_GET.role);
         account_info.time   = now;
-        account_info.fromapp=true;
+        base_status.isapp=true;
         //保存用户信息
         $.Angelcrunch.dataSet.Model.user.id             = account_info.id;
         $.Angelcrunch.dataSet.Model.user.access_token   = account_info.token;
@@ -328,9 +331,28 @@
             }
         });
         //APP内嵌隐藏头部
-        if(account_info.fromapp){
+        if(base_status.isapp){
             $head.hide();
         }
     });
 
+}).call(this);
+
+//微信卡片
+(function(){
+    this.wechat_card={
+        display:true,
+        deffer:false,
+        img:'http://dn-acac.qbox.me/231937129837912.png',
+        title:'',
+        render:function(){
+            //是否由微信打开
+            if(base_status.iswechat){
+                if(wechat_card.title != '')document.title=wechat_card.title;
+                $("body").prepend("<div class='default-hidden'><img width='310px' height='310px' src="+wechat_card.img+" /></div>");
+            }
+        }
+    };
+    //事件
+    $(document).ready(function(){if(wechat_card.display && !wechat_card.deffer)wechat_card.render();});
 }).call(this);

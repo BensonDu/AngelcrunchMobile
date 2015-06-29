@@ -426,11 +426,6 @@ $.Angelcrunch.notificationInit = function () {
     };
 }).call(this);
 
-$.Angelcrunch.wechatImg = function () {
-    $("body").prepend('<div id="wx_pic"><img src="/static/images/wapsite/231937129837912.png" /></div>');
-};
-
-
 // Main Initialize
 $(function () {
     $.Angelcrunch.Utilities.hidden2Visible();
@@ -440,7 +435,6 @@ $(function () {
     $.Angelcrunch.notificationInit();
     $.Angelcrunch.formModules();
     $.Angelcrunch.linkBtnInit();
-    $.Angelcrunch.wechatImg();
     $.Angelcrunch.headerMenu();
 
     $("input").input_text_autocomplete();
