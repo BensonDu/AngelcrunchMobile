@@ -31,146 +31,6 @@
     <title>天使汇 | 让靠谱的项目找到靠谱的钱 | 创业，投资，找VC就上天使汇 | 中国股权众筹第一平台</title>
     <link href="/static/css/wapsite/base-css.css" rel="stylesheet" />
     <link href="/static/css/wapsite/homepage/style.css" rel="stylesheet" />
-
-    <script src="/static/js/lib/jquery-1.11.1.min.js"></script>
-    <script src="/static/js/lib/headroom.js"></script>
-    <script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
-    <script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
-
-    <script type="text/javascript" id="page-interactive-init">
-        var page = window.page || {};
-        page.MethodObj = function () { };
-        page.MethodObj.prototype = (function () {
-            var I = {
-                Ajax_home_link: {                     // Login service
-                    url: "http://mobile.angelcrunch.com/v2/wap_home_link",
-                    basic_data: {
-                    }
-                }
-            };
-
-            var waste_9839213 = function () {
-                var url = I.Ajax_home_link.url,
-                    basic_data = I.Ajax_home_link.basic_data,
-                          type = "jsonp";
-                var _data = $.extend(true, {}, basic_data);
-                _data["user_id"] = $.cookie($.Angelcrunch.COOKIE.cookieName.user_id);
-
-                $.post(url, _data, function (data) {
-                    bind_url(data);
-                }, type);
-
-                var bind_url = function (data) {
-                    var $join_sd = $(".join--sd"),
-                        $reg_investor = $(".reg--investor");
-                    var href_attr = "data-href";
-                    $join_sd.attr(href_attr, data.sd_reg_url || "");
-                    $reg_investor.attr(href_attr, data.angel_apply_url || "");
-                }
-            };
-
-            var waste1231787 = function () {
-                var $wechat = $("#wechat-PA"),
-                    $layer = $("#PA-layer"),
-                    $close=$layer.find(".close");
-                var _time = 320;
-
-                $wechat.click(function () {
-                    $layer.fadeIn(_time);
-                });
-
-                $close.click(function () {
-                    $layer.fadeOut(_time-60);
-                });
-            };
-
-            var waste1238791 = function () {
-                var header = new Headroom(document.querySelector("#header"), {
-                    tolerance: 5,
-                    offset: 206,
-                    classes: {
-                        initial: "animated",
-                        pinned: "slideDown",
-                        unpinned: "slideUp"
-                    }
-                });
-                header.init();
-            };
-
-
-            return {
-                attackEvent: function () {
-                    waste_9839213();
-                    waste1231787();
-                    waste1238791();
-                },
-
-                pageLoad_Init: function () {
-                },
-
-                initial: function () {
-                    this.pageLoad_Init();
-                    this.attackEvent();
-                }
-            };
-        })();
-
-        page.initialBridge = function () {
-            var o = new page.MethodObj();
-            o.initial();
-        };
-
-        $(function () {
-            page.initialBridge();
-        });
-        $(document).ready(function(){
-
-           var $num=$('.countdown'),start= 1435498136428, t, y, e,ss,sss, w, l;
-
-            t=setInterval(function(){
-                var now= start-$.now();
-                if(now<=0){
-                    clearInterval(t);
-                }
-                else{
-                    var a=Math.floor((start-$.now())/1000),
-                        h=Math.floor(a/(60*60)),
-                        m=Math.floor((a=a-60*60*h)/60),
-                        s=a-m*60;
-                    if(h>9){
-                        y=h.toString()[0];
-                        e=h.toString()[1];
-                    }
-                    else{
-                        y=0;
-                        e=h;
-                    }
-                    if(m>9){
-                        ss =  m.toString()[0];
-                        sss=  m.toString()[1];
-                    }
-                    else{
-                        ss= 0;
-                        sss=m;
-                    }
-                    if(s>9){
-                       w= s.toString()[0];
-                       l= s.toString()[1];
-                    }
-                    else{
-                        w=0;
-                        l=s;
-                    }
-                    $num.eq(0).html(y);
-                    $num.eq(1).html(e);
-                    $num.eq(2).html(ss);
-                    $num.eq(3).html(sss);
-                    $num.eq(4).html(w);
-                    $num.eq(5).html(l);
-                }
-            },500);
-        });
-    </script>
 </head>
 <body>
     <div class="details">
@@ -330,4 +190,142 @@
         </div>
     </div>
 </body>
+<script src="/static/js/lib/jquery-2.1.4.min.js"></script>
+<script src="/static/js/lib/headroom.js"></script>
+<script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
+<script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
+<script type="text/javascript" id="page-interactive-init">
+    var page = window.page || {};
+    page.MethodObj = function () { };
+    page.MethodObj.prototype = (function () {
+        var I = {
+            Ajax_home_link: {                     // Login service
+                url: "http://mobile.angelcrunch.com/v2/wap_home_link",
+                basic_data: {
+                }
+            }
+        };
+
+        var waste_9839213 = function () {
+            var url = I.Ajax_home_link.url,
+                    basic_data = I.Ajax_home_link.basic_data,
+                    type = "jsonp";
+            var _data = $.extend(true, {}, basic_data);
+            _data["user_id"] = $.cookie($.Angelcrunch.COOKIE.cookieName.user_id);
+
+            $.post(url, _data, function (data) {
+                bind_url(data);
+            }, type);
+
+            var bind_url = function (data) {
+                var $join_sd = $(".join--sd"),
+                        $reg_investor = $(".reg--investor");
+                var href_attr = "data-href";
+                $join_sd.attr(href_attr, data.sd_reg_url || "");
+                $reg_investor.attr(href_attr, data.angel_apply_url || "");
+            }
+        };
+
+        var waste1231787 = function () {
+            var $wechat = $("#wechat-PA"),
+                    $layer = $("#PA-layer"),
+                    $close=$layer.find(".close");
+            var _time = 320;
+
+            $wechat.click(function () {
+                $layer.fadeIn(_time);
+            });
+
+            $close.click(function () {
+                $layer.fadeOut(_time-60);
+            });
+        };
+
+        var waste1238791 = function () {
+            var header = new Headroom(document.querySelector("#header"), {
+                tolerance: 5,
+                offset: 206,
+                classes: {
+                    initial: "animated",
+                    pinned: "slideDown",
+                    unpinned: "slideUp"
+                }
+            });
+            header.init();
+        };
+
+
+        return {
+            attackEvent: function () {
+                waste_9839213();
+                waste1231787();
+                waste1238791();
+            },
+
+            pageLoad_Init: function () {
+            },
+
+            initial: function () {
+                this.pageLoad_Init();
+                this.attackEvent();
+            }
+        };
+    })();
+
+    page.initialBridge = function () {
+        var o = new page.MethodObj();
+        o.initial();
+    };
+
+    $(function () {
+        page.initialBridge();
+    });
+
+    $(function(){
+        var $num=$('.countdown'),start= 1435498136428, t, y, e,ss,sss, w, l;
+
+        t=setInterval(function(){
+            var now= start-$.now();
+            if(now<=0){
+                clearInterval(t);
+            }
+            else{
+                var a=Math.floor((start-$.now())/1000),
+                        h=Math.floor(a/(60*60)),
+                        m=Math.floor((a=a-60*60*h)/60),
+                        s=a-m*60;
+                if(h>9){
+                    y=h.toString()[0];
+                    e=h.toString()[1];
+                }
+                else{
+                    y=0;
+                    e=h;
+                }
+                if(m>9){
+                    ss =  m.toString()[0];
+                    sss=  m.toString()[1];
+                }
+                else{
+                    ss= 0;
+                    sss=m;
+                }
+                if(s>9){
+                    w= s.toString()[0];
+                    l= s.toString()[1];
+                }
+                else{
+                    w=0;
+                    l=s;
+                }
+                $num.eq(0).html(y);
+                $num.eq(1).html(e);
+                $num.eq(2).html(ss);
+                $num.eq(3).html(sss);
+                $num.eq(4).html(w);
+                $num.eq(5).html(l);
+            }
+        },500);
+    });
+</script>
 </html>
