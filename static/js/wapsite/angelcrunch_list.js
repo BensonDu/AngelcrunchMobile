@@ -38,7 +38,7 @@
               if(!search_model_display.status.topbar) {
                   $searchmodel.show(0, function () {
                       $(this).css({display: 'block', opacity: 0.95});
-                      $btn.css('right', '6%');
+                      $btn.css('right', '16%');
                   });
                   search_model_display.status.topbar = true;
               }
@@ -46,7 +46,7 @@
           hide:function(){
               if(search_model_display.status.topbar) {
                   $searchmodel.css('opacity', 0);
-                  $btn.css('right', '9%');
+                  $btn.css('right', '19%');
                   $searchmodel.hide();
                   search_model_display.status.topbar = false;
               }
