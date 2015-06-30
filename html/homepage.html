@@ -35,7 +35,7 @@
 <body>
     <div class="bk"></div>
     <div class="details">
-        <div id="header" class="head">
+        <div id="header" class="newhead">
             <div class="logo touch-href" data-href="http://angelcrunch.com"></div>
             <div class="options">
                 <span></span>
@@ -192,7 +192,6 @@
     </div>
 </body>
 <script src="/static/js/lib/jquery-2.1.4.min.js"></script>
-<script src="/static/js/lib/headroom.js"></script>
 <script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
 <script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
 <script src="/static/js/wapsite/angelcrunch_base.js"></script>
@@ -243,25 +242,10 @@
             });
         };
 
-        var waste1238791 = function () {
-            var header = new Headroom(document.querySelector("#header"), {
-                tolerance: 5,
-                offset: 206,
-                classes: {
-                    initial: "animated",
-                    pinned: "slideDown",
-                    unpinned: "slideUp"
-                }
-            });
-            header.init();
-        };
-
-
         return {
             attackEvent: function () {
                 waste_9839213();
                 waste1231787();
-                waste1238791();
             },
 
             pageLoad_Init: function () {
