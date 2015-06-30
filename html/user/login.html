@@ -133,15 +133,16 @@
             });
 
 
-            $account.on('change keyup',function () {
-                checkActive();
-            });
-            $pwd.on('change keyup',function () {
-                checkActive();
-            });
+
             // Page load ready checked
             setTimeout(function(){
                 checkActive();
+                $account.on('change keyup',function () {
+                    checkActive();
+                });
+                $pwd.on('change keyup',function () {
+                    checkActive();
+                });
             },200);
 
         };
