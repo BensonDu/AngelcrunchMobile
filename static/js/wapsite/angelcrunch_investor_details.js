@@ -25,7 +25,7 @@
     }
     this.page_status={
         //投资人预设ID
-        user_id:'10812503',
+        user_id:'',
         follow:false,
         send_intention:false,
         name:'',
