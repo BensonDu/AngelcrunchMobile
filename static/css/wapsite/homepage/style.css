@@ -65,32 +65,21 @@ p {
   user-select:none;
 }
 
-.head {
-  position: fixed;
-  background:rgba(233, 67, 16, 0.76);
+.newhead {
+  background: rgba(235, 70, 19, 1);
 }
 
-/*
-@media only screen and (min-width: 998px) {
-  .head {
-    width:360px;
-    left:50%;
-    margin-left:-180px;
-  }
-}
-*/
-
-.head .logo {
+.newhead .logo {
   background:url(/static/images/wapsite/cssimage/108273189237.png) no-repeat left center;
   background-size:auto 18px;
 }
 
-.head .options span {
+.newhead .options span {
   background:url(/static/images/wapsite/cssimage/108273189237.png) no-repeat right center;
   background-size:auto 18px;
 }
 
-.head .hidden-menu li {
+.newhead .hidden-menu li {
   color:#FC5830;
 }
 
