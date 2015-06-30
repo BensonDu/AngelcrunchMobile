@@ -341,11 +341,11 @@
         default_item:{
             investor:[
                 [base_protocol+account_info.id+'.'+base_host,'个人主页'],
-                ['javascript:account_operate.logoff()','注销']
+                ['javascript:account_operate.logoff()','退出登录']
             ],
             entre:   [
                 [base_protocol+account_info.id+'.'+base_host,'个人主页'],
-                ['javascript:account_operate.logoff()','注销']
+                ['javascript:account_operate.logoff()','退出登录']
             ],
             notlogin:[
                 [base_protocol+'auth.'+base_host+'?source='+encodeURIComponent(location.href),'登&nbsp;录'],
