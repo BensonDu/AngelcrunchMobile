@@ -876,7 +876,6 @@ body.footer-close-bottom .banner-footer {
   background:#F5F5F5;
   overflow-y:auto;
   overflow-x:hidden;
-  overflow:overlay;
   -webkit-box-shadow:-2px 0 5px #AAA;
   -ms-box-shadow:-2px 0 5px #AAA;
   box-shadow:-2px 0 5px #AAA;
@@ -1294,7 +1293,7 @@ body.footer-close-bottom .banner-footer {
 .newhead .search {
   position:absolute;
   margin-top:6px;
-  right: 9%;
+  right: 19%;
   cursor:pointer;
   z-index: 20;
   -webkit-transition:right .3s ease;
@@ -1380,14 +1379,24 @@ body.footer-close-bottom .banner-footer {
   color: #2170CD;
 }
 
+.newhead .account ,
 .newhead .options {
   position:relative;
   float:right;
-  padding: 0 4.2%;
-  margin-top:12px;
+  padding: 12px 3.2% 0;
   cursor:pointer;
 }
-
+.newhead .account span{
+  display:inline-block;
+  width:20px;
+  height:20px;
+  background:url(http://dn-acac.qbox.me/wap_user.svg) no-repeat 50% 80%;
+  background-size:auto 18px;
+}
+.newhead .account.active span{
+  background:url(http://dn-acac.qbox.me/wap_user_a.svg) no-repeat 50% 80%;
+  background-size:auto 18px;
+}
 .newhead .options span {
   display:inline-block;
   width:6px;
@@ -1395,24 +1404,25 @@ body.footer-close-bottom .banner-footer {
   background:url(/static/images/wapsite/cssimage/18237192837.png) no-repeat right center;
   background-size:auto 18px;
 }
-
-.newhead .options .hidden-menu {
+.newhead div .hidden-menu{
   position:absolute;
-  /*display:block;*/
   width:154px;
   padding:8px 0;
-  margin-top:-24px;
-  margin-left:-154px;
-  left:0;
-  border-radius:2px;
   background:#FFF;
+  margin-top:10px;
   -webkit-box-shadow:rgba(0, 0, 0, 0.15) 0px 0px 4px;
-  -moz-box-shadow:rgba(0, 0, 0, 0.15) 0px 0px 4px;
   box-shadow:rgba(0, 0, 0, 0.15) 0px 0px 4px;
-  -moz-user-select:none;
   -webkit-user-select:none;
   user-select:none;
+  left:0;
+  border-radius:2px;
   z-index:999;
+}
+.newhead .account .hidden-menu{
+  margin-left:-100px;
+}
+.newhead .options .hidden-menu {
+  margin-left:-135px;
 }
 
 .newhead .hidden-menu li {

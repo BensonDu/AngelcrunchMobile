@@ -202,8 +202,11 @@
     }
 }).call(this);
 
-//全局账户信息获取
+//全局账户信息
 (function(){
+    //过期删除
+    var now= $.now(),
+        $COOKIE=$.Angelcrunch.COOKIE || {};
     this.account_info={
         id:0,
         name:'',
@@ -213,9 +216,12 @@
         is_login:false,
         version:'1.2.1'
     };
-    //过期删除
-    var now= $.now(),
-        $COOKIE=$.Angelcrunch.COOKIE || {};
+    this.account_operate={
+        logoff:function(){
+            $.Angelcrunch.COOKIE.operation.clearUserKey();
+            return location.reload();
+        }
+    };
 
     //登陆信息写入全局变量 放弃localstorage
     if($.cookie($COOKIE.cookieName.user_id)){
@@ -303,38 +309,80 @@
 
 //头部选项
 (function(){
-    $(document).ready(function(){
-        var $head=$('.newhead'),$trigger=$head.children('.options'),$tar=$trigger.children('.hidden-menu'),sta=false,$bk=$('.bk'),
+    var $head=$('#header'),
+        $bk=$('.bk'),
+        $option=$head.children('.options'),
+        $account=$head.children('.account'),
+        $container=$account.children('ul'),
+        $current=$(),
+        sta=false,
         headoption_display={
             show:function(){
-                $tar.slideDown(200,function(){sta=true});
+                $current.children('ul').slideDown(200,function(){sta=true});
+                $current.children('span').css('position','absoute');
                 $bk.show(0,function(){$(this).css('opacity',0.7)});
             },
             hide:function(){
-                $tar.slideUp(200,function(){sta=false});
+                $current.children('ul').slideUp(200,function(){sta=false});
                 $bk.css('opacity',0);
                 setTimeout(function(){$bk.hide();},400);
             }
-        };
-        $trigger.touchtap(function(){
+        },
+        display_controll=function(){
+            $current=$(this);
             if(!sta){
                 headoption_display.show();
             }
             else{
                 headoption_display.hide();
             }
-
-        });
-        $bk.touchtap(function(){
-            if(sta){
-                headoption_display.hide();
+        };
+    this.account_center={
+        default_item:{
+            investor:[
+                [base_protocol+account_info.id+'.'+base_host,'个人主页'],
+                ['javascript:account_operate.logoff()','注销']
+            ],
+            entre:   [
+                [base_protocol+account_info.id+'.'+base_host,'个人主页'],
+                ['javascript:account_operate.logoff()','注销']
+            ],
+            notlogin:[
+                [base_protocol+'auth.'+base_host+'?source='+encodeURIComponent(location.href),'登&nbsp;录'],
+                [base_protocol+'auth.'+base_host+'reg?source='+encodeURIComponent(location.href),'注&nbsp;册']
+            ]
+        },
+        item:[],
+        create_item:function(array){
+            var cache='';
+            for(var i in array){
+                cache+="<li class=\"touch-href\" data-href=\""+array[i][0]+"\">"+array[i][1]+"</li>";
             }
-        });
-        //APP内嵌隐藏头部
-        if(base_status.isapp){
-            $head.hide();
+            return cache;
         }
+    };
+    if(account_info.is_login){
+       if(account_info.role>1){
+           account_center.item=account_center.default_item.investor;
+       }
+        else{
+           account_center.item=account_center.default_item.entre;
+       }
+    }
+    else{
+        account_center.item=account_center.default_item.notlogin;
+    }
+    $($container).append(account_center.create_item(account_center.item));
+    //事件绑定
+    $(document).ready(function(){
+        $option.touchtap(display_controll);
+        $account.touchtap(display_controll);
+        $bk.touchtap(function(){if(sta)headoption_display.hide();});
     });
+    //APP内嵌隐藏头部
+    if(base_status.isapp){
+        $head.hide();
+    }
 
 }).call(this);
 

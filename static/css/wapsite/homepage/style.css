@@ -78,6 +78,10 @@ p {
   background:url(/static/images/wapsite/cssimage/108273189237.png) no-repeat right center;
   background-size:auto 18px;
 }
+.newhead .account span{
+    background:url(http://dn-acac.qbox.me/wap_user_h.svg) no-repeat 50% 80%;
+    background-size:auto 18px;
+}
 
 .newhead .hidden-menu li {
   color:#FC5830;
