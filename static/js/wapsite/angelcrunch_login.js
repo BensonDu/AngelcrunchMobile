@@ -72,6 +72,7 @@
 
         },data);
     };
+    $pwd.pressenter(login_action);
     $btn.touchtap(login_action);
     $account.on('change keyup',login_active);
     $pwd.on('change keyup',login_active);
