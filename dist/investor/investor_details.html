@@ -51,23 +51,17 @@
             <ul class="hidden-menu"></ul>
         </div>
     </div>
-
-    <div class="pesonal-summary">
-        <div class="layer">
-            <div class="avatar">
-                <img src="" ms-class="show:data.avatar"
-                     ms-src="data.avatar||''" />
-            </div>
-            <div class="summary">
-                <h1 ms-text="data.name"></h1>
-                <p class="hidden2Visible" ms-text="data.company+' '+data.title"></p>
-                <p class="extra" ms-class="bigger-font:data.summary.length < 34"
-                   ms-class-1="align-center:data.summary.length < 28"
-                   ms-text="data.summary.length > 160 ? data.summary.substr(0,160) + ' ...' : data.summary"></p>
-            </div>
-        </div>
-        <div class="effect-card">
-            <div class="rs-bkg"><img src="/static/images/wapsite/bannerbox.jpg" /></div>
+    <div class="personal-info">
+        <img ms-src="data.avatar" width="100%" height="auto">
+    </div>
+    <div class="personal-brief">
+        <h3><span ms-text="data.name"></span><span ms-if="data.company.length+data.title.length>0">·</span><span ms-text="data.company"></span><span>&nbsp;</span><span ms-text="data.title"></span></h3>
+        <h4><span ms-text="data.business"></span></h4>
+    </div>
+    <div class="pesonal-info">
+        <div ms-if="data.style.length">
+            <h1>简介</h1>
+            <p ms-html="data.summary"></p>
         </div>
     </div>
     <div class="participation">

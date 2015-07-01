@@ -4,29 +4,40 @@
 /* Standard：Google
 /*
 /*/
-
 /*******************
-    bkg container
+    Personal Info.
   *******************/
-
-/*.card-effect {
-  position:relative;
-  width:100%;
-  height:48px;
-  top:0;
-  z-index:99;
+.personal-info{
+    width: 100%;
 }
-
-.card-effect .content {
-  position:absolute;
-  bottom:0;
-  background:#21395C;
+.personal-info img{
+    display: inline-block;
 }
-
-.card-effect .content img {
-  width:100%;
-}*/
-
+.personal-brief{
+    width: 100%;
+    height: 60px;
+    padding: 12px 5%;
+    border-bottom: 5px solid #fff;
+}
+.personal-brief h3{
+    display: inline-block;
+    width: 100%;
+    line-height: 20px;
+    text-align: center;
+}
+.personal-brief h3 span{
+    font-size: 15px;
+}
+.personal-brief h4{
+    display: inline-block;
+    width: 100%;
+    line-height: 20px;
+    text-align: center;
+}
+.personal-brief h4 span{
+    font-size: 13px;
+    color: #999;
+}
 /*******************
     Pesonal Summary
   *******************/
