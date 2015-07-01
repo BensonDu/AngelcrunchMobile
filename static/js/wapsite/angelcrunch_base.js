@@ -368,16 +368,33 @@
             return cache;
         }
     };
+    //登录后显示用户头像
+    this.account_portrait={
+        login:function(){
+            base_remote_data.ajaxjsonp(api.user_info,function(data){
+                if(data.hasOwnProperty('user')){
+                    $account.children('span').css('background',"url("+data.user.avatar_small+")");
+                }
+            },{'uid':account_info.id,'access_token':account_info.token});
+            $account.addClass('active');
+        },
+        notlogin:function(){
+            //暂时木有不重刷 取消登录状态
+        }
+    };
     if(account_info.is_login){
-       if(account_info.role>1){
+        if(account_info.role>1){
            account_center.item=account_center.default_item.investor;
-       }
+        }
         else{
            account_center.item=account_center.default_item.entre;
-       }
+        }
+        account_portrait.login();
+
     }
     else{
         account_center.item=account_center.default_item.notlogin;
+        account_portrait.notlogin();
     }
     $($container).append(account_center.create_item(account_center.item));
     //事件绑定

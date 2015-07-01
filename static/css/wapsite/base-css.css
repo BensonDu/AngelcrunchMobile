@@ -1394,8 +1394,9 @@ body.footer-close-bottom .banner-footer {
   background-size:auto 18px;
 }
 .newhead .account.active span{
-  background:url(http://dn-acac.qbox.me/wap_user_a.svg) no-repeat 50% 80%;
-  background-size:auto 18px;
+  background-size:auto 20px !important;
+  background-position: center center;
+  border-radius: 50% 50%;
 }
 .newhead .options span {
   display:inline-block;
