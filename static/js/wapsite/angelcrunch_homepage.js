@@ -1,17 +1,15 @@
 //login relatived
 (function(){
     this.page_config={
-        api_login:base_mobile+'',
         api_home_link:base_mobile+'v2/wap_home_link'
     };
 }).call(this);
 
-//get home link, I don't why do it by this kind of method;
+//get home link, I don't why they do it by this kind of method;
 (function(){
     var $sd         = $(".join--sd"),
         $investor   = $('.reg--investor');
     base_remote_data.ajaxjsonp(page_config.api_home_link,function(data){
-        console.log(data);
         $sd.attr('data-href',data.sd_reg_url || "");
         $investor.attr('data-href',data.angel_apply_url || "");
     },{'user_id':account_info.id});
