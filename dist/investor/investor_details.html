@@ -69,11 +69,13 @@
         <div ms-if="data.invested_com.length" id="album" class="slider-container">
             <ul>
                 <li ms-repeat="data.invested_com">
-                    <div>
-                        <img ms-src="el.logo">
-                        <h3 ms-text="el.name"></h3>
-                        <p ms-text="el.part==1?'投资人':el.part==2?'领投人':''">投资人</p>
-                    </div>
+                    <a ms-href="el.url">
+                        <div>
+                            <img ms-src="el.logo">
+                            <h3 ms-text="el.name"></h3>
+                            <p ms-text="el.part==1?'投资人':el.part==2?'领投人':''">投资人</p>
+                        </div>
+                    </a>
                 </li>
             </ul>
         </div>

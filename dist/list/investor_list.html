@@ -81,6 +81,7 @@
                 </section>
             </a>
         </div>
+        <div class="page-turn-occupy"></div>
         <div class="page-turn">
             <button class="btn prev-page">上一页</button>
             <p><i class="current-page">0</i>/<i class="total-page">0</i></p>
@@ -216,73 +217,6 @@
                 vm.data = {};
             })
         };
-    }).call(this);
-
-    /*触摸移动事件事件 翻页显示与隐藏*/
-    (function(){
-        this.$touchele=$('.page-turn');
-
-        this.touchsta={
-            barheight:65,
-            eleshow:true,
-            isstart:false,
-            startY:0,
-            endY:0
-        };
-        if(typeof document.body.ontouchstart!='undefined'){
-            document.body.ontouchstart=function(event){
-                var touch=event.touches[0];
-                if(touch){
-                    touchsta.startY=touch.clientY;
-                    touchsta.isstart=true;
-                }
-            };
-            document.body.ontouchmove=function(event){
-                var touch=event.touches[0],mY;
-                if(touch){
-                    mY=touch.clientY-touchsta.startY;
-                    if(Math.abs(mY)<touchsta.barheight){
-                        if(mY<0 && touchsta.eleshow){
-                            $touchele.css('bottom',mY);
-                        }
-
-                        if(mY>0 && !touchsta.eleshow){
-                            $touchele.css('bottom',mY-touchsta.barheight);
-                        }
-                    }
-
-                }
-            };
-            document.body.ontouchend=function(event){
-                var touch=event.changedTouches[0],endY=touch.clientY,moveabs=Math.abs(endY-touchsta.startY);
-                if(moveabs>10){
-                    if(endY-touchsta.startY>0 && !touchsta.eleshow){
-                        if(moveabs>touchsta.barheight/2){
-                            $touchele.animate({'bottom':0});
-                            touchsta.eleshow=true;
-                        }
-                        else{
-                            $touchele.animate({'bottom':-touchsta.barheight});
-                            touchsta.eleshow=false;
-                        }
-                    }
-                    if(endY-touchsta.startY<0 && touchsta.eleshow){
-                        if(moveabs>touchsta.barheight/2){
-                            $touchele.animate({'bottom':-touchsta.barheight});
-                            touchsta.eleshow=false;
-                        }
-                        else{
-                            $touchele.animate({'bottom':0});
-                            touchsta.eleshow=true;
-                        }
-                    }
-                }
-
-            };
-
-        }
-
-
     }).call(this);
 </script>
 </html>
