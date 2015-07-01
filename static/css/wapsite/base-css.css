@@ -1394,8 +1394,11 @@ body.footer-close-bottom .banner-footer {
   background-size:auto 18px;
 }
 .newhead .account.active span{
-  background-size:auto 20px !important;
+  width: 24px;
+  height: 24px;
+  background-size:auto 24px !important;
   background-position: center center;
+  background-repeat: no-repeat;
   border-radius: 50% 50%;
 }
 .newhead .options span {
