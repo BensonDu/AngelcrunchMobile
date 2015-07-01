@@ -282,6 +282,7 @@
                     var event=e.originalEvent,during=event.timeStamp-start,move=Math.pow(event.pageX-x,2)+Math.pow(event.pageY-y,2);
                     if(during<200 && move<100){
                         fn.call($(this));
+                        return false;
                     }
                 });
             }
