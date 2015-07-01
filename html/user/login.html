@@ -33,18 +33,19 @@
     <link href="/static/css/wapsite/user/login.css" rel="stylesheet" />
 </head>
 <body>
+    <div class="bk"></div>
     <div class="details">
         <div class="angelcrunch-brand">
             <img src="/static/images/wapsite/angelcrunchbrandlogoinloginpage.png" />
         </div>
-        <div class="notification red">登录名和密码不匹配 <i class="close">×</i></div>
+        <div class="notification red"><i class="txt"></i><i class="close">×</i></div>
         <div class="login-module">
             <!-- Back-up form -->
             <form action="/" method="post">
                 <label><span>邮箱/手机</span><i><input id="account" type="text" name="account" value="" /></i></label>
                 <label><span>密码</span><i><input id="pwd" type="password" name="password" value="" /></i></label>
-                <button id="subbmit-btn" class="btn submit-btn"></button>
             </form>
+            <button id="subbmit-btn" class="btn submit-btn"></button>
         </div>
         <div class="banner-footer">
             <p>AngelCrunch.com</p>
@@ -56,119 +57,5 @@
 <script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
 <script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
 <script src="/static/js/wapsite/angelcrunch_base.js"></script>
-<script type="text/javascript" id="page-interactive-init">
-    var page = window.page || {};
-    page.MethodObj = function () { };
-    page.MethodObj.prototype = (function () {
-        var settings = page.settings;
-        var I = {
-            Ajax_login: {                     // Login service
-                url: api.login,
-                basic_data: {
-                    // uid: "10878516", access_token: "test"
-                }
-            }
-        };
-
-        var waste_9839213 = function () {
-            var className={
-                account: "#account",
-                pwd: "#pwd",
-                btn: "#subbmit-btn",
-                notification:".notification",
-                // state
-                active:"active"
-            };
-            var $account, $pwd, $btn;
-            var $notification;
-            $account = $(className.account),
-                    $pwd = $(className.pwd),
-                    $btn = $(className.btn);
-            $notification = $(className.notification);
-
-            var checkVal = function () {
-                if($account.val() != "" && $pwd.val().trim().length >= 6){
-                    return true;
-                }
-                else {
-                    return false;
-                }
-            };
-
-            var checkActive = function () {
-                if (checkVal()){
-                    $btn.addClass(className.active);
-                }
-                else {
-                    $btn.removeClass(className.active);
-                }
-            };
-
-            $btn.click(function () {
-                checkActive();
-                if ($(this).hasClass(className.active)) {
-                    var url = I.Ajax_login.url,
-                            basic_data = I.Ajax_login.basic_data,
-                            type = "jsonp";
-                    var _data = $.extend(true, {}, basic_data);
-                    _data[$account.attr("name")] = $account.val().trim();
-                    _data[$pwd.attr("name")] = $pwd.val().trim();
-
-                    $.post(url, _data, function (data) {
-                        if (data.user) {
-                            $.Angelcrunch.dataSet.operation.setUser(data.user);
-                            $.Angelcrunch.COOKIE.operation.setUserKey();
-                            if($_GET.hasOwnProperty('source')){
-                                location.href=decodeURIComponent($_GET.source);
-                                return
-                            }
-                            location.href = 'http://' + window.page.settings.host;
-                        } else if (data.success == false)
-                            $notification.notificationToggle();
-                        else
-                            throw new Error("An unknown error, the error code is E821928234");
-                    }, type);
-                };
-                return false;
-            });
-
-
-
-            // Page load ready checked
-            setTimeout(function(){
-                checkActive();
-                $account.on('change keyup',function () {
-                    checkActive();
-                });
-                $pwd.on('change keyup',function () {
-                    checkActive();
-                });
-            },200);
-
-        };
-
-        return {
-            attackEvent: function () {
-                waste_9839213();
-            },
-
-            pageLoad_Init: function () {
-            },
-
-            initial: function () {
-                this.pageLoad_Init();
-                this.attackEvent();
-            }
-        };
-    })();
-
-    page.initialBridge = function () {
-        var o = new page.MethodObj();
-        o.initial();
-    };
-
-    $(function () {
-        page.initialBridge();
-    })
-</script>
+<script src="/static/js/wapsite/angelcrunch_login.js"></script>
 </html>

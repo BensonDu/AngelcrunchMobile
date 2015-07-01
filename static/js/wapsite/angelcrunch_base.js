@@ -267,7 +267,7 @@
     });
 }).call(this);
 
-//移动设备触摸事件
+//移动设备事件
 (function(){
     $.fn.extend({
         touchtap:function(fn){
@@ -289,6 +289,13 @@
                 $(this).click(fn);
             }
 
+        },
+        pressenter:function(fn){
+            $(this).bind('keypress',function(e){
+                if(e.keyCode==13){
+                    fn.call($(this));
+                }
+            })
         }
     });
 }).call(this);
