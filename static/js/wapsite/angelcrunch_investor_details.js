@@ -103,6 +103,7 @@
 (function(){
     page_remote_data_syn(page_config.api_investor_details,function(data){
         if(data.hasOwnProperty('user')){
+            data.user.avatar=data.user.avatar.replace(/\d{0,3}x$/,'400x');
             avalon_model.details.data=data.user;
             page_status.name=data.user.name;
             page_status.id=data.user.id;
