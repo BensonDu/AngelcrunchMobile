@@ -155,7 +155,7 @@
     //接口数据转换为所需数据
     this.value_change=function(stocksale,parts,hope){
         avalon_model.buydetails.data=buydetailsdata={
-            totalprice:hope/(stocksale/100),  //估值
+            totalprice:page_helper.float_cut(hope/(stocksale/100)),  //估值
             totalprecent:stocksale,           //出让股权
             totalparts:parts,                 //出让份数
             unit:50,                          //每次加价
