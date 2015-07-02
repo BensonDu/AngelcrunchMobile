@@ -37,7 +37,7 @@
     //微信卡片异步添加
     this.wechat_card.deffer=true;
 }).call(this);
-//框架绑定 阻止初次空data重复渲染
+//框架绑定
 (function(){
     this.avalon_model={};
     this.avalon_attach_details=function(data){
@@ -45,11 +45,14 @@
             vm.data = data;
         });
     };
-    this.avalon_attach_entrelist=function(data){
-        avalon_model.entrelist=avalon.define("entre-list", function (vm) {
-            vm.data = data;
-        })
-    };
+
+    avalon_model.entrelist=avalon.define("entre-list", function (vm) {
+        vm.data = {
+            name:'',
+            list:'',
+            select:function(){}
+        };
+    })
 }).call(this);
 //消息通知
 (function(){
@@ -331,7 +334,7 @@
                $confirm.addClass('active');
             }
         };
-        avalon_attach_entrelist(data);
+        avalon_model.entrelist.data=data;
         //状态重置
         $confirm.removeClass('active');
         select_id=0;
