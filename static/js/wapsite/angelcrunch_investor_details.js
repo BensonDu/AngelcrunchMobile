@@ -37,19 +37,19 @@
     //微信卡片异步添加
     this.wechat_card.deffer=true;
 }).call(this);
-//框架绑定
+//框架绑定 阻止初次空data重复渲染
 (function(){
     this.avalon_model={};
-    avalon_model.details=avalon.define("investor-details", function (vm) {
-        vm.data = {};
-    });
-    avalon_model.entrelist=avalon.define("entre-list", function (vm) {
-        vm.data = {
-            name:'',
-            list:'',
-            select:function(){}
-        };
-    })
+    this.avalon_attach_details=function(data){
+        avalon_model.details=avalon.define("investor-details", function (vm) {
+            vm.data = data;
+        });
+    };
+    this.avalon_attach_entrelist=function(data){
+        avalon_model.entrelist=avalon.define("entre-list", function (vm) {
+            vm.data = data;
+        })
+    };
 }).call(this);
 //消息通知
 (function(){
@@ -104,7 +104,7 @@
     page_remote_data_syn(page_config.api_investor_details,function(data){
         if(data.hasOwnProperty('user')){
             data.user.avatar=data.user.avatar.replace(/\d{0,3}x$/,'800x');
-            avalon_model.details.data=data.user;
+            avalon_attach_details(data.user);
             page_status.name=data.user.name;
             page_status.id=data.user.id;
             page_status.portrait=data.user.avatar;
@@ -331,7 +331,7 @@
                $confirm.addClass('active');
             }
         };
-        avalon_model.entrelist.data=data;
+        avalon_attach_entrelist(data);
         //状态重置
         $confirm.removeClass('active');
         select_id=0;
