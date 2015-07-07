@@ -9,7 +9,7 @@
         }
     };
     this.page_status={
-        user_id:'13027679',
+        user_id:'',
         follow:false,
         send_intention:false,
         name:'',
