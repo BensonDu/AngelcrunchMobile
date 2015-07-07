@@ -479,23 +479,23 @@
      Entrepreneurs
   ********************/
 
-.entrepreneurs .pesonal-info {
+.entrepreneurs .entre-info {
   display:block;
   min-height:370px;
   padding:0;
 }
 
-.entrepreneurs .pesonal-info section {
+.entrepreneurs .entre-info section {
   display:inline-block;
   width:100%;
   padding: 0px 5.2% 30px;
 }
 
-.entrepreneurs .pesonal-info section p {
+.entrepreneurs .entre-info section p {
   line-height:18px;
 }
 
-.entrepreneurs .pesonal-info section:nth-child(2n+1) {
+.entrepreneurs .entre-info section:nth-child(2n+1) {
   background:#FFF;
 }
 /*******************

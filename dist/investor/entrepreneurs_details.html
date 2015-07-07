@@ -50,37 +50,34 @@
                 <ul class="hidden-menu"></ul>
             </div>
         </div>
-        <div class="pesonal-summary">
-            <div class="layer">
-                <div class="avatar"><img src="" ms-class="show:data.user.avatar"
-                                         ms-src="data.user.avatar||''" /></div>
-                <div class="summary">
-                    <h1 ms-text="data.user.name"></h1>
-                    <p class="hidden2Visible" ms-text="data.user.company+' '+data.user.title"></p>
-                    <p class="extra" ms-class="bigger-font:data.user.summary.length < 34"
-                       ms-class-1="align-center:data.user.summary.length < 28"
-                       ms-text="data.user.summary.length > 160 ? data.user.summary.substr(0,160) + ' ...' : data.user.summary"></p>
-                </div>
-            </div>
-            <div class="effect-card">
-                <div class="rs-bkg"><img src="/static/images/wapsite/bannerbox.jpg" /></div>
-            </div>
+        <div class="personal-info">
+            <img ms-src="data.avatar" width="100%" height="auto">
+        </div>
+        <div class="personal-brief">
+            <h3><span ms-text="data.name"></span><span ms-if="data.company.length+data.title.length>0">·</span><span ms-text="data.company"></span><span>&nbsp;</span><span ms-text="data.title"></span></h3>
+            <h4><span ms-text="data.business"></span></h4>
         </div>
         <div class="pesonal-info">
-            <section ms-if="data.user.style.length">
+            <div ms-if="data.summary.length">
+                <h1>简介</h1>
+                <p ms-html="data.summary"></p>
+            </div>
+        </div>
+        <div class="pesonal-info entre-info">
+            <section ms-if="data.style.length">
                 <h1>创业理念</h1>
-                <p ms-text="data.user.style"></p>
+                <p ms-text="data.style"></p>
             </section>
-            <section ms-if="data.user.career.length">
+            <section ms-if="data.career.length">
                 <h1>工作经历</h1>
-                <p ms-repeat="data.user.career" ms-text="el.htmlstr"></p>
+                <p ms-repeat="data.career" ms-text="el.company+'·'+el.title"></p>
             </section>
-            <section ms-if="data.user.edu.length">
-                <h1>擅长领域</h1>
-                <p ms-repeat="data.user.edu" ms-text="el.htmlstr"></p>
+            <section ms-if="data.edu.length">
+                <h1>教育经历</h1>
+                <p ms-repeat="data.edu" ms-text="el.school+'&nbsp;'+el.degress+'&nbsp;'+el.major"></p>
             </section>
         </div>
-        <div class="page-action">
+        <div id="page-action" class="page-action">
             <div class="btn-group center">
                 <button id="follow-btn" class="btn btn-small white-border" data-btn-reverse-text="已关注">关注该创业者</button>
             </div>
@@ -93,181 +90,5 @@
 <script src="/static/js/wapsite/angelcrunch.app_downloadbar.jq.c.js"></script>
 <script src="/static/js/wapsite/angelcrunch_base.js"></script>
 <script src="/static/js/lib/avalon.mobile.min.js"></script>
-<script type="text/javascript" id="page-interactive-init">
-    var page = window.page || {};
-    page.MethodObj = function () { };
-    page.MethodObj.prototype = (function () {
-        var settings = page.settings;
-        var $COOKIE = $.Angelcrunch.COOKIE;
-
-        var I = {
-            Ajax_investor_details: {                          // Investor Details
-                url: "http://" + settings.AjaxDomain + "/v2/user/m_detail",
-                basic_data: {}
-            },
-            Ajax_follow: {                     // Follow
-                url: "http://" + settings.AjaxDomain + "/v2/follow",
-                basic_data: {}
-            },
-            Ajax_unfollow: {                     // Unfollow
-                url: "http://" + settings.AjaxDomain + "/v2/unfollow",
-                basic_data: {}
-            },
-            API: {
-                changeFellowState: ""
-            }
-        };
-
-        var waste_2012932 = function () {
-
-            // Data processor
-            // Connecting data array to html string
-            var handleDataArr = function (arr, fieldArr) {
-                var obj;
-                var strArr;
-                var newArr=[];
-                for (var J in arr) {
-                    strArr = [];
-                    obj = arr[J];
-                    obj.htmlstr = "";
-                    for (var K in fieldArr) {
-                        var val = obj[fieldArr[K]];
-                        if (val) strArr.push(val);
-                    }
-                    obj.htmlstr = strArr.join(" · ");
-                    newArr.push(obj);
-                }
-                return newArr;
-            };
-
-            // Details information
-            (function () {
-                var url = I.Ajax_investor_details.url,
-                        basic_data = I.Ajax_investor_details.basic_data,
-                        type = "jsonp";
-                var _data = $.extend(true, {}, basic_data);
-                var userid = $.Angelcrunch.url.getUserId();
-                _data[$COOKIE.cookieName.token] = $.cookie($COOKIE.cookieName.token);
-                _data[$COOKIE.cookieName.user_id] = $.cookie($COOKIE.cookieName.user_id);
-
-                if (userid) _data["user_id"] = userid;
-                $.post(url, _data, function (data) {
-                    data.user.career = handleDataArr(data.user.career, ["company", "title"]);
-                    data.user.edu = handleDataArr(data.user.edu, ["school", "degress", "major"]);
-                    avalonNS.model.details.data = data;
-                    I.API.changeFellowState(data.user.isfollow);
-                    // Delay calculation method
-                }, type);
-            }).call(this);
-        };
-
-        var waste_3920123 = function () {
-            var className = {
-                notification: "#login-failed",
-
-                followState: "reverse",
-                sending: "sending-state"
-            };
-            var txt = {
-                isFollow: "已关注",
-                notFollow: "关注该创业者"
-            };
-            var $btn, $notification;
-            $btn = $("#follow-btn"),
-                    $notification = $(className.notification);
-
-            var changeFellowState =
-                    I.API.changeFellowState = function (isFollow) {
-                        if (isFollow)
-                            $btn.addClass(className.followState).text(txt.isFollow);
-                        else
-                            $btn.removeClass(className.followState).text(txt.notFollow);
-                    };
-
-            $btn.click(function () {
-                if (!$COOKIE.operation.isLogin())
-                    location.href = $.Angelcrunch.url.addedSouceUrl(settings.loginPageURL);
-
-                if ($(this).hasClass(className.sending)) return 0;
-                if ($(this).hasClass(className.followState))
-                    unfollowAjax();
-                else followAjax();
-            });
-
-            // Follow
-            var followAjax = function () {
-                var url = I.Ajax_follow.url,
-                        basic_data = I.Ajax_follow.basic_data,
-                        type = "jsonp";
-                var _data = $.extend(true, {}, basic_data);
-                var userId = $.Angelcrunch.url.getUserId();
-                _data[$COOKIE.cookieName.token] = $.cookie($COOKIE.cookieName.token);
-                _data[$COOKIE.cookieName.user_id] = $.cookie($COOKIE.cookieName.user_id);
-
-                if (userId) _data["id"] = userId;
-                $btn.addClass(className.sending);
-                $.post(url, _data, function (data) {
-                    if (data.success)
-                        changeFellowState(true);
-                    else $notification.notificationToggle();
-                    $btn.removeClass(className.sending);
-                }, type);
-            };
-            // Unfollow
-            var unfollowAjax = function () {
-                var url = I.Ajax_unfollow.url,
-                        basic_data = I.Ajax_unfollow.basic_data,
-                        type = "jsonp";
-                var _data = $.extend(true, {}, basic_data);
-                var userId = $.Angelcrunch.url.getUserId();
-                _data[$COOKIE.cookieName.token] = $.cookie($COOKIE.cookieName.token);
-                _data[$COOKIE.cookieName.user_id] = $.cookie($COOKIE.cookieName.user_id);
-
-                if (userId) _data["id"] = userId;
-                $btn.addClass(className.sending);
-                $.post(url, _data, function (data) {
-                    if (data.success)
-                        changeFellowState(false);
-                    else $notification.notificationToggle();
-                    $btn.removeClass(className.sending);
-                }, type);
-            };
-
-        };
-
-
-        return {
-            attackEvent: function () {
-                waste_2012932();
-                waste_3920123();
-            },
-
-            pageLoad_Init: function () {
-            },
-
-            initial: function () {
-                this.pageLoad_Init();
-                this.attackEvent();
-            }
-        };
-    })();
-
-    page.initialBridge = function () {
-        var o = new page.MethodObj();
-        o.initial();
-    }
-
-    $(function () {
-        page.initialBridge();
-    })
-
-    var avalonNS = window.avalonNS || {};
-    (function () {
-        avalonNS.model = {
-            details: avalon.define("entrepreneurs-details", function (vm) {
-                vm.data = {};
-            })
-        };
-    }).call(this);
-</script>
+<script src="/static/js/wapsite/angelcrunch_entre_details.js"></script>
 </html>

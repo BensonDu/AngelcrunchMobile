@@ -157,7 +157,7 @@
             $box.css('top',0);
             setTimeout(function(){
                 $contain.show();
-                $items.hide();},500);
+                $items.hide();},300);
         },
         hide:function(){
             $items.show();
