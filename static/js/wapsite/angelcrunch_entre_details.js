@@ -87,7 +87,6 @@
             if(typeof call != 'undefined')call();
         }
     };
-    host_id();
 }).call(this);
 
 //个人主页
@@ -123,6 +122,7 @@
 (function(){
     page_remote_data_syn(page_config.api_detail,function(data){
         if(data.hasOwnProperty('user')){
+            data.user.avatar=data.user.avatar.replace(/\d{0,3}x$/,'800x');
             framework.details(data.user);
             if(data.user.isfollow){
                 follow.view.follow();
