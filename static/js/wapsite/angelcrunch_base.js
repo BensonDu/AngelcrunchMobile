@@ -14,7 +14,7 @@
     this.base_mobile='http://mobile.angelcrunch.com/';
 
     if(base_environment!='online'){
-        this.base_mobile='http://mobile.ac-test.com/';
+        //this.base_mobile='http://mobile.ac-test.com/';
     }
 
 
@@ -27,6 +27,7 @@
         comlist:this.base_mobile+'v2/startup',
         log:'http://yx.dubaoxing.com/api/remotelog?msg=id_',
         user_info:this.base_mobile+'v2/home/user_info',
+        host_id:this.base_mobile+'v3/host_id',
         comlistsearch:this.base_mobile+'v2/startup_search',
         com_details:this.base_mobile+'v2/startup/m_detail',
         com_finace_info:this.base_mobile+'v2/startup/m_finance',
