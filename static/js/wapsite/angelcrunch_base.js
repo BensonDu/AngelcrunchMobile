@@ -37,7 +37,8 @@
         com_unfollow:this.base_mobile+'v2/unfollow',
         com_vc_standard:this.base_mobile+'v3/startup/vc',
         com_vc_info:this.base_mobile+'v3/startup/vc_info',
-        com_vc_query:this.base_mobile+'v3/startup/vc_query'
+        com_vc_query:this.base_mobile+'v3/startup/vc_query',
+        industry_list:this.base_mobile+'v4/settings/business_list'
     };
 
     this.base_config={

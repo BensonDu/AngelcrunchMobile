@@ -248,6 +248,7 @@ input:focus{
     width: 100%;
     height: 80%;
     background-color: #fff;
+    overflow: hidden;
 }
 .industry-choose .input{
     width: 100%;
@@ -307,6 +308,7 @@ input:focus{
     padding: 0 5%;
     width: 50%;
     height: 100%;
+    position: relative;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -321,7 +323,6 @@ input:focus{
     width: 100%;
     line-height: 53px;
     font-size: 16px;
-    display: inline-block;
     border-bottom: 1px solid #ccc;
 }
 .industry-choose .select .left{
@@ -389,4 +390,48 @@ input:focus{
     border: none;
     background: #e65100;
     color: #fff;
+}
+/*创建项目结果*/
+.new-page-result .title{
+    margin-top: 35%;
+    width: 100%;
+}
+.new-page-result .title h3{
+    font-size: 32px;
+    color: #333;
+}
+.new-page-result .content{
+    margin-top: 5%;
+    width: 100%;
+}
+.new-page-result .content p,.new-page-result .content strong{
+    text-align: left;
+    font-size: 18px;
+    line-height: 28px;
+
+}
+.new-page-result .content p{
+    color: #666;
+}
+.new-page-result .content strong{
+    color: #333;
+    font-weight: bold;
+}
+.new-page-result .btn-group{
+    height: 30px;
+    width: 100%;
+    margin-top: 20%;
+    display: inline-block;
+    text-align: center;
+}
+.new-page-result .btn-group a{
+    display: inline-block;
+    height: 100%;
+    width: 70%;
+    border: 1px solid #666;
+    color: #666;
+    font-size: 16px;
+    text-align: center;
+    line-height: 32px;
+    border-radius: 3px;
 }
