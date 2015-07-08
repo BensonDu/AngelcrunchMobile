@@ -1,8 +1,17 @@
-//命名空间
 (function(){
+    this.page_config={
+        api_create:'http://mobile.ac-test.com/v4/startup',
+        default_param:{
+            uid:account_info.id,
+            access_token:account_info.token
+        }
+    };
+    //命名空间
     this.space_uploader = {};
     this.space_select   = {};
     this.space_industry = {};
+    this.space_framework= {};
+    this.space_create   = {};
 }).call(this);
 
 //消息通知
@@ -34,6 +43,16 @@
         }
     };
 }).call(this);
+
+//数据获取
+(function(){
+    this.page_remote_data_syn=function(url,call,data){
+        base_remote_data.ajaxjsonp(url,function(data){
+            call(data);
+        },$.extend(true,page_config.default_param,data),function(){view_notification.show('网络错误');});
+    };
+}).call(this);
+
 //头像上传
 (function(){
     var $trigger = $('#upload-trigger'),
@@ -67,6 +86,8 @@
             $img.show();
         }
     };
+    //钩子方法
+    this.upload_hook=function(){};
     //返回存储ID
     this.upload_img_id='';
 
@@ -103,6 +124,7 @@
             space_uploader.progress.show(100,100);
             space_uploader.view_upload.done(space_uploader.get_img_url(r.key,r));
             space_uploader.progress.hide();
+            space_uploader.upload_hook();
         })
     });
     //错误
@@ -147,9 +169,7 @@
         $items  = $('#item-container'),
         $contain= $box.children('div'),
         $select = $box.children('.select'),
-        $trigger= $('#industry-trigger'),
-        $cancle=$('#select-cancle'),
-        $confirm=$('#select-confirm');
+        $trigger= $('#industry-trigger');
 
     this.view_box={
         show:function(){
@@ -167,11 +187,210 @@
             });
         }
     };
-    //JS尺寸响应
-    this.view_box_response=function(){
-        var h  = $box.height(),sh = h-240;
-        $select.height(sh);
-    };
     $trigger.touchtap(this.view_box.show);
-    $cancle.touchtap(this.view_box.hide);
 }).call(space_industry);
+
+//获取行业列表
+(function(){
+    this.list=[];
+    page_remote_data_syn(api.industry_list,function(data){
+        if(data.hasOwnProperty('list')){
+            space_framework.industry.list = space_industry.list = data.list;
+            space_framework.industry.second_level=space_framework.second_level();
+        }
+    })
+}).call(space_industry);
+
+//框架绑定
+(function(){
+    this.first_active=0;
+    this.selected = [];
+    this.second_level = function(){
+        var parent = space_industry.list[space_framework.first_active],
+            list = parent.child,
+            ll = list.length,
+            selected = space_framework.selected,
+            ret = [],
+            first = [{active:false,name:'全部'}];
+
+        for(var n = 0 ; n < ll; n++) {
+            var a = false;
+            if(selected.indexOf(list[n]) != -1){
+                a = true;
+            }
+            ret.push({active:a,name:list[n]});
+        }
+        if(selected.indexOf(parent.name) != -1){
+            first[0].active = true;
+        }
+
+        return first.concat(ret);
+    };
+    this.list_render = function(index){
+        if(typeof index != 'undefined'){
+            space_framework.first_active=index;
+        }
+        space_framework.industry.btn_confirm=space_framework.selected.length>0?true:false;
+        space_framework.industry.list=space_industry.list;
+        space_framework.industry.second_level=space_framework.second_level();
+    };
+    this.result_hook=function(){};
+    this.add_selected = function(name){
+
+        var list = space_framework.selected,
+            all =space_industry.list[space_framework.first_active],
+            ele = name,
+            ll=list.length,
+            child=all.child,
+            cl=child.length;
+        if(name == '全部'){
+            ele = all.name;
+            for(var i = 0; i < ll; i ++){
+                for(var n = 0; n <cl ; n++){
+                    if(list[i] == child[n]){
+                        list.splice(i,1);
+                        i--;
+                    }
+                }
+            }
+        }
+        else{
+            for(var i = 0; i < ll; i ++){
+                if(list[i] == all.name){
+                    list.splice(i,1);
+                    i--;
+                }
+            }
+        }
+        if(list.length<5 && typeof ele != 'undefined' && list.indexOf(ele) == -1){
+                list.push(ele);
+        }
+        space_framework.industry.selected  = list;
+    };
+    this.write_new = function(){
+        if(!!space_framework.industry.input){
+            space_framework.add_selected(space_framework.industry.input);
+            space_framework.list_render();
+            space_framework.industry.input='';
+        }
+    };
+    this.industry = avalon.define('industry-select', function (vm) {
+        vm.list=[];
+        vm.selected= [];
+        vm.second_level = [];
+        vm.input = '';
+        vm.btn_confirm=false;
+        vm.cancle_industry=function(el){
+            space_framework.selected.splice(el,1);
+            space_framework.industry.selected = space_framework.selected;
+            space_framework.list_render();
+        };
+        vm.first_active=function(index){
+            space_framework.list_render(index);
+        };
+        vm.second_active=function(name){
+            space_framework.add_selected(name);
+            space_framework.list_render();
+        };
+        vm.write_new=space_framework.write_new;
+        vm.cancle_choose=function(){
+            space_framework.industry.selected = space_framework.selected =[];
+            space_industry.view_box.hide();
+            space_framework.list_render();
+            space_framework.result_hook();
+        };
+        vm.confirm_choose=function(){
+            if(space_framework.selected.length>0){
+                space_industry.view_box.hide();
+                space_framework.result_hook();
+            }
+        };
+        vm.input_enter=function(e){
+            if(e.keyCode == 13){
+                space_framework.write_new();
+            }
+        }
+    })
+}).call(space_framework);
+
+//创建项目
+(function(){
+
+    var $name        = $('#form-name'),
+        $one         = $('#form-one'),
+        $desc        = $('#form-desc'),
+        $stage       = $('#select-stage').children('select'),
+        $position    = $('#select-position').children('select'),
+        $agree       = $('.mentos-container'),
+        $submit      = $('#subbmit-btn');
+
+    this.form_content=function() {
+        return {
+            ico: space_uploader.upload_img_id,
+            com_name: $name.val(),
+            stage: $stage.val(),
+            tag_list: space_framework.selected.join(','),
+            description: $desc.val(),
+            description_short: $one.val(),
+            my_title: $position.val()
+        };
+    };
+    this.form_check=function(){
+
+        var content=space_create.form_content();
+
+        if(!!content.com_name && !!content.ico && !!content.tag_list && !!content.description && !!content.description_short &&  !!content.my_title && content.stage!=0 && $agree.hasClass('checked')){
+            $submit.addClass('active');
+            return true;
+        }
+        else{
+            $submit.removeClass('active');
+            return false;
+        }
+
+    };
+    this.submit=function(){
+        page_remote_data_syn(page_config.api_create,function(data){
+            if(data.hasOwnProperty('success')){
+                if(data.success){
+                    space_create.view_result.show();
+                }
+                else{
+                    view_notification.show(data.message);
+                }
+            }
+        },space_create.form_content());
+    };
+    $submit.touchtap(function(){
+        if(space_create.form_check()){
+            space_create.submit();
+        }
+    });
+    //一堆事件绑定，要不然呢？
+    $name.keyup(function(){space_create.form_check();});
+    $one.keyup(function(){space_create.form_check();});
+    $desc.keyup(function(){space_create.form_check();});
+    $stage.change(function(){space_create.form_check();});
+    $position.change(function(){space_create.form_check();});
+    $agree.click(function(){space_create.form_check();});
+    //不是表单的钩子
+    space_uploader.upload_hook=space_create.form_check;
+    space_framework.result_hook=space_create.form_check;
+
+}).call(space_create);
+
+//创建完成
+(function(){
+    var $close      = $('.yesiknow'),
+        $layout     = $('#create-result');
+    this.view_result={
+        show:function(){
+            $layout.fadeIn(100);
+        },
+        hide:function(){
+            $layout.hide();
+        }
+
+    };
+    $close.touchtap(function(){space_create.view_result.hide();});
+}).call(space_create);
