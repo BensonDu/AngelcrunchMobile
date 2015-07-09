@@ -393,7 +393,7 @@
 (function(){
     if(page_status.user_id == ''){
         page_remote_data_syn(api.host_id,function(data){
-            if(data.hasOwnProperty(ret)){
+            if(data.hasOwnProperty('ret')){
                 page_status.user_id=data.ret;
             }
         });
