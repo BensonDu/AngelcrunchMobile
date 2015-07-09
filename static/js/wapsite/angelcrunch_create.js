@@ -188,9 +188,12 @@
         }
     };
     $trigger.touchtap(this.view_box.show);
-    //APP内嵌 隐藏头部 选择框调整
+    //APP内嵌 隐藏头部 选择框大小调整
     if(base_status.isapp){
         $box.css('margin-top',0);
+    }
+    if($_GET.hasOwnProperty('source')){
+        $items.children('.page-title').children('h1').html('请首先创建项目');
     }
 }).call(space_industry);
 
