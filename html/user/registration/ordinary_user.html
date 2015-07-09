@@ -129,6 +129,11 @@
                 $reason.fadeOut(100);
             });
         }
+
+        $('#verify-btn').click(function(){
+            $(document).scrollTop(0);
+            $('#phone').blur();
+        });
     });
     var page = window.page || {};
     page.MethodObj = function () { };
