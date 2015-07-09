@@ -501,30 +501,55 @@
 /*******************
       Notice
   ********************/
+.new-page-result{
+  background: #fff;
+}
 .new-page-result .content{
-  margin-top: 40%;
+    margin-top: 0;
+}
+.new-page-result .margin-top{
+  width: 100%;
+  height: 15%;
 }
 .new-page-result .content h1{
   color: #333;
   line-height: 50px;
 }
-.new-page-result .content label{
-  padding: 6% 3%;
-}
-.new-page-result .content label h4{
-  font-size: 18px;
+.new-page-result .content p,.new-page-result .content p span{
+  font-size: 17px;
   line-height: 2em;
-  text-align: left;
+  font-weight: bold;
   word-break: break-all;
 }
-.new-page-result .content label h3{
-  font-size: 18px;
-  line-height: 2em;
-  text-align: left;
+.new-page-result .content div{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    padding: 5% 0 0;
 }
-.new-page-result .content h5{
-  font-size: 16px;
-  color: #666;
+.new-page-result .content div img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.new-page-result .content div p{
+    font-size: 14px;
+}
+.new-page-result .content .btn-group{
+    width: 100%;
+    margin-top: 5%;
+    display: inline-block;
+    text-align: center;
+}
+.new-page-result .content .btn-group a{
+    display: inline-block;
+    width: 70%;
+    border: 1px solid #666;
+    color: #666;
+    font-size: 16px;
+    text-align: center;
+    line-height: 32px;
+    border-radius: 3px;
 }
 /*******************
       Submit-com-list
