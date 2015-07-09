@@ -403,6 +403,7 @@
         },
         hide:function(){
             $layout.hide();
+            location.reload();
         }
     };
     $close.touchtap(function(){space_create.view_result.hide();});
