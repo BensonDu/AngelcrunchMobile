@@ -106,21 +106,13 @@
 <script src="/static/js/wapsite/angelcrunch_base.js"></script>
 
 <script type="text/javascript" id="page-interactive-init">
-    (function(){
-        this.page_config={
-            api_invite_record:base_mobile+'v3/invite'
-        };
-        this.record_invite=function(user,invitor){
-            base_remote_data.ajaxjsonp(page_config.api_invite_record,function(){},{user_id:invitor,new_id:user},function(){})
-        }
-    }).call(this);
 
     $(document).ready(function(){
         //跳转链接 传参同步
         var $dom=$('.already-has-account'),href=$dom.attr('href'),split=location.href.split('?');
         if(split.length>1)href+='?'+split[1];
         $dom.attr('href',href);
-        //显示message
+        //显示URL传参message
         if($_GET.hasOwnProperty('message') && $_GET.hasOwnProperty('title')){
             var $reason=$('#regist-reason'),
                     $title=$reason.find('h3'),
@@ -154,7 +146,7 @@
                 }
             },
             Ajax_form_submit: {             // Form submit
-                url: "http://" + settings.AjaxDomain + "/v2/home/m_register",
+                url: "http://" + settings.AjaxDomain + "/v4/home/m_register",
                 basic_data: {
                 }
             },
@@ -288,7 +280,10 @@
                     _data[$input.pwd.attr("name")] = $input.pwd.val().trim();
                     _data[$input.phone.attr("name")] = $input.phone.val().trim();
                     _data[$input.verify_code.attr("name")] = $input.verify_code.val().trim();
-
+                    _data['from']=0;
+                    if($_GET.hasOwnProperty('id')){
+                        _data['from']=$_GET.id;
+                    }
                     $.post(url, _data, function (data) {
                         var txt = "注册成功，但因为未知的原因，登录失败";
                         if (data.success) {
@@ -297,10 +292,6 @@
                             $.Angelcrunch.COOKIE.operation.setUserKey();
                             if (!$.Angelcrunch.COOKIE.operation.isLogin())
                                 $notification.notificationToggle(txt);
-                            //记录
-                            if($_GET.hasOwnProperty('id')){
-                                record_invite(data.id,$_GET.id);
-                            }
                             //回调
                             if($_GET.hasOwnProperty('source')){
                                 location.href=decodeURIComponent($_GET.source);
