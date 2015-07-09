@@ -1264,7 +1264,10 @@ body.footer-close-bottom .banner-footer {
 /******************
        New Head
  ******************/
-
+.head-container{
+  width: 100%;
+  height: 46px;
+}
 .newhead {
   height:46px;
   right: 0px;
