@@ -162,7 +162,7 @@
 
 }).call(space_select);
 
-//选择行业
+//选择行业页面显示及文本内容
 (function(){
     var $head   = $('#header'),
         $box    = $('#industry-choose'),
@@ -192,6 +192,7 @@
     if(base_status.isapp){
         $box.css('margin-top',0);
     }
+    //由其它页面跳转
     if($_GET.hasOwnProperty('source')){
         $items.children('.page-title').children('h1').html('请首先创建项目');
     }
