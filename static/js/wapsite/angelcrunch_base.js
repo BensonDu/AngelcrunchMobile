@@ -232,11 +232,11 @@
     this.del_cookie=function(key){
         if(typeof key == 'object'){
             for(var i in key){
-                $.removeCookie(key[i]);
+                $.removeCookie(key[i],cookie_setting);
             }
         }
         if(typeof key == 'string'){
-            $.removeCookie(key);
+            $.removeCookie(key,cookie_setting);
         }
     }
 
