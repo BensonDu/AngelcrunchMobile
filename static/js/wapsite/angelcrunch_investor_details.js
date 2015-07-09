@@ -11,17 +11,20 @@
             access_token:account_info.token
         }
     };
-    //根据环境切换跳转链接
+    //根据环境切换跳转注册链接
     this.page_link={};
     switch (base_environment){
         case 'online':
             page_link.reg='http://auth.angelcrunch.com/reg';
+            page_link.create='http://angelcrunch.com/create';
             break;
         case 'test':
             page_link.reg='http://auth.ac-test.com/reg';
+            page_link.create='';
             break;
         default :
             page_link.reg='http://angel.dubaoxing.com/html/user/registration/ordinary_user.html';
+            page_link.create='http://angel.dubaoxing.com/dist/investor/create.html';
     }
     this.page_status={
         //投资人预设ID
@@ -229,16 +232,41 @@
     });
     
 }).call(this);
+//提交项目结果成功
+(function(){
+    var $result       = $('#sendresult'),
+        $resultclose  = $result.find('.yesiknow'),
+        $com_name     = $('#result-com-name'),
+        $investor_por = $('#result-investor-por'),
+        $investor_name= $('#result-investor-name'),
+        $title        = $('#result-title');
+    this.view_result={
+        show:function(com,title){
+            var c=!!com?'"'+com+'"':'',t=title || '提交项目成功';
+            $com_name.html(c);
+            $investor_por.attr('src',page_status.portrait);
+            $investor_name.html(page_status.name);
+            $title.html(t);
+            $result.fadeIn(100);
+        },
+        hide:function(){
+            $result.fadeOut(100);
+        }
+    };
+    $resultclose.touchtap(function(){
+        view_result.hide();
+    });
+}).call(this);
 //提交项目
 (function(){
-    var $result=$('#sendresult'),$resultclose=$result.children('.close');
+
     this.dom_submit_btn=$('#submit-com');
     this.my_com_list=function(call){
         page_remote_data_syn(page_config.api_com_list,function(data){
             call(data);
         },{type:3});
     };
-    this.submit_my_commit=function(id){
+    this.submit_my_commit=function(id,success_function){
         var data={};
         data.com_id=id;
         if(page_status.user_id!=''){
@@ -247,8 +275,13 @@
         page_remote_data_syn(page_config.api_com_submit,function(data){
             if(data.hasOwnProperty('success')){
                 if(data.success){
-                    view_notification.show(data.message,false);
-                    view_list_display.hide();
+                    if(typeof success_function != 'undefined'){
+                        view_list_display.hide();
+                        view_result.show();
+                    }
+                    else{
+                        success_function();
+                    }
                 }
                 else{
                     view_notification.show(data.message);
@@ -281,16 +314,12 @@
                     view_list_import(data.list);
                 }
                 else{
-                    //显示说明
-                    $result.fadeIn(100);
+                    //跳转到创建项目页
+                    location.href=page_link.create+base_create_param({'source':location.href});
                 }
             });
         }
     });
-    $resultclose.touchtap(function(){
-        $result.hide();
-    });
-
 }).call(this);
 //当前用户项目列表
 (function(){
@@ -348,4 +377,15 @@
        view_list_display.hide();
     });
 
+}).call(this);
+//创建项目完成 回调 提交项目
+(function(){
+    if($_GET.hasOwnProperty('com_id') && $_GET.hasOwnProperty('time') && $_GET.hasOwnProperty('com_name')){
+        console.log($_GET);
+        if($.now()-$_GET.time<2000000){
+            this.submit_my_commit($_GET.com_id,function(){
+                view_result.show(decodeURIComponent($_GET.com_name),'创建并提交项目成功');
+            });
+        }
+    }
 }).call(this);
