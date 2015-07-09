@@ -276,11 +276,11 @@
             if(data.hasOwnProperty('success')){
                 if(data.success){
                     if(typeof success_function != 'undefined'){
-                        view_list_display.hide();
-                        view_result.show();
+                        success_function();
                     }
                     else{
-                        success_function();
+                        view_list_display.hide();
+                        view_result.show();
                     }
                 }
                 else{
