@@ -1,6 +1,6 @@
 (function(){
     this.page_config={
-        api_create:'http://mobile.ac-test.com/v4/startup',
+        api_create:this.base_mobile+'v4/startup',
         default_param:{
             uid:account_info.id,
             access_token:account_info.token
@@ -390,7 +390,6 @@
         hide:function(){
             $layout.hide();
         }
-
     };
     $close.touchtap(function(){space_create.view_result.hide();});
 }).call(space_create);
