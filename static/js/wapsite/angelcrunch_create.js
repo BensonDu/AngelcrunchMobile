@@ -188,6 +188,10 @@
         }
     };
     $trigger.touchtap(this.view_box.show);
+    //APP内嵌 隐藏头部 选择框调整
+    if(base_status.isapp){
+        $box.css('margin-top',0);
+    }
 }).call(space_industry);
 
 //获取行业列表

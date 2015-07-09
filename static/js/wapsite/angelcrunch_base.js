@@ -360,6 +360,7 @@
 //头部选项
 (function(){
     var $head=$('#header'),
+        $headcontainer=$('#head-container'),
         $bk=$('.bk'),
         $option=$head.children('.options'),
         $account=$head.children('.account'),
@@ -451,6 +452,7 @@
     //APP内嵌隐藏头部
     if(base_status.isapp){
         $head.hide();
+        $headcontainer.hide();
     }
 
 }).call(this);
