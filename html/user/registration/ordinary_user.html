@@ -290,11 +290,12 @@
                         _data['from']=$_GET.id;
                     }
                     $.post(url, _data, function (data) {
-                        var txt = "注册成功，但因为未知的原因，登录失败";
+                        var txt = "注册成功，但因为未知的原因，登录失败",login={};
                         if (data.success) {
-                            data.defaultpart = 0;
-                            $.Angelcrunch.dataSet.operation.setUser(data);
-                            $.Angelcrunch.COOKIE.operation.setUserKey();
+                            login[account_key.id]=data.id||0;
+                            login[account_key.token]=data.access_token||'';
+                            login[account_key.role]=0;
+                            save_cookie(login);
                             if (!$.Angelcrunch.COOKIE.operation.isLogin())
                                 $notification.notificationToggle(txt);
                             //回调
@@ -302,7 +303,7 @@
                                 location.href=decodeURIComponent($_GET.source);
                             }
                             else{
-                                location.href = $btn.submit.attr("data-redirect");
+                                location.href = base_protocol+login[account_key.id]+'.'+base_host;
                             }
                         } else
                             $notification.notificationToggle(data.message);
