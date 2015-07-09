@@ -14,7 +14,7 @@
     this.base_mobile='http://mobile.angelcrunch.com/';
 
     if(base_environment!='online'){
-        this.base_mobile='http://mobile.ac-test.com/';
+        //this.base_mobile='http://mobile.ac-test.com/';
     }
 
 
@@ -204,11 +204,53 @@
     }
 }).call(this);
 
+//Cookie方法
+(function(){
+    var domain='.angelcrunch.com';
+
+    if(/dubaoxing/g.test(location.href.toLocaleLowerCase())){
+        domain='.dubaoxing.com';
+    }
+    if(/ac-test/g.test(location.href.toLocaleLowerCase())){
+        domain='.ac-test.com';
+    }
+    this.cookie_setting={ expires: 7, path: "/", secure: false,domain:domain};
+
+    this.get_cookie=function(key){
+        return !!key? $.cookie(key): $.cookie();
+    };
+    this.save_cookie=function(data,val){
+        if(typeof data == 'object'){
+            for(var i in data){
+                $.cookie(i,data[i],cookie_setting);
+            }
+        }
+        if(typeof data == 'string' && typeof val != 'undefined'){
+            $.cookie(data,val,cookie_setting);
+        }
+    };
+    this.del_cookie=function(key){
+        if(typeof key == 'object'){
+            for(var i in key){
+                $.removeCookie(key[i]);
+            }
+        }
+        if(typeof key == 'string'){
+            $.removeCookie(key);
+        }
+    }
+
+}).call(this);
+
 //全局账户信息
 (function(){
     //过期删除
-    var now= $.now(),
-        $COOKIE=$.Angelcrunch.COOKIE || {};
+    var now= $.now();
+    this.account_key={
+        id:'uid',
+        token:'access_token',
+        role:'defaultpart'
+    };
     this.account_info={
         id:0,
         name:'',
@@ -220,16 +262,16 @@
     };
     this.account_operate={
         logoff:function(){
-            $.Angelcrunch.COOKIE.operation.clearUserKey();
+            del_cookie(account_key);
             return location.reload();
         }
     };
 
     //登陆信息写入全局变量 放弃localstorage
-    if($.cookie($COOKIE.cookieName.user_id)){
-        account_info.id     = $.cookie($COOKIE.cookieName.user_id) || account_info.id;
-        account_info.token  = $.cookie($COOKIE.cookieName.token) || account_info.token;
-        account_info.role   = $.cookie($COOKIE.cookieName.defaultpart) || account_info.role;
+    if(get_cookie(account_key.id)){
+        account_info.id     = get_cookie(account_key.id) || account_info.id;
+        account_info.token  = get_cookie(account_key.token) || account_info.token;
+        account_info.role   = get_cookie(account_key.role) || account_info.role;
         account_info.time   = now;
     }
 
@@ -241,10 +283,9 @@
         account_info.time   = now;
         base_status.isapp=true;
         //保存用户信息
-        $.Angelcrunch.dataSet.Model.user.id             = account_info.id;
-        $.Angelcrunch.dataSet.Model.user.access_token   = account_info.token;
-        $.Angelcrunch.dataSet.Model.user.defaultpart    = account_info.role;
-        $.Angelcrunch.COOKIE.operation.setUserKey();
+        save_cookie(account_key.id,account_info.id);
+        save_cookie(account_key.token,account_info.token);
+        save_cookie(account_key.role,account_info.role);
     }
 
     //登陆状态
