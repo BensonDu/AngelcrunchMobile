@@ -389,3 +389,13 @@
         }
     }
 }).call(this);
+//获取当前页面ID
+(function(){
+    if(page_status.user_id == ''){
+        page_remote_data_syn(api.host_id,function(data){
+            if(data.hasOwnProperty(ret)){
+                page_status.user_id=data.ret;
+            }
+        });
+    }
+}).call(this);

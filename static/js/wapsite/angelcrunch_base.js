@@ -350,10 +350,12 @@
         default_item:{
             investor:[
                 [base_protocol+account_info.id+'.'+base_host,'个人主页'],
+                [base_protocol+base_host+'create','创建项目'],
                 ['javascript:account_operate.logoff()','退出登录']
             ],
             entre:   [
                 [base_protocol+account_info.id+'.'+base_host,'个人主页'],
+                [base_protocol+base_host+'create','创建项目'],
                 ['javascript:account_operate.logoff()','退出登录']
             ],
             notlogin:[
