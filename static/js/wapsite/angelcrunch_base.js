@@ -287,7 +287,8 @@
         save_cookie(account_key.token,account_info.token);
         save_cookie(account_key.role,account_info.role);
     }
-
+    //Debug 删除主站附带Session
+    del_cookie('S');
     //登陆状态
     if(account_info.token.length>5){
         account_info.is_login=true;
