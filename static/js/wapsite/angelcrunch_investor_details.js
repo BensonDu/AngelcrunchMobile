@@ -40,6 +40,25 @@
     //微信卡片异步添加
     this.wechat_card.deffer=true;
 }).call(this);
+//数据获取
+(function(){
+    //异步，同时的话，公共变量冲突
+    this.page_remote_data_param={};
+    this.page_remote_data_url='';
+    this.page_remote_data_fun=function(){};
+    this.page_remote_data_render=function(data){return data};
+    this.page_remote_data=function(){
+        base_remote_data.ajaxjsonp(page_remote_data_url,function(data){
+            page_remote_data_fun(page_remote_data_render(data));
+        },$.extend(true,page_config.default_param,page_remote_data_param));
+    };
+    //同步
+    this.page_remote_data_syn=function(url,call,data){
+        base_remote_data.ajaxjsonp(url,function(data){
+            call(data);
+        },$.extend(true,page_config.default_param,data),function(){view_notification.show('网络错误');});
+    };
+}).call(this);
 //获取当前页面ID
 (function(){
     if(page_status.user_id == ''){
@@ -94,25 +113,6 @@
         hide:function(){
             $dom.fadeOut();
         }
-    };
-}).call(this);
-//数据获取
-(function(){
-    //异步，同时的话，公共变量冲突
-    this.page_remote_data_param={};
-    this.page_remote_data_url='';
-    this.page_remote_data_fun=function(){};
-    this.page_remote_data_render=function(data){return data};
-    this.page_remote_data=function(){
-        base_remote_data.ajaxjsonp(page_remote_data_url,function(data){
-            page_remote_data_fun(page_remote_data_render(data));
-        },$.extend(true,page_config.default_param,page_remote_data_param));
-    };
-    //同步
-    this.page_remote_data_syn=function(url,call,data){
-        base_remote_data.ajaxjsonp(url,function(data){
-            call(data);
-        },$.extend(true,page_config.default_param,data),function(){view_notification.show('网络错误');});
     };
 }).call(this);
 //投资人信息获取
