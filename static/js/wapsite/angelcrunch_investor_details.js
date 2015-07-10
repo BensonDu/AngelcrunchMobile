@@ -40,6 +40,16 @@
     //微信卡片异步添加
     this.wechat_card.deffer=true;
 }).call(this);
+//获取当前页面ID
+(function(){
+    if(page_status.user_id == ''){
+        page_remote_data_syn(api.host_id,function(data){
+            if(data.hasOwnProperty('ret')){
+                page_status.user_id=data.ret;
+            }
+        });
+    }
+}).call(this);
 //框架绑定
 (function(){
     this.avalon_model={};
@@ -387,15 +397,5 @@
                 view_result.show(decodeURIComponent($_GET.com_name),'创建并提交项目成功');
             });
         }
-    }
-}).call(this);
-//获取当前页面ID
-(function(){
-    if(page_status.user_id == ''){
-        page_remote_data_syn(api.host_id,function(data){
-            if(data.hasOwnProperty('ret')){
-                page_status.user_id=data.ret;
-            }
-        });
     }
 }).call(this);

@@ -388,7 +388,7 @@ input::-webkit-input-placeholder {
 }
 
 .btn.submit-btn.active {
-  background-color:#333;
+  background-color:#333 !important;
   -moz-transition:background-color 0.2s linear;
   -o-transition:background-color 0.2s linear;
   -webkit-transition:background-color 0.2s linear;
