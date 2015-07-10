@@ -60,9 +60,12 @@
             'password':$pwd.val()
         };
         base_remote_data.ajaxjsonp(api.login,function(data){
+            var login={};
             if(data.hasOwnProperty('user')){
-                $.Angelcrunch.dataSet.operation.setUser(data.user);
-                $.Angelcrunch.COOKIE.operation.setUserKey();
+                login[account_key.id]=data.user.id||0;
+                login[account_key.token]=data.user.access_token||'';
+                login[account_key.role]=data.user.defaultpart || 0;
+                save_cookie(login);
                 source_back();
             }
             else{
@@ -74,6 +77,6 @@
     };
     $pwd.pressenter(login_action);
     $btn.touchtap(login_action);
-    $account.on('change keyup',login_active);
-    $pwd.on('change keyup',login_active);
+    //IOS设备事件监听会丢失呢,貌似是被回收了⊙﹏⊙b汗，研究完发篇文章
+    setInterval(function(){login_active();},100);
 }).call(this);
