@@ -18,7 +18,7 @@
         }
     };
     this.page_status={
-        com_id:'13097951',
+        com_id:'13029169',//'13097951',
         follow:false,
         send_intention:false,
         name:'',
