@@ -198,7 +198,7 @@
             wechat:$('#sel-form-wechat')
         };
     this.check_form=function(){
-         return $agreement.hasClass('checked') && $form.name.val()!='' && $form.phone.val() != '' && $form.mail.val() !='';
+         return $agreement.hasClass('checked') && $form.name.val()!='' && base_regex.phone.test($form.phone.val()) && base_regex.mail.test($form.mail.val());
     };
     this.check_active=function(){
         if(check_form()){
