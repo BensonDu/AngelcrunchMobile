@@ -134,6 +134,8 @@
             wechat_card.img=page_status.portrait.replace(/\d{1,3}x$/,'310x');
             wechat_card.title='向投资人'+page_status.name+'提交商业计划书';
             wechat_card.render();
+            //异步获取数据后填充投资人信息
+            view_personal_info();
             //关注状态
             follow_hook(data.user.isfollow);
             //判断是否为个人主页
@@ -256,12 +258,15 @@
         $investor_por = $('#result-investor-por'),
         $investor_name= $('#result-investor-name'),
         $title        = $('#result-title');
+
+    this.view_personal_info=function(){
+        $investor_por.attr('src',page_status.portrait);
+        $investor_name.html(page_status.name);
+    };
     this.view_result={
         show:function(com,title){
             var c=!!com?'"'+com+'"':'',t=title || '提交项目成功';
             $com_name.html(c);
-            $investor_por.attr('src',page_status.portrait);
-            $investor_name.html(page_status.name);
             $title.html(t);
             $result.fadeIn(100);
         },
@@ -396,7 +401,6 @@
 //创建项目完成 回调 提交项目
 (function(){
     if($_GET.hasOwnProperty('com_id') && $_GET.hasOwnProperty('time') && $_GET.hasOwnProperty('com_name')){
-        console.log($_GET);
         if($.now()-$_GET.time<20000){
             this.submit_my_commit($_GET.com_id,function(){
                 view_result.show(decodeURIComponent($_GET.com_name),'创建并提交项目成功');
