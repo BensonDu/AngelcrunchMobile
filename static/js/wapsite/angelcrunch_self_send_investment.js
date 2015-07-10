@@ -251,7 +251,7 @@
             else{
                 view_notification.show(data.message);
             }
-        });
+        },data);
     };
     //结果页关闭 返回主页
     $sendresult.children('.close').touchtap(function(){
@@ -259,7 +259,9 @@
         location.href=location.origin;
     });
     $submitbtn.touchtap(function(){
-        pre_vc();
+        if(check_form()){
+            pre_vc();
+        }
     });
     //自动填充表单 如果已登录
     if(account_info.is_login){
