@@ -61,12 +61,18 @@
 }).call(this);
 //获取当前页面ID
 (function(){
-    if(page_status.user_id == ''){
-        page_remote_data_syn(api.host_id,function(data){
-            if(data.hasOwnProperty('ret')){
-                page_status.user_id=data.ret;
-            }
-        });
+    this.get_host_id=function(call){
+        if(page_status.user_id == ''){
+            page_remote_data_syn(api.host_id,function(data){
+                if(data.hasOwnProperty('ret')){
+                    page_status.user_id=data.ret;
+                    call(data.ret);
+                }
+            });
+        }
+        else{
+            call(page_status.user_id);
+        }
     }
 }).call(this);
 //框架绑定
@@ -277,30 +283,29 @@
         },{type:3});
     };
     this.submit_my_commit=function(id,success_function){
-        var data={};
-        data.com_id=id;
-        if(page_status.user_id!=''){
-            data.target_id=page_status.user_id;
-        }
-        page_remote_data_syn(page_config.api_com_submit,function(data){
-            if(data.hasOwnProperty('success')){
-                if(data.success){
-                    if(typeof success_function != 'undefined'){
-                        success_function();
+        get_host_id(function(target_id){
+            page_remote_data_syn(page_config.api_com_submit,function(data){
+                if(data.hasOwnProperty('success')){
+                    if(data.success){
+                        if(typeof success_function != 'undefined'){
+                            success_function();
+                        }
+                        else{
+                            view_list_display.hide();
+                            view_result.show();
+                        }
                     }
                     else{
-                        view_list_display.hide();
-                        view_result.show();
+                        view_notification.show(data.message);
                     }
                 }
                 else{
-                    view_notification.show(data.message);
-                }
-            }
-            else{
                     view_notification.show('提交失败');
-            }
-        },data);
+                }
+            },{target_id:target_id,com_id:id});
+
+        });
+
     };
     dom_submit_btn.touchtap(function(){
         //判断对应逻辑
