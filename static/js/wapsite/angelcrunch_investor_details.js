@@ -397,7 +397,7 @@
 (function(){
     if($_GET.hasOwnProperty('com_id') && $_GET.hasOwnProperty('time') && $_GET.hasOwnProperty('com_name')){
         console.log($_GET);
-        if($.now()-$_GET.time<2000000){
+        if($.now()-$_GET.time<20000){
             this.submit_my_commit($_GET.com_id,function(){
                 view_result.show(decodeURIComponent($_GET.com_name),'创建并提交项目成功');
             });
