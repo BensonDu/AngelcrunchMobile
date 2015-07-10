@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+    <meta name="description" content="天使汇 | 让靠谱的项目找到靠谱的钱 | 创业，投资，找VC就上天使汇 | 中国股权众筹第一平台" />
+    <meta name="keywords" content="天使汇,创业,投资,找VC,上天使汇,中国股权众筹第一平台" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+    <meta content="yes" name="apple-touch-fullscreen"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="black" name="apple-mobile-web-app-status-bar-style" />
+    <meta name="author" content="http://angelcrunch.com" />
+    <meta name="copyright" content="Copyright &copy;http://angelcrunch.com 版权所有" />
+    <meta name="revisit-after"  content="0 days" />
+    <meta content="email=no" name="format-detection" />
+    <meta content="telephone=yes" name="format-detection" />
+
+    <!--iPhone vs retina screen -->
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="touch-icon-iphone-114.png" />
+    <!--iPad2 & older -->
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="touch-icon-ipad-144.png" />
+    <!--iPad3 & updated  -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="touch-icon-ipad-144.png" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/vnd.microsoft.icon" />
+    <link rel="Bookmark" href="/favicon.ico" />
+    <link rel="canonical" href="页面权威链接，待编辑" />
+    <!-- META WT -->
+
+    <title>天使汇 | 项目页面 | 让靠谱的项目找到靠谱的钱</title>
+    <link href="/static/css/wapsite/base-css.css" rel="stylesheet" />
+    <link href="/static/css/wapsite/investor/details.css" rel="stylesheet" />
+    <link href="/static/css/wapsite/user/registration/style.css" rel="stylesheet" />
+</head>
+<body>
+<div class="bk"></div>
+<div id="details" class="details">
+    <div class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
+    <div id="header" class="newhead">
+        <div class="logo touch-href" data-href="http://angelcrunch.com"></div>
+        <div class="options">
+            <span></span>
+            <ul class="hidden-menu">
+                <li class="touch-href" data-href="http://angelcrunch.com/startup_financing">创业项目</li>
+                <li class="touch-href" data-href="http://angelcrunch.com/angel">投资人</li>
+            </ul>
+        </div>
+        <div class="account">
+            <span></span>
+            <ul class="hidden-menu"></ul>
+        </div>
+    </div>
+
+    <div class="branding-head" ms-controller="basic-info">
+        <div class="icon"><img ms-src="data.logo||''" /></div>
+        <div class="brand-info">
+            <h1 ms-text="data.name"></h1>
+            <p ms-text="data.concept"></p>
+            <p class="extra" ms-text="data.industry"></p>
+        </div>
+        <div class="progress-container">
+            <div class="progress">
+                <div class="progress-bar progress-bar-success progress-bar-striped active reverse" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" ms-css-width="{{data.finance_percent > 100 ? 100 : data.finance_percent}}%">
+                    <span class="sr-only">{{data.finance_percent}}% Complete</span>
+                </div>
+            </div>
+            <p class="hidden2Visible"><em ms-if="window.account_info.role>0">投资意向: {{data.amount}}万（预融资{{data.hope_amount}}万）</em><em class="right" ms-if="data.day>0">剩余{{data.day}}天</em></p>
+        </div>
+    </div>
+    <div class="page-action">
+        <div class="btn-group">
+            <div class="btn-group-social">
+                <a id="follow-btn" class="follow-btn"><i></i><span>关注</span></a>
+                <a id="share-wechat" class="share-wechat"><i></i><span>分享</span></a>
+            </div>
+
+            <a id="send-investment-btn" class="btn btn-small orange touch-href" data-href="/vc_new">发送投资意向</a>
+        </div>
+    </div>
+    <div class="slider-container" ms-controller="basic-info" ms-if="data.pics && data.pics.length">
+        <ul ms-each-el="data.pics">
+            <li><img ms-src="el.small" /></li>
+        </ul>
+    </div>
+
+    <div class="logged-in">
+        <div class="article-list" ms-controller="deatils" >
+            <article class="intro" ms-if="data.descriptions ">
+                <h1>项目描述</h1>
+                <p class="silver" ms-if="data.descriptions.user_case">产品介绍</p>
+                <p ms-if="data.descriptions.user_case" ms-html="txt2html(data.descriptions.user_case)"></p>
+                <div class="item" ms-if="data.descriptions.market_research">
+                    <p class="silver">市场调研</p>
+                    <p ms-html="txt2html(data.descriptions.market_research)"></p>
+                </div>
+                <div class="item" ms-if="data.descriptions.advantage">
+                    <p class="silver">项目优势</p>
+                    <p ms-html="txt2html(data.descriptions.advantage)"></p>
+                </div>
+                <div class="item" ms-if="data.descriptions.pattern">
+                    <p class="silver">商业模式</p>
+                    <p ms-html="txt2html(data.descriptions.pattern)"></p>
+                </div>
+                <div class="item" ms-if="data.descriptions.plan">
+                    <p class="silver">发展规划</p>
+                    <p ms-html="txt2html(data.descriptions.plan)"></p>
+                </div>
+            </article>
+            <article class="team" ms-if="window.account_info.role>0 && data.team">
+            <h1>团队架构</h1>
+            <div class="item" ms-repeat="data.team">
+                <h3 ms-text="el.name"></h3>
+                <p class="avatar"><img ms-src="el.avatar||''" /></p>
+                <p class="experience" ms-if="el.firmname!=''">{{el.firmname}}{{" · " + el.title || ''}}</p>
+                <p class="gray" ms-html="txt2html(el.summary)"></p>
+            </div>
+            </article>
+            <article class="milestone" ms-if="window.account_info.role>0 && data.milestone">
+                <h1>项目大事记</h1>
+                <div class="item" ms-repeat="data.milestone">
+                    <p class="date">
+                        <i>{{el.M_dd}}</i><em>{{el.yyyy}}</em>
+                    </p>
+                    <p class="gray" ms-text="el.content"></p>
+                </div>
+            </article>
+            <article class="growing-up" ms-if="window.account_info.role>0 && data.growthdata">
+                <h1>成长数据</h1>
+                <div class="item" ms-repeat="data.growthdata">
+                    <p class="date">
+                        <i>{{el.M_dd}}</i><em>{{el.yyyy}}</em>
+                    </p>
+                    <p class="gray">{{el.content}}</p>
+                </div>
+            </article>
+            <article class="news" ms-if="window.account_info.role>0 && data.news.length>0">
+                <h1>新闻</h1>
+                <div ms-each-el="data.news">
+                    <p class="date">
+                        <i>{{el.M_dd}}</i><em>{{el.yyyy}}</em>
+                    </p>
+                    <div class="item">
+                        <p>{{el.title}}</p>
+                        <p class="gray">{{el.content}}</p>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <div class="invest-info" ms-controller="finance">
+            <article class="needs">
+                <div class="info-table">
+                    <ul>
+                        <li class="hourglass"><aside><i>{{data.hope_amount || 0}}W</i><em>预计融资</em></aside></li>
+                        <li class="pie-chat"><aside><i>{{data.stock_sale || 0}}%</i><em>出让股权比例</em></aside></li>
+                    </ul>
+                    <ul>
+                        <li class="money"><aside><i>{{data.min_quota || 0}}W</i><em>最低投资额</em></aside></li>
+                        <li class="bar-chat"><aside><i>{{data.price || 0}}W</i><em>融资前估值</em></aside></li>
+                    </ul>
+                </div>
+                <p ms-if="data.txt"><i>优先考虑的投资人：</i><em ms-text="data.txt"></em></p>
+            </article>
+            <article class="invester" ms-if="data.vc_list.length">
+                <h1>本轮投资意向<i ms-text="data.vc_list.length"></i></h1>
+                <div id="invester" class="investor-slider-container">
+                    <ul>
+                        <li ms-repeat="data.vc_list">
+                            <div>
+                                <p class="portrait"><img ms-src="el.avatar || ''" /></p>
+                                <p class="name">{{el.name}}</p>
+                                <p class="company">{{el.firmname}}</p>
+                                <p class="title">{{el.title}}</p>
+                                <div class="investment">{{el.amount}}W</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </article>
+            <article class="funds" ms-if="data.purpose">
+                <h1>资金用途</h1>
+                <div ms-html="txt2html(data.purpose)"></div>
+            </article>
+            <div class="article-list">
+                <article class="intro" ms-if="window.account_info.role>0">
+                    <h1>认购须知</h1>
+                    <p class="silver">本次融资形式</p>
+                    <p>新股增发</p>
+                    <div class="item">
+                        <p class="silver">股东法律结构</p>
+                        <p>以LP形式进入专项有限合伙</p>
+                    </div>
+                    <div class="item">
+                        <p class="silver">信息披露的权益</p>
+                        <p>季报、半年报、年报</p>
+                    </div>
+                    <div class="item">
+                        <p class="silver">是否具有反稀释认购权</p>
+                        <p>通过有限合伙享有</p>
+                    </div>
+                    <div class="item">
+                        <p class="silver">筹资条款</p>
+                        <p>本次发行计划出让不超过2.5%的股权，融资7500万人民币</p>
+                    </div>
+                    <div class="item">
+                        <p class="silver">认购条件</p>
+                        <p>对天使汇平台认证投资人每份￥100万，单一投资者认购不得超过5份；对战略投资者和机构投资者，单一投资者认购不得超过25份</p>
+                    </div>
+                    <div class="item">
+                        <p class="silver">合格机构投资人标准</p>
+                        <p>1. 在互联网、证券、金融领域有丰富的经验和资源，能够为天使汇带来强有力的附加价值</p>
+                        <p>2. 符合国家法律法规、政策、《公司章程》规定的股东要求和资格</p>
+                        <p>3. 无违法犯罪记录或其他违反法律、行政法规的行为</p>
+                        <p>4. 遵守公司相关制度、规则、管理规定，未实施有损于公司或妨碍公司正常运作的行为</p>
+                        <p>5. 未投资于其他从事与公司或其关联方相同或相似业务的民事主体</p>
+                    </div>
+                    <div class="item">
+                        <p class="silver">合格个人投资人标准</p>
+                        <p>天使汇平台认证投资人</p>
+                    </div>
+                    <div class="item">
+                        <p class="silver">超额认购的处理</p>
+                        <p>根据认购额度、能够提供的战略资源排序，优选具有附加价值的投资人</p>
+                    </div>
+                    <div class="item">
+                        <p class="silver">过往融资</p>
+                        <p>2013-10-05 , 融资3000万元人民币</p>
+                        <p>参与投资人 ： 弘道</p>
+                    </div>
+                </article>
+            </div>
+            <article class="questions-answers" ms-if="data.qa_list.length">
+                <h1>Q&A</h1>
+                <div class="group" ms-repeat="data.qa_list">
+                    <div class="item">
+                        <p class="title-container"><i>Q</i><em>{{el.name}}{{"·" + el.title}}</em></p>
+                        <p ms-text="el.q"></p>
+                    </div>
+                    <div class="item" ms-if="el.a">
+                        <p class="title-container"><i>A</i><em>{{el.a_name}}·项目创始人</em></p>
+                        <p ms-text="el.a"></p>
+                    </div>
+                </div>
+            </article>
+            <article class="extra-files">
+                <h1>商业企划书</h1>
+                <div class="file PDF"><a href="">查看商业计划书</a></div>
+            </article>
+
+            <article class="angel-extra-files">
+                <h1>招股说明书</h1>
+                <div class="angelfile"><a>申请查看招股说明书</a><i id="angel-arrow"></i><button>已经申请</button></div>
+                <div class="form registration">
+
+                    <div class="other-value">
+                        <textarea id="resource" placeholder="您能提供的附加价值"></textarea>
+                    </div>
+
+                    <div class="email">
+                        <p>请提供您的E-mail地址，用于接收招股说明书</p>
+                        <div><label>E-mail：</label><input id="form-email" type="email"></div>
+                    </div>
+
+                    <div class="prove">
+                        <p>请上传机构投资人注册资本（实缴）/净资产/总资产/基金管理资产一亿元以上证明</p>
+                    </div>
+                    <label>
+                        <span>上传资产证明</span>
+                        <i><button id="prove-btn" class="btn image-uploader" data-playground-bind="#prove-files" data-warning-text="需要上传资产证明" data-image-id="">开始上传</button></i>
+                    </label>
+                    <div id="prove-files" class="upload-playground">
+                        <input accept="image/*" class="hidden" type="file" name="cards" value="" />
+                        <p>资产证明预览</p>
+                        <div class="image-container loading">
+                            <img>
+                        </div>
+                    </div>
+
+                    <div class="addition-agreement">
+                        <p> 符合国家法律法规、政策、《公司章程》规定的股东要求和资格；<br>
+                            无违法犯罪记录或其他违反法律、行政法规的行为；<br>
+                            遵守公司相关制度、规则、管理规定，未实施有损于公司或妨碍公司正常运作的行为；<br>
+                            未投资于其他从事与公司或其关联方相同或相似业务的民事主体。</p>
+                        <div class="modules">
+                            <div class="mentos-container">
+                                <label class="label">
+                                    <input class="mentos" type="checkbox" name="additionalAgreement" value="1" />
+                                    <em class="tracks">
+                                        <em class="slider-button">
+                                            <i>×</i>
+                                            <i></i>
+                                        </em>
+                                    </em>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="form-submit" class="submit">
+                        <a>提交申请</a>
+                    </div>
+                </div>
+
+            </article>
+        </div>
+    </div>
+    <div class="not-logged-in">
+        <div class="login-options">
+            <p class="declare">详细信息只对<i>天使汇认证投资人</i>可见，您可以选择：</p>
+            <div class="control-module">
+                <em><i></i>&nbsp;天使汇认证投资人</em>
+                <a class="btn btn-small login-btn">登录</a>
+            </div>
+            <div class="control-module">
+                <em><i></i>&nbsp;更换投资人账号登录？</em>
+                <a class="btn btn-small login-btn">登录</a>
+            </div>
+            <div class="control-module">
+                <em><i></i>&nbsp;申请投资人账号</em>
+                <a id="shortly_reg" class="btn btn-small" >立即申请</a>
+            </div>
+            <div class="control-module">
+                <em><i></i>&nbsp;进行投资人认证</em>
+                <a id="longer_reg" class="btn btn-small" >申请认证</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="PA-layer" class="wechat-PA">
+        <div class="close">×</div>
+        <div class="summary">
+            <h2 class="title"></h2>
+            <div class="image-container">
+            </div>
+            <h5>截屏至相册后, 使用微信扫一扫</h5>
+            <p>手动复制链接:<input onclick="this.setSelectionRange(0, 999);"></p>
+        </div>
+    </div>
+
+    <div class="banner-footer">
+        <p>AngelCrunch.com</p>
+        <p>天使汇 - 让靠谱的项目找到靠谱的钱</p>
+    </div>
+</div>
+</body>
+<script src="https://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
+<script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
+<script src="/static/js/wapsite/angelcrunch_base.js"></script>
+<script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
+<script src="/static/js/wapsite/angelcrunch.app_downloadbar.jq.c.js"></script>
+<script src="https://dn-acac.qbox.me/avalon.mobile.min.js"></script>
+<script src="/static/js/lib/image_upload.min.js"></script>
+<script src="/static/js/wapsite/angelcrunch.image_tools.jq.c.js"></script>
+<script src="/static/js/wapsite/angelcrunch_self_details.js"></script>
+<script src="https://dn-acac.qbox.me/qrcode.js"></script>
+</html>
