@@ -241,7 +241,6 @@
     margin-top: 25px;
 }
 .self-form span{
-    width: 15%;
     margin: 0;
     line-height: 50px;
     float: left;
@@ -250,9 +249,16 @@
     display: inline-block;
     position: relative;
 }
+.self-form i{
+    margin-left: 5px;
+    display: inline-block;
+    width: 5%;
+    line-height: 55px;
+    float: left;
+}
 .self-form input{
     display: inline-block;
-    width: 82%;
+    width: 78%;
     float: right;
     height: 100%;
     background: #eee;
