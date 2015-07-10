@@ -228,7 +228,7 @@
             }
         }, $.extend(true,page_status.get_com_id(),data));
     };
-    this.pre_vc=function(call){
+    this.pre_vc=function(){
         var data={
             phone:$form.phone.val(),
             mail:$form.mail.val(),
@@ -259,7 +259,7 @@
         location.href=location.origin;
     });
     $submitbtn.touchtap(function(){
-
+        pre_vc();
     });
     //自动填充表单 如果已登录
     if(account_info.is_login){
