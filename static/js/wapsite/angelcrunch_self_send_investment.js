@@ -8,6 +8,7 @@
 (function(){
     this.page_config={
         api_pre_vc:this.base_mobile+'v4/startup/pre_vc',
+        api_send_investment:this.base_mobile+'v4/startup/vc',
         default_param:function(){
             return {
                     uid:account_info.id,
@@ -217,7 +218,7 @@
             weixin:$form.wechat.val(),
             angelname:$form.name.val()
         };
-        page_remote_data_syn(api.com_vc_standard,function(data){
+        page_remote_data_syn(page_config.api_send_investment,function(data){
             if(data.hasOwnProperty('success')){
                 if(data.success){
                     $sendresult.fadeIn();
