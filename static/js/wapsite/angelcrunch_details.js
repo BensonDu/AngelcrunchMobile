@@ -37,6 +37,17 @@
     avalon_model.finance=avalon.define("finance", function (vm) {vm.data = {};});
 }).call(this);
 
+//数据转HTML
+(function(){{
+    this.txt2html = function (txt) {
+        var html, txt_list, _i, _len;
+        txt_list = txt.split('\n');
+        html = '';
+        for (_i = 0, _len = txt_list.length; _i < _len; _i++)
+            html += "<p>" + txt_list[_i] + "</p>";
+        return html;
+    };
+}}).call(this);
 
 //数据获取
 (function(){
