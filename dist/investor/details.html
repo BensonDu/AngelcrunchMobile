@@ -88,7 +88,7 @@
         <div class="article-list" ms-controller="deatils" >
             <article class="intro" ms-if="window.account_info.role>0" ms-if="data.descriptions ">
                 <h1>项目描述</h1>
-                <p class="silver" ms-if="data.descriptions.user_case">用户场景</p>
+                <p class="silver" ms-if="data.descriptions.user_case">项目描述</p>
                 <p ms-if="data.descriptions.user_case" ms-html="txt2html(data.descriptions.user_case)"></p>
                 <div class="item" ms-if="data.descriptions.market_research">
                     <p class="silver">市场调研</p>
@@ -199,62 +199,6 @@
                 <h1>商业企划书</h1>
                 <div class="file PDF"><a href="">查看商业计划书</a></div>
             </article>
-
-            <article class="angel-extra-files">
-                <h1>招股说明书</h1>
-                <div class="angelfile"><a>申请查看招股说明书</a><i id="angel-arrow"></i><button>已经申请</button></div>
-                <div class="form registration">
-
-                    <div class="other-value">
-                        <textarea id="resource" placeholder="您能提供的附加价值"></textarea>
-                    </div>
-
-                    <div class="email">
-                        <p>请提供您的E-mail地址，用于接收招股说明书</p>
-                        <div><label>E-mail：</label><input id="form-email" type="email"></div>
-                    </div>
-
-                    <div class="prove">
-                        <p>请上传机构投资人注册资本（实缴）/净资产/总资产/基金管理资产一亿元以上证明</p>
-                    </div>
-                    <label>
-                        <span>上传资产证明</span>
-                        <i><button id="prove-btn" class="btn image-uploader" data-playground-bind="#prove-files" data-warning-text="需要上传资产证明" data-image-id="">开始上传</button></i>
-                    </label>
-                    <div id="prove-files" class="upload-playground">
-                        <input accept="image/*" class="hidden" type="file" name="cards" value="" />
-                        <p>资产证明预览</p>
-                        <div class="image-container loading">
-                            <img>
-                        </div>
-                    </div>
-
-                    <div class="addition-agreement">
-                        <p> 符合国家法律法规、政策、《公司章程》规定的股东要求和资格；<br>
-                            无违法犯罪记录或其他违反法律、行政法规的行为；<br>
-                            遵守公司相关制度、规则、管理规定，未实施有损于公司或妨碍公司正常运作的行为；<br>
-                            未投资于其他从事与公司或其关联方相同或相似业务的民事主体。</p>
-                        <div class="modules">
-                            <div class="mentos-container">
-                                <label class="label">
-                                    <input class="mentos" type="checkbox" name="additionalAgreement" value="1" />
-                                    <em class="tracks">
-                                        <em class="slider-button">
-                                            <i>×</i>
-                                            <i></i>
-                                        </em>
-                                    </em>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="form-submit" class="submit">
-                        <a>提交申请</a>
-                    </div>
-                </div>
-
-            </article>
         </div>
     </div>
     <div class="not-logged-in">
@@ -299,11 +243,7 @@
 <script src="https://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
 <script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
 <script src="/static/js/wapsite/angelcrunch_base.js"></script>
-<script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
-<script src="/static/js/wapsite/angelcrunch.app_downloadbar.jq.c.js"></script>
 <script src="https://dn-acac.qbox.me/avalon.mobile.min.js"></script>
-<script src="/static/js/lib/image_upload.min.js"></script>
-<script src="/static/js/wapsite/angelcrunch.image_tools.jq.c.js"></script>
 <script src="/static/js/wapsite/angelcrunch_details.js"></script>
 <script src="https://dn-acac.qbox.me/qrcode.js"></script>
 </html>
