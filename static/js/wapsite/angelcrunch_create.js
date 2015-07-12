@@ -167,8 +167,6 @@
     var $head   = $('#header'),
         $box    = $('#industry-choose'),
         $items  = $('#item-container'),
-        $contain= $box.children('div'),
-        $select = $box.children('.select'),
         $trigger= $('#industry-trigger');
 
     this.view_box={
@@ -176,15 +174,13 @@
             $head.css('position','fixed');
             $box.css('top',0);
             setTimeout(function(){
-                $contain.show();
-                $items.hide();},300);
+                $items.hide();
+            },300);
         },
         hide:function(){
             $items.show();
-            $contain.hide(0,function(){
-                $head.css('position','static');
-                $box.css('top',100+'%');
-            });
+            $head.css('position','static');
+            $box.css('top',100+'%');
         }
     };
     $trigger.touchtap(this.view_box.show);
