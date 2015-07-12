@@ -228,7 +228,6 @@ input:focus{
     transition:top .3s cubic-bezier(0.4, 0, 1, 1);
 }
 .industry-choose .element-container{
-    display: none;
     height: 100%;
     width: 100%;
 }
