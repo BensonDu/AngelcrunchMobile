@@ -86,8 +86,6 @@
             $img.show();
         }
     };
-    //钩子方法
-    this.upload_hook=function(){};
     //返回存储ID
     this.upload_img_id='';
 
@@ -124,7 +122,6 @@
             space_uploader.progress.show(100,100);
             space_uploader.view_upload.done(space_uploader.get_img_url(r.key,r));
             space_uploader.progress.hide();
-            space_uploader.upload_hook();
         })
     });
     //错误
@@ -166,8 +163,7 @@
 (function(){
     var $head   = $('#header'),
         $box    = $('#industry-choose'),
-        $items  = $('#item-container'),
-        $trigger= $('#industry-trigger');
+        $items  = $('#item-container');
 
     this.view_box={
         show:function(){
@@ -183,7 +179,6 @@
             $box.css('top',100+'%');
         }
     };
-    $trigger.touchtap(this.view_box.show);
     //APP内嵌 隐藏头部 选择框大小调整
     if(base_status.isapp){
         $box.css('margin-top',0);
@@ -209,6 +204,7 @@
 (function(){
     this.first_active=0;
     this.selected = [];
+    this.input_selected=[];
     this.second_level = function(){
         var parent = space_industry.list[space_framework.first_active],
             list = parent.child,
@@ -238,7 +234,6 @@
         space_framework.industry.list=space_industry.list;
         space_framework.industry.second_level=space_framework.second_level();
     };
-    this.result_hook=function(){};
     this.add_selected = function(name,isinput){
         var list = space_framework.selected,
             all =space_industry.list[space_framework.first_active],
@@ -282,12 +277,19 @@
     this.industry = avalon.define('industry-select', function (vm) {
         vm.list=[];
         vm.selected= [];
+        vm.input_selected=[];
         vm.second_level = [];
         vm.input = '';
         vm.btn_confirm=false;
         vm.cancle_industry=function(el){
             space_framework.selected.splice(el,1);
             space_framework.industry.selected = space_framework.selected;
+            space_framework.list_render();
+        };
+        vm.cancle_input_industry=function(el){
+            space_framework.input_selected.splice(el,1);
+            space_framework.industry.input_selected = space_framework.input_selected;
+            space_framework.industry.selected = space_framework.selected = space_framework.input_selected.concat();
             space_framework.list_render();
         };
         vm.first_active=function(index){
@@ -299,22 +301,26 @@
         };
         vm.write_new=space_framework.write_new;
         vm.cancle_choose=function(){
-            space_framework.industry.selected = space_framework.selected =[];
+            space_framework.industry.input_selected = space_framework.input_selected;
+            space_framework.industry.selected = space_framework.selected = space_framework.input_selected.concat();
             space_industry.view_box.hide();
             space_framework.list_render();
-            space_framework.result_hook();
         };
         vm.confirm_choose=function(){
             if(space_framework.selected.length>0){
+                space_framework.industry.input_selected = space_framework.input_selected = space_framework.selected.concat();
                 space_industry.view_box.hide();
-                space_framework.result_hook();
             }
         };
         vm.input_enter=function(e){
             if(e.keyCode == 13){
                 space_framework.write_new();
             }
-        }
+        };
+        vm.box_show=function(){
+            space_industry.view_box.show();
+            space_framework.list_render();
+        };
     })
 }).call(space_framework);
 
@@ -334,7 +340,7 @@
             ico: space_uploader.upload_img_id,
             com_name: $name.val(),
             stage: $stage.val(),
-            tag_list: space_framework.selected.join(','),
+            tag_list: space_framework.input_selected.join(','),
             description: $desc.val(),
             description_short: $one.val(),
             my_title: $position.val()
@@ -376,17 +382,7 @@
             space_create.submit();
         }
     });
-    //一堆事件绑定，要不然呢？
-    $name.keyup(function(){space_create.form_check();});
-    $one.keyup(function(){space_create.form_check();});
-    $desc.keyup(function(){space_create.form_check();});
-    $stage.change(function(){space_create.form_check();});
-    $position.change(function(){space_create.form_check();});
-    $agree.click(function(){space_create.form_check();});
-    //不是表单的钩子
-    space_uploader.upload_hook=space_create.form_check;
-    space_framework.result_hook=space_create.form_check;
-
+    setInterval(space_create.form_check,300);
 }).call(space_create);
 
 //创建完成
