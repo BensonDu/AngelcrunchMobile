@@ -89,13 +89,13 @@
             <textarea id="form-desc"></textarea>
         </label>
 
-        <label class="page-name industry">
-            <span>所属行业</span><em id="industry-trigger"></em>
+        <label class="page-name industry" ms-controller="industry-select">
+            <span>所属行业</span><em ms-on-tap="box_show()"></em>
         </label>
         <label class="page-desc industry">
             <p>所属行业最多选择5个 已选择</p>
             <div class="industry-container" ms-controller="industry-select">
-                <span ms-repeat="selected" ms-on-tap="cancle_industry($index)"><i ms-text="el"></i><em>×</em></span>
+                <span ms-repeat="input_selected" ms-on-tap="cancle_input_industry($index)"><i ms-text="el"></i><em>×</em></span>
             </div>
         </label>
 
