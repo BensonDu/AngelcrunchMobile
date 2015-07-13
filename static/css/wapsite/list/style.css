@@ -110,50 +110,6 @@
   margin-left:5px;
 }
 
-.section-list .progress-container {
-  display:inline-block;
-  width: 100%;
-  height: 52px;
-  padding: 14px 0 0;
-}
-
-.section-list .progress-container > p {
-  width: 100%;
-  text-align: left;
-  font-size:12px;
-  margin-top: 8px;
-  margin-left: -2px;
-}
-
-.section-list .progress-container > p em {
-  font-size: 12px;
-}
-
-.section-list .progress-container em.right {
-  float: right;
-  margin-right: -2px;
-}
-
-.section-list .progress-done {
-    display:inline-block;
-    width: 100%;
-    height: 52px;
-    padding: 14px 0 0;
-}
-
-.section-list .progress-done > p {
-    width: 100%;
-    text-align: left;
-    font-size:12px;
-    margin-top: 8px;
-    margin-left: -2px;
-}
-
-.section-list .progress-done > p em {
-    font-size: 12px;
-}
-
-
 .section-list .loading-container {
   width:100%;
   text-align:center;
@@ -167,10 +123,8 @@
   margin:0;
   background:url(/static/images/wapsite/cssimage/iconfont-iconloading.png) no-repeat scroll;
   background-size:40px;
-  -moz-animation: 1s linear 0s normal forwards infinite rotate;
-  -o-animation: 1s linear 0s normal forwards infinite rotate;
-  -webkit-animation: 1s linear 0s normal forwards infinite rotate;
-  animation: 1s linear 0s normal forwards infinite rotate;
+  -webkit-animation:rotate 1s linear 0s normal forwards infinite;
+  animation:rotate 1s linear 0s normal forwards infinite;
 }
 /*底部翻页*/
 .page-turn {
