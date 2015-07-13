@@ -127,7 +127,7 @@
     if(account_info.role<1)return false;
     this.view_dom={
         follow:$('#follow-btn'),
-        intention:$('#send-investment-btn'),
+        intention:$('.send-investment-btn'),
         notification:$('.notification'),
         pb_file:$('.PDF').children('a'),
         bk:$('.bk'),
