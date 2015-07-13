@@ -53,20 +53,23 @@
   margin-top: 8px;
 }
 
-.branding-head .progress-container {
+.branding-head .new-progress-container {
   width: 100%;
   padding: 20px 22px 20px 20px;
   background: #EEE;
+  height: auto;
 }
-
-.branding-head .progress-container > p {
+.branding-head .new-progress-container .new-progress-group .new-progress-sta p{
+    font-size: 14px;
+}
+.branding-head .new-progress-container > p {
   width: 100%;
   text-align: left;
   margin-top: 8px;
   margin-left: -2px;
 }
 
-.branding-head .progress-container > p em {
+.branding-head .new-progress-container > p em {
   font-size: 14px;
 }
 

@@ -302,7 +302,7 @@ input::-webkit-input-placeholder {
     width: 100%;
 }
 .new-progress-container .new-progress-group .new-progress{
-    width: 90%;
+    width: 88%;
     float: left;
     height:8px;
     margin-bottom:0px;
@@ -313,7 +313,7 @@ input::-webkit-input-placeholder {
     box-shadow:inset 0 1px 2px rgba(0,0,0,.1)
 }
 .new-progress-container .new-progress-group .new-progress .new-progress-bar{
-    width:60%;
+    width:0;
     height:100%;
     font-size:12px;
     line-height:20px;
