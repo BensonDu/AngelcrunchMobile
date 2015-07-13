@@ -65,7 +65,7 @@
                     <span class="sr-only">{{data.finance_percent}}% Complete</span>
                 </div>
             </div>
-            <p class="hidden2Visible"><em ms-if="window.account_info.role>0">投资意向: {{data.amount}}万（预融资{{data.hope_amount}}万）</em><em class="right" ms-if="data.day>0">剩余{{data.day}}天</em></p>
+            <p><em ms-if="window.account_info.role>0" ms-text="'投资意向: '+data.amount+'万（预融资'+data.hope_amount+'万)'"></em><em class="right" ms-if="data.day>0" ms-text="'剩余'+data.day+'天'"></em></p>
         </div>
     </div>
     <div class="page-action default-hidden">
