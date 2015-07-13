@@ -59,13 +59,14 @@
             <p ms-text="data.concept"></p>
             <p class="extra" ms-text="data.industry"></p>
         </div>
-        <div class="progress-container">
-            <div class="progress">
-                <div class="progress-bar progress-bar-success progress-bar-striped active reverse" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" ms-css-width="{{data.finance_percent > 100 ? 100 : data.finance_percent}}%">
-                    <span class="sr-only">{{data.finance_percent}}% Complete</span>
+        <div class="new-progress-container"  ms-if="el.coinveststatus>40 && el.coinveststatus<80">
+            <div class="new-progress-group">
+                <div class="new-progress">
+                    <div class="new-progress-bar" ms-css-width="(el.finishamount/el.amount > 1 ? 100 : el.finishamount/el.amount*100)+'%'"></div>
                 </div>
+                <div class="new-progress-sta"><p ms-text="(el.finishamount/el.amount*100).toFixed(0)+'%'"></p></div>
             </div>
-            <p class="hidden2Visible"><em ms-if="window.account_info.role>0">投资意向: {{data.amount}}万（预融资{{data.hope_amount}}万）</em><em class="right" ms-if="data.day>0">剩余{{data.day}}天</em></p>
+            <p><em ms-if="window.account_info.role>0" ms-text="'投资意向: '+el.finishamount+'万（预融资'+el.amount+'万)'"></em><em class="right"  ms-if="el.day>0" ms-text="'剩余'+el.day+'天'"></em></p>
         </div>
     </div>
     <div class="page-action">
