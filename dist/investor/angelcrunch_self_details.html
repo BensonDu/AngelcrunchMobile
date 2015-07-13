@@ -59,13 +59,14 @@
             <p ms-text="data.concept"></p>
             <p class="extra" ms-text="data.industry"></p>
         </div>
-        <div class="progress-container">
-            <div class="progress">
-                <div class="progress-bar progress-bar-success progress-bar-striped active reverse" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" ms-css-width="{{data.finance_percent > 100 ? 100 : data.finance_percent}}%">
-                    <span class="sr-only">{{data.finance_percent}}% Complete</span>
+        <div class="new-progress-container">
+            <div class="new-progress-group">
+                <div class="new-progress">
+                    <div class="new-progress-bar" ms-css-width="(data.finance_percent > 1 ? 100 : data.finance_percent)+'%'"></div>
                 </div>
+                <div class="new-progress-sta"><p ms-text="data.finance_percent+'%'"></p></div>
             </div>
-            <p class="hidden2Visible"><em ms-if="window.account_info.role>0">投资意向: {{data.amount}}万（预融资{{data.hope_amount}}万）</em><em class="right" ms-if="data.day>0">剩余{{data.day}}天</em></p>
+            <p><em ms-if="window.account_info.role>0" ms-text="'投资意向: '+data.amount+'万（预融资'+data.hope_amount+'万)'"></em><em class="right"  ms-if="data.day>0" ms-text="'剩余'+data.day+'天'"></em></p>
         </div>
     </div>
     <div class="page-action">
