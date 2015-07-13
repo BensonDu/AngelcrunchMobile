@@ -59,14 +59,14 @@
             <p ms-text="data.concept"></p>
             <p class="extra" ms-text="data.industry"></p>
         </div>
-        <div class="new-progress-container"  ms-if="el.coinveststatus>40 && el.coinveststatus<80">
+        <div class="new-progress-container">
             <div class="new-progress-group">
                 <div class="new-progress">
-                    <div class="new-progress-bar" ms-css-width="(el.finishamount/el.amount > 1 ? 100 : el.finishamount/el.amount*100)+'%'"></div>
+                    <div class="new-progress-bar" ms-css-width="(data.finance_percent > 1 ? 100 : data.finance_percent)+'%'"></div>
                 </div>
-                <div class="new-progress-sta"><p ms-text="(el.finishamount/el.amount*100).toFixed(0)+'%'"></p></div>
+                <div class="new-progress-sta"><p ms-text="data.finance_percent+'%'"></p></div>
             </div>
-            <p><em ms-if="window.account_info.role>0" ms-text="'投资意向: '+el.finishamount+'万（预融资'+el.amount+'万)'"></em><em class="right"  ms-if="el.day>0" ms-text="'剩余'+el.day+'天'"></em></p>
+            <p><em ms-if="window.account_info.role>0" ms-text="'投资意向: '+data.amount+'万（预融资'+data.hope_amount+'万)'"></em><em class="right"  ms-if="data.day>0" ms-text="'剩余'+data.day+'天'"></em></p>
         </div>
     </div>
     <div class="page-action">
