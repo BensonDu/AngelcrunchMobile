@@ -168,15 +168,14 @@
     this.view_box={
         show:function(){
             $head.css('position','fixed');
-            $box.css('top',0);
-            setTimeout(function(){
+            $box.animate({top:0+'%'},150,'linear',function(){
                 $items.hide();
-            },300);
+            });
         },
         hide:function(){
             $items.show();
             $head.css('position','static');
-            $box.css('top',100+'%');
+            $box.animate({top:100+'%'},150,'linear');
         }
     };
     //APP内嵌 隐藏头部 选择框大小调整
