@@ -64,13 +64,15 @@
         isipad: !!base_ua.indexOf('ipad') > -1,
         */
     };
-    this.base_regex = {
-        phone: /^\d{11}$/,
-        strict_validation_phone: /^(1(([35][0-9])|(47)|[8][0126789]))\d{8}$/,
-        mail: /^[a-z\d]+(\.[a-z\d]+)*@([\da-z](-[\da-z])?)+(\.{1,2}[a-z]+)+$/,
-        qq: /^\d{5,10}$/,
-        chinese_Unicode: /^[\u2E80-\u9FFF]+$/,
-        chinese_Name: /^[\u2E80-\u9FFF]{2,5}$/
+    this.base_regex = function(){
+        return {
+                phone: /^\d{11}$/,
+                strict_validation_phone: /^(1(([35][0-9])|(47)|[8][0126789]))\d{8}$/,
+                mail: /^[a-z\d]+(\.[a-z\d]+)*@([\da-z](-[\da-z])?)+(\.{1,2}[a-z]+)+$/,
+                qq: /^\d{5,10}$/,
+                chinese_Unicode: /^[\u2E80-\u9FFF]+$/,
+                chinese_Name: /^[\u2E80-\u9FFF]{2,5}$/
+        };
     };
 
     //localStorage存储管理

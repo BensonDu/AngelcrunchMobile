@@ -224,8 +224,8 @@ input:focus{
     margin: 46px auto auto;
     z-index: 10;
     background: #f5f5f5;
-    -webkit-transition:top .2s cubic-bezier(0.4, 0, 1, 1);
-    transition:top .2s cubic-bezier(0.4, 0, 1, 1);
+    -webkit-transition:top .2s ease-out;
+    transition:top .2s ease-out;
 }
 .industry-choose .element-container{
     position: relative;
