@@ -33,7 +33,13 @@
 (function(){
     this.avalon_model={};
     avalon_model.basic_info=avalon.define("basic-info", function (vm) {vm.data = {};});
-    avalon_model.details=avalon.define("deatils", function (vm) {vm.data = {};});
+    avalon_model.details=avalon.define("deatils", function (vm) {
+        vm.data = {
+            growthdata:[],
+            milestone:[],
+            news:[],
+        };
+    });
     avalon_model.finance=avalon.define("finance", function (vm) {vm.data = {};});
 }).call(this);
 
