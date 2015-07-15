@@ -1211,15 +1211,15 @@ body.footer-close-bottom .banner-footer {
 }
 
 .newhead .search {
-  position:absolute;
-  margin-top:6px;
-  right: 19%;
+  margin-top:7px;
+  margin-right: 1%;
+  float: right;
   cursor:pointer;
-  z-index: 20;
   -webkit-transition:right .3s ease;
-  -o-transition:right .3s ease;
-  -moz-transition:right .3s ease;
   transition:right .3s ease;
+}
+.newhead .search.active{
+    margin-right: 0%;
 }
 .newhead .search i{
   display:inline-block;
