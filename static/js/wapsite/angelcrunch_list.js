@@ -281,6 +281,25 @@
             },13);
         }
     };
+    //列表每日更新
+    this.keep_data_update=function(){
+      var key  = 'list_last_update',
+          index= this.page_config.currentpage,
+          last = base_local_data.getdata(key),
+          now  = $.now();
+
+        if(!last){
+            last = now;
+            base_local_data.savedata(key,now);
+            return false;
+        }
+        if(index == 1 && now-last>1000*60*60*24){
+            base_local_data.savedata(key,now);
+            return false;
+        }
+
+        return true;
+    };
     //数据整理
     this.page_data_get=function(call){
         var getcache, todel,data,
@@ -295,7 +314,7 @@
 
         getcache=base_local_data.getdata(page_config.localprecacheprefix+this.page_config.currentpage);
         //如果该页有缓存调用 或 Ajax获取
-        if(getcache){
+        if(getcache && this.keep_data_update()){
             call(getcache);
         }
         else{
