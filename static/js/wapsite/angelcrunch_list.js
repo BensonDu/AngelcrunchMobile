@@ -38,7 +38,7 @@
               if(!search_model_display.status.topbar) {
                   $searchmodel.show(0, function () {
                       $(this).css({display: 'block', opacity: 0.95});
-                      $btn.css('right', '16%');
+                      $btn.addClass('active');
                   });
                   search_model_display.status.topbar = true;
               }
@@ -46,7 +46,7 @@
           hide:function(){
               if(search_model_display.status.topbar) {
                   $searchmodel.css('opacity', 0);
-                  $btn.css('right', '19%');
+                  $btn.removeClass('active');
                   $searchmodel.hide();
                   search_model_display.status.topbar = false;
               }
@@ -293,7 +293,7 @@
             base_local_data.savedata(key,now);
             return false;
         }
-        if(index == 1 && now-last>1000*60*60*24){
+        if(index < 3 && now-last>1000*60*60*24){
             base_local_data.savedata(key,now);
             return false;
         }
