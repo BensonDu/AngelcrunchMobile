@@ -188,59 +188,6 @@
     };
 }).call(this);
 
-(function(){
-    var sep='-',
-        con=':',
-        that = this;
-
-    this.get_hash_str = function(){
-        var s = location.hash.split('#'),
-            str = s.length>1 ? s[1] : '';
-
-        return str.split('?')[0];
-    };
-
-    this.get_data=function(k){
-        var hash = that.get_hash_str().split(sep),
-            l = hash.length,
-            a = {}, c = [];
-
-        if(typeof k != 'undefined'){
-            for(var i = 0 ; i < l ; i++){
-                c = hash[i].split(con);
-                if(c.length == 2 && c[0] == encodeURIComponent(k)){
-                 return decodeURIComponent(c[1]);
-                }
-            }
-        }
-        else{
-            for(var n = 0 ; n < l ; n++){
-                c = hash[n].split(con);
-                if(c.length == 2){
-                    a[decodeURIComponent(c[0])] = decodeURIComponent(c[1]);
-                }
-            }
-        }
-        return a;
-    };
-
-    this.save_data=function(d){
-        var s = '#',
-            o = that.get_data(),
-            a = typeof d == 'object'? d :{},
-            n = $.extend(true,o,a);
-
-        for(var i in n){
-          if(typeof n[i] != 'object' && typeof n[i]!= 'function'){
-              s+= ''+encodeURIComponent(i)+con+encodeURIComponent(n[i])+sep;
-          }
-        };
-
-        return s.slice(0,s.length-1);
-    };
-
-}).call(define('base_hash_new'));
-
 //获取URL传参
 (function(){
     this.$_GET={};

@@ -24,7 +24,6 @@
   line-height:50px;
   padding:0 5.6%;
 }
-
 .section-list {
   display:inline-block;
   width:100%;
@@ -38,8 +37,6 @@
   padding:17px 5.6% 4px;
   margin-bottom:6px;
   background:#FFF;
-  -moz-animation: fadeIn 0.7s linear 0s normal forwards;
-  -o-animation: fadeIn 0.7s linear 0s normal forwards;
   -webkit-animation:fadeIn 0.7s linear 0s normal forwards;
   animation: fadeIn 0.7s linear 0s normal forwards;
 }
@@ -110,12 +107,14 @@
   margin-left:5px;
 }
 
+.sd-list .loading-container,
 .section-list .loading-container {
   width:100%;
   text-align:center;
   margin-top:52px;
 }
 
+.sd-list .loading-container .loading,
 .section-list .loading-container .loading {
   display:inline-block;
   width:40px;
@@ -125,6 +124,76 @@
   background-size:40px;
   -webkit-animation:rotate 1s linear 0s normal forwards infinite;
   animation:rotate 1s linear 0s normal forwards infinite;
+}
+/*闪投列表*/
+.sd-list{
+    display:none;
+    width:100%;
+    min-height:736px;
+    margin-top:6px;
+}
+.sd-list section{
+    width:100%;
+    min-height:100px;
+    padding:17px 0 4px;
+    margin-bottom:6px;
+    background:#FFF;
+    -webkit-animation:fadeIn 0.7s linear 0s normal forwards;
+    animation: fadeIn 0.7s linear 0s normal forwards;
+}
+.sd-list section .info{
+    width: 100%;
+    position: relative;
+    display: inline-block;
+}
+.sd-list section .info .theme{
+    width: 100%;
+    height: auto;
+}
+.sd-list section .info .slogan{
+    position: absolute;
+    width: 100%;
+    height: 45px;
+    background: rgba(0,0,0,0.8);
+    bottom: 0;
+}
+.sd-list section .info .slogan .logo{
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    left: 10px;
+    top: -30px;
+    border: 1px solid #000;
+    border-radius: 3px;
+}
+.sd-list section .info .slogan p{
+    display: inline-block;
+    float: left;
+    margin-left: 80px;
+    color: #fff;
+    line-height: 45px;
+    font-size: 14px;
+    width: 75%;
+    white-space:nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.sd-list section .info .slogan p span{
+    display: inline-block;
+    margin-left: 0;
+    line-height: 45px;
+    color: #fff;
+}
+.sd-list section .info .slogan p span.name{
+    font-size: 16px;
+    font-weight: bold;
+}
+.sd-list section .info .slogan p span.concept{
+    font-size: 13px;
+    margin-left: 1em;
+}
+.sd-list section .new-progress-container{
+    padding:14px 3%;
 }
 /*底部翻页*/
 .page-turn {
@@ -180,8 +249,100 @@
 .page-turn .btn.next-page {
   float:right;
 }
+/*列表过滤*/
+.filter-occupy{
+    width: 100%;
+    height: 40px;
+}
+.filter{
+    width: 100%;
+    height: 40px;
+    background: #f5f5f5;
+}
+.filter div{
+    height: 100%;
+    width: 100%;
+    min-width: 150px;
+    text-align: center;
+    padding:0 5%;
+    position: relative;
+}
+.filter div a{
+    position: relative;
+    display: inline-block;
+    float: left;
+    width: 33%;
+    height: 100%;
+    padding: 5px 0 5px 18px;
+}
+.filter div a span{
+    font-size: 16px;
+    line-height: 28px;
+    padding: 6px;
+    display: inline-block;
+}
 
-
+.filter div a span:after{
+    content: '';
+    float: right;
+    width: 25px;
+    height: 25px;
+    background: url("http://dn-acac.qbox.me/arrow_down.png") no-repeat 50% 50%;
+    background-size: 25px 25px;
+}
+.filter div a.active span,
+.filter div a:active span{
+    color: #d36b39;
+}
+.filter div a.active span:after,
+.filter div a:active span:after{
+    background: url("http://dn-acac.qbox.me/arrow_down_o.png") no-repeat 50% 50%;
+    background-size: 25px 25px;
+}
+.filter ul{
+    position: absolute;
+    display: none;
+    width: 100%;
+    top: 40px;
+    left: 0;
+    padding: 0 10% 35px;
+    z-index: -1;
+    background: rgba(245,245,245,1);
+    max-height: 360px;
+    overflow-y:auto ;
+    opacity: 0;
+    -webkit-animation:fadeIn 0.4s linear 0.5s normal forwards;
+     animation: fadeIn 0.4s linear 0.5s normal forwards;
+}
+.filter ul li{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    text-align: left;
+    float: left;
+    font-size: 14px;
+    line-height:40px ;
+    height: 40px;
+    border-bottom: 1px solid #aaa;
+}
+.filter ul li:active{
+    color: #d36b39;
+}
+.filter.top{
+    position: fixed;
+    top: 0;
+    z-index: 11;
+    -webkit-animation:slipdown 0.4s linear 0s normal forwards;
+    animation: slipdown 0.4s linear 0s normal forwards;
+}
+.filter.top div{
+    box-shadow:#666 0 0 5px 1px;
+    border-bottom: 2px solid #d36b39;
+}
+.filter ul.active{
+    box-shadow:inset #666 0 0 5px 1px;
+    display: inline-block;
+ }
 /*******************
        Keyframes
   ********************/
@@ -193,36 +354,6 @@
 
   100% {
     -webkit-transform: rotate(360deg) translateZ(-1px);
-  }
-}
-
-@-moz-keyframes rotate {
-  0% {
-    -moz-transform: rotate(0deg) translateZ(-1px);
-  }
-
-  100% {
-    -moz-transform: rotate(360deg) translateZ(-1px);
-  }
-}
-
-@-o-keyframes rotate {
-  0% {
-    -o-transform: rotate(0deg) translateZ(-1px);
-  }
-
-  100% {
-    -o-transform: rotate(360deg) translateZ(-1px);
-  }
-}
-
-@-ms-keyframes rotate {
-  0% {
-    -ms-transform: rotate(0deg) translateZ(-1px);
-  }
-
-  100% {
-    -ms-transform: rotate(360deg) translateZ(-1px);
   }
 }
 
@@ -247,36 +378,6 @@
     }
 }
 
-@-moz-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@-o-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
-@-ms-keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 1;
-    }
-}
-
 @keyframes fadeIn {
     0% {
         opacity: 0;
@@ -284,5 +385,25 @@
 
     100% {
         opacity: 1;
+    }
+}
+/*筛选栏滑下*/
+@-webkit-keyframes slipdown {
+    0% {
+        top: -40px;
+    }
+
+    100% {
+        top: 0;
+    }
+}
+
+@keyframes slipdown {
+    0% {
+        top: -40px;
+    }
+
+    100% {
+        top: 0;
     }
 }
