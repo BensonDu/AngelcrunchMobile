@@ -288,16 +288,12 @@
           last = base_local_data.getdata(key),
           now  = $.now();
 
-        if(!last){
-            last = now;
+        if(!last || (index < 3 && now-last>1000*60*60*24)){
             base_local_data.savedata(key,now);
+            base_local_data.deldata(page_config.localprecacheprefix+1);
+            base_local_data.deldata(page_config.localprecacheprefix+2);
             return false;
         }
-        if(index < 3 && now-last>1000*60*60*24){
-            base_local_data.savedata(key,now);
-            return false;
-        }
-
         return true;
     };
     //数据整理
