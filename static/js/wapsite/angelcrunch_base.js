@@ -28,11 +28,9 @@
     this.base_ua=navigator.userAgent.toLowerCase();
     this.api={
         login:this.base_mobile+'v2/home/login',
-        comlist:this.base_mobile+'v2/startup',
         log:'http://yx.dubaoxing.com/api/remotelog?msg=id_',
         user_info:this.base_mobile+'v2/home/user_info',
         host_id:this.base_mobile+'v3/host_id',
-        comlistsearch:this.base_mobile+'v2/startup_search',
         com_details:this.base_mobile+'v2/startup/m_detail',
         com_finace_info:this.base_mobile+'v2/startup/m_finance',
         com_basic_info:this.base_mobile+'v2/startup/base_info',

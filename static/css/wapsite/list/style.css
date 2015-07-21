@@ -1,18 +1,47 @@
-﻿/*/
-/*
-/* Rank: 3
-/* Standard：Google
-/*
-/*/
-
-/*******************
+﻿/*******************
     branding head
   *******************/
-
+.bk_new{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    opacity: 0;
+    z-index: 10;
+    display: none;
+}
+.fadeTransIn{
+    -webkit-animation:fadeTransIn 0.3s linear 0s normal forwards;
+    animation: fadeTransIn 0.3s linear 0s normal forwards;
+}
+.fadeTransOut{
+    -webkit-animation:fadeTransOut 0.2s linear 0s normal forwards;
+    animation: fadeTransOut 0.2s linear 0s normal forwards;
+}
 .details {
   background:#F5F5F5;
 }
+.loading-container {
+    display: none;
+    position: absolute;
+    width:100%;
+    height: 100%;
+    text-align:center;
+    background: rgba(255,255,255,0.9);
+    z-index: 5;
+}
 
+.loading-container .loading {
+    width: 30px;
+    height: 30px;
+    margin: 50% auto;
+    background:url(http://dn-xswe.qbox.me/fOhvRtoHnzQkvAGNjuRANg) no-repeat;
+    background-size:30px;
+}
+.list-container{
+    width: 100%;
+    position: relative;
+}
 .title-header {
   width:100%;
   height:48px;
@@ -25,7 +54,7 @@
   padding:0 5.6%;
 }
 .section-list {
-  display:inline-block;
+  display:block;
   width:100%;
   min-height:736px;
   margin-top:6px;
@@ -106,28 +135,9 @@
   font-size:12px;
   margin-left:5px;
 }
-
-.sd-list .loading-container,
-.section-list .loading-container {
-  width:100%;
-  text-align:center;
-  margin-top:52px;
-}
-
-.sd-list .loading-container .loading,
-.section-list .loading-container .loading {
-  display:inline-block;
-  width:40px;
-  height:40px;
-  margin:0;
-  background:url(/static/images/wapsite/cssimage/iconfont-iconloading.png) no-repeat scroll;
-  background-size:40px;
-  -webkit-animation:rotate 1s linear 0s normal forwards infinite;
-  animation:rotate 1s linear 0s normal forwards infinite;
-}
 /*闪投列表*/
 .sd-list{
-    display:none;
+    display:block;
     width:100%;
     min-height:736px;
     margin-top:6px;
@@ -149,6 +159,9 @@
 .sd-list section .info .theme{
     width: 100%;
     height: auto;
+    min-height: 180px;
+    background: url("http://dn-acac.qbox.me/SD_default_600x.png") no-repeat 50% 50%;
+    background-size: 100%;
 }
 .sd-list section .info .slogan{
     position: absolute;
@@ -211,20 +224,6 @@
     width: 100%;
 }
 
-@media only screen and (max-width: 359px) {
-  .page-turn {
-    padding-left:12.4%;
-    padding-right:12.4%;
-  }
-}
-
-@media only screen and (max-width: 315px) {
-  .page-turn {
-    padding-left:5.4%;
-    padding-right:5.4%;
-  }
-}
-
 .page-turn p {
   display:inline-block;
   line-height:28px;
@@ -264,21 +263,22 @@
     width: 100%;
     min-width: 150px;
     text-align: center;
-    padding:0 5%;
     position: relative;
 }
 .filter div a{
     position: relative;
     display: inline-block;
-    float: left;
-    width: 33%;
+    text-align: center;
+    width: 24%;
     height: 100%;
-    padding: 5px 0 5px 18px;
+    padding: 5px 0;
 }
 .filter div a span{
-    font-size: 16px;
-    line-height: 28px;
-    padding: 6px;
+    min-width: 80px;
+    font-size: 14px;
+    line-height: 25px;
+    padding: 6px 0;
+    text-align: right;
     display: inline-block;
 }
 
@@ -286,18 +286,20 @@
     content: '';
     float: right;
     width: 25px;
-    height: 25px;
+    height: 23px;
     background: url("http://dn-acac.qbox.me/arrow_down.png") no-repeat 50% 50%;
     background-size: 25px 25px;
 }
 .filter div a.active span,
 .filter div a:active span{
-    color: #d36b39;
+    color: #ef3d00;
 }
 .filter div a.active span:after,
 .filter div a:active span:after{
     background: url("http://dn-acac.qbox.me/arrow_down_o.png") no-repeat 50% 50%;
     background-size: 25px 25px;
+    transform:rotateX(180deg);
+    -webkit-transform:rotateX(180deg);
 }
 .filter ul{
     position: absolute;
@@ -305,29 +307,60 @@
     width: 100%;
     top: 40px;
     left: 0;
-    padding: 0 10% 35px;
-    z-index: -1;
+    z-index: 2;
     background: rgba(245,245,245,1);
-    max-height: 360px;
-    overflow-y:auto ;
+    max-height: 400px;
+    overflow-y: scroll;
     opacity: 0;
-    -webkit-animation:fadeIn 0.4s linear 0.5s normal forwards;
-     animation: fadeIn 0.4s linear 0.5s normal forwards;
+    -webkit-animation:fadeIn 0.4s linear 0s normal forwards;
+     animation: fadeIn 0.4s linear 0s normal forwards;
+}
+.filter ul::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 3px;
+}
+.filter ul::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: rgba(0,0,0,.5);
+    -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }
 .filter ul li{
     position: relative;
     display: inline-block;
     width: 100%;
+    line-height:45px ;
+    height: 45px;
+    padding: 0 7%;
+    border-bottom: 1px solid #ccc;
+}
+.filter ul li span{
+    display: inline-block;
     text-align: left;
     float: left;
     font-size: 14px;
-    line-height:40px ;
-    height: 40px;
-    border-bottom: 1px solid #aaa;
+    line-height:45px ;
+    width: 100%;
+}
+.filter ul li.active{
+    color:#ef3d00;
+}
+.filter ul li.active :after{
+    content: '';
+    height: 45px;
+    width: 45px;
+    margin-right:-10px;
+    display: inline-block;
+    float: right;
+    background: url("http://dn-acac.qbox.me/selected_icon.png") no-repeat 50% 50%;
+    background-size: 15px 15px;
 }
 .filter ul li:active{
-    color: #d36b39;
+    background: #ccc;
 }
+
+.filter ul li:active span{
+     color: #fff;
+ }
 .filter.top{
     position: fixed;
     top: 0;
@@ -337,10 +370,9 @@
 }
 .filter.top div{
     box-shadow:#666 0 0 5px 1px;
-    border-bottom: 2px solid #d36b39;
+    border-bottom: 2px solid #333;
 }
 .filter ul.active{
-    box-shadow:inset #666 0 0 5px 1px;
     display: inline-block;
  }
 /*******************
@@ -387,7 +419,47 @@
         opacity: 1;
     }
 }
+/*渐透*/
+@-webkit-keyframes fadeTransIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
+
+@keyframes fadeTransIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
+@-webkit-keyframes fadeTransOut {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
+
+@keyframes fadeTransOut {
+    0% {
+        opacity: 0.6;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
 /*筛选栏滑下*/
+
 @-webkit-keyframes slipdown {
     0% {
         top: -40px;
@@ -405,5 +477,18 @@
 
     100% {
         top: 0;
+    }
+}
+@media only screen and (max-width: 359px) {
+    .page-turn {
+        padding-left:12.4%;
+        padding-right:12.4%;
+    }
+}
+
+@media only screen and (max-width: 315px) {
+    .page-turn {
+        padding-left:5.4%;
+        padding-right:5.4%;
     }
 }

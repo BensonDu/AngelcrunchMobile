@@ -11,7 +11,7 @@
         vm.searchhistory=function(e){
             search_import(this.innerHTML);
         }
-    })
+    });
 }).call(this);
 
 //搜索模块
@@ -23,6 +23,7 @@
         $close=$searchmodel.find('i'),sta=false,
         $cancelsearch=$('.cancelsearch'),
         $searchresult=$('.search-result'),
+        $filter =$('.filter-occupy'),
         domain=this;
     this.search_config_cache={};
     this.search_model_display={
@@ -34,23 +35,23 @@
             searching:false
         },
         topbar:{
-          show:function(){
-              if(!search_model_display.status.topbar) {
-                  $searchmodel.show(0, function () {
-                      $(this).css({display: 'block', opacity: 0.95});
-                      $btn.addClass('active');
-                  });
-                  search_model_display.status.topbar = true;
-              }
-          },
-          hide:function(){
-              if(search_model_display.status.topbar) {
-                  $searchmodel.css('opacity', 0);
-                  $btn.removeClass('active');
-                  $searchmodel.hide();
-                  search_model_display.status.topbar = false;
-              }
-          }
+            show:function(){
+                if(!search_model_display.status.topbar) {
+                    $searchmodel.show(0, function () {
+                        $(this).css({display: 'block', opacity: 0.95});
+                        $btn.addClass('active');
+                    });
+                    search_model_display.status.topbar = true;
+                }
+            },
+            hide:function(){
+                if(search_model_display.status.topbar) {
+                    $searchmodel.css('opacity', 0);
+                    $btn.removeClass('active');
+                    $searchmodel.hide();
+                    search_model_display.status.topbar = false;
+                }
+            }
         },
         history:{
             show:function(){
@@ -94,13 +95,17 @@
         result:{
             show:function(name,count){
                 var $span=$searchresult.find('span');
-                    $searchresult.show();
-                    $span.eq(0).html(name);
-                    $span.eq(1).html(count);
+                $searchresult.show();
+                $span.eq(0).html(name);
+                $span.eq(1).html(count);
+                $filter.hide();
                 search_model_display.status.result=true;
             },
             hide:function(){
-                setTimeout(function(){ $searchresult.hide();},200);
+                setTimeout(function(){
+                    $searchresult.hide();
+                    $filter.show();
+                },200);
                 search_model_display.status.result=false;
             }
         }
@@ -181,19 +186,20 @@
         search_model_display.bk.hide();
         search_model_display.input.blur();
         search_model_display.input.fill();
+        space_filter.view_filter.hide();
     });
     $close.touchtap(function(){
         //正常显示关闭
-            setTimeout(function(){
-                search_model_display.history.hide();
-                search_model_display.topbar.hide();
-                search_model_display.bk.hide();
-            },100);
+        setTimeout(function(){
+            search_model_display.history.hide();
+            search_model_display.topbar.hide();
+            search_model_display.bk.hide();
+        },100);
 
-            search_model_display.input.blur();
-            search_model_display.input.fill();
-            //取消搜索
-            search_model_display.status.searching && search_cancel();
+        search_model_display.input.blur();
+        search_model_display.input.fill();
+        //取消搜索
+        search_model_display.status.searching && search_cancel();
 
     });
     $cancelsearch.touchtap(function(){
@@ -205,8 +211,8 @@
         }
     });
     $input.focus(function(){
-       search_model_display.history.show();
-       search_model_display.bk.show();
+        search_model_display.history.show();
+        search_model_display.bk.show();
     });
 }).call(this);
 
@@ -283,21 +289,17 @@
     };
     //列表每日更新
     this.keep_data_update=function(){
-      var key  = 'list_last_update',
-          index= this.page_config.currentpage,
-          last = base_local_data.getdata(key),
-          now  = $.now();
+        var key  = 'list_last_update',
+            index= this.page_config.currentpage,
+            last = base_local_data.getdata(key),
+            now  = $.now();
 
-        if(!last){
-            last = now;
+        if(!last || (index < 3 && now-last>1000*60*60*24)){
             base_local_data.savedata(key,now);
+            base_local_data.deldata(page_config.localprecacheprefix+1);
+            base_local_data.deldata(page_config.localprecacheprefix+2);
             return false;
         }
-        if(index < 3 && now-last>1000*60*60*24){
-            base_local_data.savedata(key,now);
-            return false;
-        }
-
         return true;
     };
     //数据整理
@@ -435,3 +437,67 @@
 
 
 }).call(this);
+//筛选模块
+(function(){
+    var $dom = {
+            filter:$('#list-filter'),
+            select:$('#list-filter').children().children('a')
+        };
+
+    this.view_filter={
+        show:function(){
+            $dom.filter.addClass('top');
+        },
+        hide:function(){
+           // $(window).scrollTop(0);
+            $dom.filter.removeClass('top');
+            space_filter.avalon_filter.list_display='';
+        }
+    };
+    $(window).scroll(function(){
+        if($(this).scrollTop()>75){
+           return space_filter.view_filter.show();
+        }
+        if($(this).scrollTop()<46){
+            search_model_display.bk.hide();
+           return space_filter.view_filter.hide();
+        }
+    });
+    this.select_active=function(index){
+        $dom.select.removeClass('active');
+        $dom.select.eq(index).addClass('active');
+    };
+    this.filter_acitve=function(){
+        $(window).scrollTop(85);
+        space_filter.avalon_filter.list_display='active';
+        search_model_display.bk.show();
+    };
+    this.industry_list = ["电子商务","移动互联网","信息技术","游戏","旅游","教育","金融","社交","娱乐","硬件","能源","医疗健康","餐饮","企业","平台","汽车","数据","房产酒店","文化艺术","体育运动","生物科学","媒体资讯","广告营销","节能环保","消费生活","工具软件","资讯服务","智能设备"];
+    this.district_list = ['全部','北京','上海','深圳','广州','杭州','南京','西安','成都','苏州','天津','无锡','武汉','重庆','厦门','青岛'];
+    this.page_list     = ['闪投项目','全部项目'];
+    this.avalon_filter = avalon.define("list-filter", function (vm) {
+
+        vm.page_name='闪投项目';
+        vm.industry_name='全部行业';
+        vm.district_name='全部地区';
+        vm.list_display='';
+        vm.list_content= space_filter.page_list.concat();
+        vm.list_page=function(){
+            space_filter.select_active(0);
+            space_filter.filter_acitve();
+            space_filter.avalon_filter.list_content=space_filter.page_list.concat();
+        };
+        vm.list_industry=function(){
+            space_filter.select_active(1);
+            space_filter.filter_acitve();
+            space_filter.avalon_filter.list_content=space_filter.industry_list.concat();
+        };
+        vm.list_district=function(){
+            space_filter.select_active(2);
+            space_filter.filter_acitve();
+            space_filter.avalon_filter.list_content=space_filter.district_list.concat();
+
+        }
+
+    });
+}).call(define('space_filter'));
