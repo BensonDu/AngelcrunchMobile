@@ -1215,11 +1215,13 @@ body.footer-close-bottom .banner-footer {
   margin-right: 1%;
   float: right;
   cursor:pointer;
+  position: relative;
+  z-index: 25;
   -webkit-transition:margin-right .3s ease;
   transition:margin-right .3s ease;
 }
 .newhead .search.active{
-    margin-right: 0%;
+    margin-right: -12%;
 }
 .newhead .search i{
   display:inline-block;
