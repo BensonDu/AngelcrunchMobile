@@ -158,6 +158,7 @@
         self.input.blur();
         self.search.result_name ='';
         view_dom.bk.hide();
+        search_sta = false;
     };
 
     this.word_search = function(k){
