@@ -34,8 +34,9 @@
 
 </head>
 <body>
-<div class="bk"></div>
+<div class="bk_new bk"></div>
 <div class="details">
+    <div class="notification red"><i class="txt"></i><i class="close">×</i></div>
     <div id="header" class="newhead">
         <div class="logo touch-href" data-href="http://angelcrunch.com"></div>
         <div class="options">
@@ -49,44 +50,110 @@
             <span></span>
             <ul class="hidden-menu"></ul>
         </div>
-        <div class="search">
+        <div class="search"  ms-controller="search" ms-on-tap="controll_search.start_search()">
             <i></i>
         </div>
 
-        <div class="search-list">
-            <div class="top"><div class="border"><i></i><input title="Search" type="search" autocorrect="off"></div></div>
-            <div class="list" ms-controller="search-status" ms-if="data.length>0">
-                <a ms-on-tap="searchhistory" ms-repeat="data" >{{el}}</a>
-                <a ms-on-tap="clearhistory" class="clearhistory">清除历史记录</a>
+        <div class="search-list"  ms-controller="search">
+            <div class="top"><div class="border"><i ms-on-tap="controll_search.cancel_search()"></i><input type="search" autocorrect="off" ms-on-keypress="controll_search.input_search()"></div></div>
+            <div class="list" ms-if="history.length>0">
+                <a ms-on-tap="controll_search.search_history" ms-repeat="history" ms-text="el"></a>
+                <a ms-on-tap="controll_search.clear_history" class="clearhistory">清除历史记录</a>
             </div>
         </div>
     </div>
-    <div class="search-result">
-        <p>共找到“<span></span>”相关项目<span></span>个</p><a class="cancelsearch">取消</a>
+    <div class="search-result"  ms-controller="search" ms-if="result_name != ''">
+        <p>共找到“<span ms-text="result_name"></span>”相关项目<span ms-text="result_num"></span>个</p><a class="cancel-search" ms-on-tap="controll_search.cancel_search()">取消</a>
     </div>
-    <div class="section-list" ms-controller="list-info">
+    <div class="filter-occupy">
+        <div id="list-filter" class="filter" ms-controller="list-filter">
+            <div>
+                <a ms-on-tap="list_page()">
+                    <span ms-text="page_name"></span>
+                </a>
+                <a ms-on-tap="list_industry()">
+                    <span ms-text="industry_name"></span>
+                </a>
+                <a ms-on-tap="list_district()">
+                    <span ms-text="district_name"></span>
+                </a>
+                <a ms-if="page_name == '闪投项目'" ms-on-tap="sd_state()">
+                    <span ms-text="sd_state_name"></span>
+                </a>
+                <a ms-if="page_name != '闪投项目'" ms-on-tap="order()">
+                    <span ms-text="order_name"></span>
+                </a>
+            </div>
+            <ul>
+                <li ms-repeat="list_content" ms-attr-class="$index == window.view_filter.active_offset?'active':''"><span ms-text="el" ms-on-tap="select_this()"></span></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="list-container">
+
         <div class="loading-container">
             <div class="loading"></div>
         </div>
-        <a ms-if="data" ms-repeat="data" ms-href="{{window.base_protocol}}{{el.id}}.{{window.base_host}}">
-            <section>
-                <div class="logo"><img src="" ms-src="el.logo||''" /></div>
-                <div class="summary">
-                    <h3 ms-text="el.name"></h3>
-                    <p ms-text="el.concept"></p>
-                </div>
-                <div class="new-progress-container"  ms-if="el.coinveststatus>40 && el.coinveststatus<80">
-                    <div class="new-progress-group">
-                        <div class="new-progress">
-                            <div class="new-progress-bar" ms-css-width="(el.finishamount/el.amount > 1 ? 100 : el.finishamount/el.amount*100)+'%'"></div>
-                        </div>
-                        <div class="new-progress-sta"><p ms-text="(el.finishamount/el.amount*100).toFixed(0)+'%'"></p></div>
+
+        <div class="not-found">
+            <div>
+                <img src="http://dn-acac.qbox.me/404_atm.png">
+                <h3>呀~没找到</h3>
+                <p>很抱歉，未找到与该筛选条件相匹配的结果</p>
+            </div>
+        </div>
+
+        <div class="section-list" ms-controller="list">
+            <a ms-if="data" ms-repeat="data" ms-href="{{window.base_protocol}}{{el.id}}.{{window.base_host}}">
+                <section>
+                    <div class="logo"><img src="" ms-src="el.logo||''" /></div>
+                    <div class="summary">
+                        <h3 ms-text="el.name"></h3>
+                        <p ms-text="el.concept"></p>
                     </div>
-                    <p><em ms-if="window.account_info.role>0" ms-text="'投资意向: '+el.finishamount+'万（预融资'+el.amount+'万)'"></em><em class="right"  ms-if="el.day>0" ms-text="'剩余'+el.day+'天'"></em></p>
-                </div>
-            </section>
-        </a>
+                    <div class="new-progress-container"  ms-if="el.coinveststatus>30 && el.coinveststatus<80">
+                        <div class="new-progress-group">
+                            <div class="new-progress">
+                                <div class="new-progress-bar" ms-css-width="(el.finishamount/el.amount > 1 ? 100 : el.finishamount/el.amount*100)+'%'"></div>
+                            </div>
+                            <div class="new-progress-sta"><p ms-text="(el.finishamount/el.amount*100).toFixed(0)+'%'"></p></div>
+                        </div>
+                        <p><em ms-if="window.account_info.role>0" ms-text="'投资意向: '+el.finishamount+'万（预融资'+el.amount+'万)'"></em><em class="right"  ms-if="el.day>0" ms-text="'剩余'+el.day+'天'"></em></p>
+                    </div>
+                </section>
+            </a>
+        </div>
+
+        <div class="sd-list"  ms-controller="sd-list">
+            <a  ms-if="data" ms-repeat="data" ms-href="{{window.base_protocol}}{{el.id}}.{{window.base_host}}">
+                <section>
+                    <div class="info">
+                        <img class="theme" ms-src="el.image">
+                        <div class="slogan">
+                            <img class="logo" ms-src="el.logo">
+                            <p><span class="name" ms-text="el.name"></span><span class="concept" ms-text="el.concept"></span></p>
+                        </div>
+                    </div>
+                    <div class="new-progress-container" ms-if="el.coinveststatus>30 && el.coinveststatus<80">
+                        <div class="new-progress-group">
+                            <div class="new-progress">
+                                <div class="new-progress-bar" ms-css-width="(el.finishamount/el.amount > 1 ? 100 : el.finishamount/el.amount*100)+'%'"></div>
+                            </div>
+                            <div class="new-progress-sta"><p ms-text="(el.finishamount/el.amount*100).toFixed(0)+'%'"></p></div>
+                        </div>
+                        <p><em ms-if="window.account_info.role>0" ms-text="'投资意向: '+el.finishamount+'万（预融资'+el.amount+'万)'"></em><em class="right" ms-text="'剩余'+el.day+'天'"></em></p>
+                    </div>
+                    <div class="success"  ms-if="el.coinveststatus>70">
+                        <p>已完成融资，已获得 <span ms-text="el.vc_list.splice(0,3).join(',')"></span><span ms-if="el.vc_list.length >4">等{{el.vc_list.length}}}人</span>投资</p>
+                    </div>
+                </section>
+            </a>
+        </div>
+
     </div>
+
+
 </div>
 <div class="page-turn-occupy"></div>
 <div class="page-turn">
@@ -100,5 +167,6 @@
 <script src="/static/js/lib/jquery-cookie.js"></script>
 <script src="/static/js/lib/avalon.mobile.min.js"></script>
 <script src="/static/js/wapsite/angelcrunch_base.js"></script>
-<script src="/static/js/wapsite/angelcrunch_list.js"></script>
+<script src="/static/js/wapsite/angelcrunch_onepage.js"></script>
+<script src="/static/js/wapsite/angelcrunch_list_new.js"></script>
 </html>
