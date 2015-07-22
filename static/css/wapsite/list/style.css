@@ -38,6 +38,39 @@
     background:url(http://dn-xswe.qbox.me/fOhvRtoHnzQkvAGNjuRANg) no-repeat;
     background-size:30px;
 }
+.not-found{
+    display: none;
+    position: absolute;
+    width:100%;
+    height: 100%;
+    text-align:center;
+    background: #fff;
+    z-index: 5;
+}
+.not-found div{
+    width: 80%;
+    height: 250px;
+    margin: 5% auto;
+}
+.not-found div img{
+    display: inline-block;
+    width: 100%;
+    padding: 15% 25% 25px;
+}
+.not-found div h3{
+    color: #7dbbcb;
+    font-size: 24px;
+    line-height: 35px;
+    display: inline-block;
+    text-align: center;
+}
+.not-found div p{
+    color: #7dbbcb;
+    font-size: 18px;
+    line-height: 25px;
+    display: inline-block;
+    text-align: center;
+}
 .list-container{
     width: 100%;
     position: relative;
@@ -145,7 +178,7 @@
 .sd-list section{
     width:100%;
     min-height:100px;
-    padding:17px 0 4px;
+    padding:5px 0 5px;
     margin-bottom:6px;
     background:#FFF;
     -webkit-animation:fadeIn 0.7s linear 0s normal forwards;
@@ -160,8 +193,9 @@
     width: 100%;
     height: auto;
     min-height: 180px;
+    max-height: 233px;
     background: url("http://dn-acac.qbox.me/SD_default_600x.png") no-repeat 50% 50%;
-    background-size: 100%;
+    background-size:100% 100%;
 }
 .sd-list section .info .slogan{
     position: absolute;
@@ -207,6 +241,21 @@
 }
 .sd-list section .new-progress-container{
     padding:14px 3%;
+}
+.sd-list section .success{
+    width: 100%;
+    height: 40px;
+    padding: 0 14px;
+}
+.sd-list section .success p{
+    display: inline-block;
+    line-height: 45px;
+    font-size: 14px;
+    width: 100%;
+}
+.sd-list section .success p span{
+    font-size: 14px;
+    font-weight: bold;
 }
 /*底部翻页*/
 .page-turn {
@@ -331,7 +380,7 @@
     line-height:45px ;
     height: 45px;
     padding: 0 7%;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #e0e0f0;
 }
 .filter ul li span{
     display: inline-block;

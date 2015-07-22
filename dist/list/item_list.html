@@ -96,6 +96,14 @@
             <div class="loading"></div>
         </div>
 
+        <div class="not-found">
+            <div>
+                <img src="http://dn-acac.qbox.me/404_atm.png">
+                <h3>呀~没找到</h3>
+                <p>很抱歉，未找到与该筛选条件相匹配的结果</p>
+            </div>
+        </div>
+
         <div class="section-list" ms-controller="list">
             <a ms-if="data" ms-repeat="data" ms-href="{{window.base_protocol}}{{el.id}}.{{window.base_host}}">
                 <section>
@@ -104,7 +112,7 @@
                         <h3 ms-text="el.name"></h3>
                         <p ms-text="el.concept"></p>
                     </div>
-                    <div class="new-progress-container"  ms-if="el.coinveststatus>40 && el.coinveststatus<80">
+                    <div class="new-progress-container"  ms-if="el.coinveststatus>30 && el.coinveststatus<80">
                         <div class="new-progress-group">
                             <div class="new-progress">
                                 <div class="new-progress-bar" ms-css-width="(el.finishamount/el.amount > 1 ? 100 : el.finishamount/el.amount*100)+'%'"></div>
@@ -127,7 +135,7 @@
                             <p><span class="name" ms-text="el.name"></span><span class="concept" ms-text="el.concept"></span></p>
                         </div>
                     </div>
-                    <div class="new-progress-container">
+                    <div class="new-progress-container" ms-if="el.coinveststatus>30 && el.coinveststatus<80">
                         <div class="new-progress-group">
                             <div class="new-progress">
                                 <div class="new-progress-bar" ms-css-width="(el.finishamount/el.amount > 1 ? 100 : el.finishamount/el.amount*100)+'%'"></div>
@@ -135,6 +143,9 @@
                             <div class="new-progress-sta"><p ms-text="(el.finishamount/el.amount*100).toFixed(0)+'%'"></p></div>
                         </div>
                         <p><em ms-if="window.account_info.role>0" ms-text="'投资意向: '+el.finishamount+'万（预融资'+el.amount+'万)'"></em><em class="right" ms-text="'剩余'+el.day+'天'"></em></p>
+                    </div>
+                    <div class="success"  ms-if="el.coinveststatus>70">
+                        <p>已完成融资，已获得 <span ms-text="el.vc_list.splice(0,3).join(',')"></span><span ms-if="el.vc_list.length >4">等{{el.vc_list.length}}}人</span>投资</p>
                     </div>
                 </section>
             </a>

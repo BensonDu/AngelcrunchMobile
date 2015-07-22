@@ -128,7 +128,7 @@
             data.user.avatar=data.user.avatar.replace(/\d{0,3}x$/,'800x');
             avalon_attach_details(data.user);
             page_status.name=data.user.name;
-            page_status.id=data.user.id;
+            page_status.user_id=data.user.id;
             page_status.portrait=data.user.avatar;
             //微信卡片制作
             wechat_card.img=page_status.portrait.replace(/\d{1,3}x$/,'310x');
