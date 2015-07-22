@@ -162,12 +162,14 @@
     };
 
     this.word_search = function(k){
-        self.btn.hide();
-        self.input.blur();
-        self.search.result_name ='';
-        view_dom.bk.hide();
-        search_sta = false;
-        route.go({type:'search', k:k, p:1});
+        if(k != ''){
+            self.btn.hide();
+            self.input.blur();
+            self.search.result_name ='';
+            view_dom.bk.hide();
+            search_sta = false;
+            route.go({type:'search', k:k, p:1});
+        }
     };
 
     this.search_result = function(n){
