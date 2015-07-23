@@ -33,7 +33,7 @@
 .value-info .before .text-container{
     width: 95px;
     height: 100%;
-    margin-right: 10%;
+    margin-right: 5%;
 }
 .value-info .before .text-container p{
     text-align: center;
@@ -58,7 +58,7 @@
 .value-info .percent .icon-container{
     width: 50px;
     height: 100%;
-    margin-left: 10%;
+    margin-left: 5%;
 }
 .value-info .percent .icon-container i{
     display: inline-block;

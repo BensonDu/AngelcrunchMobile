@@ -348,7 +348,7 @@ input:focus{
     margin-right:-10px;
     display: inline-block;
     float: right;
-    background: url("http://dn-acac.qbox.me/selected_icon.png") no-repeat 50% 50%;
+    background: url("http://dn-acac.qbox.me/icon_selection.png") no-repeat 50% 50%;
     background-size: 15px 15px;
 }
 .industry-choose .btn-group{

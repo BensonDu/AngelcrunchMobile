@@ -178,8 +178,8 @@
 .sd-list section{
     width:100%;
     min-height:100px;
-    padding:5px 0 5px;
-    margin-bottom:6px;
+    padding:0;
+    margin-bottom:10px;
     background:#FFF;
     -webkit-animation:fadeIn 0.7s linear 0s normal forwards;
     animation: fadeIn 0.7s linear 0s normal forwards;
@@ -358,7 +358,7 @@
     left: 0;
     z-index: 2;
     background: rgba(245,245,245,1);
-    max-height: 400px;
+    max-height: 360px;
     overflow-y: scroll;
     opacity: 0;
     -webkit-animation:fadeIn 0.4s linear 0s normal forwards;
@@ -400,7 +400,7 @@
     margin-right:-10px;
     display: inline-block;
     float: right;
-    background: url("http://dn-acac.qbox.me/selected_icon.png") no-repeat 50% 50%;
+    background: url("http://dn-acac.qbox.me/icon_selection.png") no-repeat 50% 50%;
     background-size: 15px 15px;
 }
 .filter ul li:active{

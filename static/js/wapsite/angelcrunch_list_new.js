@@ -124,10 +124,10 @@
 
     this.module = {
         show:function(){
-            $searchmodel.addClass('active');
+            $searchmodel.fadeIn();
         },
         hide:function(){
-            $searchmodel.removeClass('active');
+            $searchmodel.fadeOut();
         }
     };
 
@@ -435,7 +435,6 @@
             history[l] = hash_data;
         }
     };
-
     this.go_history = function(){
         self.jump(history[0]);
     };
