@@ -1240,13 +1240,6 @@ body.footer-close-bottom .banner-footer {
   width: 100%;
   position: absolute;
   z-index: 20;
-  opacity: 0;
-  -webkit-transition:opacity .3s ease;
-  transition:opacity .3s ease;
-}
-.newhead .search-list.active{
-  display: block;
-  opacity: 1;
 }
 .newhead .search-list .top{
   height: 46px;
