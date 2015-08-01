@@ -338,15 +338,18 @@
 (function(){
     $.fn.extend({
         touchtap:function(fn){
-            var x,y;
+            var x, y,s;
             if(base_status.support_touch){
                 $(this).bind('touchstart',function(e){
                     x= e.originalEvent.pageX;
                     y= e.originalEvent.pageY;
+                    s = new Date().getTime();
                 });
                 $(this).bind('touchend',function(e){
-                    var event=e.originalEvent,move=Math.pow(event.pageX-x,2)+Math.pow(event.pageY-y,2);
-                    fn.call($(this));
+                    var event=e.originalEvent,move=Math.pow(event.pageX-x,2)+Math.pow(event.pageY-y,2),o = new Date().getTime();
+                    if(o-s>100 && o-s<200 ){
+                        fn.call($(this));
+                    }
                 });
             }
             else{
