@@ -87,7 +87,7 @@
         width:        10,
         text:         function(value){return value + '%';},
         colors:       ['#cecece', '#ff3d00'],
-        duration:     200,
+        duration:     500,
         wrpClass:     'circles-wrp',
         textClass:    'circles-text',
         styleWrapper: true,
@@ -95,9 +95,8 @@
     });
     this.update_value = function(val){
         var v = val || 0;
-        self.circle.setPercent(0);
         self.circle.updateMaxTextValue(v > 100 ? v : 0);
-        self.circle.update(v);
+        self.circle.updateTo(v);
     };
 
 }).call(define('view_sd'));
