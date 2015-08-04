@@ -321,6 +321,7 @@
 
 //日志记录
 (function(){
+    if(base_environment != 'online')return;
     var self = this,
         start = new Date(),
         end,
@@ -364,7 +365,7 @@
                 });
                 $(this).bind('touchend',function(e){
                     var event=e.originalEvent,move=Math.pow(event.pageX-x,2)+Math.pow(event.pageY-y,2),o = new Date().getTime();
-                    if(o-s>100 && o-s<200 ){
+                    if(o-s<300 ){
                         fn.call($(this));
                     }
                 });
