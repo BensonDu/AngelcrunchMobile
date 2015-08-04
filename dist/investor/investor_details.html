@@ -49,7 +49,7 @@
     <div class="pesonal-info">
         <div ms-if="data.style.length">
             <h1>简介</h1>
-            <p ms-html="data.summary"></p>
+            <div ms-html="decode_text(data.summary)"></div>
         </div>
     </div>
     <div class="participation">
@@ -71,11 +71,11 @@
     <div class="pesonal-info">
         <div ms-if="data.style.length">
             <h1>投资理念</h1>
-            <p ms-html="data.style"></p>
+            <div ms-html="decode_text(data.style)"></div>
         </div>
         <div ms-if="data.service.length">
             <h3>可提供的附加价值</h3>
-            <p ms-text="data.service"></p>
+            <div ms-html="decode_text(data.service)"></div>
         </div>
         <div ms-if="data.tag">
             <h3>擅长领域</h3>

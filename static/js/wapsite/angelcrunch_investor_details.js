@@ -41,6 +41,17 @@
     this.wechat_card.deffer=true;
     log.type = 'investor_detail';
 }).call(this);
+//数据转HTML
+(function(){{
+    this.decode_text = function (txt) {
+        var html, txt_list, _i, _len;
+        txt_list = txt.split('\n');
+        html = '';
+        for (_i = 0, _len = txt_list.length; _i < _len; _i++)
+            html += "<p>" + txt_list[_i] + "</p>";
+        return html;
+    };
+}}).call(this);
 //数据获取
 (function(){
     //异步，同时的话，公共变量冲突
