@@ -14,7 +14,18 @@
     this.space_create   = {};
     log.type = 'create';
 }).call(this);
-
+//如果未登陆跳转注册
+(function(){
+    if(!account_info.is_login){
+        var linkparam={
+            source:location.href,
+            title:'创建项目',
+            message:'请先注册或登录天使汇账户。',
+            portrait:'//dn-xswe.qbox.me/13065529?imageMogr2/crop/!690x690a0a0/thumbnail/200x'
+        };
+        location.href='http://auth.angelcrunch.com/reg'+base_create_param(linkparam);
+    }
+}).call(this);
 //消息通知
 (function(){
     var $dom=$('.notification'),$bk=$('.bk');
