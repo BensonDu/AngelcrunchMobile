@@ -50,5 +50,11 @@
 }
 /*列表筛选样式自定义*/
 .filter div a{
-  width: 35%;
+    width: 45%;
+}
+.filter div a span{
+    min-width: 120px;
+}
+.filter div a span:after{
+    width: 45px;
 }
