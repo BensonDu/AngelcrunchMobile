@@ -12,6 +12,7 @@
     this.space_industry = {};
     this.space_framework= {};
     this.space_create   = {};
+    log.type = 'create';
 }).call(this);
 
 //消息通知

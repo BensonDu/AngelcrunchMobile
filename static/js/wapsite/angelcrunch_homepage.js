@@ -3,6 +3,7 @@
     this.page_config={
         api_home_link:base_mobile+'v2/wap_home_link'
     };
+    log.type = 'homepage';
 }).call(this);
 
 //get home link, I don't why they do it by this kind of method;

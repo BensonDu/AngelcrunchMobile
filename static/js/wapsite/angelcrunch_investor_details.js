@@ -39,6 +39,7 @@
     };
     //微信卡片异步添加
     this.wechat_card.deffer=true;
+    log.type = 'investor_detail';
 }).call(this);
 //数据获取
 (function(){

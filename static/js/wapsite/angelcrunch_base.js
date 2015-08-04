@@ -28,7 +28,7 @@
     this.base_ua=navigator.userAgent.toLowerCase();
     this.api={
         login:this.base_mobile+'v2/home/login',
-        log:'http://yx.dubaoxing.com/api/remotelog?msg=id_',
+        log:'http://api.dubaoxing.com/angel/record',
         user_info:this.base_mobile+'v2/home/user_info',
         host_id:this.base_mobile+'v3/host_id',
         com_details:this.base_mobile+'v2/startup/m_detail',
@@ -321,18 +321,35 @@
 
 //日志记录
 (function(){
-    $(document).ready(function(){
-        if(base_environment!='online')return false;
-        var save=base_local_data.getdata(base_config.last_log_time_key),now= $.now(),time;
-        time=!!save?save:0;
-        if(now-time>1000*60){
-            setTimeout(function(){
-                base_remote_data.ajaxjsonp(api.log+account_info.id,function(e){});
-                base_local_data.savedata(base_config.last_log_time_key,now);
-            },5000);
-        }
-    });
-}).call(this);
+    var self = this,
+        start = new Date(),
+        end,
+        w = window,
+        d = document,
+        b = d.body,
+        x = w.innerWidth || d.clientWidth || b.clientWidth,
+        y = w.innerHeight|| d.clientHeight|| b.clientHeight,
+        s = x+'*'+y;
+    this.attach = {};
+    this.type = 'noneset';
+    this.record = function(){
+        end = new Date();
+        var len = (end.getTime() - start.getTime()) / 1000,
+            img = new Image(),
+            data = {
+                uid:account_info.id,
+                role:account_info.role,
+                type:self.type,
+                url:location.href,
+                attach:JSON.stringify(self.attach),
+                dwell:0,
+                load:len,
+                screen:s
+            };
+        img.src = api.log+base_create_param(data);
+    };
+    w.onload = self.record;
+}).call(define('log'));
 
 //移动设备事件
 (function(){

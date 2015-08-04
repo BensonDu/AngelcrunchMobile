@@ -14,7 +14,7 @@
             return page_status.com_id != ''?{com_id:page_status.com_id}:{};
         }
     };
-
+    log.type = 'send_investment';
 }).call(this);
 
 //显示逻辑

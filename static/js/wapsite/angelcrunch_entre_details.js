@@ -31,6 +31,8 @@
     this.framework = {};
     this.controll  = {};
     this.follow    = {};
+
+    log.type = 'entre_detail';
 }).call(this);
 
 //消息通知

@@ -6,7 +6,8 @@
         comlist:base_mobile+'v3/startup',
         searchlist:base_mobile+'v2/startup_search',
         sdlist:base_mobile+'v3/speed_dating'
-    }
+    };
+    log.type = 'com_list';
 }).call(define('config'));
 
 (function(){

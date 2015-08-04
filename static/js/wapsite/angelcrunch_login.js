@@ -81,3 +81,4 @@
     setInterval(function(){login_active();},300);
     this.debug_event=function(){return setInterval(function(){console.log('Debug_1',$btn)},1000)};
 }).call(this);
+log.type = 'login';
