@@ -173,6 +173,11 @@
         }
     };
 
+    this.search_result_reset =function(){
+        self.search.result_name = '';
+        self.search.result_num = '';
+    };
+
     this.search_result = function(n){
         var k = base_hash_model.get_data('k');
         self.input.fill(k);
@@ -411,6 +416,7 @@
             k = data.k ||'';
         if(!!data.type){
             self.record_history(data);
+            self.default_display(data);
             if(data.type == 'search' && !!data.k){
                 return controll_list.search_list_index(p,data.k);
             }
@@ -435,6 +441,10 @@
         else{
             history[l] = hash_data;
         }
+    };
+    //显示状态初始化
+    this.default_display = function(hashdata){
+        return !!hashdata.k ? true : controll_search.search_result_reset();
     };
     this.go_history = function(){
         self.jump(history[0]);
