@@ -626,10 +626,10 @@
   height: 30px;
   width: 30px;
   margin: 10px 10px 0 0;
-  background: url("http://angelcrunch.qiniudn.com/sd-unselect.svg") no-repeat;
+  background: url("http://dn-acac.qbox.me/sd-unselect.svg") no-repeat;
 }
 .submit-com-list .list-container em.active{
-  background: url("http://angelcrunch.qiniudn.com/sd-select.svg") no-repeat ;
+  background: url("http://dn-acac.qbox.me/sd-select.svg") no-repeat ;
 }
 .submit-com-list .btn-group{
   text-align: center;
