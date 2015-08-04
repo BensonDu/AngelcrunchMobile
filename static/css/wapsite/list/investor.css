@@ -48,3 +48,7 @@
 .section-list .summary .item-state {
   margin-top:6px;
 }
+/*列表筛选样式自定义*/
+.filter div a{
+  width: 35%;
+}

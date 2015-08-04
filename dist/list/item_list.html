@@ -42,7 +42,7 @@
         </div>
 
         <div class="search-list"  ms-controller="search">
-            <div class="top"><div class="border"><i ms-on-tap="controll_search.cancel_search()"></i><input type="search" autocorrect="off" ms-on-keypress="controll_search.input_search()"></div></div>
+            <div class="top"><div class="border"><i ms-on-tap="controll_search.stop_search(1)"></i><input type="search" autocorrect="off" ms-on-keypress="controll_search.input_search()"></div></div>
             <div class="list" ms-if="history.length>0">
                 <a ms-on-tap="controll_search.search_history" ms-repeat="history" ms-text="el"></a>
                 <a ms-on-tap="controll_search.clear_history" class="clearhistory">清除历史记录</a>

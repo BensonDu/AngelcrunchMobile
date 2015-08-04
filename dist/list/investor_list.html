@@ -22,34 +22,70 @@
     <link href="/static/css/wapsite/list/investor.css" rel="stylesheet" />
 </head>
 <body>
-    <div class="bk"></div>
-    <div class="details" ms-controller="list-info">
-        <div id="header" class="newhead">
-            <div class="logo touch-href" data-href="http://angelcrunch.com"></div>
-            <div class="options">
-                <span></span>
-                <ul class="hidden-menu">
-                    <li class="touch-href" data-href="http://angelcrunch.com/startup_financing">创业项目</li>
-                    <li class="touch-href" data-href="http://angelcrunch.com/angel">投资人</li>
-                </ul>
-            </div>
-            <div class="account">
-                <span></span>
-                <ul class="hidden-menu"></ul>
+<div class="bk_new bk"></div>
+<div class="details">
+    <div id="header" class="newhead">
+        <div class="logo touch-href" data-href="http://angelcrunch.com"></div>
+        <div class="options">
+            <span></span>
+            <ul class="hidden-menu">
+                <li class="touch-href" data-href="http://angelcrunch.com/startup_financing">创业项目</li>
+                <li class="touch-href" data-href="http://angelcrunch.com/angel">投资人</li>
+            </ul>
+        </div>
+        <div class="account">
+            <span></span>
+            <ul class="hidden-menu"></ul>
+        </div>
+        <div class="search"  ms-controller="search" ms-on-tap="controll_search.start_search()">
+            <i></i>
+        </div>
+        <div class="search-list"  ms-controller="search">
+            <div class="top"><div class="border"><i ms-on-tap="controll_search.stop_search(1)"></i><input type="search" autocorrect="off" ms-on-keypress="controll_search.input_search()"></div></div>
+            <div class="list" ms-if="history.length>0">
+                <a ms-on-tap="controll_search.search_history" ms-repeat="history" ms-text="el"></a>
+                <a ms-on-tap="controll_search.clear_history" class="clearhistory">清除历史记录</a>
             </div>
         </div>
-        <div class="section-list">
-            <div class="loading-container">
-                <div class="loading"></div>
+    </div>
+    <div class="search-result"  ms-controller="search" ms-if="result_name != ''">
+        <p>共找到“<span ms-text="result_name"></span>”相关项目<span ms-text="result_num"></span>个</p><a class="cancel-search" ms-on-tap="controll_search.cancel_search()">取消</a>
+    </div>
+    <div class="filter-occupy">
+        <div id="list-filter" class="filter" ms-controller="list-filter">
+            <div>
+                <a ms-on-tap="list_industry()">
+                    <span ms-text="industry_name"></span>
+                </a>
+                <a ms-on-tap="list_district()">
+                    <span ms-text="district_name"></span>
+                </a>
             </div>
-            <a ms-if="data.list" ms-repeat="data.list" ms-href="el.item_url">
+            <ul>
+                <li ms-repeat="list_content" ms-attr-class="$index == window.view_filter.active_offset?'active':''"><span ms-text="el" ms-on-tap="select_this()"></span></li>
+            </ul>
+        </div>
+    </div>
+    <div class="section-list">
+        <div class="loading-container">
+            <div class="loading"></div>
+        </div>
+        <div class="not-found">
+            <div>
+                <img src="http://dn-acac.qbox.me/404_atm.png">
+                <h3>呀~没找到</h3>
+                <p>很抱歉，未找到与该筛选条件相匹配的结果</p>
+            </div>
+        </div>
+        <div class="section-list" ms-controller="list">
+            <a ms-if="data" ms-repeat="data" ms-href="el.url">
                 <section>
                     <div class="logo"><img src="" ms-src="el.avatar||''" /></div>
                     <div class="summary">
                         <h3 ms-text="el.name"></h3>
                         <p ms-text="el.firmname + el.title
-                                ? '[' + el.firmname + el.title + ']'
-                                : ''"></p>
+                                    ? '[' + el.firmname + el.title + ']'
+                                    : ''"></p>
                         <p class="sliver" ms-text="el.summary"></p>
                         <ul class="item-state">
                             <li>
@@ -69,142 +105,19 @@
                 </section>
             </a>
         </div>
-        <div class="page-turn-occupy"></div>
-        <div class="page-turn">
-            <button class="btn prev-page">上一页</button>
-            <p><i class="current-page">0</i>/<i class="total-page">0</i></p>
-            <button class="btn next-page">下一页</button>
-        </div>
     </div>
+    <div class="page-turn-occupy"></div>
+    <div class="page-turn">
+        <a class="btn prev-page">上一页</a>
+        <p><i class="current-page">0</i>/<i class="total-page">0</i></p>
+        <a class="btn next-page">下一页</a>
+    </div>
+</div>
 </body>
-<script src="/static/js/lib/jquery-2.1.4.min.js"></script>
-<script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
-<script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
+<script src="https://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
+<script src="/static/js/lib/jquery-cookie.js"></script>
+<script src="https://dn-acac.qbox.me/avalon.mobile.min.js"></script>
 <script src="/static/js/wapsite/angelcrunch_base.js"></script>
-<script src="/static/js/lib/avalon.mobile.min.js"></script>
-<script type="text/javascript" id="page-interactive-init">
-    var page = window.page || {};
-    page.MethodObj = function () { };
-    page.MethodObj.prototype = (function () {
-        var settings = page.settings;
-        var $COOKIE = $.Angelcrunch.COOKIE;
-
-        var I = {
-            Ajax_item_list: {                          // Investor List
-                url: "http://" + settings.AjaxDomain + "/v2/user",
-                basic_data: {}
-            },
-            API: {
-                handleTurnPageModule: ""
-            },
-            page_size: 20,
-            listPage_url_params: "?" + "page="
-        };
-
-        var waste_1289371 = function () {
-            var $prev_page = $(".page-turn .btn.prev-page"),
-                    $next_page = $(".page-turn .btn.next-page"),
-                    $current_page = $(".page-turn i.current-page"),
-                    $total_page = $(".page-turn i.total-page");
-            var attr = {
-                redirect_page_num: "data-page-num"
-            };
-
-            var redirect_page = function (num) {
-                location.href = I.listPage_url_params + num;
-            }
-
-            // Page turn module
-            I.API.handleTurnPageModule = function (total_item) {
-                var url_page_num=$.Angelcrunch.url.getPageNum();
-                var total_page = Math.round(parseInt(parseInt(total_item) / I.page_size) + 0.5);
-                var current_page = url_page_num > total_page ? total_page : url_page_num;
-                if (!total_page) return 0;
-
-                $total_page.text(total_page);
-                $current_page.text(current_page);
-                $prev_page.click(function () {
-                    redirect_page($(this).attr(attr.redirect_page_num));
-                }).attr(attr.redirect_page_num, current_page - 1 || 1);
-
-                $next_page.click(function () {
-                    redirect_page($(this).attr(attr.redirect_page_num));
-                }).attr(attr.redirect_page_num,
-                        (current_page + 1) > total_page
-                                ? total_page : (current_page + 1));
-
-
-                if (url_page_num > total_page)
-                    redirect_page(total_page);
-
-            }
-        };
-
-        var waste_9839213 = function () {
-            var $loading = $(".loading-container");
-
-            // Data processor
-            var handle_item_url = function (arr) {
-                var ele;
-                for (var K in arr) {
-                    ele = arr[K];
-                    ele.item_url ="//" + ele.id + "." + settings.host;
-                }
-            };
-
-            // Details information
-            var url = I.Ajax_item_list.url,
-                    basic_data = I.Ajax_item_list.basic_data,
-                    type = "jsonp";
-            var _data = $.extend(true, {}, basic_data);
-            var pageNum = $.Angelcrunch.url.getPageNum();
-            _data[$COOKIE.cookieName.token] = $.cookie($COOKIE.cookieName.token);
-            _data[$COOKIE.cookieName.user_id] = $.cookie($COOKIE.cookieName.user_id);
-
-            _data["pagesize"] = I.page_size || 10;
-
-            if (pageNum) _data["pageindex"] = pageNum;
-            $.post(url, _data, function (data) {
-                if (data.list && data.list.length) $loading.hide();
-                handle_item_url(data.list);
-                I.API.handleTurnPageModule(data.total)
-                avalonNS.model.list_info.data = data;
-            }, type);
-        }
-
-        return {
-            attackEvent: function () {
-                waste_1289371();
-                waste_9839213();
-            },
-
-            pageLoad_Init: function () {
-            },
-
-            initial: function () {
-                this.pageLoad_Init();
-                this.attackEvent();
-            }
-        };
-    })();
-
-    page.initialBridge = function () {
-        var o = new page.MethodObj();
-        o.initial();
-    };
-
-    $(function () {
-        page.initialBridge();
-    });
-
-    var avalonNS = window.avalonNS || {};
-    (function () {
-        avalonNS.model = {
-            list_info: avalon.define("list-info", function (vm) {
-                vm.data = {};
-            })
-        };
-    }).call(this);
-    log.type='investor_list';
-</script>
+<script src="/static/js/wapsite/angelcrunch_onepage.js"></script>
+<script src="/static/js/wapsite/angelcrunch_investor_list.js"></script>
 </html>

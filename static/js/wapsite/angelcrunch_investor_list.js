@@ -1,13 +1,12 @@
 (function(){
     this.key = {
-        search_record:'com_search_history'
+        search_record:'investor_search_history'
     };
     this.api = {
-        comlist:base_mobile+'v3/startup',
-        searchlist:base_mobile+'v2/startup_search',
-        sdlist:base_mobile+'v3/speed_dating'
+        list:base_mobile+'v3/user',
+        search:base_mobile+'v3/user_search'
     };
-    log.type = 'com_list';
+    log.type = 'investor_list';
 }).call(define('config'));
 
 (function(){
@@ -79,7 +78,6 @@
         self.notification.show('网络错误');
     };
 
-
     this.filter = {
         show:function(){
             $filter.show();
@@ -94,10 +92,10 @@
 
 (function(){
 
-    var $btn=$('.search'),
+    var self = this,
+        $btn=$('.search'),
         $searchmodel=$('.search-list'),
         $input=$searchmodel.find('input'),
-        self = this,
         search_sta = false;
 
     /*view*/
@@ -171,7 +169,7 @@
             self.search.result_name ='';
             view_dom.bk.hide();
             search_sta = false;
-            route.go({type:'search', k:k, p:1, _:new Date().getTime()});
+            route.go({type:'search', k:k, p:1,_:new Date().getTime()});
         }
     };
 
@@ -235,7 +233,6 @@
 
 (function(){
     var self = this,
-        $sd_box = $('.sd-list'),
         $normal = $('.section-list'),
         $turning= $('.page-turn'),
         $prev   = $turning.children('.prev-page'),
@@ -244,7 +241,6 @@
         $total  = $turning.children('p').children('.total-page');
 
     this.search = function(data){
-        $sd_box.hide();
         $normal.show();
         self.page_turning(data);
         if(data.hasOwnProperty('total')){
@@ -252,15 +248,7 @@
         }
     };
 
-    this.sd = function(data){
-        $sd_box.show();
-        $normal.hide();
-        view_dom.filter.show();
-        self.page_turning(data,10);
-    };
-
-    this.com = function(data){
-        $sd_box.hide();
+    this.list = function(data){
         $normal.show();
         view_dom.filter.show();
         self.page_turning(data);
@@ -294,8 +282,7 @@
             access_token:account_info.token,
             uid:account_info.id
         },
-        comlist_default = $.extend({},default_param,{type:0,pagesize:10}),
-        sdlist_default = $.extend({},default_param,{pagesize:10,w:600,state:'online'}),
+        list_default = $.extend({},default_param,{type:0,pagesize:10}),
         loading = {
             start: function(){
                 view_dom.loading.show();
@@ -307,47 +294,38 @@
         },
         error = view_dom.error;
 
-    //全部项目 搜索列表 页面数据填充
-    this.com_list = avalon.define("list", function (vm) {
-        vm.data = [];
-    });
-
-    //闪投项目 页面数据填充
-    this.sd_list = avalon.define("sd-list", function (vm) {
+    //列表 搜索列表 页面数据填充
+    this.list = avalon.define("list", function (vm) {
         vm.data = [];
     });
 
     //数据格式化
     this.list_render = function(data){
-        var render=data,l;
-        l=render.length;
+        var render = data, l = render.length;
         while(l){
-            if(typeof render[(l-1)].finishamount=='string'){
-                render[(l-1)].finishamount=parseInt(render[(l-1)].finishamount.replace(/\.0/,'').replace(/\,/g,'').replace(/0{4}$/,''));
-            }
-            if(typeof render[(l-1)].amount == 'string'){
-                render[(l-1)].amount=parseInt(render[(l-1)].amount.replace(/\,/g,'').replace(/0{4}$/,''));
+            if(render[(l-1)].hasOwnProperty('id')){
+                render[(l-1)].url = window.base_protocol+render[(l-1)].id+'.'+window.base_host;
             }
             l--;
         }
-        return render;
+        return data;
     };
 
-    //全部项目 数据获取回调
-    this.com_list_call = function(data){
+    //列表 数据获取回调
+    this.list_call = function(data){
         if(data.hasOwnProperty('list')){
-            self.com_list.data= self.list_render(data.list);
+            self.list.data= self.list_render(data.list);
         }
         if(data.hasOwnProperty('total')){
             data.total==0 && view_dom.not_found.show();
         }
-        view_list.com(data);
+        view_list.list(data);
     };
 
     //搜索列表 数据回调方法
     this.search_list_call =function(data){
         if(data.hasOwnProperty('list')){
-            self.com_list.data= self.list_render(data.list);
+            self.list.data= self.list_render(data.list);
         }
         if(data.hasOwnProperty('total')){
             data.total==0 && view_dom.not_found.show();
@@ -355,52 +333,26 @@
         view_list.search(data);
     };
 
-    //闪投列表 数据回调
-    this.sd_list_call = function(data){
-        if(data.hasOwnProperty('list')){
-            self.sd_list.data = self.list_render(data.list);
-        }
-        if(data.hasOwnProperty('total')){
-            data.total==0 && view_dom.not_found.show();
-        }
-        view_list.sd(data);
-    };
+    //列表 数据获取方法初始化
+    this.list_get = base_data_model.init('com',config.api.list,list_default,self.list_call,error,loading);
 
-    //全部项目 数据获取方法初始化
-    this.com_list_get = base_data_model.init('com',config.api.comlist,comlist_default,self.com_list_call,error,loading);
-
-    //全部项目 获取数据方法
-    this.com_list_index = function(index,industry,district,order){
+    //列表 获取数据方法
+    this.list_index = function(index,industry,district){
         var post ={
             pageindex:index || 1,
-            industryid:industry || '',
-            regionid:district || '',
-            order:(!!order && order == 'new')?'new':'heat'
+            industry:industry || '',
+            region:district || ''
         };
-        self.com_list_get(post);
+        self.list_get(post);
     };
 
     //搜索列表 数据获取方法初始化
-    this.search_list_get = base_data_model.init('search',config.api.searchlist,comlist_default,self.search_list_call,error,loading);
+    this.search_list_get = base_data_model.init('search',config.api.search,list_default,self.search_list_call,error,loading);
 
     //搜索列表 获取数据
     this.search_list_index = function(index,keyword){
         self.search_list_get({pageindex:index,keyword:keyword});
     };
-
-    //闪投列表 数据获取方法初始化
-    this.sd_list_get = base_data_model.init('sd',config.api.sdlist,sdlist_default,self.sd_list_call,error,loading);
-
-    //闪投列表 获取数据
-    this.sd_list_index = function(index,industry,district,state){
-        var post ={
-            pageindex:index || 1,
-            industryid:industry || '',
-            regionid:district || '',
-            state:(!!state && state == 'success') ? 'success' :'online'
-        };
-        self.sd_list_get(post);
-    }
 }).call(define('controll_list'));
 
 (function(){
@@ -413,8 +365,6 @@
             p = data.p || 1,
             industry = data.industry || '',
             district= data.district || '',
-            order = data.order || '',
-            state = data.state || '',
             k = data.k ||'';
         if(!!data.type){
             self.record_history(data);
@@ -422,14 +372,11 @@
             if(data.type == 'search' && !!data.k){
                 return controll_list.search_list_index(p,data.k);
             }
-            if(data.type == 'sd'){
-                return controll_list.sd_list_index(p,industry,district,state);
-            }
-            if(data.type == 'com'){
-                return controll_list.com_list_index(p,industry,district,order);
+            if(data.type == 'list'){
+                return controll_list.list_index(p,industry,district);
             }
         }
-        self.go({type:'sd'});
+        self.go({type:'list'});
     };
     //状态记录 列表类型间切换
     this.record_history = function(hash_data){
@@ -537,69 +484,41 @@
         return $select;
     };
     this.active_offset = 0;
-    this.curret_type = 1;
-    this.com_active = (!!hash_data.type && hash_data.type == 'sd')?'闪投项目':'全部项目';
+    this.curret_type = 2;
     this.industry_active = !!hash_data.industry ? hash_data.industry : '全部行业';
     this.district_active = !!hash_data.district ? hash_data.district : '全部地区';
-    this.sd_state_active = (!!hash_data.state && hash_data.state == 'success')?'完成融资':'正在热投';
-    this.order_active = (!!hash_data.order && hash_data.order == 'new')?'时间排序':'热度排序';
 
     this.check_active = function(array,k,t){
-      self.curret_type = t;
-          for(var i in array){
-              if(array[i] == k){
-                  self.active_offset = i;
-                  break;
-              }
-          }
-      return array;
+        self.curret_type = t;
+        for(var i in array){
+            if(array[i] == k){
+                self.active_offset = i;
+                break;
+            }
+        }
+        return array;
     };
     this.select_action = function(){
-      var hash_data = {};
+        var hash_data = {};
         base_helper.scroll_to(0);
-        hash_data.type = self.com_active == '闪投项目'?'sd':'com';
         hash_data.industry = self.industry_active == '全部行业'?'':self.industry_active;
         hash_data.district = self.district_active == '全部地区'?'':self.district_active;
-        if(hash_data.type == 'sd'){
-            hash_data.state = self.sd_state_active == '正在热投'? 'online' : 'success';
-        }
-        else{
-            hash_data.order = self.order_active == '热度排序' ? 'heat' : 'new';
-        }
         route.jump(hash_data);
     };
 
     this.industry_list = ["全部行业","电子商务","移动互联网","信息技术","游戏","旅游","教育","金融","社交","娱乐","硬件","能源","医疗健康","餐饮","企业","平台","汽车","数据","房产酒店","文化艺术","体育运动","生物科学","媒体资讯","广告营销","节能环保","消费生活","工具软件","资讯服务","智能设备"];
     this.district_list = ['全部地区','北京','上海','深圳','广州','杭州','南京','西安','成都','苏州','天津','无锡','武汉','重庆','厦门','青岛'];
-    this.page_list     = ['闪投项目','全部项目'];
-    this.sd_state_list = ['正在热投','完成融资'];
-    this.order_list    =  ['热度排序','时间排序'];
     this.avalon_filter = avalon.define("list-filter", function (vm) {
-        vm.page_name= self.com_active;
         vm.industry_name= self.industry_active;
         vm.district_name= self.district_active;
-        vm.sd_state_name= self.sd_state_active;
-        vm.order_name = self.order_active;
-        vm.list_content= self.page_list.concat();
-        vm.list_page=function(){
-            self.filter_acitve(0);
-            self.avalon_filter.list_content=self.check_active(self.page_list.concat(),self.com_active,1);
-        };
+        vm.list_content= self.industry_list.concat();
         vm.list_industry=function(){
-            self.filter_acitve(1);
+            self.filter_acitve(0);
             self.avalon_filter.list_content=self.check_active(self.industry_list.concat(),self.industry_active,2);
         };
         vm.list_district=function(){
-            self.filter_acitve(2);
+            self.filter_acitve(1);
             self.avalon_filter.list_content=self.check_active(self.district_list.concat(),self.district_active,3);
-        };
-        vm.sd_state = function(){
-            self.filter_acitve(3);
-            self.avalon_filter.list_content=self.check_active(self.sd_state_list.concat(),self.sd_state_active,4);
-        };
-        vm.order = function(){
-            self.filter_acitve(4);
-            self.avalon_filter.list_content=self.check_active(self.order_list.concat(),self.order_active,5);
         };
         vm.select_this=function(){
             var val =this.innerHTML,
@@ -610,20 +529,11 @@
                 self.list.hide();
             },200);
             switch (self.curret_type){
-                case 1:
-                    self.com_active = self.avalon_filter.page_name = val;
-                    break;
                 case 2:
                     self.industry_active = self.avalon_filter.industry_name = val;
                     break;
                 case 3:
                     self.district_active = self.avalon_filter.district_name = val;
-                    break;
-                case 4:
-                    self.sd_state_active = self.avalon_filter.sd_state_name = val;
-                    break;
-                case 5:
-                    self.order_active = self.avalon_filter.order_name = val;
                     break;
                 default :
             }
