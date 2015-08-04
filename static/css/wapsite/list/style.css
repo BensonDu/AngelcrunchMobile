@@ -168,6 +168,12 @@
   font-size:12px;
   margin-left:5px;
 }
+.section-list .item-state li.active i{
+    color: #000;
+}
+.section-list .item-state li.active span{
+    color: #000;
+}
 /*闪投列表*/
 .sd-list{
     display:block;
