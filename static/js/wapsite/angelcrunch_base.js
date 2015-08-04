@@ -323,10 +323,16 @@
 (function(){
     var self = this,
         start = new Date(),
-        end;
+        end,
+        w = window,
+        d = document,
+        b = d.body,
+        x = w.innerWidth || d.clientWidth || b.clientWidth,
+        y = w.innerHeight|| d.clientHeight|| b.clientHeight,
+        s = x+'*'+y;
     this.attach = {};
     this.type = 'noneset';
-    window.onbeforeunload = function(){
+    this.record = function(){
         end = new Date();
         var len = (end.getTime() - start.getTime()) / 1000,
             img = new Image(),
@@ -336,10 +342,13 @@
                 type:self.type,
                 url:location.href,
                 attach:JSON.stringify(self.attach),
-                dwell:len
+                dwell:0,
+                load:len,
+                screen:s
             };
         img.src = api.log+base_create_param(data);
     };
+    w.onload = self.record;
 }).call(define('log'));
 
 //移动设备事件
