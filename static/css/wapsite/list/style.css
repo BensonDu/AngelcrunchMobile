@@ -89,8 +89,6 @@
 .section-list {
   display:inline-block;
   width:100%;
-  min-height:736px;
-  margin-top:6px;
 }
 
 .section-list section {
@@ -277,6 +275,7 @@
 .page-turn-occupy{
     height: 64px;
     width: 100%;
+    background: #fff;
 }
 
 .page-turn p {
