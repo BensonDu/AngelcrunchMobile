@@ -29,9 +29,14 @@
         },
         event:function(){
             //取消搜索
-            base_helper.delay(function(){
-                controll_search.stop_search();
-            },200);
+            if(controll_search.sta){
+                base_helper.delay(function(){
+                    controll_search.stop_search(1);
+                },200);
+            }
+            else{
+                self.bk.hide();
+            }
             view_filter.list.hide();
             view_filter.select_active();
         },
@@ -97,9 +102,8 @@
     var $btn=$('.search'),
         $searchmodel=$('.search-list'),
         $input=$searchmodel.find('input'),
-        self = this,
-        search_sta = false;
-
+        self = this;
+    this.sta = false;
     /*view*/
     this.input = {
         foucus:function(){
@@ -133,14 +137,14 @@
     };
 
     this.start_search = function(){
-        if(!search_sta){
+        if(!self.sta){
             self.btn.show();
             self.module.show();
             self.show_history();
             self.input.foucus();
             self.input.fill();
             view_dom.bk.show();
-            search_sta = true;
+            self.sta = true;
         }
         else{
             self.word_search($input.val());
@@ -161,7 +165,7 @@
             self.search.result_name ='';
         }
         view_dom.bk.hide();
-        search_sta = false;
+        self.sta = false;
     };
 
     this.word_search = function(k){
@@ -170,7 +174,7 @@
             self.input.blur();
             self.search.result_name ='';
             view_dom.bk.hide();
-            search_sta = false;
+            self.sta = false;
             route.go({type:'search', k:k, p:1, _:new Date().getTime()});
         }
     };

@@ -1,6 +1,11 @@
 ﻿/*******************
     branding head
   *******************/
+html{
+    height: 100%;
+}body{
+    min-height: 100%;
+}
 .bk_new{
     position: fixed;
     width: 100%;
@@ -71,6 +76,13 @@
     display: inline-block;
     text-align: center;
 }
+.position-occupy{
+    position: absolute;
+    width: 100%;
+    height: 120%;
+    top: 0;
+    z-index: -10;
+}
 .list-container{
     width: 100%;
     position: relative;
@@ -89,6 +101,8 @@
 .section-list {
   display:inline-block;
   width:100%;
+  height: 100%;
+  margin-top: 6px;
 }
 
 .section-list section {
@@ -177,7 +191,6 @@
     display:block;
     width:100%;
     min-height:736px;
-    margin-top:6px;
 }
 .sd-list section{
     width:100%;
@@ -418,7 +431,7 @@
 .filter.top{
     position: fixed;
     top: 0;
-    z-index: 11;
+    z-index: 30;
     -webkit-animation:slipdown 0.4s linear 0s normal forwards;
     animation: slipdown 0.4s linear 0s normal forwards;
 }
