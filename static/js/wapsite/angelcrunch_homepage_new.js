@@ -87,7 +87,7 @@
         width:        10,
         text:         function(value){return value + '%';},
         colors:       ['#cecece', '#ff3d00'],
-        duration:     500,
+        duration:     300,
         wrpClass:     'circles-wrp',
         textClass:    'circles-text',
         styleWrapper: true,
@@ -144,7 +144,7 @@
         }
     };
 
-    this.get_sd = page_base.get_data(page_base.api.sd,self.data_call,{pagesize:10,pageindex:2,w:600,state:'online',industryid:'',regionid:''})
+    this.get_sd = page_base.get_data(page_base.api.sd,self.data_call,{pagesize:10,pageindex:3,w:600,state:'online',industryid:'',regionid:''})
 
     this.info = function(index){
         var c = {},f = 1,h = 1;
@@ -321,7 +321,7 @@
         }
     };
 
-    this.get_sd = page_base.get_data(page_base.api.stars,self.data_call,{pagesize:10,pageindex:3,w:600,state:'online',industryid:'',regionid:''});
+    this.get_sd = page_base.get_data(page_base.api.stars,self.data_call,{pagesize:10,pageindex:1,w:600,state:'online',industryid:'',regionid:''});
 
 
 }).call(define('view_stars'));

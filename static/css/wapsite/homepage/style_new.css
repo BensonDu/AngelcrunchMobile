@@ -32,6 +32,15 @@
 .newhead .hidden-menu li {
     color:#FC5830;
 }
+/*公共标题*/
+.pub-title h3{
+    display: inline-block;
+    line-height: 40px;
+    text-align: center;
+    width: 100%;
+    font-size: 30px;
+    font-weight: bolder;
+}
 /*首屏*/
 .section-container{
     width: 100%;
@@ -51,13 +60,7 @@
     padding-top: 85px;
 }
 .section-container .reward .title h3{
-    display: inline-block;
-    line-height: 40px;
     color: #fff;
-    text-align: center;
-    width: 100%;
-    font-size: 35px;
-    font-weight: bolder;
 }
 .section-container .reward .tag-group{
     width: 100%;
@@ -145,13 +148,16 @@
     -webkit-animation:fadein 0.8s linear 0s normal forwards;
     animation:fadein 0.8s linear 0s normal forwards;
 }
-
-.section-container .reward .bk-num p {
+.section-container .reward .bk-num .num-container{
+    display: inline-block;
+    width: 200%;
+    margin-left: -50%;
+    text-align: center;
+}
+.section-container .reward .bk-num .num-container p {
     display: inline-block;
     font-size: 530px;
     line-height: 400px;
-    width: 150%;
-    margin-left: -25%;
     font-family: 'OpenSans';
     font-weight: bolder;
     text-align: center;
@@ -259,20 +265,12 @@
 .section-container .regist{
     padding: 30px 0 20px;
 }
-.section-container .regist h3{
-    display: inline-block;
-    line-height: 40px;
-    text-align: center;
-    width: 100%;
-    font-size: 35px;
-    font-weight: bolder;
-}
 .section-container .regist h4{
     display: inline-block;
     line-height: 40px;
     text-align: center;
     width: 100%;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bolder;
     white-space:nowrap;
 }
@@ -313,8 +311,8 @@
 .section-container .resource .avatar{
     position: absolute;
     z-index: 0;
-    width: 65%;
-    max-width: 290px;
+    width: 75%;
+    max-width: 320px;
     height: auto;
     left: 0;
     bottom: 0;
@@ -366,14 +364,15 @@
 }
 .section-container .resource .brief .logo img{
     display: inline-block;
-    width: 175px;
+    width: 105px;
+    margin-top: 25px;
     height: auto;
 }
 .section-container .resource .brief p{
-    font-size: 20px;
+    font-size: 16px;
     line-height: 25px;
     font-weight: 900;
-    white-space: nowrap;
+    padding: 0 5%;
     text-align: center;
 }
 .section-container .resource .board-group{
@@ -398,6 +397,7 @@
     display: inline-block;
     float: left;
     width: 40px;
+    padding: 4px;
 }
 .section-container .resource .board-group a div{
     display: inline-block;
@@ -426,20 +426,12 @@
 .section-container .sd-list{
     padding: 30px 0 0;
 }
-.section-container .sd-list h3{
-    display: inline-block;
-    line-height: 40px;
-    text-align: center;
-    width: 100%;
-    font-size: 35px;
-    font-weight: bolder;
-}
 .section-container .sd-list .description{
     width: 100%;
     padding: 7px 3% 0;
 }
 .section-container .sd-list .description p{
-    text-align: center;
+    text-align: justify;
     font-weight: 900;
     font-size: 14px;
     padding: 0 3%;
@@ -614,7 +606,7 @@
     display: inline-block;
     height: 100%;
     width: 50%;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 900;
     line-height: 50px;
     white-space: nowrap;
@@ -628,7 +620,7 @@
     text-align: right;
 }
 .section-container .sd-list .fin-info p span{
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 900;
     color: #ff3d00;
 }
@@ -716,20 +708,12 @@
     position: relative;
     padding: 30px 0 0;
 }
-.section-container .stars h3{
-    display: inline-block;
-    line-height: 40px;
-    text-align: center;
-    width: 100%;
-    font-size: 35px;
-    font-weight: bolder;
-}
 .section-container .stars .description{
     width: 100%;
     padding: 7px 3% 0;
 }
 .section-container .stars .description p{
-    text-align: center;
+    text-align: justify;
     font-weight: 900;
     font-size: 14px;
     padding: 0 3%;
@@ -855,20 +839,12 @@
     position: relative;
     padding: 30px 0 0;
 }
-.section-container .after h3{
-    display: inline-block;
-    line-height: 40px;
-    text-align: center;
-    width: 100%;
-    font-size: 35px;
-    font-weight: bolder;
-}
 .section-container .after .description{
     width: 100%;
     padding: 7px 3% 0;
 }
 .section-container .after .description p{
-    text-align: center;
+    text-align: justify;
     font-weight: 900;
     font-size: 14px;
     padding: 0 3%;
@@ -930,6 +906,7 @@
     height: auto;
 }
 .section-container .after .case p{
+    text-align: justify;
     font-size: 16px;
     line-height: 20px;
     padding: 15px 0;
@@ -980,13 +957,7 @@
     background: #ff3d00;
 }
 .section-container .mobile h3{
-    display: inline-block;
-    line-height: 40px;
-    text-align: center;
-    width: 100%;
-    font-size: 35px;
     color: #fff;
-    font-weight: bolder;
 }
 .section-container .mobile .content{
     width: 100%;
@@ -1041,14 +1012,6 @@
 .section-container .classes{
     padding: 30px 0 20px;
 }
-.section-container .classes h3{
-    display: inline-block;
-    line-height: 40px;
-    text-align: center;
-    width: 100%;
-    font-size: 35px;
-    font-weight: bolder;
-}
 .section-container .classes h4{
     display: inline-block;
     line-height: 40px;
@@ -1100,6 +1063,23 @@
     top:5px;
     text-align: center;
     background: #ff3d00;
+    -webkit-transform:rotate(45deg);
+    transform:rotate(45deg);
+}
+.section-container .classes .btn-group a.hot p:after{
+    content: 'Hot';
+    display: inline-block;
+    position: absolute;
+    width: 60px;
+    height: 16px;
+    font-size: 12px;
+    line-height: 17px;
+    font-weight: 900;
+    color: #fff;
+    right: -18px;
+    top:5px;
+    text-align: center;
+    background: #8f26a3;
     -webkit-transform:rotate(45deg);
     transform:rotate(45deg);
 }
@@ -1337,15 +1317,10 @@
 }
 /*小屏样式*/
 @media screen and (max-width: 340px) {
-    .section-container .stars h3,
-    .section-container .regist h3,
-    .section-container .sd-list h3,
-    .section-container .classes h3,
-    .section-container .mobile h3,
-    .section-container .after h3,
+    .pub-title,
     .section-container .data a h3,
     .section-container .data a h4{
-        font-size: 28px;
+        font-size: 24px;
     }
     .section-container .after .case .detail{
         font-size: 14px;
@@ -1357,14 +1332,16 @@
         font-size: 22px;
     }
     .section-container .regist h4{
-        font-size: 15px;
+        font-size: 13px;
     }
     .section-container .mobile .content .app-download p{
         font-size: 13px;
         line-height: 13px;
     }
-    .section-container .regist div a,
-    .section-container .resource .brief p{
+    .section-container .regist div a{
         font-size: 18px;
+    }
+    .section-container .resource .brief p{
+        font-size: 13px;
     }
 }
