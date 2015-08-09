@@ -95,7 +95,7 @@
                     <p ms-html="txt2html(data.descriptions.plan)"></p>
                 </div>
             </article>
-            <article class="team" ms-if="window.account_info.role>0 && data.team">
+            <article class="team" ms-if="data.team">
             <h1>团队架构</h1>
             <div class="item" ms-repeat="data.team">
                 <h3 ms-text="el.name"></h3>
@@ -104,7 +104,7 @@
                 <p class="gray" ms-html="txt2html(el.summary)"></p>
             </div>
             </article>
-            <article class="milestone" ms-if="window.account_info.role>0 && data.milestone">
+            <article class="milestone" ms-if="data.milestone">
                 <h1>项目大事记</h1>
                 <div class="item" ms-repeat="data.milestone">
                     <p class="date">
@@ -113,7 +113,7 @@
                     <p class="gray" ms-text="el.content"></p>
                 </div>
             </article>
-            <article class="growing-up" ms-if="window.account_info.role>0 && data.growthdata">
+            <article class="growing-up" ms-if="data.growthdata">
                 <h1>成长数据</h1>
                 <div class="item" ms-repeat="data.growthdata">
                     <p class="date">
@@ -122,7 +122,7 @@
                     <p class="gray">{{el.content}}</p>
                 </div>
             </article>
-            <article class="news" ms-if="window.account_info.role>0 && data.news.length>0">
+            <article class="news" ms-if="data.news.length>0">
                 <h1>新闻</h1>
                 <div ms-each-el="data.news">
                     <p class="date">
@@ -231,12 +231,12 @@
                     </div>
                 </div>
             </article>
-            <article class="extra-files">
+            <article class="extra-files default-hidden">
                 <h1>商业企划书</h1>
                 <div class="file PDF"><a href="">查看商业计划书</a></div>
             </article>
 
-            <article class="angel-extra-files">
+            <!--<article class="angel-extra-files">
                 <h1>招股说明书</h1>
                 <div class="angelfile"><a>申请查看招股说明书</a><i id="angel-arrow"></i><button>已经申请</button></div>
                 <div class="form registration">
@@ -275,12 +275,12 @@
                     </div>
                 </div>
 
-            </article>
+            </article>-->
         </div>
     </div>
     <div class="not-logged-in">
         <div class="login-options">
-            <p class="declare">详细信息只对<i>天使汇认证投资人</i>可见，您可以选择：</p>
+            <p class="declare">《商业计划书》只<i>天使汇认证投资人</i>可见，您可以选择：</p>
             <div class="control-module">
                 <em><i></i>&nbsp;天使汇认证投资人</em>
                 <a class="btn btn-small login-btn">登录</a>
