@@ -2,7 +2,7 @@
     if(!account_info.is_login){
         account_info.role   = 0;
         account_info.id     = '13126984';
-        account_info.token  = '9a1c59d334a243855fdbeb380d4ab6a2';
+        account_info.token  = '6eb291ee75f1c625da255bf4a62a5042';
     }
 }).call(this);
 (function(){
@@ -265,7 +265,7 @@
         }
     });
     //自动填充表单 如果已登录
-    if(account_info.is_login){
+    if(account_info.is_login && account_info.id != '13126984'){
         page_remote_data_syn(api.user_info,function(data){
 
             if(data.hasOwnProperty('user')){
