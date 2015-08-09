@@ -108,6 +108,7 @@
                         </div>
                         <p><em ms-if="window.account_info.role>0" ms-text="'投资意向: '+el.finishamount+'万（预融资'+el.amount+'万)'"></em><em class="right"  ms-if="el.day>0" ms-text="'剩余'+el.day+'天'"></em></p>
                     </div>
+                    <p class="new-progress-tag finish" ms-if="el.coinveststatus>=80">已完成</p>
                 </section>
             </a>
         </div>

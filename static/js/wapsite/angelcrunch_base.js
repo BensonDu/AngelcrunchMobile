@@ -58,10 +58,12 @@
         iswechat: base_ua.indexOf("micromessenger") != -1,
         //Android
         isandroid:base_ua.indexOf("android") != -1,
+        //Apple
+        isios: !!base_ua.match(/\(i[^;]+;( u;)? cpu.+mac os x/),
         //APP嵌入
         isapp:false
         /*isandorid: !!base_ua.indexOf("android") != -1 ? 1 : 0,
-        isios: !!base_ua.match(/\(i[^;]+;( u;)? cpu.+mac os x/),
+
         isiphone: !!base_ua.indexOf('iphone') > -1 || ua.indexOf('mac') > -1,
         isipad: !!base_ua.indexOf('ipad') > -1,
         */

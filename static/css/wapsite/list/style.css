@@ -106,11 +106,13 @@ html{
 }
 
 .section-list section {
+  position: relative;
   width:100%;
   min-height:100px;
   padding:17px 5.6% 4px;
   margin-bottom:6px;
   background:#FFF;
+  overflow: hidden;
   -webkit-animation:fadeIn 0.7s linear 0s normal forwards;
   animation: fadeIn 0.7s linear 0s normal forwards;
 }

@@ -143,6 +143,23 @@ input::-webkit-input-placeholder {
 /**********************
      New progress
   **********************/
+.new-progress-tag{
+  position: absolute;
+  display: inline-block;
+  right: -21px;
+  top:11px;
+  width: 80px;
+  height: 17px;
+  font-size: 13px;
+  line-height: 18px;
+  text-align: center;
+  color: #fff;
+  -webkit-transform:rotate(45deg);
+  transform:rotate(45deg);
+}
+.new-progress-tag.finish{
+  background: #74C374;
+}
 .new-progress-container{
     position: relative;
     display: inline-block;
