@@ -2,7 +2,8 @@
     var self = this;
     this.api = {
         sd:base_mobile+'v3/speed_dating',
-        stars:base_mobile+'v3/speed_dating'
+        stars:base_mobile+'v3/speed_dating',
+        report:'http://api.dubaoxing.com/angel_home/report'
     };
     this.default_param = {
         uid:account_info.id,
@@ -309,6 +310,7 @@
     this.data_render = function(data){
         var ret = data || {};
         for(var i in ret){
+            ret[i].intention = ret[i].vc_list.length;
             ret[i].link = base_protocol+ret[i].id+'.'+base_host;
             ret[i].district = ret[i].region == ''?'全国':ret[i].region.split(' ').splice(0,2).join(' · ');
             ret[i].industry = ret[i].industry.slice(0,24).split(' ').join(' · ');
@@ -325,3 +327,41 @@
 
 
 }).call(define('view_stars'));
+
+(function(){
+    var self = this;
+    this.framework =  function() {
+        return avalon.define("report", function (vm) {
+            vm.data = {};
+        });
+    };
+    this.data_call = function(data){
+        if(data.percentsd){
+         self.framework().data = data;
+        }
+    };
+    this.get_report =page_base.get_data(page_base.api.report,self.data_call,{});
+
+}).call(define('view_report'));
+
+(function(){
+    var self = this,
+        data = [{logo:'http://dn-acac.qbox.me/index/daixiaomi_logo.svg',name:'创始人：焦可',img:'http://dn-acac.qbox.me/mobile/homepage/daixiaomi_mobile.png',desc:'2013.10注册天使汇，10.18完成300万天使轮融资，2014.8获晨兴创投A轮融资，额度500万美金。',tips:[{img:'http://dn-acac.qbox.me/v1/icon/icon_info.svg',title:'项目信息完善指导',desc:'帮助项目打磨天使汇展现页面'},{img:'http://dn-acac.qbox.me/v1/icon/icon_bp.svg',title:'融资BP指导',desc:'商业计划书模板下载和指导'},{img:'http://dn-acac.qbox.me/v1/icon/icon_company.svg',title:'足不出户开公司',desc:'一站式在线注册公司（仅海淀区）'},{img:'http://dn-acac.qbox.me/v1/icon/icon_speeddating.svg',title:'闪投私密线下路演',desc:'一次路演，约见50位投资人'}]},{logo:'http://dn-acac.qbox.me/index/xitu_logo.svg',name:'创始人：阴明',img:'http://dn-acac.qbox.me/mobile/homepage/xitu_mobile.png',desc:'2014.12入驻天使汇100X加速器，2014.12.18参加私密路演，当日收获数份投资意向，次日完成数百万天使轮融。',tips:[{img:'http://dn-acac.qbox.me/v1/icon/icon_analysis.svg',title:'投资人分析服务',desc:'帮助您选择最合适的投资人'},{img:'http://dn-acac.qbox.me/v1/icon/icon_term.svg',title:'投资条款指导',desc:'最大限度保证创业者的权益'},{img:'http://dn-acac.qbox.me/v1/icon/icon_partner.svg',title:'创建有限合伙公司',desc:'避免繁杂流程，高效完成融资'},{img:'http://dn-acac.qbox.me/v1/icon/icon_party.svg',title:'举办融资庆祝Party',desc:'与投资人建立更紧密的友谊'}]}];
+    this.framework =  function() {
+        return avalon.define("resource", function (vm) {
+            vm.data = {};
+        });
+    };
+    this.framework().data = data[new Date().getTime()%2];
+}).call(define('view_resource'));
+
+(function(){
+    var self = this,
+        data=[{name:'创始人:陈驰',desc:'#在天使汇#从0到1，小猪短租用了三年时间。无论面对任何质疑和嘲笑，天使汇一直都和我们站在同一边。相信每一位和我们一样坚信自己，坚持勇气的创业者，在这里都能实现自己的梦想。',logo:'http://dn-acac.qbox.me/index/xiaozhuduanzu_logo.svg',img:'http://dn-acac.qbox.me/mobile/homepage/xiaozhu_mobile.png?1',detail:{link:'http://10913645.angelcrunch.com/',name:'C轮融资6000W美金的行业龙头，查看详情'}},{name:'创始人:黄浩',desc:'#在天使汇#4个月的时间从天使走到A轮，天使汇的专业服务让我轻松搞定了很多繁复的法律文件和融资条款，让我能安心地打磨和改进产品，快速成长，这是我接触过的最懂创业者的平台。',logo:'http://dn-acac.qbox.me/index/quchaogu_logo@2X.png',img:'http://dn-acac.qbox.me/mobile/homepage/quchaogu_mobile.png',detail:{link:'http://12906186.angelcrunch.com/',name:'4个月估值提升20倍，查看详情'}},{name:'创始人:彭程',desc:'#在天使汇#在创业刚开始就接触到天使汇是我的幸运，在这里我不仅融到了资金，更得到了投资人从方向到资源方方面面的支持。仅仅3个月，我的项目就领跑了垂直领域，我的投资人也得到了几十倍的回报。',logo:'http://dn-acac.qbox.me/index/haoche_logo@2X.png',img:'http://dn-acac.qbox.me/mobile/homepage/haoche_mobile.png?',detail:{link:'http://12918181.angelcrunch.com/',name:'从0开始3个月融资2000万美金，查看详情'}}];
+    this.framework =  function() {
+        return avalon.define("after", function (vm) {
+            vm.data = {};
+        });
+    };
+    this.framework().data = data[new Date().getTime()%3];
+}).call(define('view_after'));

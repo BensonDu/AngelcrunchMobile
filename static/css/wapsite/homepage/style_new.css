@@ -835,7 +835,7 @@
 }
     /*完成融资*/
 .section-container .after{
-    height: 490px;
+    height: 500px;
     position: relative;
     padding: 30px 0 0;
 }
@@ -896,9 +896,9 @@
 }
 .section-container .after .case{
     position: relative;
-    width: 65%;
+    width: 68%;
     height: 310px;
-    padding: 30px 6% 0;
+    padding: 20px 6% 0;
 }
 .section-container .after .case img{
     display: inline-block;
@@ -907,9 +907,9 @@
 }
 .section-container .after .case p{
     text-align: justify;
-    font-size: 16px;
+    font-size: 14px;
     line-height: 20px;
-    padding: 15px 0;
+    padding: 10px 0;
 }
 .section-container .after .case .detail{
     display: inline-block;
@@ -1062,7 +1062,7 @@
     right: -18px;
     top:5px;
     text-align: center;
-    background: #ff3d00;
+    background: #74C374;
     -webkit-transform:rotate(45deg);
     transform:rotate(45deg);
 }
@@ -1079,7 +1079,7 @@
     right: -18px;
     top:5px;
     text-align: center;
-    background: #8f26a3;
+    background: #ff3d00;
     -webkit-transform:rotate(45deg);
     transform:rotate(45deg);
 }
@@ -1317,7 +1317,7 @@
 }
 /*小屏样式*/
 @media screen and (max-width: 340px) {
-    .pub-title,
+    .pub-title h3,
     .section-container .data a h3,
     .section-container .data a h4{
         font-size: 24px;

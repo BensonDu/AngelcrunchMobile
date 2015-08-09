@@ -5,7 +5,9 @@
     this.api = {
         comlist:base_mobile+'v3/startup',
         searchlist:base_mobile+'v2/startup_search',
-        sdlist:base_mobile+'v3/speed_dating'
+        sdlist:base_mobile+'v3/speed_dating',
+        ohm:'http://api.dubaoxing.com/angel_list/ohm',
+        ohx:'http://api.dubaoxing.com/angel_list/ohx'
     };
     log.type = 'com_list';
 }).call(define('config'));
@@ -278,15 +280,15 @@
     };
 
     this.turning = function(index,total,size){
-        var s = size || 10,
+        var s = size || 10,i = parseInt(index),
             page = Math.ceil(parseInt(total)/s),
-            prev = index-1 > 1 ? index-1: 1,
-            next = index+1 < page ? index+1 :page,
+            prev = i-1 > 1 ? i-1: 1,
+            next = i+1 < page ? i+1 :page,
             hash_prev = base_hash_model.save_data({p:prev}),
             hash_next = base_hash_model.save_data({p:next});
         $prev.attr('href',hash_prev);
         $next.attr('href',hash_next);
-        $current.html(index);
+        $current.html(i);
         $total.html(page);
     };
 
@@ -348,6 +350,28 @@
         view_list.com(data);
     };
 
+    //ohm 数据获取回调
+    this.ohm_list_call = function(data){
+        if(data.hasOwnProperty('list')){
+            self.com_list.data= self.list_render(data.list);
+        }
+        if(data.hasOwnProperty('total')){
+            data.total==0 && view_dom.not_found.show();
+        }
+        view_list.com(data);
+    };
+    
+    //ohx 数据获取回调
+    this.ohx_list_call = function(data){
+        if(data.hasOwnProperty('list')){
+            self.com_list.data= self.list_render(data.list);
+        }
+        if(data.hasOwnProperty('total')){
+            data.total==0 && view_dom.not_found.show();
+        }
+        view_list.com(data);
+    };
+
     //搜索列表 数据回调方法
     this.search_list_call =function(data){
         if(data.hasOwnProperty('list')){
@@ -392,6 +416,34 @@
         self.search_list_get({pageindex:index,keyword:keyword});
     };
 
+    //ohm 数据获取方法初始化
+    this.ohm_list_get = base_data_model.init('ohm',config.api.ohm,comlist_default,self.ohm_list_call,error,loading);
+
+    //ohm 获取数据
+    this.ohm_list_index = function(index,industry,district,order){
+        var post ={
+            pageindex:index || 1,
+            industryid:industry || '',
+            regionid:district || '',
+            order:(!!order && order == 'new')?'new':'heat'
+        };
+        self.ohm_list_get(post);
+    };
+
+    //ohx 数据获取方法初始化
+    this.ohx_list_get = base_data_model.init('ohx',config.api.ohx,comlist_default,self.ohx_list_call,error,loading);
+
+    //ohx 获取数据
+    this.ohx_list_index = function(index,industry,district,order){
+        var post ={
+            pageindex:index || 1,
+            industryid:industry || '',
+            regionid:district || '',
+            order:(!!order && order == 'new')?'new':'heat'
+        };
+        self.ohx_list_get(post);
+    };
+
     //闪投列表 数据获取方法初始化
     this.sd_list_get = base_data_model.init('sd',config.api.sdlist,sdlist_default,self.sd_list_call,error,loading);
 
@@ -431,6 +483,12 @@
             }
             if(data.type == 'com'){
                 return controll_list.com_list_index(p,industry,district,order);
+            }
+            if(data.type == 'ohm'){
+                return controll_list.ohm_list_index(p,industry,district,order);
+            }
+            if(data.type == 'ohx'){
+                return controll_list.ohx_list_index(p,industry,district,order);
             }
         }
         self.go({type:'sd'});
@@ -542,7 +600,41 @@
     };
     this.active_offset = 0;
     this.curret_type = 1;
-    this.com_active = (!!hash_data.type && hash_data.type == 'sd')?'闪投项目':'全部项目';
+    this.type_transfer = function(){
+        var ret = '闪投项目';
+        if(!!hash_data.type){
+            switch (hash_data.type){
+                case 'com':
+                    ret = '全部项目';
+                    break;
+                case 'ohm':
+                    ret = '一亿美金';
+                    break;
+                case 'ohx':
+                    ret = '百倍成长';
+                    break;
+                default :
+            }
+        }
+        return ret;
+    };
+    this.transfer_type = function(){
+        var ret = 'sd';
+        switch (self.com_active){
+            case '全部项目':
+                ret = 'com';
+                break;
+            case '一亿美金':
+                ret = 'ohm';
+                break;
+            case '百倍成长':
+                ret = 'ohx';
+                break;
+            default :
+        }
+        return ret;
+    };
+    this.com_active = self.type_transfer();
     this.industry_active = !!hash_data.industry ? hash_data.industry : '全部行业';
     this.district_active = !!hash_data.district ? hash_data.district : '全部地区';
     this.sd_state_active = (!!hash_data.state && hash_data.state == 'success')?'完成融资':'正在热投';
@@ -561,7 +653,7 @@
     this.select_action = function(){
       var hash_data = {};
         base_helper.scroll_to(0);
-        hash_data.type = self.com_active == '闪投项目'?'sd':'com';
+        hash_data.type = self.transfer_type();
         hash_data.industry = self.industry_active == '全部行业'?'':self.industry_active;
         hash_data.district = self.district_active == '全部地区'?'':self.district_active;
         if(hash_data.type == 'sd'){
@@ -575,7 +667,7 @@
 
     this.industry_list = ["全部行业","电子商务","移动互联网","信息技术","游戏","旅游","教育","金融","社交","娱乐","硬件","能源","医疗健康","餐饮","企业","平台","汽车","数据","房产酒店","文化艺术","体育运动","生物科学","媒体资讯","广告营销","节能环保","消费生活","工具软件","资讯服务","智能设备"];
     this.district_list = ['全部地区','北京','上海','深圳','广州','杭州','南京','西安','成都','苏州','天津','无锡','武汉','重庆','厦门','青岛'];
-    this.page_list     = ['闪投项目','全部项目'];
+    this.page_list     = ['闪投项目','全部项目','一亿美金','百倍成长'];
     this.sd_state_list = ['正在热投','完成融资'];
     this.order_list    =  ['热度排序','时间排序'];
     this.avalon_filter = avalon.define("list-filter", function (vm) {
