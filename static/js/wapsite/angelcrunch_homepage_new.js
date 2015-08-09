@@ -14,6 +14,7 @@
             call(data);
         },$.extend(true,self.default_param,data));
     };
+    log.type = 'homepage';
 }).call(define('page_base'));
 
 (function(){
