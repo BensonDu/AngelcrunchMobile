@@ -2,7 +2,7 @@
     if(!account_info.is_login){
         account_info.role   = 0;
         account_info.id     = '13126984';
-        account_info.token  = 'ac883a5db60dc02cc9c0cf35aaea23ca';
+        account_info.token  = '6eb291ee75f1c625da255bf4a62a5042';
     }
 }).call(this);
 (function(){
