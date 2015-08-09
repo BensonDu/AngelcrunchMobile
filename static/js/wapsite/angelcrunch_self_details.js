@@ -74,9 +74,9 @@
         invest_info:$('.invest-info')
     };
 
-    if(account_info.is_login){
+    if(account_info.is_login && account_info.id=='13126984'){
 
-        if(account_info.role<1 && account_info.id=='13126984'){
+        if(account_info.role<1){
             view_page_init_dom.limited.show();
             view_page_init_dom.login_module.eq(1).show();
             view_page_init_dom.login_module.eq(3).show();
