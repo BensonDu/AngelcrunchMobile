@@ -8,8 +8,8 @@
 (function(){
     var encode_current_url=encodeURIComponent(location.href);
     this.page_config={
-        reg_investor_long_url:"//m.angelcrunch.com/angel_vip_simple?source="+encode_current_url,
-        reg_investor_short_url:"//0.angelcrunch.com/angel/new?source="+encode_current_url,
+        reg_investor_long_url:"//0.angelcrunch.com/angel/new?source="+encode_current_url,
+        reg_investor_short_url:"//m.angelcrunch.com/angel_vip_simple?source="+encode_current_url,
         login_url:"//auth.angelcrunch.com?source="+encode_current_url,
         default_param:{
             uid:account_info.id,
@@ -74,9 +74,9 @@
         invest_info:$('.invest-info')
     };
 
-    if(account_info.is_login){
+    if(account_info.is_login && account_info.id !='13126984'){
 
-        if(account_info.role<1 && account_info.id=='13126984'){
+        if(account_info.role<1){
             view_page_init_dom.limited.show();
             view_page_init_dom.login_module.eq(1).show();
             view_page_init_dom.login_module.eq(3).show();
