@@ -23,7 +23,7 @@
         $selector = $base.children('.selector'),
         $first = $base.children('div').children('a'),
         $bk_menu = $('.bk-num'),
-        $bk_text = $bk_menu.children('p');
+        $bk_text = $bk_menu.find('p');
 
     this.sta = {
         switch:true,
