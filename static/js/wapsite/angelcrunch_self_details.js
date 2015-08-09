@@ -271,7 +271,8 @@
 }).call(this);
 //融资详情
 (function(){
-    if(account_info.role<1)return false;
+    //if(account_info.role<1)return false;
+    $('.invest-info').show();
     page_remote_data_syn(api.com_finace_info,function(data){
         avalon_model.finance.data=data;
     },page_status.get_com_id());
@@ -279,6 +280,7 @@
 //BP
 (function(){
     if(account_info.role<1)return false;
+    $('.extra-files').show();
     page_remote_data_syn(api.com_bp,function(data){
         if(data.hasOwnProperty('pb')){
             set_pb(data.pb);
@@ -289,6 +291,7 @@
 
 /*天使汇此次单独*/
 (function(){
+    return false;
     //if(account_info.role<1 || !(/^http:\/\/13097951\./.test(location.href.toLowerCase()) || page_status.com_id=='13097951')){return}
     this.angel_api={
         is_apply:base_mobile+'v4/startup/is_bp_view_apply',
