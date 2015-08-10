@@ -366,3 +366,50 @@
     };
     this.framework().data = data[new Date().getTime()%3];
 }).call(define('view_after'));
+
+(function(){
+    var $num=$('.countdown'),start= 1439438400000, t, y, e,ss,sss, w, l;
+
+    t=setInterval(function(){
+        var now= start-$.now();
+        if(now<=0){
+            clearInterval(t);
+        }
+        else{
+            var a=Math.floor((start-$.now())/1000),
+                h=Math.floor(a/(60*60)),
+                m=Math.floor((a=a-60*60*h)/60),
+                s=a-m*60;
+            if(h>9){
+                y=h.toString()[0];
+                e=h.toString()[1];
+            }
+            else{
+                y=0;
+                e=h;
+            }
+            if(m>9){
+                ss =  m.toString()[0];
+                sss=  m.toString()[1];
+            }
+            else{
+                ss= 0;
+                sss=m;
+            }
+            if(s>9){
+                w= s.toString()[0];
+                l= s.toString()[1];
+            }
+            else{
+                w=0;
+                l=s;
+            }
+            $num.eq(0).html(y);
+            $num.eq(1).html(e);
+            $num.eq(2).html(ss);
+            $num.eq(3).html(sss);
+            $num.eq(4).html(w);
+            $num.eq(5).html(l);
+        }
+    },500);
+}).call(define('view_angel'));
