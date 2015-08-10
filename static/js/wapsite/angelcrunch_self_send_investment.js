@@ -91,14 +91,14 @@
                     vm.event.syn();
                 }
             },
-            addparts:function(){
+            addparts:function(e){
                 if(buydetailsdata.parts<buydetailsdata.totalparts){
                     avalon_model.buydetails.data.parts+=1;
                     buydetailsdata.parts+=1;
                     vm.event.syn();
                 }
             },
-            minparts:function(){
+            minparts:function(e){
                 if(buydetailsdata.parts>1){
                     avalon_model.buydetails.data.parts-=1;
                     buydetailsdata.parts-=1;
