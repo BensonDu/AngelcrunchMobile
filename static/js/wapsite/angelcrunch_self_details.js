@@ -6,7 +6,7 @@
     }
 }).call(this);
 (function(){
-    var encode_current_url=encodeURIComponent(location.href);
+    var encode_current_url=encodeURIComponent(location.href.split('?')[0]);
     this.page_config={
         reg_investor_long_url:"//0.angelcrunch.com/angel/new?source="+encode_current_url,
         reg_investor_short_url:"//m.angelcrunch.com/angel_vip_simple?source="+encode_current_url,
