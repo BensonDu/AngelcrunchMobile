@@ -46,7 +46,7 @@
             <p ms-text="data.concept"></p>
             <p class="extra" ms-text="data.industry"></p>
         </div>
-        <div class="new-progress-container">
+        <div class="new-progress-container" ms-if="false">
             <div class="new-progress-group">
                 <div class="new-progress">
                     <div class="new-progress-bar" ms-css-width="(data.finance_percent > 100 ? 100 : data.finance_percent)+'%'"></div>
@@ -145,7 +145,7 @@
                     </ul>
                     <ul>
                         <li class="money"><aside><i>{{data.min_quota || 0}}W</i><em>最低投资额</em></aside></li>
-                        <li class="bar-chat"><aside><i>30亿</i><em>估值</em></aside></li>
+                        <li class="bar-chat"><aside><i>20亿</i><em>估值</em></aside></li>
                     </ul>
                 </div>
                 <p ms-if="data.txt"><i>优先考虑的投资人：</i><em ms-text="data.txt"></em></p>
@@ -171,7 +171,7 @@
                 <div ms-html="txt2html(data.purpose)"></div>
             </article>
             <div class="article-list">
-                <article class="intro" ms-if="window.account_info.role>0">
+                <article class="intro">
                     <h1>认购须知</h1>
                     <p class="silver">本次融资形式</p>
                     <p>新股增发</p>
@@ -189,11 +189,11 @@
                     </div>
                     <div class="item">
                         <p class="silver">筹资条款</p>
-                        <p>本次发行计划出让不超过2.5%的股权，融资7500万人民币</p>
+                        <p>天使汇将于近期完成A轮融资，本次发行是A轮融资前的一次私募发行。本次发行计划出让1%的股权，融资2000万人民币，根据超额认购情况，Cap在3500万人民币，主要是为了在完成A轮融资之前，拿出少量额度优选能够为天使汇带来重要价值的战略投资者。</p>
                     </div>
                     <div class="item">
                         <p class="silver">认购条件</p>
-                        <p>对天使汇平台认证投资人每份￥100万，单一投资者认购不得超过5份；对战略投资者和机构投资者，单一投资者认购不得超过25份</p>
+                        <p>每份认购价人民币100万，每份占股0.05％，根据超额认购情况，每份占股会相应进行下调，最低不低于0.0285%。对天使汇平台认证投资人每份￥100万，单一投资者认购不得超过5份；对战略投资者和机构投资者，单一投资者认购不得超过20份。</p>
                     </div>
                     <div class="item">
                         <p class="silver">合格机构投资人标准</p>
