@@ -494,11 +494,11 @@
         $bk.touchtap(function(){if(sta)headoption_display.hide();});
     });
     //APP内嵌隐藏头部
-    if(base_status.isapp){
+    if(base_status.isapp || get_cookie('isapp') == 'yes'){
+        save_cookie('isapp','yes');
         $head.hide();
         $headcontainer.hide();
     }
-
 }).call(this);
 
 //微信分享卡片
