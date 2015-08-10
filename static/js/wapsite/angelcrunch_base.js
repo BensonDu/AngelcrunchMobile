@@ -343,7 +343,7 @@
                 uid:account_info.id,
                 role:account_info.role,
                 type:self.type,
-                url:location.href,
+                url:encodeURIComponent(location.href),
                 attach:JSON.stringify(self.attach),
                 dwell:0,
                 load:len,
