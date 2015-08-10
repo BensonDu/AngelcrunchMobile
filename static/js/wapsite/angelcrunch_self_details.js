@@ -256,16 +256,14 @@
 (function(){
     page_remote_data_syn(api.com_details,function(data){
         avalon_model.details.data=data;
-        if(account_info.role>0){
-            //获取关注状态
-            if(data.hasOwnProperty('is_follow') && data.is_follow){
-                view_follow.follow();
-                page_status.follow=true;
-            }
-            //发送投资意向状态
-            if(data.hasOwnProperty('investment_is_send') && data.investment_is_send){
-                view_intetion.already_sent();
-            }
+        //获取关注状态
+        if(data.hasOwnProperty('is_follow') && data.is_follow){
+            view_follow.follow();
+            page_status.follow=true;
+        }
+        //发送投资意向状态
+        if(data.hasOwnProperty('investment_is_send') && data.investment_is_send){
+            view_intetion.already_sent();
         }
     },page_status.get_com_id());
 }).call(this);
