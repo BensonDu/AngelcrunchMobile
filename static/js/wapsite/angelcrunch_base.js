@@ -4,7 +4,7 @@
         return (typeof  s != 'undefined' && typeof  this[s] == 'undefined') ? this[s] = {} : (this[s] || {});
     };
     this.base_environment=(function(){
-        var href=location.href.toLowerCase();
+        var href=location.host.toLowerCase();
         if(href.indexOf('angelcrunch') != -1){
             return 'online'
         }
