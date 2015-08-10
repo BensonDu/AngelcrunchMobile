@@ -203,16 +203,17 @@
 (function(){
     this.$_GET={};
 
-    var url=window.location.href.split('?'), a, h, l, e, f={};
+    var url=window.location.href.split('?'),rl = url.length, a, h, l, e, f={};
 
-    if(url.length>1){
-        h= url[1].split('#');
-        a=h[0].split('&');
-
-        l= a.length;
-        for(var i=0;i<l;i++){
-            e=a[i].split('=');
-            f[e[0]]= e.length>1?e[1]:'';
+    if(rl>1){
+        for(var m = 1 ; m < rl;m++){
+            h= url[m].split('#');
+            a=h[0].split('&');
+            l= a.length;
+            for(var i=0;i<l;i++){
+                e=a[i].split('=');
+                f[e[0]]= e.length>1?e[1]:'';
+            }
         }
         this.$_GET=f;
     }
