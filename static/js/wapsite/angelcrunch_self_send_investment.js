@@ -34,8 +34,8 @@
                 return x.toFixed(2);
             }
         }
-    }
-
+    };
+    log.type = 'self_investment';
 }).call(this);
 
 //显示逻辑

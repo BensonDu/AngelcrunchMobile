@@ -26,7 +26,7 @@
             return page_status.com_id != ''?{com_id:page_status.com_id}:{};
         }
     };
-
+    log.type = 'self_detail';
 }).call(this);
 
 //链接补全当前链接 回调链接
