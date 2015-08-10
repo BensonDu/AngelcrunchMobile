@@ -395,7 +395,7 @@ input::-webkit-input-placeholder {
   line-height:26px;
   float:right;
   border:none;
-  background:#E65100;
+  background:#ff3d00;
 }
 
 .btn-group .btn.white-border.reverse {
@@ -574,6 +574,7 @@ label > i input {
   margin-top:9px;
   border:none;
   background-color:transparent;
+  font-family: "PingHei","Lucida Grande","Lucida Sans Unicode","Helvetica","Arial","Verdana","sans-serif";
 }
 
 label > i input:focus {
