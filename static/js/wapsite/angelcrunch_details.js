@@ -42,10 +42,11 @@
     });
     avalon_model.finance=avalon.define("finance", function (vm) {vm.data = {};});
 }).call(this);
-
-//数据转HTML
-(function(){{
-    this.txt2html = function (txt) {
+//Helper
+(function(){
+    var self = this;
+    //文本换行转化为html标签
+    this.decode_text = function (txt) {
         var html, txt_list, _i, _len;
         txt_list = txt.split('\n');
         html = '';
@@ -53,7 +54,30 @@
             html += "<p>" + txt_list[_i] + "</p>";
         return html;
     };
-}}).call(this);
+    //时间戳转为月日
+    this.get_md = function(t){
+        var tt =new Date(parseInt(t) * 1000),
+            m = tt.getMonth()+ 1,
+            d = tt.getDate(),
+            mm = m < 9 ? '0'+ m : m,
+            dd = d < 9 ? '0'+ d : d;
+        return !t ? '':mm+'.'+dd;
+    };
+    //时间戳转为年
+    this.get_y = function(t){
+        var tt =new Date(parseInt(t) * 1000),
+            y = tt.getFullYear();
+        return !t ? '' : y;
+    };
+    //是否为数组
+    this.is_array = function(o){
+        return Object.prototype.toString.call(o) === '[object Array]';
+    };
+    //数组是否为空
+    this.array_empty = function(a){
+        return (!!a && self.is_array(a) && a.length>0);
+    };
+}).call(this);
 
 //数据获取
 (function(){
