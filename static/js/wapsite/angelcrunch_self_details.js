@@ -4,6 +4,8 @@
         account_info.id     = '13126984';
         account_info.token  = '6eb291ee75f1c625da255bf4a62a5042';
     }
+    wechat_card.img = 'http://dn-xswe.qbox.me/13168760?imageMogr2/thumbnail/340x';
+    wechat_card.title = '投资天使汇，抢占天使投资先锋阵地';
 }).call(this);
 (function(){
     var encode_current_url=encodeURIComponent(location.href.split('?')[0]);
