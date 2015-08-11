@@ -7,7 +7,7 @@
     this.no_authority = function(hasaccount){
         return self.has_authority=false,$no_auth.show(),(!!hasaccount ? $apply.attr('href',"//0.angelcrunch.com/angel/new?source="+current_url):$apply.attr('href',"//m.angelcrunch.com/angel_vip_simple?source="+current_url));
     };
-    (!$_GET.id || !$_GET.all || !$_GET.role || !$_GET.access_token || $_GET.access_token.length<10)?self.no_authority():(parseInt($_GET.role)<1?self.no_authority(1):'');
+    (!$_GET.id || !$_GET.all || parseInt(account_info.role)<1)?self.no_authority():(!account_info.is_login?self.no_authority(1):'');
     log.type = 'bp';
 }).call(define('view_bp'));
 
