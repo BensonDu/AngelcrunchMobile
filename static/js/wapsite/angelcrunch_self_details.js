@@ -281,11 +281,12 @@
 (function(){
     if(account_info.role<1)return false;
     $('.extra-files').show();
-    page_remote_data_syn(api.com_bp,function(data){
+    /*page_remote_data_syn(api.com_bp,function(data){
         if(data.hasOwnProperty('pb')){
             set_pb(data.pb);
         }
-    },page_status.get_com_id())
+    },page_status.get_com_id())*/
+    set_pb('http://ac2015.angelcrunch.com/bp?id=13168816&all=54');
 }).call(this);
 
 
