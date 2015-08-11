@@ -66,7 +66,7 @@
             <a class="btn btn-small orange send-investment-btn" href="/vc_new">发送投资意向</a>
         </div>
     </div>
-    <div class="slider-container" ms-controller="basic-info" ms-if="data.pics && data.pics.length">
+    <div class="slider-container" ms-controller="basic-info" ms-if="array_empty(data.pics)">
         <ul ms-each-el="data.pics">
             <li><img ms-src="el.small" /></li>
         </ul>
@@ -77,22 +77,22 @@
             <article class="intro" ms-if="window.account_info.role>0 && data.descriptions ">
                 <h1>项目描述</h1>
                 <p class="silver" ms-if="data.descriptions.user_case">项目描述</p>
-                <p ms-if="data.descriptions.user_case" ms-html="txt2html(data.descriptions.user_case)"></p>
+                <p ms-if="data.descriptions.user_case" ms-html="decode_text(data.descriptions.user_case)"></p>
                 <div class="item" ms-if="data.descriptions.market_research">
                     <p class="silver">市场调研</p>
-                    <p ms-html="txt2html(data.descriptions.market_research)"></p>
+                    <p ms-html="decode_text(data.descriptions.market_research)"></p>
                 </div>
                 <div class="item" ms-if="data.descriptions.advantage">
                     <p class="silver">项目优势</p>
-                    <p ms-html="txt2html(data.descriptions.advantage)"></p>
+                    <p ms-html="decode_text(data.descriptions.advantage)"></p>
                 </div>
                 <div class="item" ms-if="data.descriptions.pattern">
                     <p class="silver">商业模式</p>
-                    <p ms-html="txt2html(data.descriptions.pattern)"></p>
+                    <p ms-html="decode_text(data.descriptions.pattern)"></p>
                 </div>
                 <div class="item" ms-if="data.descriptions.plan">
                     <p class="silver">发展规划</p>
-                    <p ms-html="txt2html(data.descriptions.plan)"></p>
+                    <p ms-html="decode_text(data.descriptions.plan)"></p>
                 </div>
             </article>
             <article class="team" ms-if="data.team">
@@ -101,10 +101,10 @@
                     <h3 ms-text="el.name"></h3>
                     <p class="avatar"><img ms-src="el.avatar||''" /></p>
                     <p class="experience" ms-if="el.firmname!=''" ms-text="el.firmname+' · '+(el.title || '')"></p>
-                    <p class="gray" ms-html="txt2html(el.summary)"></p>
+                    <p class="gray" ms-html="decode_text(el.summary)"></p>
                 </div>
             </article>
-            <article class="milestone" ms-if="window.account_info.role>0 && data.milestone && data.milestone.length">
+            <article class="milestone" ms-if="window.account_info.role>0 && array_empty(data.milestone)">
                 <h1>项目大事记</h1>
                 <div class="item" ms-repeat="data.milestone">
                     <p class="date">
@@ -113,7 +113,7 @@
                     <p class="gray" ms-text="el.content"></p>
                 </div>
             </article>
-            <article class="growing-up" ms-if="window.account_info.role>0 && data.growthdata && data.growthdata.length>0">
+            <article class="growing-up" ms-if="window.account_info.role>0 && array_empty(data.growthdata)">
                 <h1>成长数据</h1>
                 <div class="item" ms-repeat="data.growthdata">
                     <p class="date">
@@ -122,7 +122,7 @@
                     <p class="gray" ms-text="el.content"></p>
                 </div>
             </article>
-            <article class="news" ms-if="window.account_info.role>0 && data.news && data.news.length>0">
+            <article class="news" ms-if="window.account_info.role>0 && array_empty(data.news)">
                 <h1>新闻</h1>
                 <div ms-each-el="data.news">
                     <p class="date">
@@ -168,7 +168,7 @@
             </article>
             <article class="funds" ms-if="data.purpose">
                 <h1>资金用途</h1>
-                <div ms-html="txt2html(data.purpose)"></div>
+                <div ms-html="decode_text(data.purpose)"></div>
             </article>
             <article class="questions-answers" ms-if="data.qa_list.length">
                 <h1>Q&A</h1>
