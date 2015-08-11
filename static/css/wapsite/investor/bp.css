@@ -181,13 +181,12 @@ body {
     height: 100%;
     display: inline-block;
     text-align: center;
-    line-height: 22px;
+    line-height: 20px;
     font-size: 14px;
 }
 .page-num p span{
     font-size: 14px;
     color: #000;
-    line-height: 22px;
 }
 
 .details {
