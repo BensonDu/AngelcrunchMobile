@@ -68,6 +68,7 @@ body {
     width: 100%;
     height: 100%;
     background: #fff;
+    z-index: 20;
     display: none;
 }
 .no-authority .mg{
@@ -110,6 +111,56 @@ body {
     background: #000;
     color: #fff;
 }
+
+.error{
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    display: none;
+    z-index: 20;
+}
+.error .mg{
+    width: 100%;
+    height: 15%;
+}
+.error .logo{
+    width: 100%;
+    text-align: center;
+}
+.error .logo img{
+    width: 50%;
+    height: auto;
+    border-radius: 10%;
+}
+.error p{
+    display: inline-block;
+    text-align: center;
+    width: 100%;
+    font-size: 18px;
+    line-height: 27px;
+    margin-top: 50px;
+}
+.error p span{
+    font-size: 18px;
+    color: #ff3d00;
+}
+.error .btn-group{
+    width: 100%;
+    text-align: center;
+    margin-top: 20%;
+}
+.error a{
+    display: inline-block;
+    border: 1px solid #000;
+    border-radius: 3px;
+    padding: 8px 10px;
+}
+.error a:active{
+    background: #000;
+    color: #fff;
+}
+
 .page-num{
     position: fixed;
     height: 22px;

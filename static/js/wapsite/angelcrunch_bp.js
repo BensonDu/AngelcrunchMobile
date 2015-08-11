@@ -2,12 +2,17 @@
     var self = this,
         $no_auth = $('.no-authority'),
         $apply = $('#apply'),
+        $error = $('.error'),
         current_url = encode_current_url=encodeURIComponent(location.href.split('?')[0]);
     this.has_authority =true;
     this.no_authority = function(hasaccount){
         return self.has_authority=false,$no_auth.show(),(!!hasaccount ? $apply.attr('href',"//0.angelcrunch.com/angel/new?source="+current_url):$apply.attr('href',"//m.angelcrunch.com/angel_vip_simple?source="+current_url));
     };
-    (!$_GET.id || !$_GET.all || parseInt(account_info.role)<1)?self.no_authority():(!account_info.is_login?self.no_authority(1):'');
+    this.error = function(){
+        $error.show();
+    };
+    (!$_GET.id || !$_GET.all)&&self.error();
+    (parseInt(account_info.role)<1)?self.no_authority():(!account_info.is_login?self.no_authority(1):'');
     log.type = 'bp';
 }).call(define('view_bp'));
 
