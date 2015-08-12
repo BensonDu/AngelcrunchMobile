@@ -28,22 +28,3 @@
 .banner-footer {
   margin-top:216px;
 }
-
-/*按钮修复*/
-.submit-new-btn{
-  display: inline-block;
-  width: 100%;
-  height: 50px;
-  background: #ddd;
-  text-align: center;
-  transition:background 0.2s linear;
-  -webkit-transition:background 0.2s linear;
-}
-.submit-new-btn img{
-  display: inline-block;
-  height: 50px;
-  padding: 15px;
-}
-.submit-new-btn.active{
-  background: #333;
-}

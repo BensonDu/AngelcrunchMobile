@@ -1203,7 +1203,7 @@
     font-family: 'Teko';
     font-style: normal;
     font-weight: 400;
-    src: local('Teko Regular'), local('Teko-Regular'), url(https://dn-acac.qbox.me/teko.woff) format('woff');
+    src: local('Teko Regular'), local('Teko-Regular'), url(https://dn-acac.qbox.me/teko.woff) format('woff'),url('https://dn-acac.qbox.me/mobile/homepage/teko.otf') format('opentype');
 }
 .first-screen .image-container {
     margin-top:92px;
