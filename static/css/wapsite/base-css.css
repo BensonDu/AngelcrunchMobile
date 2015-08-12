@@ -98,7 +98,7 @@ body {
   font-family: "PingHei";
   font-style: normal;
   font-weight: 200;
-  src: local("☺︎"), url("https://dn-acac.qbox.me/PingHei-light.woff") format("woff");
+  src: local("☺︎"), url("http://dn-acac.qbox.me/PingHei-light.woff") format("woff"),url("http://dn-acac.qbox.me/pinghei-light.eot") format("embedded-opentype"),url('http://dn-acac.qbox.me/pinghei-light.otf') format('opentype');
 }
 
 @font-face {
@@ -327,6 +327,25 @@ input::-webkit-input-placeholder {
   -o-transition:background-color 0.2s linear;
   -webkit-transition:background-color 0.2s linear;
   transition:background-color 0.2s linear;
+}
+
+/*按钮修复*/
+.submit-new-btn{
+  display: inline-block;
+  width: 100%;
+  height: 50px;
+  background: #ddd;
+  text-align: center;
+  transition:background 0.2s linear;
+  -webkit-transition:background 0.2s linear;
+}
+.submit-new-btn img{
+  display: inline-block;
+  height: 50px;
+  padding: 15px;
+}
+.submit-new-btn.active{
+  background: #333;
 }
 
 .btn.black {
