@@ -75,6 +75,7 @@
     left: 0;
     top: 0;
     background: rgba(255,255,255,0.9);
+    z-index: 0;
     -webkit-transition:top .5s ease;
     transition:top .5s ease
 }
@@ -82,6 +83,7 @@
     position: relative;
     width: 70%;
     height: 100%;
+    z-index: 1;
     overflow: hidden;
 }
 .section-container .reward .tag-group a{
@@ -366,7 +368,7 @@
     display: inline-block;
     width: 105px;
     margin-top: 25px;
-    height: auto;
+    height: 39px;
 }
 .section-container .resource .brief p{
     font-size: 16px;
@@ -906,6 +908,8 @@
     height: auto;
 }
 .section-container .after .case p{
+    display: inline-block;
+    position: relative;
     text-align: justify;
     font-size: 14px;
     line-height: 20px;
@@ -1221,6 +1225,8 @@
 .first-screen.angelred .img-div{
     width: 100%;
     height: 268px;
+    margin: 0;
+    top: 0;
     overflow: visible;
     position: relative;
 }
@@ -1229,7 +1235,7 @@
 }
 .first-screen.angelred .img-div div img{
     width: 100%;
-    height: 100%;
+    height: auto;
 }
 .first-screen.angelred .img-div .ipone{
     top:50%;
