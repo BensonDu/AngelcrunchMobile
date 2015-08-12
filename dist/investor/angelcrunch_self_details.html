@@ -100,7 +100,7 @@
             <div class="item" ms-repeat="data.team">
                 <h3 ms-text="el.name"></h3>
                 <p class="avatar"><img ms-src="el.avatar||''" /></p>
-                <p class="experience" ms-if="el.firmname!=''">{{el.firmname}}{{" · " + el.title || ''}}</p>
+                <p class="experience" ms-if="el.firmname!=''" ms-text="el.firmname+' · '+(el.title || '')"></p>
                 <p class="gray" ms-html="decode_text(el.summary)"></p>
             </div>
             </article>
@@ -108,7 +108,7 @@
                 <h1>项目大事记</h1>
                 <div class="item" ms-repeat="data.milestone">
                     <p class="date">
-                        <i>{{el.M_dd}}</i><em>{{el.yyyy}}</em>
+                        <i ms-text="el.M_dd"></i><em ms-text="el.yyyy"></em>
                     </p>
                     <p class="gray" ms-text="el.content"></p>
                 </div>
@@ -117,20 +117,20 @@
                 <h1>成长数据</h1>
                 <div class="item" ms-repeat="data.growthdata">
                     <p class="date">
-                        <i>{{el.M_dd}}</i><em>{{el.yyyy}}</em>
+                        <i ms-text="el.M_dd"></i><em ms-text="el.yyyy"></em>
                     </p>
-                    <p class="gray">{{el.content}}</p>
+                    <p class="gray" ms-text="el.content"></p>
                 </div>
             </article>
             <article class="news" ms-if="data.news.length>0">
                 <h1>新闻</h1>
                 <div ms-each-el="data.news">
                     <p class="date">
-                        <i>{{el.M_dd}}</i><em>{{el.yyyy}}</em>
+                        <i ms-text="el.M_dd"></i><em ms-text="el.yyyy"></em>
                     </p>
                     <div class="item">
-                        <p>{{el.title}}</p>
-                        <p class="gray">{{el.content}}</p>
+                        <p ms-text="el.title"></p>
+                        <p class="gray" ms-text="el.content"></p>
                     </div>
                 </div>
             </article>
@@ -140,11 +140,11 @@
             <article class="needs">
                 <div class="info-table">
                     <ul>
-                        <li class="hourglass"><aside><i>{{data.hope_amount || 0}}W</i><em>预计融资</em></aside></li>
-                        <li class="pie-chat"><aside><i>{{data.stock_sale || 0}}%</i><em>出让股权比例</em></aside></li>
+                        <li class="hourglass"><aside><i ms-text="(data.hope_amount || 0)+'W'"></i><em>预计融资</em></aside></li>
+                        <li class="pie-chat"><aside><i ms-text="(data.stock_sale || 0)+'%'"></i><em>出让股权比例</em></aside></li>
                     </ul>
                     <ul>
-                        <li class="money"><aside><i>{{data.min_quota || 0}}W</i><em>最低投资额</em></aside></li>
+                        <li class="money"><aside><i ms-text="(data.min_quota || 0)+'W'"></i><em>最低投资额</em></aside></li>
                         <li class="bar-chat"><aside><i>20亿</i><em>估值</em></aside></li>
                     </ul>
                 </div>
@@ -157,10 +157,10 @@
                         <li ms-repeat="data.vc_list">
                             <div>
                                 <p class="portrait"><img ms-src="el.avatar || ''" /></p>
-                                <p class="name">{{el.name}}</p>
-                                <p class="company">{{el.firmname}}</p>
-                                <p class="title">{{el.title}}</p>
-                                <div class="investment">{{el.amount}}W</div>
+                                <p class="name" ms-text="el.name"></p>
+                                <p class="company" ms-text="el.firmname"></p>
+                                <p class="title" ms-text="el.title"></p>
+                                <div class="investment" ms-text="el.amount+'W'"></div>
                             </div>
                         </li>
                     </ul>
@@ -222,11 +222,11 @@
                 <h1>Q&A</h1>
                 <div class="group" ms-repeat="data.qa_list">
                     <div class="item">
-                        <p class="title-container"><i>Q</i><em>{{el.name}}{{"·" + el.title}}</em></p>
+                        <p class="title-container"><i>Q</i><em ms-text="el.name+' · '+el.title"></em></p>
                         <p ms-text="el.q"></p>
                     </div>
                     <div class="item" ms-if="el.a">
-                        <p class="title-container"><i>A</i><em>{{el.a_name}}·项目创始人</em></p>
+                        <p class="title-container"><i>A</i><em ms-text="el.a_name+'·项目创始人'"></em></p>
                         <p ms-text="el.a"></p>
                     </div>
                 </div>
