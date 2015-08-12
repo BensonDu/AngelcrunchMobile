@@ -229,10 +229,6 @@ input::-webkit-input-placeholder {
 
 .btn {
   display: inline-block;
-  *border-bottom: 0 none #b3b3b3;
-  display: inline;
-  /* IE7 inline-block hack */
-  *zoom: 1;
   height:28px;
   padding: 4px 12px;
   margin-bottom: 0;
@@ -242,34 +238,21 @@ input::-webkit-input-placeholder {
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  color: #333333;
+  color: #333;
   background-color: transparent;
   background-repeat: repeat-x;
-  border-color: #666;
-  *-webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
   border-radius: 2px;
-  margin-left: 0em;
+  margin-left: 0;
   -webkit-box-shadow: none;
-  -moz-box-shadow: none;
   box-shadow: none;
-/* Darken IE7 buttons by default so they stand out more given they won't have borders */
-
   border:1px solid #CCC;
-  -ms-user-select:none;
-  -moz-user-select:none;
   -webkit-user-select:none;
   user-select:none;
 }
 
 .btn[disabled] {
-  color: #333333;
+  color: #333;
   background-color: #f5f5f5;
-  *background-color: #eee;
-}
-
-.btn:first-child {
-  *margin-left: 0;
 }
 
 .btn:hover,
@@ -277,14 +260,11 @@ input::-webkit-input-placeholder {
   color: #333333;
   text-decoration: none;
   -webkit-transition: background-position 0.1s linear;
-  -moz-transition: background-position 0.1s linear;
-  -o-transition: background-position 0.1s linear;
   transition: background-position 0.1s linear;
 }
 
 .btn:focus {
   outline: thin dotted #333;
-  outline: 5px auto -webkit-focus-ring-color;
   outline-offset: -2px;
 }
 
@@ -387,9 +367,6 @@ input::-webkit-input-placeholder {
   height:28px;
   font-size:14px;
   border-radius:3px;
-  -moz-transition:background 0.3s linear;
-  -o-transition:background 0.3s linear;
-  -ms-transition:background 0.3s linear;
   -webkit-transition:background 0.3s linear;
   transition:background 0.3s linear;
 }
@@ -422,9 +399,6 @@ input::-webkit-input-placeholder {
   border:none;
   background:#74C374;
   line-height:26px;
-  -moz-transition:background 0.3s linear;
-  -o-transition:background 0.3s linear;
-  -ms-transition:background 0.3s linear;
   -webkit-transition:background 0.3s linear;
   transition:background 0.3s linear;
 }
@@ -499,8 +473,6 @@ input::-webkit-input-placeholder {
   left:50%;
   border-radius:3px;
   -webkit-transform:translate(-50%,0);
-  -moz-transform:translate(-50%,0);
-  -o-transform:translate(-50%,0);
   transform:translate(-50%,0);
   background:rgba(57, 57, 57, 0.48);
   z-index:19999;
@@ -837,7 +809,6 @@ body.footer-close-bottom .banner-footer {
   -webkit-transition:right .4s ease;
   -o-transition:right .4s ease;
   transition:right .4s ease;
-    /*right:0;*/
 }
 
 @media only screen and (min-width: 998px) {
@@ -1090,9 +1061,9 @@ body.footer-close-bottom .banner-footer {
 
 .head {
   height:46px;
-  right: 0px;
-  left: 0px;
-  top: 0px;
+  right: 0;
+  left: 0;
+  top: 0;
   text-align:left;
   background:#FFF;
   z-index: 10;
@@ -1131,7 +1102,6 @@ body.footer-close-bottom .banner-footer {
 
 .head .options .hidden-menu {
   position:absolute;
-  /*display:block;*/
   width:154px;
   padding:8px 0;
   margin-top:-24px;
@@ -1224,9 +1194,9 @@ body.footer-close-bottom .banner-footer {
 }
 .newhead {
   height:46px;
-  right: 0px;
-  left: 0px;
-  top: 0px;
+  right: 0;
+  left: 0;
+  top: 0;
   text-align:left;
   background:#FFF;
   z-index: 15;
