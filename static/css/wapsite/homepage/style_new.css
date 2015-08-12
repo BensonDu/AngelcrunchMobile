@@ -371,6 +371,8 @@
     height: 39px;
 }
 .section-container .resource .brief p{
+    display: inline-block;
+    position: relative;
     font-size: 16px;
     line-height: 25px;
     font-weight: 900;
@@ -915,8 +917,11 @@
     line-height: 20px;
     padding: 10px 0;
 }
-.section-container .after .case .detail{
+.section-container .after .detail{
     display: inline-block;
+    position: absolute;
+    left: 6%;
+    bottom: 7%;
     padding: 6px 7px 3px;
     font-size: 16px;
     font-weight: 900;
@@ -926,7 +931,7 @@
     border-radius: 3px;
     white-space: nowrap;
 }
-.section-container .after .case .detail:active{
+.section-container .after .detail:active{
     background:#ff3d00 ;
     color: #fff;
 }
@@ -1207,7 +1212,10 @@
     font-family: 'Teko';
     font-style: normal;
     font-weight: 400;
-    src: local('Teko Regular'), local('Teko-Regular'), url(https://dn-acac.qbox.me/teko.woff) format('woff'),url('https://dn-acac.qbox.me/mobile/homepage/teko.otf') format('opentype');
+    src: local('Teko Regular'),
+            url(http://dn-acac.qbox.me/teko.woff) format('woff'),
+            url(http://dn-acac.qbox.me/mobile/homepage/teko.otf) format('opentype'),
+            url(http://dn-acac.qbox.me/mobile/homepage/teko.ttf) format('truetype');
 }
 .first-screen .image-container {
     margin-top:92px;
@@ -1476,13 +1484,13 @@
     }
 }
 /*小屏样式*/
-@media screen and (max-width: 340px) {
+@media screen and (max-width: 360px) {
     .pub-title h3,
     .section-container .data a h3,
     .section-container .data a h4{
         font-size: 24px;
     }
-    .section-container .after .case .detail{
+    .section-container .after .detail{
         font-size: 14px;
     }
     .section-container .classes h4{
@@ -1501,6 +1509,10 @@
     .section-container .regist div a{
         font-size: 18px;
     }
+    .section-container .sd-list .pro-info .corner,
+    .section-container .stars .list-container .corner{
+        font-size: 14px;
+    }
     .section-container .resource .brief p{
         font-size: 13px;
     }
@@ -1509,5 +1521,8 @@
     }
     .first-screen.angelred .text-div p{
         font-size: 21px;
+    }
+    .section-container .after .case p{
+        line-height: 16px;
     }
 }
