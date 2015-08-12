@@ -77,8 +77,6 @@
     };
     $pwd.pressenter(login_action);
     $btn.touchtap(login_action);
-    //IOS设备事件监听会丢失呢,貌似是被回收了⊙﹏⊙b汗，研究完发篇文章
     setInterval(function(){login_active();},300);
-    this.debug_event=function(){return setInterval(function(){console.log('Debug_1',$btn)},1000)};
 }).call(this);
 log.type = 'login';
