@@ -189,7 +189,7 @@
 (function(){
     var $addition=$('.other-value').children('textarea'),
         $agreement=$('.mentos-container'),
-        $submitbtn=$('.submit-btn'),
+        $submitbtn=$('.submit-new-btn'),
         $sendresult=$('#sendresult'),
         $form={
             name:$('#self-form-name'),
