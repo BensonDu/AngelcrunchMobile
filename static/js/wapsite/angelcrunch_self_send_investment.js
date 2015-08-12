@@ -13,7 +13,7 @@
             return {
                     uid:account_info.id,
                     access_token:account_info.token
-                    }
+                }
         }
     };
     this.page_status={
