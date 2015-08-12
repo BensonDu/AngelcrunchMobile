@@ -3,21 +3,25 @@
     width: 100%;
     height: 105px;
     border-top: 2px solid #fff;
+    padding: 0 5%;
 }
 .value-info>div{
     width: 50%;
     height: 100%;
     float: left;
     text-align: center;
+    position: relative;
 }
 .value-info .before{
     border-right:1px solid #fff ;
 }
 .value-info .before>div{
     text-align: center;
-    float: right;
+    position: absolute;
 }
 .value-info .before .icon-container{
+    left: 0;
+    top:0;
     width: 50px;
     height: 100%;
     margin-right: 3%;
@@ -31,21 +35,28 @@
     margin-top: 30px;
 }
 .value-info .before .text-container{
+    right: 0;
+    top: 0;
     width: 95px;
     height: 100%;
     margin-right: 5%;
 }
 .value-info .before .text-container p{
+    display: inline-block;
+    position: relative;
     text-align: center;
+    width: 100%;
 }
 .value-info .before .text-container .amount{
     font-size: 22px;
     margin-top: 37px;
+    white-space: nowrap;
 }
 .value-info .before .text-container .desc{
     font-size: 14px;
     color: #666;
     margin-top: 2px;
+    white-space: nowrap;
 }
 
 .value-info .percent{
@@ -53,9 +64,11 @@
 }
 .value-info .percent>div{
     text-align: center;
-    float: left;
+    position: absolute;
 }
 .value-info .percent .icon-container{
+    left: 0;
+    top: 0;
     width: 50px;
     height: 100%;
     margin-left: 5%;
@@ -69,12 +82,17 @@
     margin-top: 30px;
 }
 .value-info .percent .text-container{
+    top: 0;
+    right: 0;
     width: 95px;
     height: 100%;
     margin-left: 3%;
 }
 .value-info .percent .text-container p {
+    display: inline-block;
+    position: relative;
     text-align: center;
+    width: 100%;
 }
 .value-info .percent .text-container .amount{
     font-size: 22px;
@@ -268,4 +286,12 @@
 }
 .self-form input:focus{
     outline: none;
+}
+
+@media screen and (max-width: 360px) {
+    .value-info .percent .text-container .amount,
+    .value-info .before .text-container .amount{
+        font-size: 16px;
+        margin-top: 41px;
+    }
 }
