@@ -64,7 +64,7 @@
         <div class="value-info"  ms-controller="buydetails">
             <div class="before">
                 <div class="text-container">
-                    <p class="amount">{{data.totalprice || 0}}万</p>
+                    <p class="amount" ms-text="(data.totalprice || 0)+'万'"></p>
                     <p class="desc">估值</p>
                 </div>
                 <div class="icon-container"><i></i></div>
@@ -72,17 +72,17 @@
             <div class="percent">
                 <div class="icon-container"><i></i></div>
                 <div class="text-container">
-                    <p class="amount">{{data.totalprecent || 0}}%</p>
+                    <p class="amount" ms-text="(data.totalprecent || 0)+'%'"></p>
                     <p class="desc">出让股权比例</p>
                 </div>
             </div>
         </div>
 
         <div class="choose-bar" ms-controller="buydetails">
-            <p class="desc">每份占股{{data.partprecent}}%，每份最低价格{{data.lowprice}}万人民币</p>
+            <p class="desc" ms-text="'每份占股'+data.partprecent+'%，每份最低价格'+data.lowprice+'万人民币'"></p>
             <p class="title">认购价格</p>
             <div class="bar-body">
-                <a class="sta">{{data.partprice}}万元人民币/份</a>
+                <a class="sta" ms-text="data.partprice+'万元人民币/份'"></a>
             </div>
         </div>
 
@@ -90,7 +90,7 @@
             <p class="title">选择认购的份数</p>
             <div class="bar-body">
                 <a class="min handle"  ms-on-tap="event.minparts()">-</a>
-                <a class="sta">{{data.parts}}份</a>
+                <a class="sta" ms-text="data.parts+'份'"></a>
                 <a class="add handle"  ms-on-tap="event.addparts()">+</a>
             </div>
         </div>
@@ -98,11 +98,11 @@
         <div class="calculate-result" ms-controller="buydetails">
             <div class="left">
                 <div class="icon-container"><i></i></div>
-                <div class="text-container"><p>投资金额￥{{data.total}}万元</p></div>
+                <div class="text-container"><p ms-text="'投资金额￥'+data.total+'万元'"></p></div>
             </div>
             <div class="right">
                 <div class="icon-container"><i></i></div>
-                <div class="text-container"><p>预计占股{{data.precent}}%</p></div>
+                <div class="text-container"><p ms-text="'预计占股'+data.precent+'%'"></p></div>
             </div>
         </div>
 
@@ -165,9 +165,8 @@
 </div>
 </body>
 <script src="https://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
-<script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
+<script src="/static/js/lib/jquery-cookie.js"></script>
 <script src="/static/js/wapsite/angelcrunch_base.js"></script>
-<script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
 <script src="https://dn-acac.qbox.me/avalon.mobile.min.js"></script>
 <script src="/static/js/wapsite/angelcrunch_self_send_investment.js"></script>
 </html>

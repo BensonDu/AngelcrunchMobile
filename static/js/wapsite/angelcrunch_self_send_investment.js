@@ -278,3 +278,28 @@
     }
     setInterval(function(){check_active()},300);
 }).call(this);
+
+//过渡 协议同意
+(function () {
+    var className = {
+        container: ".mentos-container",
+        checkbox: ".mentos-container :checkbox",
+        // State
+        beChecked: "checked"
+    };
+    var _changeCheckboxModuleState = function () {
+        var $container = $($(this).closest(className.container));
+        if ($(this).is(":checked")) $container.addClass(className.beChecked);
+        else $container.removeClass(className.beChecked);
+    };
+
+    this.formModules = function () {
+        var $container, $checkbox;
+        $checkbox = $(className.checkbox);
+        $checkbox.change(function () {
+            _changeCheckboxModuleState.call(this);
+        });
+        _changeCheckboxModuleState.call($checkbox);
+    };
+    formModules();
+}).call(this);
