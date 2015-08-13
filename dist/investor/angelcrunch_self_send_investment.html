@@ -48,14 +48,14 @@
             <p ms-text="data.concept"></p>
             <p class="extra" ms-text="data.industry"></p>
         </div>
-        <div class="new-progress-container" ms-if="start_invest">
+        <div class="new-progress-container">
             <div class="new-progress-group">
                 <div class="new-progress">
                     <div class="new-progress-bar" ms-css-width="(data.finance_percent > 100 ? 100 : data.finance_percent)+'%'"></div>
                 </div>
                 <div class="new-progress-sta"><p ms-text="data.finance_percent+'%'"></p></div>
             </div>
-            <p><em ms-if="window.account_info.role>0" ms-text="'投资意向: '+data.amount+'万（预融资'+data.hope_amount+'万)'"></em><em class="right"  ms-if="data.day>0" ms-text="'剩余'+data.day+'天'"></em></p>
+            <p><em ms-text="'投资意向: '+data.amount+'万（预融资'+data.hope_amount+'万)'"></em><em class="right"  ms-if="data.day>0" ms-text="'剩余'+data.day+'天'"></em></p>
         </div>
     </div>
 
