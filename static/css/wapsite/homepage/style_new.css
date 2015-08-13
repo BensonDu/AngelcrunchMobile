@@ -1242,6 +1242,10 @@
     background: url("http://dn-acac.qbox.me/index/self_play.png") no-repeat;
     background-size: 64px 64px;
 }
+.luc .enter p .video:active{
+    background: url("http://dn-acac.qbox.me/mobile/homepage/self_play_act.png") no-repeat;
+    background-size: 64px 64px;
+}
 .luc .enter p.title{
     margin-top: 20px;
 }
@@ -1265,7 +1269,7 @@
     top: 6px;
 }
 .luc .enter p.button{
-    margin-top: 50px;
+    margin-top: 20px;
 }
 .luc .enter p.button a{
     display: inline-block;
