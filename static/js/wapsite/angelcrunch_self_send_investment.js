@@ -4,6 +4,9 @@
         account_info.id     = '13126984';
         account_info.token  = '6eb291ee75f1c625da255bf4a62a5042';
     }
+    this.start_invest = (function(){
+        return $.now()>=1439438400000;
+    })();
 }).call(this);
 (function(){
     this.page_config={

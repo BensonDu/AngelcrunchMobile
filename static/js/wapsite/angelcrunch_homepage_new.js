@@ -368,11 +368,14 @@
 }).call(define('view_after'));
 
 (function(){
-    var $num=$('.countdown'),start= 1439438400000, t, y, e,ss,sss, w, l;
+    var $num=$('.countdown'),
+        $start = $('.invest-start'),
+        start= 1439438400000, t, y, e,ss,sss, w, l;
 
     t=setInterval(function(){
         var now= start-$.now();
         if(now<=0){
+            $start.show();
             clearInterval(t);
         }
         else{

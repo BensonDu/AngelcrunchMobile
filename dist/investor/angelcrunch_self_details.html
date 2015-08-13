@@ -46,7 +46,7 @@
             <p ms-text="data.concept"></p>
             <p class="extra" ms-text="data.industry"></p>
         </div>
-        <div class="new-progress-container" ms-if="false">
+        <div class="new-progress-container" ms-if="start_invest">
             <div class="new-progress-group">
                 <div class="new-progress">
                     <div class="new-progress-bar" ms-css-width="(data.finance_percent > 100 ? 100 : data.finance_percent)+'%'"></div>
@@ -150,7 +150,7 @@
                 </div>
                 <p ms-if="data.txt"><i>优先考虑的投资人：</i><em ms-text="data.txt"></em></p>
             </article>
-            <article class="invester" ms-if="data.vc_list.length && false">
+            <article class="invester" ms-if="data.vc_list.length && start_invest">
                 <h1>本轮投资意向<i ms-text="data.vc_list.length"></i></h1>
                 <div id="invester" class="investor-slider-container">
                     <ul>
