@@ -1280,9 +1280,6 @@
     height: auto;
     padding: 0;
 }
-.first-screen.angelred .text-div .corver .invest-start{
-    display: none;
-}
 .first-screen.angelred .text-div .corver .timeover{
     position: absolute;
     height: 100%;
