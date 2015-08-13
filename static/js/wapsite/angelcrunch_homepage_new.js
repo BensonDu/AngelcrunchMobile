@@ -366,3 +366,29 @@
     };
     this.framework().data = data[new Date().getTime()%3];
 }).call(define('view_after'));
+
+(function(){
+    var $bk = $('.bk'),player,$p =$('#youku'),$w = $(window),sta=false;
+    window.onload = function(){
+        player = new YKU.Player('youku',{
+            styleid: '1',
+            client_id: '66655b02396537f4',
+            vid: 'XMTMwODQ1NzE2NA=='
+        });
+    };
+    $('#play-btn').touchtap(function(){
+        $('.player').show();
+        $('.bk').show(0,function(){$(this).css('opacity',0.7)});
+        $p.height($w.width()*(3/4));
+        sta = true;
+        player.playVideo();
+    });
+    $bk.touchtap(function(){
+        $bk.css('opacity',0);
+        $('.player').fadeOut();
+        sta=false;
+        setTimeout(function(){$bk.hide();},400);
+    });
+}).call(define('view_player'));
+
+

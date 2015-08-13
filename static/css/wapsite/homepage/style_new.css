@@ -1207,197 +1207,116 @@
     padding: 10px 20px;
     cursor:pointer;
 }
-/*Angelcrunch's time*/
-@font-face {
-    font-family: 'Teko';
-    font-style: normal;
-    font-weight: 400;
-    src: local('Teko Regular'),
-            url(http://dn-acac.qbox.me/teko.woff) format('woff'),
-            url(http://dn-acac.qbox.me/mobile/homepage/teko.otf) format('opentype'),
-            url(http://dn-acac.qbox.me/mobile/homepage/teko.ttf) format('truetype');
-}
-.first-screen .image-container {
-    margin-top:92px;
-}
-
-.first-screen .summary {
-    margin-top:28px;
-    margin-bottom:28px;
-}
-.first-screen.angelred{
-    background: url(https://dn-acac.qbox.me/angelself.png) no-repeat;
-    background-size: 100% 100%;
+.luc{
     overflow: hidden;
-}
-.first-screen.angelred .img-div{
-    width: 100%;
-    height: 268px;
-    margin: 0;
-    top: 0;
-    overflow: visible;
     position: relative;
+    height: 480px;
 }
-.first-screen.angelred .img-div div{
+.luc .bk-img{
     position: absolute;
-}
-.first-screen.angelred .img-div div img{
-    width: 100%;
-    height: auto;
-}
-.first-screen.angelred .img-div .ipone{
-    top:50%;
-    left:1%;
-    width: 40%;
-    min-height: 165px;
-    max-width: 220px;
-    z-index: 2;
-}
-.first-screen.angelred .img-div .ipad{
-    top:14%;
-    left:6%;
-    width: 47%;
-    max-width: 260px;
-    min-width: 195px;
-    z-index: 1;
-}
-.first-screen.angelred .img-div .imac{
-    max-width: 460px;
-    min-width: 305px;
-    width: 81%;
-    right: -18%;
-    top:-26%
-}
-.first-screen.angelred .text-div{
-    width: 100%;
-    height: 220px;
-    position: relative;
-    z-index: 3;
-}
-.first-screen.angelred .text-div .corver{
-    position: relative;
-    width: 100%;
-    height: auto;
-    padding: 0;
-}
-.first-screen.angelred .text-div .corver .timeover{
-    position: absolute;
-    height: 100%;
-    width: 100%;
     top: 0;
     left: 0;
-    z-index: 2;
-    background: rgba(220,38,32,.75);
-    filter: blur(5px);
-    -webkit-filter: blur(5px);
-}
-.first-screen.angelred .text-div .corver .open{
-    position: absolute;
     width: 100%;
-    height: 100%;
-    padding: 40px 5%;
-    z-index: 3;
+    height: auto;
+    z-index: 0;
 }
-.first-screen.angelred .text-div .corver .open a{
+.luc .mg-50{
+    width: 100%;
+    height: 45%;
+}
+.luc .enter{
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100px;
+}
+.luc .enter p{
     display: inline-block;
-    height: 43px;
-    font-size: 18px;
-    margin-top: 13px;
-}
-.first-screen.angelred .text-div p{
+    width: 100%;
     text-align: center;
+}
+.luc .enter p .video{
+    display: inline-block;
+    height: 64px;
+    width: 64px;
+    background: url("http://dn-acac.qbox.me/index/self_play.png") no-repeat;
+    background-size: 64px 64px;
+}
+.luc .enter p.title{
+    margin-top: 20px;
+}
+.luc .enter p.title a{
+    display: inline-block;
+    position: relative;
+    height: 33px;
     font-size: 24px;
-    color: #fff;
-    font-weight: 900;
-    white-space: nowrap;
-    padding: 10px 0;
+    line-height: 28px;
+    color: #ff3d00;
+    overflow: visible;
 }
-.first-screen.angelred .text-div span{
-    text-align: center;
+.luc .enter .title em{
     display: inline-block;
-    font-size: 12px;
-    color: #fff;
-    width: 100%;
-    white-space: nowrap;
-    padding: 6px 0 10px;
-
-}
-.first-screen.angelred .text-div ul{
-    position: relative;
-    display: inline-block;
-    width: 100%;
-    height: 84px;
-    padding: 7px 5%;
-    letter-spacing: 2px;
-}
-.first-screen.angelred .text-div ul li{
-    height: 100%;
-    float: left;
-    position: relative;
-    display: inline-block;
-}
-.first-screen.angelred .text-div ul li.time{
-    width: 14%;
-    border-radius: 4px;
-    background: #fff;
-    color: #e34033;
-    font-size: 80px;
-    line-height: 83px;
-    text-align: center;
-    font-family: 'Teko', sans-serif;
-}
-.first-screen.angelred .text-div ul li.time em{
-    display: block;
     position: absolute;
-    width: 100%;
-    border-top: 1px solid #f1f1f1;
-    border-bottom:1px solid #f1f1f1 ;
-    border-left:3px solid #e34033;
-    border-right:3px solid #e34033;
-    top:35px;
-
+    background: url("http://dn-acac.qbox.me/index/self_video.png") no-repeat center;
+    background-size: 30px 15px;
+    width: 40px;
+    height: 15px;
+    left: -27px;
+    top: 6px;
 }
-.first-screen.angelred .text-div ul li.sep{
-    width: 5%;
-    color: #79281f;
-    font-size: 60px;
-    font-weight: 900;
-    text-align: center;
+.luc .enter p.button{
+    margin-top: 50px;
 }
-.first-screen.angelred .text-div ul li.spa{
-    width: 2%;
-}
-.first-screen.angelred .text-div div{
+.luc .enter p.button a{
     display: inline-block;
-    width: 100%;
-    padding: 7px 5%;
-    height: 57px;
-}
-.first-screen.angelred .text-div div a{
-    display: inline-block;
-    width: 100%;
-    height: 100%;
-    border-radius: 2px;
-    background: #ffef00;
-    color: #e34033;
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    line-height: 45px;
     position: relative;
+    height: 100%;
+    border: 1px solid #ff3d00;
+    border-radius: 3px;
+    color: #ff3d00;
+    font-size: 18px;
+    padding: 6px 20px 5px;
 }
-.first-screen.angelred .text-div div a:after{
+.luc .enter p.button a:active{
+    color: #2a2f68;
+    background:#ff3d00;
+}
+.luc .enter p.button a:after{
     position: absolute;
     content: '';
-    top: 17px;
+    top: 10px;
     width: 0;
     height: 0;
     border-bottom: 5px solid transparent;
     border-top: 5px solid transparent;
-    border-left: 10px solid #e34033;
+    border-left: 10px solid #ff3d00;
 }
+.player{
+    display: none;
+    width: 100%;
+    position: absolute;
+    top: 140px;
+    left: 0;
+    background: rgba(255,2552,255,0);
+    z-index: 10;
+}
+.player .con{
+    position: relative;
+    width: 100%;
+}
+.player .con img{
+    width: 100%;
+}
+.player .con .player-box{
+    position: absolute;
+    width: 100%;
+    height: auto;
+    top: 0;
+    left: 0;
+    z-index: 2;
 
-/*公共动画*/
+}
+    /*公共动画*/
 .pub-fadein{
     -webkit-animation:pubfadein 0.3s linear 0s normal forwards;
     animation:pubfadein 0.3s linear 0s normal forwards;
