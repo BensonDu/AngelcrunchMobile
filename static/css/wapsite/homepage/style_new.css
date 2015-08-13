@@ -1274,6 +1274,39 @@
     position: relative;
     z-index: 3;
 }
+.first-screen.angelred .text-div .corver{
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 0;
+}
+.first-screen.angelred .text-div .corver .invest-start{
+    display: none;
+}
+.first-screen.angelred .text-div .corver .timeover{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    background: rgba(220,38,32,.75);
+    filter: blur(5px);
+    -webkit-filter: blur(5px);
+}
+.first-screen.angelred .text-div .corver .open{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 40px 5%;
+    z-index: 3;
+}
+.first-screen.angelred .text-div .corver .open a{
+    display: inline-block;
+    height: 43px;
+    font-size: 18px;
+    margin-top: 13px;
+}
 .first-screen.angelred .text-div p{
     text-align: center;
     font-size: 24px;
@@ -1293,6 +1326,7 @@
 
 }
 .first-screen.angelred .text-div ul{
+    position: relative;
     display: inline-block;
     width: 100%;
     height: 84px;
