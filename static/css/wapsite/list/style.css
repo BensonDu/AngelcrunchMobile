@@ -208,12 +208,18 @@ html{
     position: relative;
     display: inline-block;
 }
+.sd-list section .info .occupy{
+    position: relative;
+    width: 100%;
+}
 .sd-list section .info .theme{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
     width: 100%;
     height: auto;
     min-height: 180px;
-    max-height: 233px;
-    background: url("http://dn-acac.qbox.me/SD_default_600x.png") no-repeat 50% 50%;
     background-size:100% 100%;
 }
 .sd-list section .info .slogan{
@@ -222,6 +228,7 @@ html{
     height: 45px;
     background: rgba(0,0,0,0.8);
     bottom: 0;
+    z-index: 5;
 }
 .sd-list section .info .slogan .logo{
     width: 60px;
