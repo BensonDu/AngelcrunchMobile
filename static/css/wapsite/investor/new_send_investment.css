@@ -287,6 +287,15 @@
 .self-form input:focus{
     outline: none;
 }
+.notice{
+    font-size: 12px;
+    line-height: 18px;
+    padding: 0 5.5%;
+    margin-bottom: 15px;
+}
+.addition-agreement{
+    margin: 22px 0 0;
+}
 
 @media screen and (max-width: 360px) {
     .value-info .percent .text-container .amount,
