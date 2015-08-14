@@ -306,7 +306,6 @@
         return data;
     };
     page_remote_data_syn(api.com_finace_info,function(data){
-        console.log(data);
         avalon_model.finance().data=fin_render(data);
     },page_status.get_com_id());
 }).call(this);

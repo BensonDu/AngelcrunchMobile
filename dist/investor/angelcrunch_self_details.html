@@ -158,7 +158,7 @@
                             <div>
                                 <p class="portrait">
                                     <img ms-if="!!el.avatar" ms-src="el.avatar" />
-                                    <em ms-if="!el.avatar" ms-css-background-color="el.avatar_color" ms-text="el.name[0]"></em>
+                                    <em ms-if="!el.avatar" ms-css-background-color="el.avatar_color" ms-text="el.name[0]||''"></em>
                                 </p>
                                 <p class="name" ms-text="el.name"></p>
                                 <p class="company" ms-text="el.firmname"></p>
