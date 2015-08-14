@@ -289,9 +289,25 @@
 }).call(this);
 //融资详情
 (function(){
+    var color=['#fad53e','#039be6','#81c683','#aed582','#f06292','#f57e16','#fad53e','#b39ddb','#64b5f6','#80cbc4'];
     $('.invest-info').show();
+    this.fin_render = function(data){
+        var l=0;
+        if(data.vc_list){
+            l = data.vc_list.length;
+            while(l){
+                if(/.default_10000./g.test(data.vc_list[l-1].avatar)){
+                    data.vc_list[l-1].avatar = false;
+                    data.vc_list[l-1].avatar_color = color[Math.ceil(Math.random()*10)-1];
+                }
+                l--;
+            }
+        }
+        return data;
+    };
     page_remote_data_syn(api.com_finace_info,function(data){
-        avalon_model.finance().data=data;
+        console.log(data);
+        avalon_model.finance().data=fin_render(data);
     },page_status.get_com_id());
 }).call(this);
 //BP
