@@ -287,14 +287,8 @@
 .self-form input:focus{
     outline: none;
 }
-.notice{
-    font-size: 12px;
-    line-height: 18px;
-    padding: 0 5.5%;
-    margin-bottom: 15px;
-}
-.addition-agreement{
-    margin: 22px 0 0;
+.addition-agreement .modules{
+    margin-top: 23px;
 }
 
 @media screen and (max-width: 360px) {
