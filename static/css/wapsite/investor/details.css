@@ -875,6 +875,16 @@
   display: inline-block;
   border-radius: 50%;
 }
+.investor-slider-container ul li em{
+  height: 50px;
+  width: 50px;
+  display: inline-block;
+  font-size: 30px;
+  line-height: 52px;
+  color: #fff;
+  border-radius: 50%;
+  margin-top: 0;
+}
 .investor-slider-container ul li p{
   width: 100%;
   white-space: normal;
