@@ -263,6 +263,11 @@
     width: 100%;
     text-align: center;
 }
+.section-container .data a h4.money:before{
+    content: '￥ ';
+    font-size: 22px;
+    font-weight: 100;
+}
 .section-container .data a div{
     width: 100%;
     text-align: center;
