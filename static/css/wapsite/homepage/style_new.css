@@ -1342,6 +1342,14 @@
     margin-top: 23px;
     line-height: 20px;
 }
+/*Youku reset*/
+.x-message-btn{
+    margin-top: 3px !important;
+}
+.x-message-input{
+    font-size: 30px !important;
+    height: 35px !important;
+}
 .player{
     display: none;
     width: 100%;
