@@ -187,17 +187,52 @@
 }
 /*数据展示*/
 .section-container .data{
+    position: relative;
     background: #f5f5f5;
     overflow: hidden;
 }
 .section-container .data a{
     display: inline-block;
+    position: relative;
     width: 50%;
     height: 120px;
     float: left;
     padding: 30px 5px 25px;
     border-bottom: 1px solid #fff;
     border-left: 1px solid #fff;
+}
+.section-container .data .stage{
+    position: absolute;
+    display: inline-block;
+    top:120px;
+    left: 0;
+    z-index: 3;
+    width: 100%;
+    text-align: center;
+}
+.section-container .data .stage h6{
+    position: relative;
+    color: #fff;
+    line-height: 12px;
+    margin-top: 5px;
+    font-size: 12px;
+    z-index: 3;
+}
+.section-container .data .stage h6 span{
+    color: #fff;
+    font-size: 13px;
+    line-height: 15px;
+}
+.section-container .data .stage .tra{
+    position: absolute;
+    z-index: 1;
+    top:0;
+    width: 0;
+    height: 0;
+    margin-left: -45px;
+    border-left: 45px solid transparent;
+    border-right: 45px solid transparent;
+    border-top: 45px solid #ccc;
 }
 .section-container .data a div{
     width: 100%;
@@ -1295,6 +1330,13 @@
     border-top: 5px solid transparent;
     border-left: 10px solid #ff3d00;
 }
+.luc .enter p.notice{
+    padding: 0 5%;
+    color: #ff3d00;
+    font-size: 14px;
+    margin-top: 23px;
+    line-height: 20px;
+}
 .player{
     display: none;
     width: 100%;
@@ -1451,7 +1493,7 @@
         font-size: 20px;
     }
     .section-container .data a h5{
-        font-size: 22px;
+        font-size: 20px;
     }
     .section-container .regist h4{
         font-size: 13px;
