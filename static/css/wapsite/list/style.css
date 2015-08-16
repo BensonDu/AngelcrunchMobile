@@ -33,7 +33,7 @@ html{
     height: 100%;
     text-align:center;
     background: rgba(255,255,255,0.9);
-    z-index: 5;
+    z-index: 9;
 }
 
 .loading-container .loading {
@@ -50,7 +50,7 @@ html{
     height: 100%;
     text-align:center;
     background: #fff;
-    z-index: 5;
+    z-index: 9;
 }
 .not-found div{
     width: 80%;
