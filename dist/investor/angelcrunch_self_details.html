@@ -63,7 +63,7 @@
                 <a id="share-wechat" class="share-wechat"><i></i><span>分享</span></a>
             </div>
 
-            <a class="btn btn-small orange touch-href send-investment-btn" data-href="/vc_new">发送投资意向</a>
+            <a class="btn btn-small orange send-investment-btn">发送投资意向</a>
         </div>
     </div>
     <div class="slider-container" ms-controller="basic-info" ms-if="data.pics && data.pics.length">
@@ -153,7 +153,15 @@
             <article class="invester" ms-if="data.vc_list.length">
                 <h1>本轮投资意向<i ms-text="data.vc_list.length"></i></h1>
                 <div id="invester" class="investor-slider-container">
-                    <ul>
+                    <div class="self_list_corver" ms-if="account_info.role<1">
+                        <div class="text">
+                            <p>投资意向仅对天使汇认证投资人可见</p>
+                        </div>
+                        <div class="btn-group">
+                            <a href="http://m.angelcrunch.com/angel_vip_simple">立即申请</a>
+                        </div>
+                    </div>
+                    <ul ms-if="account_info.role>0">
                         <li ms-repeat="data.vc_list">
                             <div>
                                 <p class="portrait">
@@ -164,6 +172,41 @@
                                 <p class="company" ms-text="el.firmname"></p>
                                 <p class="title" ms-text="el.title"></p>
                                 <div class="investment" ms-text="el.amount+'W'"></div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="blur"  ms-if="account_info.role<1">
+                        <li>
+                            <div>
+                                <p class="portrait">
+                                    <img src="http://dn-xswe.qbox.me/13104965?imageMogr2/crop/!608x607a25a110/thumbnail/300x">
+                                </p>
+                                <p class="name">严加峰</p>
+                                <p class="company">建设银行</p>
+                                <p class="title">支行行长</p>
+                                <div class="investment">100W</div>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <p class="portrait">
+                                    <img src="http://dn-xswe.qbox.me/13089020?imageMogr2/thumbnail/300x">
+                                </p>
+                                <p class="name">于城刚</p>
+                                <p class="company">北京城城城集团</p>
+                                <p class="title">总会计师</p>
+                                <div class="investment">100W</div>
+                            </div>
+                         </li>
+                        <li>
+                            <div>
+                                <p class="portrait">
+                                    <img src="http://dn-xswe.qbox.me/13163123?imageMogr2/thumbnail/300x">
+                                </p>
+                                <p class="name">张城博</p>
+                                <p class="company">沈阳城城科技有限公司</p>
+                                <p class="title">法人</p>
+                                <div class="investment">100W</div>
                             </div>
                         </li>
                     </ul>
@@ -229,7 +272,7 @@
                         <p ms-text="el.q"></p>
                     </div>
                     <div class="item" ms-if="el.a">
-                        <p class="title-container"><i>A</i><em>兰宁羽·天使汇CEO</em></p>
+                        <p class="title-container"><i>A</i><em>天使汇</em></p>
                         <p ms-html="decode_text(el.a)"></p>
                     </div>
                 </div>
@@ -272,10 +315,21 @@
             <p>手动复制链接:<input onclick="this.setSelectionRange(0, 999);"></p>
         </div>
     </div>
+    <div id="none-investor" class="self_notice">
+        <div class="close">×</div>
+        <div class="mg"></div>
+        <div class="image"><img src="http://dn-acac.qbox.me/mobile/homepage/sorry.png"></div>
+        <div class="text">
+            <p>&nbsp;&nbsp;&nbsp;&nbsp;对不起，您还不是天使汇认证投资人，不能发送投资意向。感谢您对天使汇的支持。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;您可以<a href="http://acmktdpt.mikecrm.com/f.php?t=YFQYn2">［申请成为天使汇认证投资人］</a>，我们的投资人服务团队会尽快对您进行投资人审核访谈，并沟通投资意愿。</p>
+        </div>
+        <div class="btn-group">
+            <a href="http://acmktdpt.mikecrm.com/f.php?t=YFQYn2">立即申请</a>
+        </div>
+    </div>
 
     <div class="bottom-send-investment" >
         <div class="btn-group">
-            <a class="btn orange send-investment-btn send-investment-btn touch-href" data-href="/vc_new">发送投资意向</a>
+            <a class="btn orange send-investment-btn">发送投资意向</a>
         </div>
     </div>
 </div>
