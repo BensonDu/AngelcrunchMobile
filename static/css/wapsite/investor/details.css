@@ -1015,11 +1015,14 @@
   text-align: center;
 }
 .self_notice .image img{
-  width: 37%;
+  width: 23%;
+  min-width: 80px;
+  max-width: 150px;
+  border-radius: 10%;
 }
 .self_notice .text{
   width: 100%;
-  margin-top: 20px;
+  margin-top: 25px;
   padding: 0 5% ;
   text-align: justify;
 }
