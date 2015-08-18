@@ -843,6 +843,7 @@
   **********************/
 
 .investor-slider-container{
+  position: relative;
   height: 190px;
   background: #F5F5F5;
 }
@@ -985,7 +986,113 @@
   padding: 10px 20px;
   cursor:pointer;
 }
+.self_notice{
+  display: none;
+  background: rgba(255,255,255,.95);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+.self_notice .close{
+  position: absolute;
+  font-size: 36px;
+  float: right;
+  top: 0;
+  right: 0;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.self_notice .mg{
+  width: 100%;
+  height: 20%;
+}
+.self_notice .image{
+  width: 100%;
+  text-align: center;
+}
+.self_notice .image img{
+  width: 37%;
+}
+.self_notice .text{
+  width: 100%;
+  margin-top: 20px;
+  padding: 0 5% ;
+  text-align: justify;
+}
+.self_notice .text p{
+  font-size: 16px;
+  line-height: 22px;
+}
+.self_notice .text  a{
+  font-size: 16px;
+  line-height: 20px;
+  color: #ff3d00;
+}
+.self_notice .btn-group{
+  width: 100%;
+  text-align: center;
+  margin-top: 40px;
+}
+.self_notice .btn-group a{
+  display: inline-block;
+  padding:6px 30% 3px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  font-size: 16px;
+  line-height: 20px;
 
+}
+.self_notice .btn-group a:active{
+  background: #000;
+  color: #fff;
+}
+.invester{
+  position: relative;
+}
+.self_list_corver{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0%;
+  left: 0;
+  z-index: 9;
+  background-color: rgba(255,255,255,.3);
+  text-align: center;
+}
+.self_list_corver div{
+  width: 100%;
+}
+.self_list_corver .text{
+  margin-top:60px ;
+}
+.self_list_corver .text p{
+  display: inline-block;
+  font-size: 18px;
+  line-height: 20px;
+  padding: 0 5%;
+}
+.self_list_corver .btn-group{
+  margin-top: 30px;
+}
+.self_list_corver .btn-group a{
+  display: inline-block;
+  font-size: 16px;
+  border: 1px solid #000;
+  border-radius: 3px;
+  padding: 6px 20px 3px;
+}
+.self_list_corver .btn-group a:active{
+  background: #000;
+  color: #fff;
+}
+.blur{
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+}
 @media only screen and (min-width:500px ){
   .wechat-PA .image-container img {
     width:188px;

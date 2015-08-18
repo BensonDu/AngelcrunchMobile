@@ -290,7 +290,6 @@
 .addition-agreement .modules{
     margin-top: 23px;
 }
-
 @media screen and (max-width: 360px) {
     .value-info .percent .text-container .amount,
     .value-info .before .text-container .amount{

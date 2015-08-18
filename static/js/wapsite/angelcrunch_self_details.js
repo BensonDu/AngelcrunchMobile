@@ -329,3 +329,23 @@
         }
     },{'uid':account_info.id,'access_token':account_info.token});
 }).call(this);
+
+(function(){
+    var self = this,
+        $btn = $('.send-investment-btn'),
+        $box = $('#none-investor'),
+        $close=$box.children('.close');
+
+    this.event = function(){
+        if(account_info.role<1){
+            $box.show();
+        }
+        else{
+            if(!page_status.send_intention){
+                location.href='http://ac2015.angelcrunch.com/vc_new';
+            }
+        }
+    };
+    $btn.touchtap(self.event);
+    $close.touchtap(function(){$box.hide();});
+}).call({send_investment:{}}.send_investment);
