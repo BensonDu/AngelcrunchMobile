@@ -188,7 +188,6 @@
 /*数据展示*/
 .section-container .data{
     position: relative;
-    background: #f5f5f5;
     overflow: hidden;
 }
 .section-container .data a{
@@ -198,41 +197,50 @@
     height: 120px;
     float: left;
     padding: 30px 5px 25px;
+    background: #f5f5f5;
     border-bottom: 1px solid #fff;
     border-left: 1px solid #fff;
 }
 .section-container .data .stage{
     position: absolute;
     display: inline-block;
-    top:120px;
+    top: 0;
     left: 0;
     z-index: 3;
     width: 100%;
+    height: 100%;
     text-align: center;
 }
 .section-container .data .stage h6{
     position: relative;
-    color: #fff;
+    display: inline-block;
+    width: 100%;
     line-height: 12px;
-    margin-top: 5px;
     font-size: 12px;
+    color: #000;
     z-index: 3;
 }
+.section-container .data .stage .sd{
+    margin-top: 212px;
+}
 .section-container .data .stage h6 span{
-    color: #fff;
+    color: #ff3d00;
     font-size: 13px;
     line-height: 15px;
 }
 .section-container .data .stage .tra{
     position: absolute;
-    z-index: 1;
-    top:0;
-    width: 0;
-    height: 0;
-    margin-left: -45px;
-    border-left: 45px solid transparent;
-    border-right: 45px solid transparent;
-    border-top: 45px solid #ccc;
+    z-index: 2;
+    top: 207px;
+    display: block;
+    width: 65px;
+    background-color: #f5f5f5;
+    border: 1px solid #fff;
+    height: 65px;
+    margin-left: 175px;
+    border-radius: 3px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
 }
 .section-container .data a div{
     width: 100%;
