@@ -332,13 +332,13 @@
 
 (function(){
     var self = this,
-        $btn = $('.send-investment-btn'),
-        $box = $('#none-investor'),
-        $close=$box.children('.close');
+        $btn = $('.send-investment-btn');
+        //$box = $('#none-investor'),
+        //$close=$box.children('.close');
 
     this.event = function(){
         if(account_info.role<1){
-            $box.show();
+            location.href='http://m.angelcrunch.com/13097951';
         }
         else{
             if(!page_status.send_intention){
@@ -347,5 +347,5 @@
         }
     };
     $btn.touchtap(self.event);
-    $close.touchtap(function(){$box.hide();});
+    //$close.touchtap(function(){$box.hide();});
 }).call({send_investment:{}}.send_investment);
