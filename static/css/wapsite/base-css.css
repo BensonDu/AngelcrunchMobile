@@ -98,7 +98,7 @@ body {
   font-family: "PingHei";
   font-style: normal;
   font-weight: 200;
-  src: local("☺︎"), url("http://dn-acac.qbox.me/PingHei-light.woff") format("woff"),url("http://dn-acac.qbox.me/pinghei-light.eot") format("embedded-opentype"),url('http://dn-acac.qbox.me/pinghei-light.otf') format('opentype');
+  src: local("☺︎"), url("http://dn-acac.qbox.me/pinghei-light-8-20.woff") format("woff"),url("http://dn-acac.qbox.me/pinghei-light.eot") format("embedded-opentype"),url('http://dn-acac.qbox.me/pinghei-light.otf') format('opentype');
 }
 
 @font-face {
