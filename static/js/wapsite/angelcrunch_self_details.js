@@ -338,7 +338,7 @@
 
     this.event = function(){
         if(account_info.role<1){
-            location.href='http://m.angelcrunch.com/13097951';
+            location.href='http://m.angelcrunch.com/branch?com_id=13097951&flow=0';
         }
         else{
             if(!page_status.send_intention){
