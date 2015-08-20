@@ -195,8 +195,6 @@ input::-webkit-input-placeholder {
     background-size:40px 40px
     -webkit-box-shadow:inset 0 -1px 0 rgba(0,0,0,.15);
     box-shadow:inset 0 -1px 0 rgba(0,0,0,.15);
-    -webkit-transition:width .6s ease;
-    transition:width .6s ease
 }
 .new-progress-container .new-progress-group .new-progress-sta{
     float: right;
