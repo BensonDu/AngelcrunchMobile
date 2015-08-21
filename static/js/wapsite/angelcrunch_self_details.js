@@ -7,8 +7,10 @@
     wechat_card.img = 'http://dn-xswe.qbox.me/13168760?imageMogr2/thumbnail/340x';
     wechat_card.title = '投资天使汇，抢占天使投资先锋阵地';
     //For VIP
-    if(/vip/.test(location.hash.toString())){
+    this.vip_path = false;
+    if(/vip/.test(location.hash.toString()) && account_info.role<1){
         account_info.role=1;
+        vip_path=true;
     };
     window.onhashchange=function(){
         location.reload();
@@ -318,7 +320,7 @@
 }).call(this);
 //BP
 (function(){
-    if(account_info.role<1)return false;
+    if(account_info.role<1 || vip_path)return false;
     $('.extra-files').show();
     set_pb('http://ac2015.angelcrunch.com/bp?id=13168816&all=54');
 }).call(this);
