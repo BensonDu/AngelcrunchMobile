@@ -351,9 +351,7 @@
                 location.href='http://m.angelcrunch.com/branch?com_id=13097951&flow=0';
             }
             else{
-                if(!page_status.send_intention){
                     location.href='http://ac2015.angelcrunch.com/vc_new';
-                }
             }
         }
     };

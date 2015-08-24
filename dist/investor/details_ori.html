@@ -18,7 +18,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/ico" />
     <link rel="Bookmark" href="/favicon.ico" />
     <link href="/static/css/wapsite/base-css.css" rel="stylesheet" />
-    <link href="/static/css/wapsite/investor/details_new.css" rel="stylesheet" />
+    <link href="/static/css/wapsite/investor/details.css" rel="stylesheet" />
     <script>
         var _hmt = _hmt || [];
         (function() {
@@ -48,7 +48,7 @@
         </div>
     </div>
 
-    <div class="branding-head" ms-controller="basic">
+    <div class="branding-head" ms-controller="basic-info">
         <div class="icon"><img ms-src="data.logo||''" /></div>
         <div class="brand-info">
             <h1 ms-text="data.name"></h1>
@@ -56,16 +56,16 @@
             <p class="extra" ms-text="data.industry"></p>
         </div>
         <div class="new-progress-container">
-            <div class="new-progress-group" ms-if="data.isfinish">
+            <div class="new-progress-group">
                 <div class="new-progress">
-                    <div class="new-progress-bar" ms-css-width="(data.percent)+'%'"></div>
+                    <div class="new-progress-bar" ms-css-width="(data.finance_percent > 100 ? 100 : data.finance_percent)+'%'"></div>
                 </div>
-                <div class="new-progress-sta"><p ms-text="(data.percent)+'%'"></p></div>
+                <div class="new-progress-sta"><p ms-text="data.finance_percent+'%'"></p></div>
             </div>
-            <p><em ms-if="window.account_info.role>0" ms-text="data.message"></em><em class="right"  ms-if="data.day>0" ms-text="'剩余'+data.day+'天'"></em></p>
+            <p><em ms-if="window.account_info.role>0" ms-text="'投资意向: '+data.amount+'万（预融资'+data.hope_amount+'万)'"></em><em class="right"  ms-if="data.day>0" ms-text="'剩余'+data.day+'天'"></em></p>
         </div>
     </div>
-    <div class="page-action">
+    <div class="page-action default-hidden">
         <div class="btn-group">
             <div class="btn-group-social">
                 <a id="follow-btn" class="follow-btn"><i></i><span>关注</span></a>
@@ -75,15 +75,15 @@
             <a class="btn btn-small orange send-investment-btn" href="/vc_new">发送投资意向</a>
         </div>
     </div>
-    <div class="slider-container" ms-controller="details" ms-if="array_empty(data.pics)">
+    <div class="slider-container" ms-controller="basic-info" ms-if="array_empty(data.pics)">
         <ul ms-each-el="data.pics">
             <li><img ms-src="el.small" /></li>
         </ul>
     </div>
 
-    <div class="logged-in" ms-controller="details">
-        <div class="article-list" >
-            <article class="intro" ms-if="data.descriptions ">
+    <div class="logged-in">
+        <div class="article-list" ms-controller="deatils" >
+            <article class="intro" ms-if="window.account_info.role>0 && data.descriptions ">
                 <h1>项目描述</h1>
                 <p class="silver" ms-if="data.descriptions.user_case">项目描述</p>
                 <p ms-if="data.descriptions.user_case" ms-html="decode_text(data.descriptions.user_case)"></p>
@@ -104,11 +104,7 @@
                     <p ms-html="decode_text(data.descriptions.plan)"></p>
                 </div>
             </article>
-            <article class="team" ms-if="array_empty(data.team)">
-                <h1 ms-if="!!data.team_txt">团队简介</h1>
-                <div class="item" ms-if="!!data.team_txt">
-                    <p ms-text="data.team_txt"></p>
-                </div>
+            <article class="team" ms-if="data.team">
                 <h1>团队成员</h1>
                 <div class="item" ms-repeat="data.team">
                     <h3 ms-text="el.name"></h3>
@@ -117,29 +113,29 @@
                     <p class="gray" ms-html="decode_text(el.summary)"></p>
                 </div>
             </article>
-            <article class="milestone" ms-if="array_empty(data.milestone)">
+            <article class="milestone" ms-if="window.account_info.role>0 && array_empty(data.milestone)">
                 <h1>项目大事记</h1>
                 <div class="item" ms-repeat="data.milestone">
                     <p class="date">
-                        <i ms-text="get_md(el.occurdate)"></i><em ms-text="get_y(el.occurdate)"></em>
+                        <i ms-text="el.M_dd"></i><em ms-text="el.yyyy"></em>
                     </p>
                     <p class="gray" ms-text="el.content"></p>
                 </div>
             </article>
-            <article class="growing-up" ms-if="array_empty(data.growthdata)">
+            <article class="growing-up" ms-if="window.account_info.role>0 && array_empty(data.growthdata)">
                 <h1>成长数据</h1>
                 <div class="item" ms-repeat="data.growthdata">
                     <p class="date">
-                        <i ms-text="get_md(el.occurtime)"></i><em ms-text="get_y(el.occurtime)"></em>
+                        <i ms-text="el.M_dd"></i><em ms-text="el.yyyy"></em>
                     </p>
                     <p class="gray" ms-text="el.content"></p>
                 </div>
             </article>
-            <article class="news" ms-if="array_empty(data.news)">
+            <article class="news" ms-if="window.account_info.role>0 && array_empty(data.news)">
                 <h1>新闻</h1>
                 <div ms-each-el="data.news">
                     <p class="date">
-                        <i ms-text="get_md(el.occurdate)"></i><em ms-text="get_y(el.occurdate)"></em>
+                        <i ms-text="el.M_dd"></i><em ms-text="el.yyyy"></em>
                     </p>
                     <div class="item">
                         <p ms-text="el.title"></p>
@@ -149,34 +145,31 @@
             </article>
         </div>
 
-        <div class="invest-info" ms-if="!!data.financing">
+        <div class="invest-info" ms-controller="finance">
             <article class="needs">
                 <div class="info-table">
                     <ul>
-                        <li class="hourglass"><aside><i ms-text="(data.financing.hope_amount || 0)+'W'"></i><em>预计融资</em></aside></li>
-                        <li class="pie-chat"><aside><i ms-text="(data.financing.stock_sale || 0)+'%'"></i><em>出让股权比例</em></aside></li>
+                        <li class="hourglass"><aside><i ms-text="(data.hope_amount || 0)+'W'"></i><em>预计融资</em></aside></li>
+                        <li class="pie-chat"><aside><i ms-text="(data.stock_sale || 0)+'%'"></i><em>出让股权比例</em></aside></li>
                     </ul>
                     <ul>
-                        <li class="money"><aside><i ms-text="(data.financing.min_quota || 0)+'W'"></i><em>最低投资额</em></aside></li>
-                        <li class="bar-chat"><aside><i ms-text="(data.financing.price || 0)+'W'"></i><em>融资前估值</em></aside></li>
+                        <li class="money"><aside><i ms-text="(data.min_quota || 0)+'W'"></i><em>最低投资额</em></aside></li>
+                        <li class="bar-chat"><aside><i ms-text="(data.price || 0)+'W'"></i><em>融资前估值</em></aside></li>
                     </ul>
                 </div>
-                <p ms-if="data.financing.txt"><i>优先考虑的投资人：</i><em ms-text="data.financing.txt"></em></p>
+                <p ms-if="data.txt"><i>优先考虑的投资人：</i><em ms-text="data.txt"></em></p>
             </article>
-            <article class="invester" ms-if="array_empty(data.vc_list)">
+            <article class="invester" ms-if="data.vc_list.length">
                 <h1>本轮投资意向<i ms-text="data.vc_list.length"></i></h1>
                 <div id="invester" class="investor-slider-container">
                     <ul>
                         <li ms-repeat="data.vc_list">
                             <div>
-                                <p class="portrait">
-                                    <img ms-if="!!el.avatar" ms-src="el.avatar" />
-                                    <em ms-if="!el.avatar" ms-css-background-color="el.avatar_color" ms-text="el.name[0]||''"></em>
-                                </p>
+                                <p class="portrait"><img ms-src="el.avatar || ''" /></p>
                                 <p class="name" ms-text="el.name"></p>
                                 <p class="company" ms-text="el.firmname"></p>
                                 <p class="title" ms-text="el.title"></p>
-                                <div class="investment" ms-text="el.money+'W'">W</div>
+                                <div class="investment" ms-text="el.amount+'W'">W</div>
                             </div>
                         </li>
                     </ul>
@@ -186,79 +179,68 @@
                 <h1>资金用途</h1>
                 <div ms-html="decode_text(data.purpose)"></div>
             </article>
-            <article class="questions-answers" ms-if="array_empty(data.qa_list)">
+            <article class="questions-answers" ms-if="data.qa_list.length">
                 <h1>Q&A</h1>
                 <div class="group" ms-repeat="data.qa_list">
                     <div class="item">
-                        <p class="title-container"><i>Q</i><em ms-text="el.q_name+'·'+el.title+'·'+el.company"></em></p>
+                        <p class="title-container"><i>Q</i><em ms-text="el.name+'·'+el.title"></em></p>
                         <p ms-text="el.q"></p>
                     </div>
                     <div class="item" ms-if="el.a">
                         <p class="title-container"><i>A</i><em ms-text="el.a_name+'·项目创始人'"></em></p>
-                        <p ms-html="decode_text(el.a)"></p>
+                        <p ms-text="el.a"></p>
                     </div>
                 </div>
             </article>
-            <article class="extra-files" ms-if="!!data.bp_link">
+            <article class="extra-files">
                 <h1>商业企划书</h1>
-                <div class="file PDF"><a ms-href="data.bp_link">查看商业计划书</a></div>
+                <div class="file PDF"><a href="">查看商业计划书</a></div>
             </article>
         </div>
-
-        <div class="not-logged-in" ms-if="account_info.role==0">
-            <div class="login-options">
-                <p class="declare">详细信息只对<i>天使汇认证投资人</i>可见，您可以选择：</p>
-                <div class="control-module">
-                    <em><i></i>&nbsp;使用投资人账号登录？</em>
-                    <a class="btn btn-small login-btn" ms-attr-href="data.link_login">登录</a>
-                </div>
-                <div class="control-module" ms-if="!account_info.is_login">
-                    <em><i></i>&nbsp;申请投资人账号</em>
-                    <a class="btn btn-small" ms-attr-href="data.link_apply" >立即申请</a>
-                </div>
-                <div class="control-module" ms-if="account_info.is_login">
-                    <em><i></i>&nbsp;进行投资人认证</em>
-                    <a class="btn btn-small" ms-attr-href="data.link_apply_long">申请认证</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="bottom-send-investment" >
+        <div class="bottom-send-investment"  ms-controller="finance" ms-if="window.account_info.role >0">
             <div class="btn-group">
-                <a class="btn orange send-investment-btn">发送投资意向</a>
+                <a class="btn orange send-investment-btn" href="/vc_new">发送投资意向</a>
             </div>
         </div>
     </div>
-</div>
-<div id="PA-layer" class="wechat-PA">
-    <div class="close">×</div>
-    <div class="summary">
-        <h2 class="title"></h2>
-        <div class="image-container">
+    <div class="not-logged-in">
+        <div class="login-options">
+            <p class="declare">详细信息只对<i>天使汇认证投资人</i>可见，您可以选择：</p>
+            <div class="control-module">
+                <em><i></i>&nbsp;天使汇认证投资人</em>
+                <a class="btn btn-small login-btn">登录</a>
+            </div>
+            <div class="control-module">
+                <em><i></i>&nbsp;更换投资人账号登录？</em>
+                <a class="btn btn-small login-btn">登录</a>
+            </div>
+            <div class="control-module">
+                <em><i></i>&nbsp;申请投资人账号</em>
+                <a id="shortly_reg" class="btn btn-small" >立即申请</a>
+            </div>
+            <div class="control-module">
+                <em><i></i>&nbsp;进行投资人认证</em>
+                <a id="longer_reg" class="btn btn-small" >申请认证</a>
+            </div>
         </div>
-        <h5>截屏至相册后, 使用微信扫一扫</h5>
-        <p>手动复制链接:<input onclick="this.setSelectionRange(0, 999);"></p>
     </div>
-</div>
-<div id="wechat-in" class="wechat-in">
-    <img src="http://dn-acac.qbox.me/mobile/detailswechat_pointer.png">
-</div>
-<div id="none-investor" class="self_notice">
-    <div class="close">×</div>
-    <div class="mg"></div>
-    <div class="image"><img src="http://dn-xswe.qbox.me/13168760?imageMogr2/thumbnail/240x"></div>
-    <div class="text">
-        <p>&nbsp;&nbsp;&nbsp;&nbsp;对不起，您还不是天使汇认证投资人，不能发送投资意向。感谢您对天使汇的支持。<br><br>&nbsp;&nbsp;&nbsp;&nbsp;您可以<a href="http://m.angelcrunch.com/angel_vip_simple">［申请成为天使汇认证投资人］</a>，我们的投资人服务团队会尽快对您进行投资人审核访谈，并沟通投资意愿。</p>
-    </div>
-    <div class="btn-group">
-        <a href="http://m.angelcrunch.com/angel_vip_simple">立即申请</a>
+
+    <div id="PA-layer" class="wechat-PA">
+        <div class="close">×</div>
+        <div class="summary">
+            <h2 class="title"></h2>
+            <div class="image-container">
+            </div>
+            <h5>截屏至相册后, 使用微信扫一扫</h5>
+            <p>手动复制链接:<input onclick="this.setSelectionRange(0, 999);"></p>
+        </div>
     </div>
 </div>
 </body>
 <script src="https://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
 <script src="/static/js/lib/jquery-cookie.js"></script>
-<script src="https://dn-acac.qbox.me/avalon.mobile.min.js"></script>
 <script src="/static/js/wapsite/angelcrunch_base.js"></script>
-<script src="/static/js/wapsite/angelcrunch_details_new.js"></script>
+<script src="https://dn-acac.qbox.me/avalon.mobile.min.js"></script>
+<script src="/static/js/wapsite/angelcrunch_details.js"></script>
 <script src="https://dn-acac.qbox.me/qrcode.js"></script>
 </html>

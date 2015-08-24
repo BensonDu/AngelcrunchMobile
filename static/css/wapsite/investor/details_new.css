@@ -1,0 +1,911 @@
+/*/
+/*
+/* Rank: 3
+/* Standard：Google
+/*
+/*/
+
+/*******************
+    branding head
+  *******************/
+
+.branding-head {
+    width: 100%;
+    padding: 0px;
+    text-align: center;
+    background: #F5F5F5;
+}
+
+.branding-head .icon {
+    display: inline-block;
+    width: 100%;
+    min-height:93px;
+    margin-top: 14px;
+}
+
+.branding-head .icon img {
+    width: 25%;
+    max-width:125px;
+    border-radius:8px;
+}
+
+.branding-head .brand-info {
+    min-height:94px;
+    margin-top: 4px;
+    padding-bottom: 16px;
+}
+
+.branding-head .brand-info h1 {
+    font-size: 24px;
+    line-height: 30px;
+}
+
+.branding-head .brand-info p {
+    font-size: 16px;
+    line-height: 18px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.branding-head .brand-info p.extra {
+    font-size: 14px;
+    color: #C9C9C9;
+    margin-top: 8px;
+}
+
+.branding-head .new-progress-container {
+    width: 100%;
+    padding: 20px 22px 14px 20px;
+    background: #EEE;
+    height: auto;
+}
+.branding-head .new-progress-container .new-progress-group .new-progress-sta p{
+    font-size: 14px;
+}
+.branding-head .new-progress-container > p {
+    width: 100%;
+    text-align: left;
+    margin-top: 8px;
+    margin-left: -2px;
+}
+
+.branding-head .new-progress-container > p em {
+    font-size: 14px;
+}
+
+.branding-head p em.right {
+    float: right;
+    margin-right: -2px;
+}
+
+/**********************
+   Article Basic Style
+  **********************/
+
+.article-list article {
+    padding: 10px 6.6% 24px 5.5%;
+    background: #F5F5F5;
+}
+
+.article-list article:nth-child(2n) {
+    background: #FFF;
+}
+
+.article-list article .item {
+    margin-top: 10px;
+}
+.invest-info article .silver,
+.article-list article .silver {
+    color: #AAA;
+}
+
+.invest-info article .gray,
+.article-list article .gray {
+    color: #757575;
+}
+
+.invest-info article h1,
+.article-list article h1 {
+    font-size: 22px;
+    line-height: 44px;
+}
+.article-list article h2 {
+    font-size: 18px;
+    line-height: 44px;
+}
+.article-list article h3 {
+    font-size: 16px;
+    line-height:18px;
+}
+
+.invest-info article p,
+.article-list article p {
+    font-size: 14px;
+    line-height: 22px;
+    text-align: left;
+}
+
+.article-list article p.date {
+    height: 30px;
+    text-align: right;
+}
+
+.article-list p.date i {
+    display: inline-block;
+    max-width:58px;
+    color: #BCBCBC;
+    font-size: 22px;
+    line-height: 16px;
+}
+
+.article-list p.date em {
+    position: absolute;
+    color: #CCC;
+    font-size: 12px;
+    line-height: 10px;
+    bottom: -2px;
+    right: 0px;
+}
+
+.article-list p.avatar {
+    float: right;
+    margin-top: -20px;
+}
+
+.article-list p.avatar:empty {
+    display: none;
+}
+
+.article-list p.avatar img {
+    width: 40px;
+    height:40px;
+}
+
+/**********************
+       Typesetting
+  **********************/
+
+.article-list article.growing-up .item,
+.article-list article.milestone .item {
+    min-height: 34px;
+}
+
+.article-list .team .item {
+    margin-bottom: 28px;
+}
+
+.article-list .team .item:last-child {
+    margin-bottom: 0;
+}
+
+.article-list .team p.gray {
+    width: 85%;
+    margin-top: 6px;
+    text-align:justify;
+}
+
+.article-list .team p.gray.full-width {
+    width: 100%;
+}
+
+.article-list .growing-up p,
+.article-list .milestone p {
+    width: 69%;
+    text-align:justify;
+}
+
+.article-list .growing-up p.date,
+.article-list .milestone p.date {
+    position: relative;
+    display: block;
+    width: 52px;
+    top: 3px;
+    float: right;
+}
+
+.article-list .news {
+    padding-bottom: 20px;
+}
+
+.article-list .news h1 {
+    margin-top: 4px;
+}
+
+.article-list .news .item {
+    margin-top: -2px;
+}
+
+.article-list .news .item p {
+    margin-bottom: 4px;
+}
+
+.article-list .news .item p.gray {
+    line-height: 18px;
+    margin-bottom: 0;
+}
+
+.article-list .news p.date {
+    position: static;
+    text-align: left;
+    margin-top: 8px;
+}
+
+.article-list .news p.date em {
+    position: relative;
+    top: 0;
+    margin-left: 4px;
+}
+
+/**********************
+    Part of Invest-info
+  **********************/
+
+.invest-info {
+    width:100%;
+    border-top: 2px solid #FFF;
+}
+
+.invest-info .needs {
+    padding: 18px 10% 28px 10%;
+    background: #EEE;
+}
+
+.invest-info .needs .info-table {
+    display: inline-block;
+    width: 278px;
+    position: relative;
+    left: 50%;
+    background: url(/static/images/wapsite/cssimage/k12398712398223.png) no-repeat scroll left center;
+    background-size: 278px;
+    -o-transform: translate(-50%,0);
+    -webkit-transform: translate(-50%,0);
+    -moz-transform: translate(-50%,0);
+    transform: translate(-50%,0);
+}
+
+/* less than 330px */
+@media only screen and (max-width:330px ) {
+    .invest-info .needs .info-table {
+        width:270px;
+        background-position:left;
+    }
+}
+
+/* less than 320px */
+@media only screen and (max-width:319px ) {
+    .invest-info .needs .info-table {
+        width: 240px;
+        background-size: 248px;
+        background-position:left 24px;
+    }
+}
+
+.invest-info .needs li {
+    float: left;
+    width: 49%;
+    height: 82px;
+    overflow:hidden;
+}
+
+
+/* less than 320px */
+@media only screen and (max-width:319px ) {
+    .invest-info .needs li {
+        float: left;
+        width: 49%;
+        height: 74px;
+        margin-top:8px;
+        overflow:hidden;
+    }
+}
+
+/* less than 300px */
+@media only screen and (max-width:319px ) {
+    .invest-info .needs li {
+        float: left;
+        width: 49%;
+        height: 64px;
+        overflow:hidden;
+    }
+}
+
+.invest-info .needs li aside {
+    box-sizing: content-box;
+    position: absolute;
+    display: inline-block;
+    width: 114px;
+    height: 54px;
+    margin-top: 16px;
+    padding-left: 18px;
+    text-align: center;
+}
+
+.invest-info .needs li:last-child aside {
+    width:80px;
+    padding-left:58px;
+}
+
+.invest-info .needs li i {
+    display: inline-block;
+    font-size: 22px;
+    margin-top: 4px;
+}
+
+.invest-info .needs li em {
+    display: inline-block;
+    width: 100%;
+    font-size: 14px;
+    color: #666;
+    padding-bottom: 22px;
+}
+
+.invest-info .needs p {
+    width: 100%;
+    margin-top: 4px;
+    line-height: 16px;
+}
+
+.invest-info .needs p i {
+    color: #757575;
+}
+
+.invest-info .needs p em {
+    font-size: 14px;
+    color: #757575;
+    font-weight: 700;
+}
+
+.invest-info .invester .slider-container {
+    height: 170px;
+    padding: 0;
+    background: #F5F5F5;
+}
+
+.invest-info .slider-container ul {
+    height: 100%;
+}
+
+.invest-info .slider-container li {
+    position: relative;
+    width: 33%;
+    height: 100%;
+    text-align: center;
+    margin: 0;
+    border-right: 1px solid #FFF;
+    background: #F5F5F5;
+}
+
+.invest-info .slider-container li:last-child {
+    border-right: 0;
+}
+
+.invest-info .invester p.avatar {
+    display: inline-block;
+    margin-top: 14px;
+}
+
+.invest-info .invester p.avatar img {
+    width:50px;
+    height: 50px;
+}
+
+.invest-info .invester p {
+    text-align: center;
+}
+
+.invest-info li p i {
+    display: block;
+    width: 100%;
+    font-size: 16px;
+    line-height: 14px;
+    margin-top: 6px;
+}
+
+.invest-info li p em {
+    display: block;
+    width: 100%;
+    color: #999;
+    font-size: 14px;
+    line-height: 14px;
+    font-family: "source-code-pro","PingHei","Lucida Grande","sans-serif";
+    margin-top: 4px;
+}
+
+.invest-info .invester h1,
+.invest-info .extra-files h1 {
+    padding-top: 12px;
+    width: 100%;
+    height: 56px;
+    padding-left: 4.6%;
+}
+
+.invest-info .invester h1 > i {
+    position:absolute;
+    display:inline-block;
+    min-width:15px;
+    height:15px;
+    color:#666;
+    font-size:12px;
+    line-height:16px;
+    text-align:center;
+    margin-top:14px;
+    margin-left:2px;
+    padding:0 3px 0 2px;
+    border-radius:3px;
+    background:#EEE;
+}
+
+.invest-info .funds,
+.invest-info .questions-answers {
+    padding: 15px 4.6% 20px;
+}
+
+.invest-info .funds p {
+    margin-top: 4px;
+    margin-bottom: 14px;
+}
+
+.invest-info .questions-answers h1 {
+    line-height:24px;
+    margin-top:9px;
+    font-family: "source-code-pro","PingHei","Lucida Grande","sans-serif";
+}
+
+.invest-info .funds p:last-child {
+    margin-bottom: 2px;
+}
+
+.invest-info .questions-answers {
+    background: #F5F5F5;
+}
+
+.invest-info .questions-answers .group {
+    margin-top:16px;
+}
+
+.invest-info .questions-answers .item {
+    margin-top:6px;
+}
+
+.invest-info .questions-answers p.title-container {
+    height:22px;
+    line-height:18px;
+    padding-top:2px;
+}
+
+.invest-info .questions-answers p i {
+    position:absolute;
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    font-size:16px;
+    line-height: 16px;
+    color: #FFF;
+    text-align: center;
+    font-family: "source-code-pro","PingHei","Lucida Grande","sans-serif";
+    border-radius: 2px;
+    margin-right: 2px;
+    background: #E3E3E3;
+}
+
+.invest-info .questions-answers p em {
+    position:absolute;
+    display: inline-block;
+    height:16px;
+    font-size: 14px;
+    line-height: 18px;
+    color: #FFF;
+    font-family: "source-code-pro","PingHei","Lucida Grande","sans-serif";
+    padding:0 6px;
+    margin-left:18px;
+    border-radius: 2px;
+    background: #E3E3E3;
+}
+
+.extra-files {
+    padding-bottom:20px;
+}
+
+.extra-files .file {
+    height:50px;
+    line-height:52px;
+    background:#eee url(https://dn-acac.qbox.me/detail_icon_03.png) no-repeat 16px center;
+    background-size:32px;
+}
+
+.extra-files .file a {
+    display:inline-block;
+    width:100%;
+    height:96%;
+    padding-left:54px;
+}
+
+.extra-files .file a:active {
+    background:rgba(82, 82, 82, 0.27);
+}
+/******************
+    Not Logged In
+  ******************/
+
+.login-options {
+    width:100%;
+}
+
+.login-options p.declare {
+    text-align:center;
+    line-height:24px;
+    padding:20px 0;
+    padding-right:6px;
+}
+
+.login-options p.declare i {
+    font-weight:700;
+}
+
+.login-options .control-module {
+    height:50px;
+    padding:0 5.5% 0 6.1%;
+    background:#F5F5F5;
+}
+
+.login-options .control-module:last-child {
+    margin-top:4px;
+}
+
+.login-options .control-module em {
+    line-height:52px;
+    padding-left:8px;
+}
+
+.login-options .control-module em i {
+    position:absolute;
+    display:inline-block;
+    width: 0;
+    height: 0;
+    margin-top:21px;
+    margin-left:-6px;
+    border-top: 4px solid transparent;
+    border-left: 4px solid #333;
+    border-bottom: 4px solid transparent;
+}
+
+.login-options .control-module .btn {
+    width:78px;
+    margin-top:11px;
+    border-color:#666;
+    float:right;
+}
+/******************
+    Share follow
+  ******************/
+
+.btn-group-social{
+    width: 48.5%;
+    border-radius: 3px;
+    height: 28px;
+    display: inline-block;
+    background: #fff;
+    text-align: center;
+
+}
+.btn-group-social a{
+    display: inline-block;
+    height: 100%;
+    font-size: 14px;
+}
+.btn-group-social .follow-btn{
+    width: 48%;
+    line-height: 30px;
+    border-right: 1px solid #eee;
+}
+.btn-group-social .follow-btn span{
+    padding-left: 8%;
+}
+.btn-group-social .follow-btn i{
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+    margin-bottom:-3px;
+    background-size: auto 16px;
+    background-repeat: no-repeat;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAaCAMAAABxVtfCAAABI1BMVEUAAAAAAAAAAAAAAACzs7MAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQEBAAAAAAAAAEBASKioq3t7dMTEwAAAAAAAABAQESEhIAAAA3NzcAAAAMDAxAQEAAAAAAAABsbGw/Pz82NjZLS0sAAACrq6tAQEBISEjCwsLExMQAAAAAAAD///8AAAAFBQUtLS0cHBwNDQ35+fnt7e3l5eU9PT0iIiISEhLd3d3V1dXQ0NDExMSzs7OcnJyWlpaLi4tjY2NgYGBVVVVAQEApKSn+/v7Y2NjJycm/v7+6urq4uLijo6ORkZGFhYWDg4N5eXlwcHBXV1dQUFBHR0c0NDQkJCQVFRWs3izSAAAANnRSTlMA+/ItBfXu1baMgnlYVEEUBePZw7yvmpBoXVEnEhENCfbdzsuvoIyGf3ZfX01JR0E5NzIiHBJkKVYcAAABE0lEQVQoz6XR146CUBAGYIGlyNLsuuvq9t7LGYoI2Pv2Xt//KVYCQUBJTPyvJvkyOTNnYnNHLEdbloukY4wWI2iNUbXlCMvD2xAnZtJqQr1ry5lZtJST2wh9rnNTT11d5jFDR6ipJQXiuuw1nB2ymSQGoyYa50UDcmvngCMcY0EzBh+de2Sn0ur2vhSZPHUb47JRR748mzhvg4PwXZ3Qo4mv+GaJw9DDJ9UhLzls4FLtl+JDW6Qs3bEWTP3bplVx7AH2Q1RK/Iznb9RuUV3Ohuyc6qFGX1Ve9aqSvgnaEdl9/wOGBqXTp4mg7cEINnhJZEnLxIWgbQO1W7QLgsGgELR06sKtpAIVXKJ4UvIdWZBii+QfQIkuyYlEJ98AAAAASUVORK5CYII=');
+
+}
+.btn-group-social .follow-btn.active i{
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAaCAMAAABxVtfCAAAAhFBMVEUAAADwYx7wZSLwZSLwZCHwZSLwZSLwZSLwZSLwYh3wYh7wZSLwZSLwZSLwZSLwZSLwZSLwZSLwZSLwZSLwZSLwZSLwYRzwZSLwZSLwZSLwZSLwZSLwZSLwXhjwZSLwZSLwYx/wZSLwZSLwZSLwZSLwZSLwZSLwZSLwZSLwZSLvVw7wZSKYp9RyAAAAK3RSTlMAEvXyBfrueF5BCNW2r5yOhFhUUC8qDuPZw7yMgEgjGQIB3c7Lk2lnOTcnVedscAAAALhJREFUKM+l0OcKwyAUhmFj9t57Nd3td//31wwa0SRQ6PtDkIdzEMnPSdaxeeEhxardH210AH3YtzsAOd2lLseYu0fKDVNUfM4p65KHirnCTHtrHTCNwC3AoldPD5NlqME22i6Dlr8hOVq31iLFZG3wt8TyVUZaRPhKZjoRujBrBMpyZp5gT41ZJfFmUIw59nTaKW8BgHOkSAEFZJM3F1o9r0ocFQZvVfn6fpKh6RxJbcYub9Mi//QB+9oh2PPF5LEAAAAASUVORK5CYII=');
+}
+.btn-group-social .share-wechat{
+    width: 48%;
+    line-height: 30px;
+}
+.btn-group-social .share-wechat span{
+    padding-left: 8%;
+}
+.btn-group-social .share-wechat i{
+    display: inline-block;
+    height: 18px;
+    width: 18px;
+    margin-bottom: -6px;
+    background-size: auto 17px;
+    background-repeat: no-repeat;
+    background-image: url('data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAACUAAAAgCAMAAACijUGCAAACLlBMVEUAAAA0NDS2tra/v7/b29szMzM3NzfKysonJycjIyMzMzMzMzMzMzMyMjIuLi7CwsKPj48rKysyMjIyMjIzMzMiIiIhISEaGhoqKiovLy8zMzMxMTFGRkYzMzMPDw8zMzMRERGCgoI4ODg+Pj5dXV1CQkLOzs6pqalaWlqPj49EREQzMzMjIyMwMDAiIiIyMjIyMjIkJCQzMzMkJCQjIyMyMjIzMzMcHBwzMzNubm4gICAhISEzMzMzMzMyMjIyMjIzMzMlJSVtbW0+Pj4wMDBAQEAkJCQwMDBUVFQkJCQzMzOlpaV9fX2NjY3Ly8vT09OlpaXNzc2BgYE1NTVgYGC/v793d3czMzN8fHzMzMwuLi4rKys0NDQzMzMiIiIzMzMUFBQpKSkpKSktLS0jIyMtLS0gICA7OzsuLi4wMDAWFhY4ODgkJCQ2NjZMTEw4ODgzMzMXFxdEREQVFRUzMzM/Pz8TExMsLCwiIiIUFBQ2NjZLS0sUFBRWVlZubm4xMTEvLy8MDAwGBgYkJCQ9PT1TU1MnJycgICAbGxtubm4eHh5cXFyAgIA7OzsrKyt9fX0AAAAnJydbW1tRUVF0dHRCQkKWlpaAgIBycnJRUVEAAABjY2MQEBAyMjJ8fHwzMzMeHh49PT14eHiEhISfn5+8vLzU1NRaWlp0dHSwsLDZ2dmfn5+dnZ3Q0NCmpqYzMzPm5uY1NTUzMzMvLy8mJiYxMTEpKSktLS0nJycTExOtDzzSAAAAsXRSTlMA/gQSEAYEAvz0yi0pJBQLCP7o4dza1dPDmZOOZGFeW1tIQjMwJBwWFBENCP777+7r39XOx8XAu7i0p6CdmpaBfHxycnJoaFZUUUxGQTEwLSgjISAfGxoXFQ78+vj39/bz8e3r6eXg3trY19XVz87IwsK7u7q3tbKurqypqKSjoqGgn5iXlpGQj46GhIF+eHV1c3FrXV1ZWFdXVlVVVFBNSzs5NzYrJiYlIx0dHBgPBwYNvAiyAAAB+UlEQVQ4y2IgFaznVZKXlffi1sKjhm++jTDjZp2NmwwsZLlxKVIp37jDpEtmmpxjRdxWEVns5nnobbRawgJm8i9z1t9UwoNNEYeBJxI3uGozFy+GouVJyT4oAvySW6VZ0VVVc8gAyRBPNbALF0QyMKgXMiqjuzyFC0QVM9YDySDxTe5AaqagDZphThyuIKo3ywVIRjSKLwRS7BLxtvIoXqjbAnYq00omEMUcyjavx3lOs5jOJhEXPoQqyy0syJp87RSU/QPXqvn1pTJaBCOp0kBSNN1RdQOUGWq9uSAcJt65RQmhSHEissFt221hnpjN2QIXVp+wlIEh0g+oksl/FTDgzHRhkbouO1EVpmrGVCChsLOfgUE1oQjInMIpBZMCTIajlB/KnOUNJBY3+QBNbQeFj5aoEUwVk8S2BmYwi1khAC3I86LYYMxA022SEFVy6KpyddngbHfGDgYBZQ12JjlvVEVhhlxwNrt97Fwlox2b0/OF3NBib5s9guMWIyKoVyuRYyhoshpZ0QqxTUgJLcRcvHURO4OAZvd2awGEcIQ5owMbgguUh9CalRutfGGCzGUbpbWx5gCNms1p0oph7ExBimvUxIR5cOQmlskZWzlFjY1FOTMnSepz486aXlJcQkKmUsLRjGbheLIwG6u2NisDn4MdD8OgBgBhmmXuFI1yOAAAAABJRU5ErkJggg==');
+}
+/*底部发送投资意向*/
+.bottom-send-investment{
+    display: inline-block;
+    width: 100%;
+    height: 80px;
+    padding: 25px;
+}
+.bottom-send-investment .btn-group{
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+.bottom-send-investment .btn-group a{
+    display: inline-block;
+    height: 30px;
+    width: 80%;
+    line-height: 23px;
+    float: none !important;
+}
+
+/*********************
+   Album  Slider Module
+  *********************/
+
+.slider-container {
+    height: 116px;
+}
+
+.slider-container li img {
+    height: 104px;
+    margin: 0;
+    padding: 0;
+}
+/**********************
+    Investor Slider Module
+  **********************/
+
+.investor-slider-container{
+    position: relative;
+    height: 190px;
+    background: #F5F5F5;
+}
+.investor-slider-container ul{
+    display:inline-block;
+    height:100%;
+    width: 100%;
+    text-align: center;
+    white-space: nowrap;
+    overflow-x:auto;
+    overflow-y:hidden;
+}
+.investor-slider-container>ul>li{
+    display: inline;
+    width: 32%;
+    white-space: nowrap;
+    float: none;
+    text-align: center;
+}
+.investor-slider-container>ul>li>div{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    height: 100%;
+    width: 32%;
+}
+.investor-slider-container ul li img{
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+    border-radius: 50%;
+}
+.investor-slider-container ul li em{
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+    font-size: 30px;
+    line-height: 52px;
+    color: #fff;
+    border-radius: 50%;
+    margin-top: 0;
+}
+.investor-slider-container ul li p{
+    width: 100%;
+    white-space: normal;
+    position: absolute;
+}
+.investor-slider-container ul li p.portrait{
+    padding-top: 14px;
+}
+.investor-slider-container ul li p.name{
+    font-size: 16px;
+    top:70px
+}
+.investor-slider-container ul li p.company{
+    font-size: 14px;
+    padding: 0 3px;
+    top:91px;
+    line-height: 17px;
+    color: #999;
+    height: 34px;
+}
+.investor-slider-container ul li p.title{
+    font-size: 14px;
+    padding: 0 3px;
+    top:130px;
+    line-height: 17px;
+    color: #999;
+}
+
+.investor-slider-container>ul>li>div>div{
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    top: 150px;
+    line-height: 40px;
+    font-size: 24px;
+    background: #EEE;
+}
+
+.wechat-PA {
+    display:none;
+    position:fixed;
+    width:100%;
+    height:100%;
+    text-align:center;
+    top:0;
+    left:0;
+    background:rgba(255, 255, 255, 0.92);
+    z-index:99;
+}
+
+.wechat-PA .summary {
+    position:absolute;
+    display:inline-block;
+    width:306px;
+    top:46%;
+    left:50%;
+    margin-left:-154px;
+    margin-top:-160px;
+}
+
+.wechat-PA h2 {
+    font-size:30px;
+}
+
+.wechat-PA h5 {
+    font-size:20px;
+    color:#FC5830;
+    line-height:32px;
+    margin-top:8px;
+}
+
+.wechat-PA p {
+    font-size:14px;
+}
+.wechat-PA p input{
+    width: 100%;
+    border:none;
+    font-size:14px;
+    text-align: center;
+}
+.wechat-PA p input:focus{
+    outline: none;
+}
+.wechat-PA .image-container {
+    margin-top:12px;
+}
+
+.wechat-PA .image-container img {
+    width:218px;
+}
+
+.wechat-PA .close {
+    position:absolute;
+    font-size:36px;
+    float:right;
+    top:0;
+    right:0;
+    padding: 10px 20px;
+    cursor:pointer;
+}
+@media only screen and (min-width:500px ){
+    .wechat-PA .image-container img {
+        width:188px;
+    }
+
+    .wechat-PA .summary {
+        margin-top:-130px;
+    }
+
+    .wechat-PA .close {
+        margin-top:21px;
+        margin-right:30px;
+    }
+}
+
+.self_notice{
+    display: none;
+    background: rgba(255,255,255,.95);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+.self_notice .close{
+    position: absolute;
+    font-size: 36px;
+    float: right;
+    top: 0;
+    right: 0;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.self_notice .mg{
+    width: 100%;
+    height: 20%;
+}
+.self_notice .image{
+    width: 100%;
+    text-align: center;
+}
+.self_notice .image img{
+    width: 23%;
+    min-width: 80px;
+    max-width: 150px;
+    border-radius: 10%;
+}
+.self_notice .text{
+    width: 100%;
+    margin-top: 25px;
+    padding: 0 5% ;
+    text-align: justify;
+}
+.self_notice .text p{
+    font-size: 16px;
+    line-height: 22px;
+}
+.self_notice .text  a{
+    font-size: 16px;
+    line-height: 20px;
+    color: #ff3d00;
+}
+.self_notice .btn-group{
+    width: 100%;
+    text-align: center;
+    margin-top: 40px;
+}
+.self_notice .btn-group a{
+    display: inline-block;
+    padding:6px 30% 3px;
+    border: 1px solid #000;
+    border-radius: 3px;
+    font-size: 16px;
+    line-height: 20px;
+
+}
+.self_notice .btn-group a:active{
+    background: #000;
+    color: #fff;
+}
+/*微信内嵌页提示分享*/
+.wechat-in{
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255,255,255,0.95);
+    text-align: right;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+.wechat-in img{
+    height: 150px;
+    margin: -15px 5% 0 0;
+}

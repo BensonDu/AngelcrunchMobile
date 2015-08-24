@@ -312,6 +312,7 @@
         save_cookie(account_key.id,account_info.id);
         save_cookie(account_key.token,account_info.token);
         save_cookie(account_key.role,account_info.role);
+        save_cookie('isapp','yes');
     }
     //Debug 删除主站附带Session
     del_cookie('S');
@@ -496,7 +497,6 @@
     });
     //APP内嵌隐藏头部
     if(base_status.isapp || get_cookie('isapp') == 'yes'){
-        save_cookie('isapp','yes');
         $head.hide();
         $headcontainer.hide();
     }
@@ -506,17 +506,16 @@
 (function(){
     this.wechat_card={
         display:true,
+        //异步添加
         deffer:false,
         img:'http://dn-acac.qbox.me/231937129837912.png',
         title:'',
         render:function(){
             //是否由微信打开
-            if(base_status.iswechat){
-                if(wechat_card.title != '')document.title=wechat_card.title;
-                $("body").prepend("<div class='default-hidden'><img width='310px' height='310px' src="+wechat_card.img+" /></div>");
-            }
+            if(wechat_card.title != '')document.title=wechat_card.title;
+            $("body").prepend("<div class='default-hidden'><img width='310px' height='310px' src="+wechat_card.img+" /></div>");
         }
     };
     //事件
-    $(document).ready(function(){if(wechat_card.display && !wechat_card.deffer)wechat_card.render();});
+    $(document).ready(function(){if(wechat_card.display && !wechat_card.deffer && base_status.iswechat)wechat_card.render();});
 }).call(this);
