@@ -36,7 +36,7 @@
         img_offset = 0,
         base_url = decodeURIComponent($_GET.url).split('__page__');
     this.get_bp_url = function(index){
-        return base_url[0]+index+base_url[1];
+        return decodeURIComponent(base_url[0]+index+base_url[1]);
     };
     this.get_html = function(all){
         var h = '';
