@@ -11,7 +11,7 @@
     this.error = function(){
         $error.show();
     };
-    (!$_GET.id || !$_GET.all)&&self.error();
+    (!$_GET.all || !$_GET.url)&&self.error();
     (parseInt(account_info.role)<1)?self.no_authority():(!account_info.is_login?self.no_authority(1):'');
     log.type = 'bp';
 }).call(define('view_bp'));
@@ -33,9 +33,10 @@
         $corner_total = $('#page-num-total'),
         timer = 0,
         unit = 1,
-        img_offset = 0;
+        img_offset = 0,
+        base_url = decodeURIComponent($_GET.url).split('__page__');
     this.get_bp_url = function(index){
-        return "http://dn-xswe.qbox.me/"+bp_id+"?odconv/jpg/page/"+index+"/density/150/quality/100/resize/640";
+        return base_url[0]+index+base_url[1];
     };
     this.get_html = function(all){
         var h = '';

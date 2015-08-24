@@ -322,7 +322,7 @@
 (function(){
     if(account_info.role<1 || vip_path)return false;
     $('.extra-files').show();
-    set_pb('http://ac2015.angelcrunch.com/bp?id=13168816&all=54');
+    set_pb('http://ac2015.angelcrunch.com/bp?all=54&url='+encodeURIComponent("http://dn-xswe.qbox.me/13168816?odconv/jpg/page/__page__/density/150/quality/100/resize/640"));
 }).call(this);
 //重新检查角色 APP 内嵌
 (function(){
@@ -331,7 +331,7 @@
         if(data.hasOwnProperty('user')){
             if(data.user.defaultpart > 0){
                 $('.extra-files').show();
-                set_pb('http://ac2015.angelcrunch.com/bp?id=13168816&all=54');
+                set_pb('http://ac2015.angelcrunch.com/bp?all=54&url='+encodeURIComponent("http://dn-xswe.qbox.me/13168816?odconv/jpg/page/__page__/density/150/quality/100/resize/640"));
                 view_page_init_dom.limited.hide();
                 save_cookie('defaultpart',1);
             }

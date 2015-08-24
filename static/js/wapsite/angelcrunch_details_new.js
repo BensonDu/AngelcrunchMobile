@@ -199,7 +199,7 @@
     this.bp_render = function(data){
       var d = data ||{},host = 'http://'+location.host+'/bp',param={};
         if(!!d.bp){
-            param.id = d.bp.bp_format_url.match(/\d{7,10}/)[0];
+            param.url = encodeURIComponent(d.bp.bp_format_url);
             param.all = d.bp.page_num;
             d.bp_link = host+=base_create_param(param);
         }
