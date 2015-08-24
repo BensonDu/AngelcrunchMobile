@@ -181,21 +181,6 @@
 //详情
 (function(){
     var self = this;
-    //BP处理
-    this.bp = function(bp){
-        var all, id;
-        if(!!bp){
-            if(base_status.isios){
-                return bp.bp_url;
-            }
-            else{
-                all = bp.page_num || 0;
-                id  = bp.bp_url.match(/\d{7,10}$/)[0] || 0;
-                return config.link.bp+base_create_param({id:id,c:all});
-            }
-        }
-
-    };
     //未上传头像，随机色
     this.investors_render = function(data){
         var l= 0,color=['#fad53e','#039be6','#81c683','#aed582','#f06292','#f57e16','#fad53e','#b39ddb','#64b5f6','#80cbc4'],cl = color.length;
@@ -226,7 +211,6 @@
     data_model.get(config.api.detail,function(data){
         var d = data || {},
             encode_current_url=encodeURIComponent(location.href.split('?')[0]);
-        !!d.bp && (d.bp.link = self.bp(data.bp||false));
         //登陆注册回调链接
         d.link_login = "http://auth.angelcrunch.com?source="+encode_current_url;
         d.link_apply = "http://m.angelcrunch.com/angel_vip_simple?source="+encode_current_url;
