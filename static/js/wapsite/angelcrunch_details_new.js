@@ -98,7 +98,7 @@
             setTimeout(function(){$bk.hide()},100);
         }
     };
-    
+
     this.notification = {
         show:function(text,isalter){
             $noti.fadeIn().children('.txt').html(text);
@@ -216,6 +216,10 @@
         d.link_apply = "http://m.angelcrunch.com/angel_vip_simple?source="+encode_current_url;
         d.link_apply_long="http://0.angelcrunch.com/angel/new?source="+encode_current_url;
         framework.detail().data = self.render(d);
+        if(!!d.pics){
+            album_controll.hook(d.pics);
+        }
+
     },config.status.get_com_id());
 }).call(define('details_controll'));
 
@@ -345,3 +349,225 @@
         }
     }
 }).call(define('wechat_controll'));
+//相册
+(function(){
+ var self = this,
+     $box = $('.album'),
+     $num = $("#album-num"),
+     $num_current = $num.children('span').eq(0),
+     $num_total = $num.children('span').eq(1),
+     $item_container = $('#album-item-container'),
+     $items = $(),
+     pub_left= 0,
+     pub_index= 0,
+     zoom_index= 0,
+     width = $(window).width();
+
+    this.list_small = [];
+    this.list_big = [];
+    this.hook = function(data){
+        var big = [],small=[];
+        for(var i in data){
+            big.push(data[i].big);
+            small.push(data[i].small)
+        }
+        return self.list_big=big,self.list_small=small,self.init();
+    };
+    this.html = function(context){
+        return "<div class='item'><img src='"+context+"'></div>";
+    };
+    this.html_small = function(offset){
+        return self.html(self.list_small[offset]);
+    };
+    this.first = function(){
+        var ret='', l=self.list_big.length;
+        for(var i = 0;i<l;i++){
+            ret+=self.html_small(i);
+        }
+        $item_container.append(ret);
+        $items=$item_container.children('div');
+    };
+    this.init_style = function(){
+    };
+    this.init = function(){
+        self.first();
+        $num_total.html(self.list_big.length);
+    };
+    this.zoom_out=function(index){
+        zoom_index = pub_index;
+        $items.eq(zoom_index).children('img').addClass('img-scale');
+    };
+    this.zoom_in=function(){
+        $items.eq(zoom_index).children('img').removeClass('img-scale');
+    };
+    this.close = function(){
+        $box.fadeOut(200);
+    };
+    this.num_update =function(index){
+        var i =parseInt(index)+1;
+        $num_current.html(i);
+    };
+    this.img_big = function(index){
+        $items.eq(index).children('img').attr('src',self.list_big[index]);
+    };
+    this.show = function(index){
+        pub_left=-parseInt(index)*width;
+        pub_index=parseInt(index);
+        $box.fadeIn(200);
+        $items.eq(0).css('margin-left',pub_left+'px');
+        self.num_update(index);
+        self.img_big(index);
+        self.init_style();
+    };
+    this.start = function(){
+        //self.zoom_out();
+    };
+    this.move = function(mX){
+        self.zoom_out();
+        $items.eq(0).css('margin-left',(pub_left+mX)+'px');
+    };
+    this.end = function(eX){
+        var r = eX, a = Math.abs(r), w = width, rw = width/4;
+        if(r>0){
+            if(a>width/2 && pub_index>0){
+                pub_left+=w;
+                pub_index--;
+            }
+        }
+        else{
+            if(a>width/2 && pub_index+1<self.list_small.length){
+                pub_left-=w;
+                pub_index++;
+            }
+        }
+        self.num_update(pub_index);
+        self.img_big(pub_index);
+        self.animate(pub_left,a*1.2);
+    };
+    this.animate=function(to,during){
+        var s = parseInt($items.eq(0).css('margin-left')),
+            d = during||200,
+            t = to || 0,
+            timer = 0,
+            n = 0,
+            e = (t-s)/(d/13);
+        timer = setInterval(function(){
+            if(n>d){
+                clearInterval(timer);
+                $items.eq(0).css('margin-left',t);
+            }
+            else{
+                s+=e;
+                $items.eq(0).css('margin-left',s);
+                n+=13;
+            }
+        },13);
+
+    };
+    this.cancel =function(){
+        self.zoom_in();
+    };
+    this.touch = function(el){
+        var startX,
+            startY,
+            startT,
+            start = function(event){
+                var  e = event || window.event;
+                startX = e.touches[0].pageX;
+                startY = e.touches[0].pageY;
+                startT = new Date().getTime();
+                event.preventDefault();
+                self.start();
+            },
+            move = function(event){
+                var  e = event || window.event;
+                mX = e.touches[0].pageX - startX;
+                mY = e.touches[0].pageY - startY;
+                self.move(mX);
+            },
+            end = function(event){
+                var  e = event || window.event,
+                    eX = e.changedTouches[0].pageX - startX,
+                    eY = e.changedTouches[0].pageY - startY,
+                    eT = new Date().getTime();
+                if(eT-startT<100 && Math.abs(eX)<5){
+                    self.close();
+                }
+                if(eT-startT>100 && Math.abs(eX)>10){
+                    self.end(eX);
+                }
+                self.cancel();
+            };
+        if(el.nodeType == 1){
+            el.addEventListener('touchstart',start, false);
+            el.addEventListener('touchmove',move, false);
+            el.addEventListener('touchend',end, false);
+        }
+    };
+    this.touchtap = function(el,fun){
+        var startX,
+            startY,
+            startT,
+            start = function(event){
+                var  e = event || window.event;
+                startT = new Date().getTime();
+                startX = e.touches[0].pageX;
+                startY = e.touches[0].pageY;
+            },
+            end = function(event){
+                var  e = event || window.event,
+                    mX = e.changedTouches[0].pageX - startX,
+                    mY = e.changedTouches[0].pageY - startY,
+                    eT= new Date().getTime(),
+                    target = e.target || e.srcElement,
+                    dom_tree = [target.parentNode,target.parentNode.parentNode],id = null,vid='';
+                for(var i in dom_tree){
+                    if(dom_tree[i].hasAttribute('pic-index')){
+                        id = dom_tree[i].getAttribute('pic-index');
+                        break;
+                    }
+                    if(dom_tree[i].hasAttribute('vid')){
+                        vid = dom_tree[i].getAttribute('vid');
+                        break;
+                    }
+                }
+                if(eT-startT<100 && Math.abs(mX)<5){
+
+                    if(id!=null){
+                        fun(id);
+                    }
+                    if(vid!=''){
+                        video_controll.play(vid);
+                    }
+
+                }
+            };
+        if(el.nodeType == 1){
+            el.addEventListener('touchstart',start, false);
+            el.addEventListener('touchend',end, false);
+        }
+    };
+    self.touchtap(document.getElementById('pic-list'),function(index){self.show(index);});
+    self.touch(document.getElementById('album'));
+    window.onresize=function(){width=$(window).width();}
+}).call(define('album_controll'));
+
+(function(){
+    var self =this,
+        $player= $('#youku'),
+        player,
+        h = $(window).width()/16* 9,
+        sta=false;
+    this.play=function(vid){
+        player = new YKU.Player('youku-container',{
+            styleid: '1',
+            client_id: '66655b02396537f4',
+            vid: vid
+        });
+        $player.children('div').css('height',h+'px');
+        $player.fadeIn(200);
+    };
+    $player.touchtap(function(){
+        $player.fadeOut(200);
+    })
+}).call(define('video_controll'));

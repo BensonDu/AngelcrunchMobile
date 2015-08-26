@@ -909,3 +909,89 @@
     height: 150px;
     margin: -15px 5% 0 0;
 }
+/*相册*/
+.album{
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.9);
+}
+.album .mg{
+    width: 100%;
+    height: 50%;
+}
+.album .mg .bar{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 50px;
+    z-index: 15;
+}
+.album .mg .bar p{
+    display: inline-block;
+    height: 50px;
+    color: #fff;
+}
+.album .mg .bar p.num{
+    float: left;
+    margin-left: 15px;
+    margin-top: 15px;
+}
+.album .mg .bar p.num span{
+    color: #fff;
+}
+.album .mg .bar p.close{
+    float: right;
+    margin-right: 15px;
+    margin-top: 10px;
+    font-size: 22px;
+}
+.album .container{
+    width: 100%;
+    height: 1px;
+    overflow: visible;
+    white-space: nowrap;
+}
+.album .container .item-container{
+    transform: translate3d(0px, -50%, 0px);
+    -webkit-transform: translate3d(0px, -50%, 0px);
+}
+.album .container .item{
+    display: inline;
+    text-align: center;
+    width: 100%;
+    white-space: nowrap;
+}
+.album .container img{
+    width: 100%;
+    vertical-align: middle;
+    -webkit-transform:scale(1,1);
+    -webkit-transition: transform 0.2s linear;
+}
+.img-scale{
+    -webkit-transform:scale(0.95,0.95) !important;
+}
+
+/*播放器*/
+.video{
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.9);
+}
+.video .mg{
+    width: 100%;
+    margin-top: 50%;
+}
+@media all and (orientation: landscape) {
+    .video .mg{
+        margin-top: 0;
+    }
+}
