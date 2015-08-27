@@ -979,6 +979,7 @@
 }
 .album .container .item .video-container img{
     position: relative;
+    visibility: hidden;
     z-index: 0;
 }
 .album .container .item .video-container .video{
