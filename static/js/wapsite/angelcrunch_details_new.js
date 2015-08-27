@@ -210,16 +210,22 @@
     };
     data_model.get(config.api.detail,function(data){
         var d = data || {},
-            encode_current_url=encodeURIComponent(location.href.split('?')[0]);
+            encode_current_url=encodeURIComponent(location.href.split('?')[0]),
+            pics = d.pics || [];
         //登陆注册回调链接
         d.link_login = "http://auth.angelcrunch.com?source="+encode_current_url;
         d.link_apply = "http://m.angelcrunch.com/angel_vip_simple?source="+encode_current_url;
         d.link_apply_long="http://0.angelcrunch.com/angel/new?source="+encode_current_url;
-        framework.detail().data = self.render(d);
-        if(!!d.pics){
-            album_controll.hook(d.pics);
+        if(d.com_video){
+            pics.unshift({
+                small:'http://dn-acac.qbox.me/mobile/detailscom-video-place-holder.png',
+                big:'http://dn-acac.qbox.me/mobile/detailscom-video-place-holder.png',
+                vid: d.com_video.id
+            })
         }
-
+        d.pics =pics;
+        album_controll.hook(pics);
+        framework.detail().data = self.render(d);
     },config.status.get_com_id());
 }).call(define('details_controll'));
 
@@ -365,13 +371,15 @@
 
     this.list_small = [];
     this.list_big = [];
+    this.list_vid = [];
     this.hook = function(data){
-        var big = [],small=[];
+        var big = [],small=[],vid = [];
         for(var i in data){
             big.push(data[i].big);
-            small.push(data[i].small)
+            small.push(data[i].small);
+            !!data[i].vid  && vid.push(data[i].vid);
         }
-        return self.list_big=big,self.list_small=small,self.init();
+        return self.list_big=big,self.list_small=small,self.list_vid=vid,self.init();
     };
     this.html = function(context){
         return "<div class='item'><img src='"+context+"'></div>";
@@ -379,11 +387,21 @@
     this.html_small = function(offset){
         return self.html(self.list_small[offset]);
     };
+    this.html_video=function(offset){
+        return "<div class='item'><div class='video-container'><img src='"+self.list_small[offset]+"'><div id='youku' video='true' class='video'></div></div></div>";
+    };
     this.first = function(){
-        var ret='', l=self.list_big.length;
+        var ret='', l=self.list_big.length,has_video=false;
         for(var i = 0;i<l;i++){
-            ret+=self.html_small(i);
+            if(!!self.list_vid[i]){
+                ret+=self.html_video(i);
+                has_video = self.list_vid[i];
+            }
+            else{
+                ret+=self.html_small(i);
+            }
         }
+        has_video && video_controll.init(has_video);
         $item_container.append(ret);
         $items=$item_container.children('div');
     };
@@ -489,16 +507,26 @@
                 var  e = event || window.event,
                     eX = e.changedTouches[0].pageX - startX,
                     eY = e.changedTouches[0].pageY - startY,
-                    eT = new Date().getTime();
+                    eT = new Date().getTime(),
+                    is_video=false;
+                    target = e.target || e.srcElement,
+                    dom_tree = [target,target.parentNode,target.parentNode.parentNode,target.parentNode.parentNode.parentNode];
                 if(eT-startT<100 && Math.abs(eX)<5){
-                    self.close();
+                    for(var i in dom_tree){
+                        if(dom_tree[i].hasAttribute && dom_tree[i].hasAttribute('video')){
+                            is_video=true;
+                            video_controll.play();
+                            break;
+                        }
+                    }
+                    !is_video && self.close();
                 }
                 if(eT-startT>100 && Math.abs(eX)>10){
                     self.end(eX);
                 }
                 self.cancel();
             };
-        if(el.nodeType == 1){
+        if(el.nodeType && el.nodeType == 1){
             el.addEventListener('touchstart',start, false);
             el.addEventListener('touchmove',move, false);
             el.addEventListener('touchend',end, false);
@@ -520,26 +548,15 @@
                     mY = e.changedTouches[0].pageY - startY,
                     eT= new Date().getTime(),
                     target = e.target || e.srcElement,
-                    dom_tree = [target.parentNode,target.parentNode.parentNode],id = null,vid='';
+                    dom_tree = [target.parentNode,target.parentNode.parentNode],id = null;
                 for(var i in dom_tree){
                     if(dom_tree[i].hasAttribute('pic-index')){
                         id = dom_tree[i].getAttribute('pic-index');
                         break;
                     }
-                    if(dom_tree[i].hasAttribute('vid')){
-                        vid = dom_tree[i].getAttribute('vid');
-                        break;
-                    }
                 }
-                if(eT-startT<100 && Math.abs(mX)<5){
-
-                    if(id!=null){
-                        fun(id);
-                    }
-                    if(vid!=''){
-                        video_controll.play(vid);
-                    }
-
+                if(eT-startT<100 && Math.abs(mX)<5 && id!=null){
+                    fun(id);
                 }
             };
         if(el.nodeType == 1){
@@ -547,27 +564,56 @@
             el.addEventListener('touchend',end, false);
         }
     };
-    self.touchtap(document.getElementById('pic-list'),function(index){self.show(index);});
+    self.touchtap(document.getElementById('pic-list'),function(index){
+        self.show(index);
+        video_controll.player();
+    });
     self.touch(document.getElementById('album'));
     window.onresize=function(){width=$(window).width();}
 }).call(define('album_controll'));
 
+//视频播放
 (function(){
     var self =this,
-        $player= $('#youku'),
         player,
-        h = $(window).width()/16* 9,
-        sta=false;
-    this.play=function(vid){
-        player = new YKU.Player('youku-container',{
-            styleid: '1',
-            client_id: '66655b02396537f4',
-            vid: vid
-        });
-        $player.children('div').css('height',h+'px');
-        $player.fadeIn(200);
+        vid = '';
+
+    this.init = function(id){
+        vid = id;
+        self.loader('http://player.youku.com/jsapi',function(){});
     };
-    $player.touchtap(function(){
-        $player.fadeOut(200);
-    })
+
+    this.loader = function (url,call){
+        var d = document,
+            head = d.getElementsByTagName('head'),
+            h = head[0]|| d.body,
+            s = d.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = url;
+        h.appendChild(s);
+        h.addEventListener('load', call);
+    };
+
+    this.player=function(){
+        if(vid!=''){
+            player = new YKU.Player('youku',{
+                styleid: '1',
+                client_id: '66655b02396537f4',
+                autoplay: true,
+                vid: vid
+            });
+        }
+    };
+
+    this.play = function(){
+        try{
+            player.playVideo();
+            document.getElementsByTagName('video')[0].play();
+        }
+        catch(e){
+
+        }
+
+    }
 }).call(define('video_controll'));

@@ -18,7 +18,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/ico" />
     <link rel="Bookmark" href="/favicon.ico" />
     <link href="/static/css/wapsite/base-css.css" rel="stylesheet" />
-    <link href="/static/css/wapsite/investor/details_new.css" rel="stylesheet" />
+    <link href="/static/css/wapsite/investor/details_new.css?" rel="stylesheet" />
     <script>
         var _hmt = _hmt || [];
         (function() {
@@ -77,8 +77,7 @@
     </div>
     <div id="pic-list" class="slider-container" ms-controller="details" ms-if="array_empty(data.pics)">
         <ul>
-            <li ms-if="!!data.com_video" ms-attr-vid="data.com_video.id"><img src="http://dn-acac.qbox.me/mobile/detailscom-video-place-holder.png"/></li>
-            <li ms-repeat="data.pics" ms-attr-pic-index="$index"><img ms-src="el.small"/></li>
+            <li ms-repeat="data.pics" ms-attr-pic-index="$index"><img ms-attr-vid="el.vid||false" ms-src="el.small"/></li>
         </ul>
     </div>
 
@@ -258,7 +257,7 @@
 <div id="album" class="album">
     <div class="mg">
         <div class="bar">
-            <p id="album-num" class="num"><span>1</span>/<span>12</span></p>
+            <p id="album-num" class="num"><span>0</span>/<span>0</span></p>
             <p id="album-close" class="close">×</p>
         </div>
     </div>
@@ -267,15 +266,11 @@
         </div>
     </div>
 </div>
-<div id="youku" class="video">
-    <div id="youku-container" class="mg"></div>
-</div>
 </body>
 <script src="https://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
 <script src="/static/js/lib/jquery-cookie.js"></script>
 <script src="https://dn-acac.qbox.me/avalon.mobile.min.js"></script>
 <script src="/static/js/wapsite/angelcrunch_base.js"></script>
-<script src="/static/js/wapsite/angelcrunch_details_new.js?1"></script>
+<script src="/static/js/wapsite/angelcrunch_details_new.js?2"></script>
 <script src="http://dn-acac.qbox.me/qrcode.js" async="async"></script>
-<script src="http://player.youku.com/jsapi" async="async"></script>
 </html>

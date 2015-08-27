@@ -966,32 +966,29 @@
     width: 100%;
     white-space: nowrap;
 }
-.album .container img{
+.album .container .item img{
     width: 100%;
     vertical-align: middle;
     -webkit-transform:scale(1,1);
-    -webkit-transition: transform 0.2s linear;
+    -webkit-transition: -webkit-transform 0.3s linear;
+}
+.album .container .item .video-container{
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+.album .container .item .video-container img{
+    position: relative;
+    z-index: 0;
+}
+.album .container .item .video-container .video{
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
 }
 .img-scale{
     -webkit-transform:scale(0.95,0.95) !important;
-}
-
-/*播放器*/
-.video{
-    position: fixed;
-    display: none;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    background: rgba(0,0,0,0.9);
-}
-.video .mg{
-    width: 100%;
-    margin-top: 50%;
-}
-@media all and (orientation: landscape) {
-    .video .mg{
-        margin-top: 0;
-    }
 }
