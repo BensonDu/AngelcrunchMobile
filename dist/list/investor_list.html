@@ -32,6 +32,7 @@
 </head>
 <body>
 <div class="bk_new bk"></div>
+<div class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
 <div class="details">
     <div id="header" class="newhead">
         <div class="logo touch-href" data-href="http://angelcrunch.com"></div>
@@ -75,7 +76,7 @@
             </ul>
         </div>
     </div>
-    <div class="list-container">
+    <div id="list-container" class="list-container">
         <div class="loading-container">
             <div class="loading"></div>
         </div>
@@ -86,33 +87,29 @@
                 <p>很抱歉，未找到与该筛选条件相匹配的结果</p>
             </div>
         </div>
-        <div class="section-list" ms-controller="list">
-            <a ms-if="data" ms-repeat="data" ms-href="el.url">
-                <section>
-                    <div class="logo"><img src="" ms-src="el.avatar||''" /></div>
+        <div class="investor-list" ms-controller="list">
+            <section ms-repeat="data">
+                <a ms-href="el.link">
                     <div class="summary">
-                        <h3 ms-text="el.name"></h3>
-                        <p ms-text="el.firmname + el.title
-                                    ? '[' + el.firmname + el.title + ']'
-                                    : ''"></p>
-                        <p class="sliver" ms-text="el.summary"></p>
-                        <ul class="item-state">
-                            <li ms-attr-class="el.isfollow==1?'active':''">
-                                <i class="vector-icons liked"></i>
-                                <span ms-text="el.followercount"></span>
-                            </li>
-                            <li>
-                                <i class="vector-icons chat"></i>
-                                <span ms-text="el.meetingtimes"></span>
-                            </li>
-                            <li>
-                                <i class="vector-icons eye"></i>
-                                <span ms-text="el.view_count"></span>
-                            </li>
-                        </ul>
+                        <div class="avatar left">
+                            <img ms-src="el.base_info.avatar">
+                        </div>
+                        <div class="text right">
+                            <p class="basic"><span class="name" ms-text="el.base_info.name"></span><span class="title" ms-text="el.base_info.firmname+''+el.base_info.title"></span></p>
+                            <p class="desc" ms-html="el.base_info.summary"></p>
+                            <p class="figure"><em></em>&nbsp;<span ms-text="el.base_info.region"></span><span class="after" ms-text="'查看项目：'+el.interaction_info.view_com_count"></span><span class="after" ms-text="'粉丝：'+el.interaction_info.view_com_count"></span></p>
+                        </div>
                     </div>
-                </section>
-            </a>
+                </a>
+                <div ms-attr-class="el.action_class">
+                    <a ms-attr-class="el.interaction_info.followclass" action-type="follow" ms-attr-action-id="el.base_info.id"><span><em></em>&nbsp;关注</span></a>
+                    <a class="invest" ms-if="el.action_invest_show" action-type="invest" ms-attr-action-id="el.base_info.id"><span><em></em>&nbsp;&nbsp;已投项目</span></a>
+                    <a class="submit" action-type="submit" ms-attr-action-id="el.base_info.id"><span><em></em>&nbsp;&nbsp;提交项目</span></a>
+                </div>
+                <div ms-attr-id="'history'+el.base_info.id" class="history">
+                    <div class="list-container"></div>
+                </div>
+            </section>
         </div>
     </div>
     <div class="position-occupy"></div>

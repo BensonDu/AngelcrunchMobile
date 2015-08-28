@@ -3,8 +3,15 @@
         search_record:'investor_search_history'
     };
     this.api = {
-        list:base_mobile+'v3/user',
-        search:base_mobile+'v3/user_search'
+        list:base_mobile+'v4/users',
+        search:base_mobile+'v4/user_search',
+        follow:base_mobile+'v4/follow',
+        unfollow:base_mobile+'v4/unfollow',
+        my_com:base_mobile+'v4/startup/my'
+    };
+    this.url = {
+        reg:'http://auth.angelcrunch.com/reg',
+        create:'http://angelcrunch.com/create'
     };
     log.type = 'investor_list';
 }).call(define('config'));
@@ -305,14 +312,26 @@
 
     //数据格式化
     this.list_render = function(data){
-        var render = data, l = render.length;
-        while(l){
-            if(render[(l-1)].hasOwnProperty('id')){
-                render[(l-1)].url = window.base_protocol+render[(l-1)].id+'.'+window.base_host;
+        var render = data, len = render.length,summary = '',invest=0;
+        for(var l =0; l < len;l++){
+            render[l].link = window.base_protocol+render[l].base_info.id+'.'+window.base_host;
+            if(!!render[l].base_info.summary){
+                summary = render[l].base_info.summary;
+                render[l].base_info.summary = summary.substr(0,60)+(summary.length>60?'...':'');
             }
-            l--;
+            render[l].interaction_info.followclass=render[l].interaction_info.isfollow?'follow active':'follow';
+            view_list_action.list_avatar[render[l].base_info.id] = render[l].base_info.avatar;
+            if(render[l].invest_list.length>0){
+                render[l].action_class='action';
+                render[l].action_invest_show=true;
+                view_list_action.list_invest[render[l].base_info.id] = render[l].invest_list;
+            }
+            else{
+                render[l].action_class='action double';
+                render[l].action_invest_show=false;
+            }
         }
-        return data;
+        return render;
     };
 
     //列表 数据获取回调
@@ -546,3 +565,122 @@
 
     });
 }).call(define('view_filter'));
+//列表操作
+(function(){
+    var self = this,
+        list_container = document.getElementById('list-container');
+    this.list_invest = {};
+    this.list_avatar = {};
+    this.remote_request = function(api,call,param){
+        var p = $.extend(param,{access_token:account_info.token,uid:account_info.id});
+        base_remote_data.ajaxjsonp(api,call,p,function(){view_dom.notification.show('网络错误')});
+    };
+    this.follow_func = function(is_follow,call,id,error){
+        var api = is_follow?config.api.follow:config.api.unfollow;
+        self.remote_request(api,call,{id:id});
+    };
+    this.follow = function(el,id){
+        var $el = $(el);
+        if($el.hasClass('active')){
+            self.follow_func(false,function(data){
+                if(data.hasOwnProperty('success') && data.success ){
+                    $el.removeClass('active');
+                }
+                else{
+                    view_dom.notification.show(data.message||'操作失败');
+                }
+            },id)
+        }
+        else{
+            self.follow_func(true,function(data){
+                if(data.hasOwnProperty('success') && data.success ){
+                    $el.addClass('active');
+                }
+                else{
+                    view_dom.notification.show(data.message||'操作失败');
+                }
+            },id)
+        }
+    };
+    self.com_list = function(){
+
+    };
+    this.submit = function(el,id){
+        //是否登录注册
+        if(!account_info.is_login){
+            var linkparam={
+                source:base_protocol+id+'.'+window.base_host,
+                title:'谢谢你通过天使汇向我提交项目。',
+                message:'请先注册或登录天使汇账户，以便我后续和你联系具体的投融资事宜。',
+                portrait:self.list_avatar[id],
+                id:id
+            };
+            location.href= config.url.reg+base_create_param(linkparam);
+        }
+        else{
+            self.remote_request(config.api.my_com,function(data){
+                if(data.hasOwnProperty('total') && data.total==0){
+                    location.href= config.url.create+base_create_param({source:base_protocol+id+'.'+window.base_host});
+                }
+                if(data.hasOwnProperty('list') && data.list.length>0){
+                    location.href = base_protocol+id+'.'+window.base_host;
+                }
+            },{type:2});
+        }
+    };
+    this.invest = function(el,id){
+        var $el = $(el),
+            $history = $('#history'+id),
+            list = self.list_invest[id],
+            len = list.length,
+            html = '';
+        if($history.height()>0){
+            $el.removeClass('active');
+            $history.animate({height:0},200,function(){$(this).hide();});
+        }
+        else{
+            for(var l=0;l<len;l++){
+                html+="<a href='"+window.base_protocol+list[l].id+'.'+window.base_host+"'><img src='"+list[l].logo+"'></a>";
+            }
+            $el.addClass('active');
+            $history.show().animate({height:60},200).children('div').empty().append(html);
+        }
+
+    };
+    this.touchtap = function(el){
+        var startX,
+            startY,
+            startT,
+            start = function(event){
+                var  e = event || window.event;
+                startT = new Date().getTime();
+                startX = e.touches[0].pageX;
+                startY = e.touches[0].pageY;
+            },
+            end = function(event){
+                var  e = event || window.event,
+                    mX = e.changedTouches[0].pageX - startX,
+                    mY = e.changedTouches[0].pageY - startY,
+                    eT= new Date().getTime(),
+                    target = e.target || e.srcElement,
+                    dom_tree = [target.parentNode,target.parentNode.parentNode],
+                    type = '', id= 0,dom;
+                for(var i in dom_tree){
+                    if(dom_tree[i].hasAttribute('action-type') && dom_tree[i].hasAttribute('action-id')){
+                        type = dom_tree[i].getAttribute('action-type');
+                        id = dom_tree[i].getAttribute('action-id');
+                        dom = dom_tree[i];
+                        break;
+                    }
+                }
+                if(eT-startT<150 && Math.abs(mX)<5 && id!=0){
+                    return (type=='follow')&&self.follow(dom,id)||(type=='invest')&&self.invest(dom,id)||(type=='submit')&&self.submit(dom,id);
+                }
+            };
+        if(el.nodeType && el.nodeType == 1){
+            el.addEventListener('touchstart',start, false);
+            el.addEventListener('touchend',end, false);
+        }
+    };
+    self.touchtap(list_container);
+}).call(define('view_list_action'));
