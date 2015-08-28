@@ -258,7 +258,12 @@
         $share=$('#share-wechat'),
         $box=$('#PA-layer'),
         $close = $box.find('.close'),
-        $wechatin = $('.wechat-in');
+        $wechatin = $('#wechat-in');
+    this.wechat_in_share = function(){
+        var ios='http://dn-acac.qbox.me/mobile/detailswechat-in-ios.png',
+            android='http://dn-acac.qbox.me/mobile/detailswechat-in-android.png';
+        return base_status.isios?$wechatin.fadeIn().children('img').attr('src',ios):$wechatin.fadeIn().children('img').attr('src',android);
+    };
     this.generator = function(){
         var has_generate = false,
             qr_container=$box.find('.image-container'),
@@ -282,7 +287,7 @@
             }
         }:
             function(){
-                $wechatin.fadeIn();
+                self.wechat_in_share();
         };
 
     };
@@ -445,7 +450,7 @@
         $items.eq(0).css('margin-left',(pub_left+mX)+'px');
     };
     this.end = function(eX){
-        var r = eX, a = Math.abs(r), w = width, rw = width/4;
+        var r = eX, a = Math.abs(r), w = width, rw = width/5;
         if(r>0){
             if(a>width/2 && pub_index>0){
                 pub_left+=w;
