@@ -368,14 +368,17 @@
 }).call(define('view_after'));
 
 (function(){
-    var $bk = $('.bk'),player,$p =$('#youku'),$w = $(window),sta=false;
-    window.onload = function(){
-        player = new YKU.Player('youku',{
-            styleid: '1',
-            client_id: '66655b02396537f4',
-            vid: 'XMTMwODQ1NzE2NA=='
-        });
-    };
+    var self=this,$bk = $('.bk'),player,$p =$('#youku'),$w = $(window),sta=false;
+    $(document).ready(function(){
+        self.loader('http://player.youku.com/jsapi',function(){});
+        setTimeout(function(){
+            player = new YKU.Player('youku',{
+                styleid: '1',
+                client_id: '66655b02396537f4',
+                vid: 'XMTMwODQ1NzE2NA=='
+            });
+        },1000);
+    });
     $('#play-btn').touchtap(function(){
         $('.player').show();
         $('.bk').show(0,function(){$(this).css('opacity',0.7)});
@@ -389,6 +392,17 @@
         sta=false;
         setTimeout(function(){$bk.hide();},400);
     });
+    this.loader = function (url,call){
+        var d = document,
+            head = d.getElementsByTagName('head'),
+            h = head[0]|| d.body,
+            s = d.createElement('script');
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = url;
+        h.appendChild(s);
+        h.addEventListener('load', call);
+    };
 }).call(define('view_player'));
 
 
