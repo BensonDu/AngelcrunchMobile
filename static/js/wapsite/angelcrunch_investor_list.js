@@ -633,14 +633,16 @@
             $history = $('#history'+id),
             list = self.list_invest[id],
             len = list.length,
-            html = '';
+            html = '',
+            img='';
         if($history.height()>0){
             $el.removeClass('active');
             $history.animate({height:0},200,function(){$(this).hide();});
         }
         else{
             for(var l=0;l<len;l++){
-                html+="<a href='"+window.base_protocol+list[l].id+'.'+window.base_host+"'><img src='"+list[l].logo+"'></a>";
+                img = list[l].logo.replace(/320x$/,'150x/format/jpeg');
+                html+="<a href='"+window.base_protocol+list[l].id+'.'+window.base_host+"'><img src='"+img+"'></a>";
             }
             $el.addClass('active');
             $history.show().animate({height:60},200).children('div').empty().append(html);

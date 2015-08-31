@@ -268,6 +268,6 @@
     width: 44px;
     border-radius: 3px;
     margin: 0 4px;
-    background: url("http://dn-acac.qbox.me/mobile/listloading.gif") no-repeat;
-    background-size: 44px 44px;
+    background: url("http://dn-acac.qbox.me/mobile/listloading.gif") no-repeat center;
+    background-size: 100px 100px;
 }
