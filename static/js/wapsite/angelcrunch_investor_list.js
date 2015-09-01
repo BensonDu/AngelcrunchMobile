@@ -321,7 +321,7 @@
             }
             render[l].interaction_info.followclass=render[l].interaction_info.isfollow?'follow active':'follow';
             view_list_action.list_avatar[render[l].base_info.id] = render[l].base_info.avatar;
-            if(render[l].invest_list.length>0){
+            if(!!render[l].invest_list && render[l].invest_list.length>0){
                 render[l].action_class='action';
                 render[l].action_invest_show=true;
                 view_list_action.list_invest[render[l].base_info.id] = render[l].invest_list;
