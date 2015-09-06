@@ -98,16 +98,14 @@
         };
     };
 
-    this.avalon_model.entrelist=function() {
-        return avalon.define("entre-list", function (vm) {
+    this.avalon_model.entrelist=avalon.define("entre-list", function (vm) {
             vm.data = {
                 name: '',
                 list: '',
                 select: function () {
                 }
             };
-        })
-    };
+    });
     this.avalon_model.followlist=avalon.define("follow-list", function (vm) {
             vm.data = {};
     });
@@ -434,7 +432,7 @@
                $confirm.addClass('active');
             }
         };
-        avalon_model.entrelist().data=data;
+        avalon_model.entrelist.data=data;
         //状态重置
         $confirm.removeClass('active');
         select_id=0;

@@ -175,14 +175,14 @@
 </div>
 <!--提交项目列表-->
 <div id="submit-com-list" class="submit-com-list"  ms-controller="entre-list">
-    <h4 class="title">向“{{data.name}}”提交项目</h4>
+    <h4 class="title" ms-text="'向“'+data.name+'”提交项目'"></h4>
     <div class="list-container">
         <ul>
             <li ms-if="data.list" ms-repeat="data.list" ms-data-id="el.id" ms-on-tap="data.select">
                 <img ms-src="el.logo">
                 <div>
-                    <h4>{{el.name}}</h4>
-                    <p>预融资额：{{el.amount}}</p>
+                    <h4 ms-text="el.name"></h4>
+                    <p ms-text="'预融资额：'+el.amount"></p>
                 </div>
                 <em></em>
             </li>
@@ -209,5 +209,5 @@
 <script src="/static/js/wapsite/angelcrunch_base.js?"></script>
 <script src="http://dn-acac.qbox.me/qrcode.js"></script>
 <script src="/static/js/lib/avalon.mobile.min.js"></script>
-<script src="/static/js/wapsite/angelcrunch_investor_details.js?"></script>
+<script src="/static/js/wapsite/angelcrunch_investor_details.js?v2"></script>
 </html>
