@@ -363,13 +363,13 @@
             var x, y,s;
             if(base_status.support_touch){
                 $(this).bind('touchstart',function(e){
-                    x= e.originalEvent.pageX;
-                    y= e.originalEvent.pageY;
+                    x= e.originalEvent.touches[0].pageX;
+                    y= e.originalEvent.touches[0].pageY;
                     s = new Date().getTime();
                 });
                 $(this).bind('touchend',function(e){
-                    var event=e.originalEvent,move=Math.pow(event.pageX-x,2)+Math.pow(event.pageY-y,2),o = new Date().getTime();
-                    if(o-s<300 ){
+                    var event=e.originalEvent.changedTouches[0],move=Math.pow(event.pageX-x,2)+Math.pow(event.pageY-y,2),o = new Date().getTime();
+                    if(o-s<150 && move<81){
                         fn.call($(this));
                     }
                 });

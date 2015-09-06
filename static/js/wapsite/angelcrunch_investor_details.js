@@ -1,11 +1,14 @@
 (function(){
 
     this.page_config={
-        api_investor_details:base_mobile+'v2/user/m_detail',
+        api_investor_details:base_mobile+'v4/user',
         api_follow:base_mobile+'v3/follow',
         api_unfollow:base_mobile+'v3/unfollow',
+        api_follower:base_mobile+'v3/user/follower',
+        api_following:base_mobile+'v3/user/focused',
         api_com_list:base_mobile+'v2/startup',
         api_com_submit:base_mobile+'v2/user/submit_com',
+        api_ops_info:base_mobile+'v4/user/ops_info',
         default_param:{
             uid:account_info.id,
             access_token:account_info.token
@@ -51,31 +54,23 @@
             html += "<p>" + txt_list[_i] + "</p>";
         return html;
     };
+    this.get_url = function(id){
+        return base_protocol+id+'.'+base_host;
+    }
 }}).call(this);
 //数据获取
 (function(){
-    //异步，同时的话，公共变量冲突
-    this.page_remote_data_param={};
-    this.page_remote_data_url='';
-    this.page_remote_data_fun=function(){};
-    this.page_remote_data_render=function(data){return data};
-    this.page_remote_data=function(){
-        base_remote_data.ajaxjsonp(page_remote_data_url,function(data){
-            page_remote_data_fun(page_remote_data_render(data));
-        },$.extend(true,page_config.default_param,page_remote_data_param));
-    };
-    //同步
-    this.page_remote_data_syn=function(url,call,data){
+    this.page_remote_data=function(url,call,data){
         base_remote_data.ajaxjsonp(url,function(data){
             call(data);
-        },$.extend(true,page_config.default_param,data),function(){view_notification.show('网络错误');});
+        },$.extend(true,{},page_config.default_param,{id:page_status.user_id,user_id:page_status.user_id},data),function(){view_notification.show('网络错误');});
     };
 }).call(this);
 //获取当前页面ID
 (function(){
     this.get_host_id=function(call){
         if(page_status.user_id == ''){
-            page_remote_data_syn(api.host_id,function(data){
+            page_remote_data(api.host_id,function(data){
                 if(data.hasOwnProperty('ret')){
                     page_status.user_id=data.ret;
                     call(data.ret);
@@ -90,19 +85,27 @@
 //框架绑定
 (function(){
     this.avalon_model={};
-    this.avalon_attach_details=function(data){
-        avalon_model.details=avalon.define("investor-details", function (vm) {
-            vm.data = data;
-        });
+    this.avalon_attach_details= function() {
+        return function (data) {
+            avalon_model.details = avalon.define("investor-details", function (vm) {
+                vm.data = data;
+            });
+        };
     };
 
-    avalon_model.entrelist=avalon.define("entre-list", function (vm) {
-        vm.data = {
-            name:'',
-            list:'',
-            select:function(){}
-        };
-    })
+    this.avalon_model.entrelist=function() {
+        return avalon.define("entre-list", function (vm) {
+            vm.data = {
+                name: '',
+                list: '',
+                select: function () {
+                }
+            };
+        })
+    };
+    this.avalon_model.followlist=avalon.define("follow-list", function (vm) {
+            vm.data = {};
+    });
 }).call(this);
 //消息通知
 (function(){
@@ -135,27 +138,55 @@
 }).call(this);
 //投资人信息获取
 (function(){
-    page_remote_data_syn(page_config.api_investor_details,function(data){
+    var self = this;
+    this.render = function(data){
+        var ret = data || {},edu=[],career=[];
+        if(ret.edu){
+            for(var i in ret.edu){
+                edu = [];
+                !!ret.edu[i].school && edu.push(ret.edu[i].school);
+                !!ret.edu[i].degress && edu.push(ret.edu[i].degress);
+                !!ret.edu[i].major && edu.push(ret.edu[i].major);
+                ret.edu[i].title = edu.join('·');
+            }
+
+        }
+        if(ret.career && false){
+            for(var m in ret.career){
+                career = [];
+                !!ret.career[m].company && career.push(ret.career[m].company);
+                !!ret.career[m].title && career.push(ret.career[m].title);
+                ret.career[m].during = ret.career[m].start+'~'+(!!ret.career[m].end?ret.career[m].end:'至今');
+                ret.career[m].title = career.join('·');
+            }
+        }
+        ret.avatar=ret.avatar.replace(/\d{0,3}x$/,'800x');
+        return ret;
+    };
+    page_remote_data(page_config.api_investor_details,function(data){
         if(data.hasOwnProperty('user')){
-            data.user.avatar=data.user.avatar.replace(/\d{0,3}x$/,'800x');
-            avalon_attach_details(data.user);
+            avalon_attach_details()(self.render(data.user));
             page_status.name=data.user.name;
             page_status.user_id=data.user.id;
             page_status.portrait=data.user.avatar;
+            data.user.follower && (follow_view.total_follower=data.user.follower.follower_count);
+            data.user.following && (follow_view.total_following=data.user.following.following_count);
             //微信卡片制作
             wechat_card.img=page_status.portrait.replace(/\d{1,3}x$/,'310x');
             wechat_card.title='向投资人'+page_status.name+'提交商业计划书';
             wechat_card.render();
             //异步获取数据后填充投资人信息
             view_personal_info();
-            //关注状态
-            follow_hook(data.user.isfollow);
             //判断是否为个人主页
             view_self_hook(data.user.id);
         }
     },page_status.get_user_id());
-
-}).call((this));
+    get_host_id(function(){
+        page_remote_data(page_config.api_ops_info,function(data){
+           data.user && follow_hook(data.user.is_follow==1);
+        });
+    });
+}).call({});
 
 //个人主页
 (function(){
@@ -222,7 +253,7 @@
     };
     this.follow_model={
         follow:function(){
-            page_remote_data_syn(page_config.api_follow,function(data){
+            page_remote_data(page_config.api_follow,function(data){
                 if(data.hasOwnProperty('success')){
                     if(data.success){
                         follow_view.follow();
@@ -234,7 +265,7 @@
             });
         },
         unfollow:function(){
-            page_remote_data_syn(page_config.api_unfollow,function(data){
+            page_remote_data(page_config.api_unfollow,function(data){
                 if(data.success){
                     follow_view.unfollow();
                 }
@@ -292,16 +323,16 @@
 }).call(this);
 //提交项目
 (function(){
-
+    var self = this;
     this.dom_submit_btn=$('#submit-com');
     this.my_com_list=function(call){
-        page_remote_data_syn(page_config.api_com_list,function(data){
+        page_remote_data(page_config.api_com_list,function(data){
             call(data);
         },{type:3});
     };
     this.submit_my_commit=function(id,success_function){
         get_host_id(function(target_id){
-            page_remote_data_syn(page_config.api_com_submit,function(data){
+            page_remote_data(page_config.api_com_submit,function(data){
                 if(data.hasOwnProperty('success')){
                     if(data.success){
                         if(typeof success_function != 'undefined'){
@@ -324,7 +355,7 @@
         });
 
     };
-    dom_submit_btn.touchtap(function(){
+    this.com_list_display = function(){
         //判断对应逻辑
         if(!account_info.is_login){
             //跳转链接传参
@@ -351,6 +382,9 @@
                 }
             });
         }
+    };
+    dom_submit_btn.touchtap(function(){
+       self.com_list_display();
     });
 }).call(this);
 //当前用户项目列表
@@ -395,7 +429,7 @@
                $confirm.addClass('active');
             }
         };
-        avalon_model.entrelist.data=data;
+        avalon_model.entrelist().data=data;
         //状态重置
         $confirm.removeClass('active');
         select_id=0;
@@ -420,3 +454,134 @@
         }
     }
 }).call(this);
+//默认提交项目
+(function(){
+    if($_GET.hasOwnProperty('default_submit')){
+        com_list_display();
+    }
+}).call(this);
+
+(function(){
+    var self = this,
+        h = $(window).height(),
+        $details = $('.details'),
+        $following = $('#following'),
+        $follower = $('#follower'),
+        $slide_page = $('#slide-page'),
+        $slide_back_btn = $('#slide-back'),
+        $slide_title = $('#slide-title'),
+        $slide_list = $('#slide-list'),
+        $slide_loading =$('#slide-loading'),
+        following_index = 0,
+        follower_index = 0,
+        following_list = [],
+        follower_list = [],
+        following_default_list=[],
+        follower_default_list=[],
+        loadlock = false,
+        is_following = true;
+    this.total_follower  = 0;
+    this.total_following = 0;
+    this.slide_left = function(text){
+        $slide_title.html(text);
+        $details.css({'margin-left':-100+'%',height:h}).addClass('slide-left');
+        $slide_page.css({height:h});
+    };
+    this.render = function(data){
+        return $slide_loading.hide(),avalon_model.followlist.data = data;
+    };
+    this.slide_right = function(){
+        $details.css({'margin-left':0+'%',height:'auto'}).removeClass('slide-left');
+    };
+    this.slide_height_syn = function(){
+        var nh = $(window).height();
+        if(Math.abs(nh-h)>5){
+            h = nh;
+            $slide_page.css({height:h});
+            $slide_list.height(h-46);
+        }
+    };
+    this.filter_default_avatar = function(list,is_following){
+        var l = list.length,ret=[];
+        if(!!l){
+            for(var i = 0 ; i < l; i++){
+                if(!/default_10000/.test(list[i].avatar)){
+                    ret.push(list[i]);
+                }
+                else{
+                    is_following?following_default_list.push(list[i]):follower_default_list.push(list[i]);
+                }
+            }
+        }
+        return ret;
+    };
+    this.get_following_list = function(next){
+        is_following = true;
+        if(following_list.length==0 || (next && Math.ceil(self.total_following/10)>following_index+1)){
+            following_index++;
+            $slide_loading.show();
+            page_remote_data(page_config.api_following,function(data){
+                if(data.list){
+                    following_list = following_list.concat(data.list);
+                    self.render(following_list);
+                    loadlock = false;
+                }
+            },{pageindex:following_index,pagesize:10});
+        }
+        else{
+            self.render(following_list);
+        }
+    };
+    this.get_follower_list = function(next){
+        is_following = false;
+        if(follower_list.length==0 || (next && Math.ceil(self.total_follower/10)>follower_index+1)){
+            follower_index++;
+            $slide_loading.show();
+            page_remote_data(page_config.api_follower,function(data){
+                if(data.list){
+                    follower_list = follower_list.concat(data.list);
+                    self.render(follower_list);
+                    loadlock = false;
+                }
+            },{pageindex:follower_index,pagesize:10});
+        }
+        else{
+            self.render(follower_list);
+        }
+    };
+    this.touch = function(el){
+        var move = function(event){
+                if($slide_list.scrollTop()+$slide_list.height()+10>$slide_list[0].scrollHeight && !loadlock){
+                    loadlock = true;
+                    if(is_following){
+                        self.get_following_list(true);
+                    }
+                    else{
+                        self.get_follower_list(true);
+                    }
+                }
+            self.slide_height_syn();
+            };
+        if(el.nodeType && el.nodeType == 1){
+            el.addEventListener('touchmove',move, false);
+        }
+    };
+    self.touch(document.getElementById('slide-list'));
+    $following.touchtap(function(){
+        if(self.total_following>0){
+            self.slide_left('关注');
+            $slide_list.height(h-46);
+            self.get_following_list();
+        }
+    });
+    $follower.touchtap(function(){
+        if(self.total_follower>0){
+            self.slide_left('粉丝');
+            $slide_list.height(h-46);
+            self.get_follower_list();
+        }
+    });
+    $slide_back_btn.touchtap(function(){
+        self.slide_right();
+    });
+}).call(follow_view);

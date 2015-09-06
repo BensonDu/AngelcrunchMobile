@@ -623,7 +623,7 @@
                     location.href= config.url.create+base_create_param({source:base_protocol+id+'.'+window.base_host});
                 }
                 if(data.hasOwnProperty('list') && data.list.length>0){
-                    location.href = base_protocol+id+'.'+window.base_host;
+                    location.href = base_protocol+id+'.'+window.base_host+'?default_submit';
                 }
             },{type:2});
         }

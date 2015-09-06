@@ -31,94 +31,129 @@
 </head>
 <body>
 <div class="bk"></div>
-<div class="details" ms-controller="investor-details">
-    <div id="login-failed" class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
-    <div id="header" class="newhead">
-        <div class="logo touch-href" data-href="http://angelcrunch.com"></div>
-        <div class="options">
-            <span></span>
-            <ul class="hidden-menu">
-                <li class="touch-href" data-href="http://angelcrunch.com/startup_financing">创业项目</li>
-                <li class="touch-href" data-href="http://angelcrunch.com/angel">投资人</li>
-            </ul>
+<div class="page-container">
+    <div class="details" ms-controller="investor-details">
+        <div id="login-failed" class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
+        <div id="header" class="newhead">
+            <div class="logo touch-href" data-href="http://angelcrunch.com"></div>
+            <div class="options">
+                <span></span>
+                <ul class="hidden-menu">
+                    <li class="touch-href" data-href="http://angelcrunch.com/startup_financing">创业项目</li>
+                    <li class="touch-href" data-href="http://angelcrunch.com/angel">投资人</li>
+                </ul>
+            </div>
+            <div class="account">
+                <span></span>
+                <ul class="hidden-menu"></ul>
+            </div>
         </div>
-        <div class="account">
-            <span></span>
-            <ul class="hidden-menu"></ul>
+        <div class="personal-info">
+            <img ms-src="data.avatar" width="100%" height="auto">
         </div>
-    </div>
-    <div class="personal-info">
-        <img ms-src="data.avatar" width="100%" height="auto">
-    </div>
-    <div class="personal-brief">
-        <h3><span ms-text="data.name"></span><span ms-if="data.company.length+data.title.length>0">·</span><span ms-text="data.company"></span><span>&nbsp;</span><span ms-text="data.title"></span></h3>
-        <h4><span ms-text="data.business"></span></h4>
-    </div>
-    <div class="pesonal-info">
-        <div ms-if="data.style.length">
-            <h1>简介</h1>
-            <div ms-html="decode_text(data.summary)"></div>
+        <div class="personal-brief">
+            <h3><span ms-text="data.name"></span><span ms-if="data.company.length+data.title.length>0">·</span><span ms-text="data.company"></span><span>&nbsp;</span><span ms-text="data.title"></span></h3>
+            <h4><span ms-text="data.invest_preference.business"></span></h4>
+            <div class="follow">
+                <a id="following" class="following">关注:&nbsp;<span ms-text="data.following.following_count||0"></span></a>
+                <a id="follower" class="follower">粉丝:&nbsp;<span ms-text="data.follower.follower_count||0"></span></a>
+            </div>
         </div>
-    </div>
-    <div class="participation">
-        <h1>过往投资案例及个人经历</h1>
-        <div ms-if="data.invested_com.length" id="album" class="slider-container">
+        <div class="personal-summary">
+            <h1>个人信息</h1>
+            <div class="item" ms-if="data.summary">
+                <h3>简介</h3>
+                <p ms-html="decode_text(data.summary)"></p>
+            </div>
+            <div class="item" ms-if="data.career">
+                <h3>工作经历</h3>
+                <ul>
+                    <li ms-repeat="data.career">
+                        <p class="title" ms-text="el.title"></p><p class="date" ms-if="el.during" ms-text="el.during"></p>
+                    </li>
+                </ul>
+            </div>
+            <div class="item" ms-if="data.edu">
+                <h3>教育经历</h3>
+                <ul>
+                    <li ms-repeat="data.edu">
+                        <p class="title" ms-text="el.title"></p><p class="date" ms-if="el.start" ms-text="el.start"></p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="history" ms-if="data.exp.length">
+            <div class="title"><h1>过往投资案例</h1>&nbsp;<i ms-text="data.exp.length"></i></div>
             <ul>
-                <li ms-repeat="data.invested_com">
-                    <a ms-href="el.url">
-                        <div>
-                            <img ms-src="el.logo">
-                            <h3 ms-text="el.name"></h3>
-                            <p ms-text="el.part==1?'投资人':el.part==2?'领投人':''">投资人</p>
-                        </div>
+                <li ms-repeat="data.exp">
+                    <a ms-href="get_url(el.id)">
+                        <img ms-src="el.logo">
+                        <h5 ms-text="el.name"></h5>
+                        <p ms-text="el.part"></p>
                     </a>
                 </li>
             </ul>
         </div>
-    </div>
-    <div class="pesonal-info">
-        <div ms-if="data.style.length">
-            <h1>投资理念</h1>
-            <div ms-html="decode_text(data.style)"></div>
+        <div class="pesonal-info">
+            <div ms-if="data.style.length">
+                <h1>投资理念</h1>
+                <div ms-html="decode_text(data.style)"></div>
+            </div>
+            <div ms-if="data.service.length">
+                <h3>可提供的附加价值</h3>
+                <ul class="mark-list">
+                    <li ms-repeat="data.service.split('·')" ms-text="el"></li>
+                </ul>
+            </div>
+            <div ms-if="data.business">
+                <h3>擅长领域</h3>
+                <ul class="mark-list">
+                    <li ms-repeat="data.business.split('·')" ms-text="el"></li>
+                </ul>
+            </div>
         </div>
-        <div ms-if="data.service.length">
-            <h3>可提供的附加价值</h3>
-            <div ms-html="decode_text(data.service)"></div>
-        </div>
-        <div ms-if="data.tag">
-            <h3>擅长领域</h3>
-            <ul class="mark-list">
-                <li ms-repeat="data.tag.split('·')">{{el}}</li>
+        <div ms-if="data.invest_preference.count" class="fund-paln">
+            <ul class="plan" ms-if="data.invest_preference.count">
+                <li>
+                    <i></i>
+                    <div class="desc">
+                        <p ms-html="data.invest_preference.count+'<em>个</em>'">0<em>个</em></p>
+                        <span>1年内计划投资</span>
+                    </div>
+                </li>
+                <li>
+                    <i></i>
+                    <div class="desc" ms-class="small-font:(String(data.min_amount) +data.max_amount).length > 5">
+                        <p ms-html="(String(data.invest_preference.min_amount) +data.invest_preference.max_amount).length > 5 ?
+                               data.invest_preference.min_amount + '-' + data.invest_preference.max_amount + 'W':
+                               data.invest_preference.min_amount + 'W-' + data.invest_preference.max_amount + 'W'">0W</p>
+                        <span>单个项目投资额</span>
+                    </div>
+                </li>
             </ul>
+            <p ms-if="data.business">我关注<i ms-html="data.invest_preference.region ? '<em>' + data.invest_preference.region.join('<b>·</b>') + '</em>的' : ''"></i><em ms-html="data.invest_preference.business.join('<b>·</b>')"></em>领域的创业项目。</p>
+        </div>
+        <div class="page-action">
+            <div class="btn-group">
+                <a id="follow-btn" class="btn btn-small white-border">关注该投资人</a>
+                <a id="submit-com" class="btn btn-small orange">提交项目</a>
+                <a id="share-self" class="btn btn-big orange">分享个人名片</a>
+            </div>
         </div>
     </div>
-    <div ms-if="data.count" class="fund-paln">
-        <ul class="plan" ms-if="data.count">
-            <li>
-                <i></i>
-                <div class="desc">
-                    <p ms-html="data.count+'<em>个</em>'">0<em>个</em></p>
-                    <span>1年内计划投资</span>
+    <div id="slide-page" class="slide-page">
+        <div class="header"><em id="slide-back"></em><h3 id="slide-title"></h3></div>
+        <div id="slide-list" class="follow-list" ms-controller="follow-list">
+            <a ms-repeat="data" ms-href="get_url(el.id)">
+                <div class="avatar">
+                    <img ms-src="el.avatar">
                 </div>
-            </li>
-            <li>
-                <i></i>
-                <div class="desc" ms-class="small-font:(String(data.min_amount) +data.max_amount).length > 5">
-                    <p ms-html="(String(data.min_amount) +data.max_amount).length > 5 ?
-                           data.min_amount + '-' + data.max_amount + 'W':
-                           data.min_amount + 'W-' + data.max_amount + 'W'">0W</p>
-                    <span>单个项目投资额</span>
+                <div class="summary">
+                    <h4><span class="name" ms-text="el.name"></span>&nbsp;<span class="title" ms-text="el.company+' '+el.title"></span></h4>
+                    <p class="desc" ms-html="el.summary.substr(0,40)+(el.summary.length>39?'...':'')"></p>
                 </div>
-            </li>
-        </ul>
-        <p ms-if="data.business">我关注<i ms-html="data.region ? '<em>' + data.region.join('<b>·</b>') + '</em>的' : ''"></i><em ms-html="data.business.split('·').join('<b>·</b>')">移动互联网·在线教育·文化艺术</em>领域的创业项目。</p>
-    </div>
-
-    <div class="page-action">
-        <div class="btn-group">
-            <a id="follow-btn" class="btn btn-small white-border">关注该投资人</a>
-            <a id="submit-com" class="btn btn-small orange">提交项目</a>
-            <a id="share-self" class="btn btn-big orange">分享个人名片</a>
+            </a>
+            <div id="slide-loading" class="loading"><em></em></div>
         </div>
     </div>
 </div>
@@ -169,10 +204,10 @@
     </div>
 </div>
 </body>
-<script src="https://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
+<script src="http://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
 <script src="/static/js/lib/jquery-cookie.js"></script>
-<script src="/static/js/wapsite/angelcrunch_base.js"></script>
+<script src="/static/js/wapsite/angelcrunch_base.js?"></script>
+<script src="http://dn-acac.qbox.me/qrcode.js"></script>
 <script src="/static/js/lib/avalon.mobile.min.js"></script>
-<script src="https://dn-acac.qbox.me/qrcode.js"></script>
-<script src="/static/js/wapsite/angelcrunch_investor_details.js"></script>
+<script src="/static/js/wapsite/angelcrunch_investor_details.js?"></script>
 </html>
