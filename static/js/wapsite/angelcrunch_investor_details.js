@@ -163,24 +163,26 @@
         ret.avatar=ret.avatar.replace(/\d{0,3}x$/,'800x');
         return ret;
     };
-    page_remote_data(page_config.api_investor_details,function(data){
-        if(data.hasOwnProperty('user')){
-            avalon_attach_details()(self.render(data.user));
-            page_status.name=data.user.name;
-            page_status.user_id=data.user.id;
-            page_status.portrait=data.user.avatar;
-            data.user.follower && (follow_view.total_follower=data.user.follower.follower_count);
-            data.user.following && (follow_view.total_following=data.user.following.following_count);
-            //微信卡片制作
-            wechat_card.img=page_status.portrait.replace(/\d{1,3}x$/,'310x');
-            wechat_card.title='向投资人'+page_status.name+'提交商业计划书';
-            wechat_card.render();
-            //异步获取数据后填充投资人信息
-            view_personal_info();
-            //判断是否为个人主页
-            view_self_hook(data.user.id);
-        }
-    },page_status.get_user_id());
+    get_host_id(function() {
+        page_remote_data(page_config.api_investor_details, function (data) {
+            if (data.hasOwnProperty('user')) {
+                avalon_attach_details()(self.render(data.user));
+                page_status.name = data.user.name;
+                page_status.user_id = data.user.id;
+                page_status.portrait = data.user.avatar;
+                data.user.follower && (follow_view.total_follower = data.user.follower.follower_count);
+                data.user.following && (follow_view.total_following = data.user.following.following_count);
+                //微信卡片制作
+                wechat_card.img = page_status.portrait.replace(/\d{1,3}x$/, '310x');
+                wechat_card.title = '向投资人' + page_status.name + '提交商业计划书';
+                wechat_card.render();
+                //异步获取数据后填充投资人信息
+                view_personal_info();
+                //判断是否为个人主页
+                view_self_hook(data.user.id);
+            }
+        }, page_status.get_user_id());
+    });
     get_host_id(function(){
         page_remote_data(page_config.api_ops_info,function(data){
            data.user && follow_hook(data.user.is_follow==1);
