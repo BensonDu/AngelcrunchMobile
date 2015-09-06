@@ -450,22 +450,22 @@
         $items.eq(0).css('margin-left',(pub_left+mX)+'px');
     };
     this.end = function(eX){
-        var r = eX, a = Math.abs(r), w = width, rw = width/5;
+        var r = eX, a = Math.abs(r), w = width, rw = 50;
         if(r>0){
-            if(a>width/2 && pub_index>0){
+            if(a>rw && pub_index>0){
                 pub_left+=w;
                 pub_index--;
             }
         }
         else{
-            if(a>width/2 && pub_index+1<self.list_small.length){
+            if(a>rw && pub_index+1<self.list_small.length){
                 pub_left-=w;
                 pub_index++;
             }
         }
         self.num_update(pub_index);
         self.img_big(pub_index);
-        self.animate(pub_left,a*1.2);
+        self.animate(pub_left,3/a*10000);
     };
     this.animate=function(to,during){
         var s = parseInt($items.eq(0).css('margin-left')),
