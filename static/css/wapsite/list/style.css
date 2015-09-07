@@ -353,7 +353,7 @@ html{
 .filter div a span{
     min-width: 80px;
     font-size: 14px;
-    line-height: 25px;
+    line-height: 22px;
     padding: 6px 0;
     text-align: right;
     display: inline-block;
@@ -363,7 +363,7 @@ html{
     content: '';
     float: right;
     width: 25px;
-    height: 23px;
+    height: 20px;
     background: url("http://dn-acac.qbox.me/arrow_down.png") no-repeat 50% 50%;
     background-size: 25px 25px;
 }
