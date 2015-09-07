@@ -85,29 +85,27 @@
         <div class="article-list" >
             <article class="intro" ms-if="data.descriptions ">
                 <h1>项目描述</h1>
-                <p class="silver" ms-if="data.descriptions.user_case">项目描述</p>
-                <p ms-if="data.descriptions.user_case" ms-html="decode_text(data.descriptions.user_case)"></p>
                 <div class="item" ms-if="data.descriptions.market_research">
                     <p class="silver">市场调研</p>
-                    <p ms-html="decode_text(data.descriptions.market_research)"></p>
+                    <p>{{decode_text(data.descriptions.market_research)|html}}</p>
                 </div>
                 <div class="item" ms-if="data.descriptions.advantage">
                     <p class="silver">项目优势</p>
-                    <p ms-html="decode_text(data.descriptions.advantage)"></p>
+                    <p>{{decode_text(data.descriptions.advantage)|html}}</p>
                 </div>
                 <div class="item" ms-if="data.descriptions.pattern">
                     <p class="silver">商业模式</p>
-                    <p ms-html="decode_text(data.descriptions.pattern)"></p>
+                    <p>{{decode_text(data.descriptions.pattern)|html}}</p>
                 </div>
                 <div class="item" ms-if="data.descriptions.plan">
                     <p class="silver">发展规划</p>
-                    <p ms-html="decode_text(data.descriptions.plan)"></p>
+                    <p>{{decode_text(data.descriptions.plan)|html}}}</p>
                 </div>
             </article>
             <article class="team" ms-if="array_empty(data.team)">
                 <h1 ms-if="!!data.team_txt">团队简介</h1>
                 <div class="item" ms-if="!!data.team_txt">
-                    <p ms-text="data.team_txt"></p>
+                    <p>{{data.team_txt}}</p>
                 </div>
                 <h1>团队成员</h1>
                 <div class="item" ms-repeat="data.team">
