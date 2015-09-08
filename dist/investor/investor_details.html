@@ -18,7 +18,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/ico" />
     <link rel="Bookmark" href="/favicon.ico" />
     <link href="/static/css/wapsite/base-css.css" rel="stylesheet" />
-    <link href="/static/css/wapsite/investor/investor_details.css?" rel="stylesheet" />
+    <link href="/static/css/wapsite/investor/investor_details.css?v1" rel="stylesheet" />
     <script>
         var _hmt = _hmt || [];
         (function() {
@@ -55,8 +55,8 @@
             <h3><span ms-text="data.name"></span><span ms-if="data.company.length+data.title.length>0">·</span><span ms-text="data.company"></span><span>&nbsp;</span><span ms-text="data.title"></span></h3>
             <h4><span ms-text="data.invest_preference.business"></span></h4>
             <div class="follow">
-                <a id="following" class="following">关注:&nbsp;<span ms-text="data.following.following_count||0"></span></a>
-                <a id="follower" class="follower">粉丝:&nbsp;<span ms-text="data.follower.follower_count||0"></span></a>
+                <a class="following" href="#following">关注:&nbsp;<span ms-text="data.following.following_count||0"></span></a>
+                <a class="follower" href="#follower">粉丝:&nbsp;<span ms-text="data.follower.follower_count||0"></span></a>
             </div>
         </div>
         <div class="personal-summary">
@@ -142,7 +142,7 @@
         </div>
     </div>
     <div id="slide-page" class="slide-page">
-        <div class="header"><em id="slide-back"></em><h3 id="slide-title"></h3></div>
+        <div class="header"><a id="slide-back"></a><h3 id="slide-title"></h3></div>
         <div id="slide-list" class="follow-list" ms-controller="follow-list">
             <a ms-repeat="data" ms-href="get_url(el.id)">
                 <div class="avatar">
@@ -209,5 +209,5 @@
 <script src="/static/js/wapsite/angelcrunch_base.js?"></script>
 <script src="http://dn-acac.qbox.me/qrcode.js"></script>
 <script src="/static/js/lib/avalon.mobile.min.js"></script>
-<script src="/static/js/wapsite/angelcrunch_investor_details.js?v2"></script>
+<script src="/static/js/wapsite/angelcrunch_investor_details.js?v3"></script>
 </html>

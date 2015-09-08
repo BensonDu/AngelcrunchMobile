@@ -569,22 +569,43 @@
             el.addEventListener('touchmove',move, false);
         }
     };
-    self.touch(document.getElementById('slide-list'));
-    $following.touchtap(function(){
+    this.show_following_list = function(){
         if(self.total_following>0){
             self.slide_left('关注');
             $slide_list.height(h-46);
             self.get_following_list();
+            setTimeout(function(){$slide_list.show();},500);
         }
-    },true);
-    $follower.touchtap(function(){
+    };
+    this.show_follower_list = function(){
         if(self.total_follower>0){
             self.slide_left('粉丝');
             $slide_list.height(h-46);
             self.get_follower_list();
+            setTimeout(function(){$slide_list.show();},500);
         }
-    },true);
+    };
+    this.follow_router = function(){
+        var h = location.hash;
+        if(/follow/.test(h)){
+            if(/follower/.test(h)){
+                self.show_follower_list();
+            }
+            if(/following/.test(h)){
+                self.show_following_list();
+            }
+        }
+        else{
+            self.slide_right();
+            $slide_list.hide();
+        }
+    };
+    self.touch(document.getElementById('slide-list'));
     $slide_back_btn.touchtap(function(){
-        self.slide_right();
-    },true);
+        location.hash='';
+    });
+    window.onhashchange = function(){
+        self.follow_router();
+    };
+    location.hash='';
 }).call(follow_view);
