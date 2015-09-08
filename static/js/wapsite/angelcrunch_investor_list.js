@@ -602,9 +602,6 @@
             },id)
         }
     };
-    self.com_list = function(){
-
-    };
     this.submit = function(el,id){
         //是否登录注册
         if(!account_info.is_login){

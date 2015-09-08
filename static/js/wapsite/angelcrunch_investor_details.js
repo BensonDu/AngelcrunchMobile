@@ -576,15 +576,15 @@
             $slide_list.height(h-46);
             self.get_following_list();
         }
-    });
+    },true);
     $follower.touchtap(function(){
         if(self.total_follower>0){
             self.slide_left('粉丝');
             $slide_list.height(h-46);
             self.get_follower_list();
         }
-    });
+    },true);
     $slide_back_btn.touchtap(function(){
         self.slide_right();
-    });
+    },true);
 }).call(follow_view);

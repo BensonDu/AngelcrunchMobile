@@ -359,7 +359,7 @@
 //移动设备事件
 (function(){
     $.fn.extend({
-        touchtap:function(fn){
+        touchtap:function(fn,delay){
             var x, y,s;
             if(base_status.support_touch){
                 $(this).bind('touchstart',function(e){
@@ -368,9 +368,9 @@
                     s = new Date().getTime();
                 });
                 $(this).bind('touchend',function(e){
-                    var event=e.originalEvent.changedTouches[0],move=Math.pow(event.pageX-x,2)+Math.pow(event.pageY-y,2),o = new Date().getTime();
+                    var event=e.originalEvent.changedTouches[0],move=Math.pow(event.pageX-x,2)+Math.pow(event.pageY-y,2),o = new Date().getTime(),self = $(this);
                     if(o-s<150 && move<81){
-                        fn.call($(this));
+                        !delay?fn.call(self):setTimeout(function(){fn.call(self)},200);
                     }
                 });
             }
