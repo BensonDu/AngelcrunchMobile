@@ -82,7 +82,7 @@
 //设置注册链接 传当前链接参数
 (function(){
     var $regist=$('#regist_link');
-    $regist.attr('href','http://auth.angelcrunch.com/reg'+base_create_param($_GET));
+    $regist.attr('href','http://auth.angelcrunch.com/reg'+(!!location.href.split('?')[1]?'?'+location.href.split('?')[1]:''));
 }).call(this);
 var _hmt = _hmt || [];
 //百度统计

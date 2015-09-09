@@ -12,7 +12,7 @@
 
 //切换登陆链接 传递当前链接参数
 (function(){
-    $('#login-link').attr('href','http://auth.angelcrunch.com/'+base_create_param($_GET));
+    $('#login-link').attr('href','http://auth.angelcrunch.com/'+(!!location.href.split('?')[1]?'?'+location.href.split('?')[1]:''));
 }).call(define('view_login_link'));
 
 //协议同意按钮状态切换
