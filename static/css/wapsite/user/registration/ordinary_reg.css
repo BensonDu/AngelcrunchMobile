@@ -121,6 +121,9 @@ label > i input:focus{
     outline: none;
 }
 /*注册成功*/
+.regist-success{
+    display: block;
+}
 .regist-success .mg{
     width: 100%;
     height: 20%;
@@ -153,6 +156,9 @@ label > i input:focus{
 }
 .regist-success .content .arrow-group a.back{
     background: #666;
+}
+.regist-success .content .arrow-group a.hidden{
+    display: none;
 }
 @media only screen and (max-width:370px ) {
     .regist-success .content .arrow-group a{

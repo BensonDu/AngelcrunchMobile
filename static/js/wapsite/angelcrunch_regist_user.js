@@ -118,12 +118,11 @@
         },{account:act,password:pwd})
     };
     this.redirect = function(){
+        var $back_btn = $('#go-back');
         if($_GET.hasOwnProperty('source')){
-            location.href=decodeURIComponent($_GET.source);
+            $back_btn.removeClass('hidden').attr('href',decodeURIComponent($_GET.source))
         }
-        else{
-            view_success.show();
-        }
+        view_success.show();
     };
     $submit.touchtap(self.submit_form);
     $pwd_eye.on('touchstart mousedown',function(){$pwd.attr('type','text')});
@@ -136,6 +135,7 @@
 //短信验证
 (function(){
     var self = this,
+        $phone  = $('#phone'),
         $verify = $('#verify-code'),
         $verify_btn = $('#verify-btn'),
         send_time = 0,
@@ -159,6 +159,7 @@
         }
     };
     this.already_sent = function(){
+        $phone.prop('disabled',true);
         btn_lock = true;
         $verify.prop('disabled',false);
         send_time = new Date().getTime();
@@ -170,6 +171,7 @@
                 $verify_btn.html(Math.floor(down)+' s');
             }
             else{
+                $phone.prop('disabled',false);
                 $verify_btn.html('重新发送');
                 clearInterval(timer);
                 btn_lock = false;
