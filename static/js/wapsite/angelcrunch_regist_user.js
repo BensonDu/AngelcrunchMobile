@@ -50,9 +50,6 @@
         }
         setTimeout(function(){$n.fadeOut();},3000);
     };
-    this.update = function(text){
-        $n.children('.txt').html(text);
-    }
 }).call(define('view_notification'));
 
 //数据获取
@@ -113,16 +110,7 @@
                 login[account_key.token]=data.user.access_token||'';
                 login[account_key.role]=data.user.defaultpart || 0;
                 save_cookie(login);
-                view_notification.show('注册成功',true);
-                setInterval(function(){
-                    time--;
-                    if(time>0){
-                        view_notification.update('注册成功 '+time+' 秒后自动跳转...');
-                    }
-                    else{
-                        self.redirect();
-                    }
-                },1000);
+                self.redirect();
             }
             else{
                 view_notification.show(data.message||'自动登录出错');
@@ -134,7 +122,7 @@
             location.href=decodeURIComponent($_GET.source);
         }
         else{
-            location.href = base_home;
+            view_success.show();
         }
     };
     $submit.touchtap(self.submit_form);
@@ -213,6 +201,16 @@
         });
     }
 }).call(define('view_reason'));
+
+/*注册成功弹窗*/
+(function(){
+    var $success = $('#regist-success'),
+        $close   = $success.children('.close');
+    this.show = function(){
+        $success.fadeIn(200);
+    };
+    $close.touchtap(function(){$success.fadeOut(100);});
+}).call(define('view_success'));
 
 //百度统计
 var _hmt = _hmt || [];

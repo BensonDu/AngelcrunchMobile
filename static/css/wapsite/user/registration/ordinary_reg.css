@@ -120,3 +120,42 @@ label > i input{
 label > i input:focus{
     outline: none;
 }
+/*注册成功*/
+.regist-success .mg{
+    width: 100%;
+    height: 20%;
+}
+.regist-success .img{
+    width: 100%;
+    text-align: center;
+}
+.regist-success .img img{
+    width: 46px;
+    height: auto;
+}
+.regist-success h3{
+    font-size: 26px;
+    line-height: 30px;
+    margin-top: 15px;
+}
+.regist-success .content h6{
+    font-size: 16px;
+}
+.regist-success .content .arrow-group{
+    margin-top: 20px;
+}
+.regist-success .content .arrow-group a{
+    display: inline-block;
+    padding: 8px 10px 6px;
+    font-size: 16px;
+    background-color: #ccc;
+    color: #fff;
+}
+.regist-success .content .arrow-group a.back{
+    background: #666;
+}
+@media only screen and (max-width:370px ) {
+    .regist-success .content .arrow-group a{
+        font-size: 14px;
+    }
+}
