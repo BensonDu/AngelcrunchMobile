@@ -121,9 +121,6 @@ label > i input:focus{
     outline: none;
 }
 /*注册成功*/
-.regist-success{
-    display: block;
-}
 .regist-success .mg{
     width: 100%;
     height: 20%;
