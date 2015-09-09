@@ -14,362 +14,92 @@
     <meta name="revisit-after"  content="1 days" />
     <meta name="format-detection" content="email=no" />
     <meta name="format-detection" content="telephone=yes" />
-    <title>和投资界大咖一起合投项目 | 天使汇 | 创业，投资，找VC就上天使汇 | 中国天使合投第一平台</title>
+    <title>注册 | 天使汇 | 创业，投资，找VC就上天使汇 | 中国天使合投第一平台</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/ico" />
     <link rel="Bookmark" href="/favicon.ico" />
     <link href="/static/css/wapsite/base-css.css" rel="stylesheet" />
-    <link href="/static/css/wapsite/user/registration/style.css" rel="stylesheet" />
-    <link href="/static/css/wapsite/user/registration/ordinary_reg.css" rel="stylesheet" />
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?b42f93c74ba66023077c20dacf5bfaee";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
+    <link href="/static/css/wapsite/user/registration/ordinary_reg.css?" rel="stylesheet" />
 </head>
 <body>
-    <div class="details">
-        <div class="notification red"><i class="txt"></i><i class="close">×</i></div>
-        <div class="angelcrunch-brand">
-            <a><img src="/static/images/wapsite/angelcrunchbrandlogoregpage.png"/></a>
-        </div>
-        <div class="registration modules">
-            <label>
-                <span>真实姓名</span>
-                <i><input id="user-name" type="text" name="name" value="" data-warning-text="需要填写姓名" /></i>
-            </label>
-
-            <label>
-                <span>手机号码</span>
-                <i>
-                    <input id="phone" type="tel" name="phone" value="" data-warning-text="需要填写11位的大陆手机号码" maxlength="11" placeholder="将作为登录账号" />
-                    <button id="verify-btn" class="btn">验证</button>
-                </i>
-            </label>
-
-            <label>
-                <span>输入短信验证码</span>
-                <i><input id="verify-code" type="tel" name="code" value="" maxlength="6" data-warning-text="手机号码需要通过验证" placeholder="发送验证后填写6位验证码" /></i>
-            </label>
-
-            <label>
-                <span>密码</span>
-                <i><input id="pwd" type="password" name="password" value="" data-warning-text="需要填写一个6位以上的密码" maxlength="16" /><em class="vector-icons eye"></em></i>
-            </label>
-            <label>
-                <a class="already-has-account" href="http://auth.angelcrunch.com">已有账号？</a>
-            </label>
-            <div class="addition-agreement">
-                <p>我已知晓 <a href="http://help.angelcrunch.com/service">《天使汇用户服务协议》</a> 及其附件 <a class="ci-link" href="http://m.angelcrunch.com/risk_agreement">《风险揭示书》</a> 中的所有内容 ，并愿意自己承担投资带来的风险。</p>
-                <div class="modules">
-                    <div class="mentos-container">
-                        <label class="label">
-                            <input id="legal-terms" class="mentos" type="checkbox" name="additionalAgreement" value="1" data-warning-text="需要同意天使汇用户协议" />
-                            <em class="tracks">
-                                <em class="slider-button">
-                                    <i>×</i>
-                                    <i></i>
-                                </em>
-                            </em>
-                        </label>
-                    </div>
-                </div>
+<div class="bk"></div>
+<div id="details" class="details">
+    <div class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
+    <div id="head-container" class="head-container">
+        <div id="header" class="newhead">
+            <div class="logo touch-href" data-href="http://angelcrunch.com"></div>
+            <div class="options">
+                <span></span>
+                <ul class="hidden-menu">
+                    <li class="touch-href" data-href="http://angelcrunch.com/startup_financing">创业项目</li>
+                    <li class="touch-href" data-href="http://angelcrunch.com/angel">投资人</li>
+                </ul>
             </div>
-            <button id="subbmit-btn" class="btn submit-btn ci-link" data-redirect="/reg_success"></button>
-        </div>
-        <!--消息提示-->
-        <div id="regist-reason" class="new-page-result">
-            <div class="close yesiknow">×</div>
-            <div class="portrait"><img src="http://dn-xswe.qbox.me/13065529?imageMogr2/crop/!690x690a0a0/thumbnail/75x"></div>
-            <div class="content">
-                <h3></h3>
-                <h4></h4>
+            <div class="account">
+                <span></span>
+                <ul class="hidden-menu"></ul>
             </div>
-            <div class="btn-group"><a class="yesiknow">下一步</a></div>
-        </div>
-        <div class="banner-footer">
-            <p>AngelCrunch.com</p>
-            <p>天使汇 - 让靠谱的项目找到靠谱的钱</p>
         </div>
     </div>
+    <div class="tab"><a id="login-link" class="left">登录</a><a class="right active">注册</a></div>
+    <div class="registration modules">
+        <label>
+            <span>真实姓名</span>
+            <i><input id="user-name" type="text" name="name" value=""/></i>
+        </label>
+
+        <label>
+            <span>手机号码</span>
+            <i>
+                <input id="phone" type="tel" name="phone" value="" maxlength="11" placeholder="将作为登录账号" />
+                <button id="verify-btn" class="verify-btn btn disable">验证</button>
+            </i>
+        </label>
+
+        <label>
+            <span>验证码</span>
+            <i><input id="verify-code" type="tel" name="code" value="" maxlength="6"  placeholder="输入短信6位验证码" disabled/></i>
+        </label>
+
+        <label>
+            <span>密码</span>
+            <i><input id="pwd" type="password" name="password" value="" maxlength="16" /><em class="vector-icons eye"></em></i>
+        </label>
+
+        <label>
+            <span>重复密码</span>
+            <i><input id="pwdrepeat" type="password" name="password" value="" maxlength="16" /><em class="vector-icons eye"></em></i>
+        </label>
+        <div class="addition-agreement">
+            <p>我已知晓 <a href="http://help.angelcrunch.com/service">《天使汇用户服务协议》</a> 及其附件 <a class="ci-link" href="http://m.angelcrunch.com/risk_agreement">《风险揭示书》</a> 中的所有内容 ，并愿意自己承担投资带来的风险。</p>
+            <div id="agreement-checkbox" class="modules">
+                <div class="mentos-container">
+                    <label class="label">
+                        <em class="tracks">
+                            <em class="slider-button">
+                                <i>×</i>
+                                <i></i>
+                            </em>
+                        </em>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <button id="submit-btn" class="btn submit-btn ci-link"></button>
+    </div>
+    <!--消息提示-->
+    <div id="regist-reason" class="new-page-result">
+        <div class="close yesiknow">×</div>
+        <div class="portrait"><img src="http://dn-xswe.qbox.me/13065529?imageMogr2/crop/!690x690a0a0/thumbnail/75x"></div>
+        <div class="content">
+            <h3></h3>
+            <h4></h4>
+        </div>
+        <div class="btn-group"><a class="yesiknow">下一步</a></div>
+    </div>
+</div>
 </body>
-<script src="/static/js/lib/jquery-1.11.1.min.js"></script>
-<script src="/static/js/wapsite/angelcrunch.jq.c.js"></script>
-<script src="/static/js/wapsite/angelcrunch.cookie.jq.c.js"></script>
-<script src="/static/js/wapsite/angelcrunch.sendsms_verify.jq.c.js"></script>
+<script src="http://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
+<script src="/static/js/lib/jquery-cookie.js"></script>
 <script src="/static/js/wapsite/angelcrunch_base.js"></script>
-
-<script type="text/javascript" id="page-interactive-init">
-
-    $(document).ready(function(){
-        //跳转链接 传参同步
-        var $dom=$('.already-has-account'),href=$dom.attr('href'),split=location.href.split('?');
-        if(split.length>1)href+='?'+split[1];
-        $dom.attr('href',href);
-        //显示URL传参message
-        if($_GET.hasOwnProperty('message') && $_GET.hasOwnProperty('title')){
-            var $reason=$('#regist-reason'),
-                    $title=$reason.find('h3'),
-                    $msg=$reason.find('h4'),
-                    $close=$reason.find('.yesiknow'),
-                    $portrait=$reason.find('img');
-            $reason.show();
-            $msg.html(decodeURIComponent($_GET.message));
-            $title.html(decodeURIComponent($_GET.title));
-            if($_GET.hasOwnProperty('portrait') && $_GET.portrait!=''){
-                $portrait.attr('src',decodeURIComponent($_GET.portrait));
-            }
-            $close.touchtap(function(){
-                $reason.fadeOut(100);
-            });
-        }
-
-        $('#verify-btn').click(function(){
-            $(document).scrollTop(0);
-            $('#phone').blur();
-        });
-    });
-    var page = window.page || {};
-    page.MethodObj = function () { };
-    page.MethodObj.prototype = (function () {
-        var settings = page.settings;
-        var I = {
-            Ajax_SMS: {                     // Short message service
-                url: "http://" + settings.AjaxDomain + "/v2/home/m_verify_code",
-                basic_data: {
-                }
-            },
-            Ajax_verify_code: {             // Checked verify code
-                url: "http://" + settings.AjaxDomain + "/v2/home/m_verify_phone_code",
-                basic_data: {
-                }
-            },
-            Ajax_form_submit: {             // Form submit
-                url: "http://" + settings.AjaxDomain + "/v4/home/m_register",
-                basic_data: {
-                }
-            },
-            current_mobile: ""
-        };
-
-        var waste_123987123 = function () {
-
-        };
-
-        var waste_9839213 = function () {
-            var className = {
-                        input: {
-                            user_name: "#user-name",
-                            phone: "#phone",
-                            verify_code: "#verify-code",
-                            pwd: "#pwd"
-                        },
-                        file: {
-                            avatar: "#avatar-file",
-                            palyground_files: ":file.hidden",
-                        },
-                        btn: {
-                            file_uploader: ".image-uploader",
-                            id_card: "#id-card",
-                            name_card: "#name-card",
-                            SMS: "#verify-btn",
-                            submit: "#subbmit-btn"
-                        },
-                        avatar: "#user-avatar",
-                        palyground_image: ".image-container",
-                        avatar_state: "#avatar-upload-state",
-                        notification: ".notification"
-                    },
-                    state = {
-                        loading: "loading",
-                        disable: "disable",
-                        checking: "checking",
-                        again:"again-js",
-                        active: "active"
-                    },
-                    attr = {
-                        txt: "data-warning-text",
-                        image_id: "data-image-id",
-                        prev_file: "data-prev-file",
-                        crop_data: "data-crop",
-                        palyground_id:"data-playground-bind",
-
-                        disabled: "disabled"
-                    };
-
-            var $input = {
-                user_name: $(className.input.user_name),
-                phone: $(className.input.phone),
-                verify_code: $(className.input.verify_code),
-                pwd: $(className.input.pwd)
-            }, $btn = {
-                file_uploader: $(className.btn.file_uploader),
-                id_card: $(className.btn.id_card),
-                name_card: $(className.btn.name_card),
-                SMS: $(className.btn.SMS),
-                submit: $(className.btn.submit)
-            };
-
-            var $avatar, $notification;
-            $avatar = $(className.avatar),
-                    $notification = $(className.notification);
-
-            // Check the button can be Active
-            var checkActive = (function () {
-                var formChecked = function (showNotification) {
-                    var canSubmit = true;
-                    $(attr.txt.attrRetrievalMode()).each(function () {
-                        var txt;
-                        txt = $(this).attr(attr.txt);
-
-                        if (($(this).is(":checkbox")
-                                && !$(this).is(":checked"))
-                                || ($(this).is("input")
-                                && !$(this).val())) {
-                            if (showNotification)
-                                $notification.notificationToggle(txt);
-                            return (canSubmit = false);
-                        }
-                    });
-                    if (!canSubmit) return canSubmit;
-
-                    if ($input.pwd.val().length < 6) {
-                        if (showNotification)
-                            $notification.notificationToggle($input.pwd.attr(attr.txt));
-                        canSubmit = false;
-                    }
-                    if (!($input.phone.val()
-                            && $btn.SMS.hasClass(state.disable)
-                            && $input.verify_code.val()
-                            && $input.verify_code.attr(attr.disabled))) {
-                        if (showNotification)
-                            $notification.notificationToggle($input.verify_code.attr(attr.txt));
-                        canSubmit = false;
-                    }
-                    return canSubmit;
-                };
-
-                return function (showNotification) {
-                    if (formChecked(showNotification)) $btn.submit.addClass(state.active);
-                    else $btn.submit.removeClass(state.active);
-                };
-            }).call(this);                        // Check the button can be Active Ended
-
-            // SMS initi
-            (function () {
-                var conf = $.Angelcrunch.SMS_Verify.settings;
-                conf.$btn = $btn;
-                conf.$input = $input;
-                conf.$notification = $notification;
-                conf.Ajax.Ajax_SMS = I.Ajax_SMS;
-                conf.Ajax.Ajax_verify_code = I.Ajax_verify_code;
-
-                $.Angelcrunch.SMS_Verify.init(checkActive);
-            }).call(this);
-
-            // Submit button
-            $btn.submit.click(function () {
-                checkActive(true);
-                if ($(this).hasClass(state.active)) {
-                    var url = I.Ajax_form_submit.url,
-                            basic_data = I.Ajax_form_submit.basic_data,
-                            type = "jsonp";
-                    var _data = $.extend(true, {}, basic_data);
-                    _data[$input.user_name.attr("name")] = $input.user_name.val().trim();
-                    _data[$input.pwd.attr("name")] = $input.pwd.val().trim();
-                    _data[$input.phone.attr("name")] = $input.phone.val().trim();
-                    _data[$input.verify_code.attr("name")] = $input.verify_code.val().trim();
-                    _data['from']=0;
-                    if($_GET.hasOwnProperty('id')){
-                        _data['from']=$_GET.id;
-                    }
-                    $.post(url, _data, function (data) {
-                        var txt = "注册成功，但因为未知的原因，登录失败",login={};
-                        if (data.success) {
-                            login[account_key.id]=data.id||0;
-                            login[account_key.token]=data.access_token||'';
-                            login[account_key.role]=0;
-                            save_cookie(login);
-                            if (!$.Angelcrunch.COOKIE.operation.isLogin())
-                                $notification.notificationToggle(txt);
-                            //回调
-                            if($_GET.hasOwnProperty('source')){
-                                location.href=decodeURIComponent($_GET.source);
-                            }
-                            else{
-                                location.href = base_protocol+login[account_key.id]+'.'+base_host;
-                            }
-                        } else
-                            $notification.notificationToggle(data.message);
-                    }, type);
-                };
-                return false;
-            });
-
-            (function () {                      // About Password Operation
-                var $eye = $input.pwd.closest("label").find(".eye");
-                // Mobile
-                $eye[0].addEventListener('touchstart', function () {
-                    $input.pwd.attr("type", "text");
-                }, false);
-                $eye[0].addEventListener('touchend', function (e) {
-                    e.preventDetault();
-                    $input.pwd.attr("type", "password");
-                }, false);
-                // PC
-                $eye.mousedown(function () {
-                    $input.pwd.attr("type", "text");
-                }).mouseup(function () {
-                    $input.pwd.attr("type", "password");
-                }).mousemove(function () {
-                    $input.pwd.attr("type", "password");
-                });
-
-                $input.pwd.focus(function () {
-                    $(this).attr("type", "password");
-                });
-            }).call(this);
-
-
-
-            $(".registration input").not("#verify-code,.hidden").keyup(function () {
-                checkActive();
-            });
-
-            $("#legal-terms").change(function () {
-                checkActive();
-            });
-
-            // Page load ready checked
-            checkActive();
-        }
-
-        return {
-            attackEvent: function () {
-                waste_9839213();
-            },
-
-            pageLoad_Init: function () {
-            },
-
-            initial: function () {
-                this.pageLoad_Init();
-                this.attackEvent();
-            }
-        };
-    })();
-
-    page.initialBridge = function () {
-        var o = new page.MethodObj();
-        o.initial();
-    }
-
-    $(function () {
-        page.initialBridge();
-    })
-    log.type = 'regist_ordinary';
-</script>
+<script src="/static/js/wapsite/angelcrunch_regist_user.js"></script>
 </html>

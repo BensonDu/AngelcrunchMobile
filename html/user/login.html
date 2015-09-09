@@ -18,40 +18,40 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/ico" />
     <link rel="Bookmark" href="/favicon.ico" />
     <link href="/static/css/wapsite/base-css.css" rel="stylesheet" />
-    <link href="/static/css/wapsite/user/login.css?" rel="stylesheet" />
-    <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?b42f93c74ba66023077c20dacf5bfaee";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
-    </script>
+    <link href="/static/css/wapsite/user/login.css?v1" rel="stylesheet" />
 </head>
 <body>
-    <div class="bk"></div>
-    <div class="details">
-        <div class="angelcrunch-brand">
-            <a><img src="/static/images/wapsite/angelcrunchbrandlogoinloginpage.png"/></a>
-        </div>
-        <div class="notification red"><i class="txt"></i><i class="close">×</i></div>
-        <div class="login-module">
-            <!-- Back-up form -->
-            <form action="/" method="post">
-                <label><span>邮箱/手机</span><i><input id="account" type="text" name="account" value="" /></i></label>
-                <label><span>密码</span><i><input id="pwd" type="password" name="password" value="" /></i></label>
-            </form>
-            <a id="subbmit-btn" class="submit-new-btn"><img src="http://dn-acac.qbox.me/mobile/homepage/btn-arrow-left.png"></a>
-        </div>
-        <div class="banner-footer">
-            <p>AngelCrunch.com</p>
-            <p>天使汇 - 让靠谱的项目找到靠谱的钱</p>
+<div class="bk"></div>
+<div id="details" class="details">
+    <div class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
+    <div id="head-container" class="head-container">
+        <div id="header" class="newhead">
+            <div class="logo touch-href" data-href="http://angelcrunch.com"></div>
+            <div class="options">
+                <span></span>
+                <ul class="hidden-menu">
+                    <li class="touch-href" data-href="http://angelcrunch.com/startup_financing">创业项目</li>
+                    <li class="touch-href" data-href="http://angelcrunch.com/angel">投资人</li>
+                </ul>
+            </div>
+            <div class="account">
+                <span></span>
+                <ul class="hidden-menu"></ul>
+            </div>
         </div>
     </div>
+    <div class="tab"><a class="left active">登录</a><a id="regist_link" class="right">注册</a></div>
+    <div class="login-container">
+        <form action="/" method="post">
+            <label><span>邮箱/手机</span><i><input id="account" type="text" name="account" value="" /></i></label>
+            <label><span>密码</span><i><input id="pwd" type="password" name="password" value="" /></i></label>
+        </form>
+        <a id="subbmit-btn" class="submit-new-btn"><img src="http://dn-acac.qbox.me/mobile/homepage/btn-arrow-left.png"></a>
+    </div>
+</div>
 </body>
 <script src="https://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
 <script src="/static/js/lib/jquery-cookie.js"></script>
 <script src="/static/js/wapsite/angelcrunch_base.js"></script>
-<script src="/static/js/wapsite/angelcrunch_login.js"></script>
+<script src="/static/js/wapsite/angelcrunch_login.js?"></script>
 </html>

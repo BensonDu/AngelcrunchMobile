@@ -297,7 +297,7 @@ input::-webkit-input-placeholder {
 .submit-new-btn img{
   display: inline-block;
   height: 50px;
-  padding: 15px;
+  padding: 18px;
 }
 .submit-new-btn.active{
   background: #333;
@@ -566,13 +566,6 @@ label > i textarea {
   border:none;
   resize:none;
   background-color:transparent;
-}
-label > .already-has-account{
-  display: inline-block;
-  text-decoration: underline;
-  text-align: center;
-  width: 100%;
-  padding: 18px 4%;
 }
 @media only screen and (max-width: 370px) {
   label > i textarea {

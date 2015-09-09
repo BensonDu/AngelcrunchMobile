@@ -414,25 +414,20 @@
 
 //过渡 协议同意
 (function () {
-    var className = {
-        container: ".mentos-container",
-        checkbox: ".mentos-container :checkbox",
-        // State
-        beChecked: "checked"
-    };
-    var _changeCheckboxModuleState = function () {
-        var $container = $($(this).closest(className.container));
-        if ($(this).is(":checked")) $container.addClass(className.beChecked);
-        else $container.removeClass(className.beChecked);
-    };
+    var self = this,
+        $btn = $('#agreement-checkbox'),
+        $class = $btn.children('.mentos-container');
 
-    this.formModules = function () {
-        var $container, $checkbox;
-        $checkbox = $(className.checkbox);
-        $checkbox.change(function () {
-            _changeCheckboxModuleState.call(this);
-        });
-        _changeCheckboxModuleState.call($checkbox);
+    this.checked = false;
+    this.active = function(){
+        $class.addClass('checked');
+        self.checked = true;
     };
-    formModules();
-}).call(this);
+    this.unactive = function(){
+        $class.removeClass('checked');
+        self.checked = false;
+    };
+    $btn.touchtap(function(){
+        self.checked?self.unactive():self.active();
+    });
+}).call({});

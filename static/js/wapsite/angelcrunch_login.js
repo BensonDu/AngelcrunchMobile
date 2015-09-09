@@ -79,4 +79,17 @@
     $btn.touchtap(login_action);
     setInterval(function(){login_active();},300);
 }).call(this);
+//设置注册链接 传当前链接参数
+(function(){
+    var $regist=$('#regist_link');
+    $regist.attr('href','http://auth.angelcrunch.com/reg'+base_create_param($_GET));
+}).call(this);
+var _hmt = _hmt || [];
+//百度统计
+(function() {
+    var hm = document.createElement("script");
+    hm.src = "//hm.baidu.com/hm.js?b42f93c74ba66023077c20dacf5bfaee";
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(hm, s);
+})();
 log.type = 'login';

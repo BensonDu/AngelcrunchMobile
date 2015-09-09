@@ -4,27 +4,38 @@
 /* Standard：Google
 /*
 /*/
-
-/*@media only screen and (min-width:420px) {
-  .details {
-    width:400px;
-    margin:0 auto;
-  }
-}*/
-
-.angelcrunch-brand {
-  width:87.2%;
-  height:auto;
-  min-height:82px;
-  margin:0 auto;
-  margin-top:38px;
-  margin-bottom:70px;
+/*新版*/
+.tab{
+    width: 100%;
+    text-align: center;
+    padding: 8px 0 8px;
+    border-top: 1px solid #f5f5f5;
 }
-
-.angelcrunch-brand img {
-  width:100%;
+.tab a{
+    display: inline-block;
+    font-size: 18px;
+    padding: 3px 0;
+    font-weight: 900;
 }
-
-.banner-footer {
-  margin-top:216px;
+.tab a.left{
+    margin-right: 15px;
+    border-bottom: 2px solid #fff;
+}
+.tab a.left.active{
+    padding-left: 2px;
+    border-bottom: 2px solid #000;
+}
+.tab a.right{
+    margin-left: 15px;
+    border-bottom: 2px solid #fff;
+}
+.tab a.right.active{
+    padding-left: 1px;
+    border-bottom: 2px solid #000;
+}
+.login-container{
+    margin-top: 0;
+}
+.submit-new-btn{
+    margin-top: 20px;
 }

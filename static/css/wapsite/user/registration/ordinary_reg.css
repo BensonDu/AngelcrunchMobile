@@ -4,23 +4,37 @@
 /* Standard：Google
 /*
 /*/
-
-
-.angelcrunch-brand {
-  width:87.2%;
-  height:auto;
-  margin:0 auto;
-  margin-top:38px;
-  margin-bottom:70px;
+/*新版*/
+/*导航*/
+.tab{
+    width: 100%;
+    text-align: center;
+    padding: 8px 0 8px;
+    border-top: 1px solid #f5f5f5;
 }
-
-.angelcrunch-brand img {
-  width:100%;
+.tab a{
+    display: inline-block;
+    font-size: 18px;
+    padding: 3px 0;
+    font-weight: 900;
 }
-
-.banner-footer {
-  margin-top:116px;
+.tab a.left{
+    margin-right: 15px;
+    border-bottom: 2px solid #fff;
 }
+.tab a.left.active{
+    padding-left: 2px;
+    border-bottom: 2px solid #000;
+}
+.tab a.right{
+    margin-left: 15px;
+    border-bottom: 2px solid #fff;
+}
+.tab a.right.active{
+    padding-left: 1px;
+    border-bottom: 2px solid #000;
+}
+/*弹出消息*/
 .new-page-result{
   background-color: #fff;
 }
@@ -72,4 +86,37 @@
   text-align: center;
   line-height: 32px;
   border-radius: 3px;
+}
+/*验证按钮*/
+.verify-btn{
+    width: 76px;
+    height: 26px;
+    float: right;
+    font-size: 14px;
+    padding: 1px 10px 0;
+    margin-top: 12px;
+    margin-right: 16px;
+    border-color: #A9A9A9;
+}
+.verify-btn.disable{
+    color: #AAA;
+    border-color: #CCB !important;
+    background: none;
+    box-shadow: none;
+}
+/*密码可见*/
+.eye{
+    display: inline-block;
+    float: right;
+    font-size: 20px;
+    line-height: 48px;
+    margin-right: 16px;
+    padding: 0 8px;
+}
+label > i input{
+    font-size: 14px;
+    margin-top: 10px;
+}
+label > i input:focus{
+    outline: none;
 }
