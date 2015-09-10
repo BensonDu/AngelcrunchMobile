@@ -23,6 +23,7 @@ label > i input{
     font-weight: 900;
 }
 .tab a.left{
+    padding-left: 2px;
     margin-right: 15px;
     border-bottom: 2px solid #fff;
 }
