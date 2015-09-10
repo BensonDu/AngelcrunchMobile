@@ -5,6 +5,10 @@
 /*
 /*/
 /*新版*/
+label > i input{
+    width: 70%;
+    padding-left: 10px;
+}
 .tab{
     width: 100%;
     text-align: center;
