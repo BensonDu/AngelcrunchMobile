@@ -85,7 +85,7 @@
 
     this.btn_active = function(){
         var form = self.form();
-        return (base_regex().phone.test(form.phone) && form.code.length==6 && form.name != '' && form.password.length>=6 && form.password_.length>=6 && view_agreement_checkbox.checked)?$submit.addClass('active'):$submit.removeClass('active');
+        return (base_regex().phone.test(form.phone) && form.code != '' && form.name != '' && form.password.length>=6 && form.password_.length>=6 && view_agreement_checkbox.checked)?$submit.addClass('active'):$submit.removeClass('active');
     };
     this.submit_form = function(){
        $submit.hasClass('active') && self.regist();
