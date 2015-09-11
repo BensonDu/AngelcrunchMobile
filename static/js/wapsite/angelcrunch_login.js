@@ -112,33 +112,33 @@
         $forget_page.height(h);
     };
     this.slide_phone= function(){
-        $choose.css('margin-left',-100+'%');
+        $choose.animate({'margin-left':-100+'%'},400);
         $forget_page.removeClass('grey');
         self.title('手机验证');
         setTimeout(function(){$phone_form.removeClass('hidden');},300);
     };
     this.slide_phone_back = function(){
-        $choose.css('margin-left',0+'%');
+        $choose.animate({'margin-left':0+'%'},400);
         $forget_page.addClass('grey');
         setTimeout(function(){ $phone_form.addClass('hidden')},300);
     };
     this.slide_mail = function(){
-        $choose.css('margin-left',-100+'%');
+        $choose.animate({'margin-left':-100+'%'},400);
         $forget_page.removeClass('grey');
         self.title('邮箱验证');
         setTimeout(function(){$mail_form.removeClass('hidden');},300);
     };
     this.slide_mail_back = function(){
-        $choose.css('margin-left',0+'%');
+        $choose.animate({'margin-left':0+'%'},400);
         $forget_page.addClass('grey');
         setTimeout(function(){ $mail_form.addClass('hidden');},300);
     };
     this.slide_back = function(){
-        $login_page.css('margin-left',0+'%');
+        $login_page.animate({'margin-left':0+'%'},400);
         setTimeout(function(){$child_page_container.hide();},300);
     };
     this.slide_first = function(){
-        $login_page.css('margin-left',-100+'%');
+        $login_page.animate({'margin-left':-100+'%'},400);
         setTimeout(function(){$child_page_container.fadeIn(100);},300);
         self.title('选择找回方式');
     };
