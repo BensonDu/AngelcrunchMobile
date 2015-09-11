@@ -18,40 +18,106 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/ico" />
     <link rel="Bookmark" href="/favicon.ico" />
     <link href="/static/css/wapsite/base-css.css" rel="stylesheet" />
-    <link href="/static/css/wapsite/user/login.css?v4" rel="stylesheet" />
+    <link href="/static/css/wapsite/user/login.css?v5" rel="stylesheet" />
 </head>
 <body>
 <div class="bk"></div>
+<div class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
 <div id="details" class="details">
-    <div class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
-    <div id="head-container" class="head-container">
-        <div id="header" class="newhead">
-            <div class="logo touch-href" data-href="http://angelcrunch.com"></div>
-            <div class="options">
-                <span></span>
-                <ul class="hidden-menu">
-                    <li class="touch-href" data-href="http://angelcrunch.com/startup_financing">创业项目</li>
-                    <li class="touch-href" data-href="http://angelcrunch.com/angel">投资人</li>
+    <!--登陆部分-->
+    <div id="login-page" class="main-page slide-page">
+        <div id="head-container" class="head-container">
+            <div id="header" class="newhead">
+                <div class="logo touch-href" data-href="http://angelcrunch.com"></div>
+                <div class="options">
+                    <span></span>
+                    <ul class="hidden-menu">
+                        <li class="touch-href" data-href="http://angelcrunch.com/startup_financing">创业项目</li>
+                        <li class="touch-href" data-href="http://angelcrunch.com/angel">投资人</li>
+                    </ul>
+                </div>
+                <div class="account">
+                    <span></span>
+                    <ul class="hidden-menu"></ul>
+                </div>
+            </div>
+        </div>
+        <div class="tab"><a class="left active">登录</a><a id="regist_link" class="right">注册</a></div>
+        <div class="login-container">
+            <form action="/" method="post">
+                <label><span>邮箱/手机</span><i><input id="account" type="text" name="account" value="" /></i></label>
+                <label><span>密码</span><i><input id="pwd" type="password" name="password" value="" /></i></label>
+            </form>
+            <div class="forget"><a href="#forget:1">忘记密码？</a></div>
+            <a id="subbmit-btn" class="submit-new-btn"><img src="http://dn-acac.qbox.me/mobile/homepage/btn-arrow-left.png"></a>
+        </div>
+    </div>
+    <!--登陆部分结束-->
+    <!--找回密码开始-->
+    <div id="forget-page" class="forget-page slide-page grey">
+        <!--找回密码头部-->
+        <div class="header"><a href="javascript:history.go(-1)"></a><h3>选择找回方式</h3></div>
+        <div class="child-container">
+            <!--选择找回方式-->
+            <div id="forget-choose" class="choose child-page">
+                <ul>
+                    <a href="#forget:2"><li id="item-phone" class="phone"><p>&nbsp;&nbsp;&nbsp;通过手机号码找回密码</p></li></a>
+                    <a href="#forget:3"><li id="item-mail" class="mail"><p>&nbsp;&nbsp;&nbsp;通过验证邮箱找回密码</p></li></a>
                 </ul>
             </div>
-            <div class="account">
-                <span></span>
-                <ul class="hidden-menu"></ul>
+            <!--手机号码找回-->
+            <div id="phone-form" class="phone-form modules child-page hidden">
+                <label>
+                    <span>手机号码</span>
+                    <i>
+                        <input id="forget-phone" type="tel" name="phone" value="" maxlength="11"  />
+                        <button id="forget-verify-btn" class="verify-btn btn disable">验证</button>
+                    </i>
+                </label>
+
+                <label>
+                    <span>验证码</span>
+                    <i><input id="forget-verify-code" type="number" name="code" value="" maxlength="6"  placeholder="请输入短信验证码" disabled/></i>
+                </label>
+
+                <label>
+                    <span>新密码</span>
+                    <i><input id="forget-pwd" type="password" name="password" value="" maxlength="16" /><em class="vector-icons eye"></em></i>
+                </label>
+
+                <label>
+                    <span>重复密码</span>
+                    <i><input id="forget-pwdrepeat" type="password" name="password" value="" maxlength="16" /><em class="vector-icons eye"></em></i>
+                </label>
+                <button id="forget-submit-btn-phone" class="btn submit-btn ci-link"></button>
+            </div>
+            <!--邮箱找回-->
+            <div id="mail-form" class="mail-form child-page hidden">
+                <label>
+                    <span>邮箱</span>
+                    <i><input id="forget-mail" type="email" value="" placeholder="输入注册邮箱"/></i>
+                </label>
+                <div></div>
+                <button id="forget-submit-btn-mail" class="btn submit-btn ci-link"></button>
             </div>
         </div>
     </div>
-    <div class="tab"><a class="left active">登录</a><a id="regist_link" class="right">注册</a></div>
-    <div class="login-container">
-        <form action="/" method="post">
-            <label><span>邮箱/手机</span><i><input id="account" type="text" name="account" value="" /></i></label>
-            <label><span>密码</span><i><input id="pwd" type="password" name="password" value="" /></i></label>
-        </form>
-        <a id="subbmit-btn" class="submit-new-btn"><img src="http://dn-acac.qbox.me/mobile/homepage/btn-arrow-left.png"></a>
+    <!--找回密码结束-->
+</div>
+<!--弹出层 找回密码结果-->
+<div id="forget-success" class="new-page-result get-pwd-success">
+    <div class="close">×</div>
+    <div class="mg"></div>
+    <div class="img"><img src="http://dn-acac.qbox.me/mobile/public/icon_done_1.png"></div>
+    <h3></h3>
+    <h6></h6>
+    <div class="btn-group">
+        <a></a>
     </div>
 </div>
 </body>
 <script src="https://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
 <script src="/static/js/lib/jquery-cookie.js"></script>
 <script src="/static/js/wapsite/angelcrunch_base.js"></script>
-<script src="/static/js/wapsite/angelcrunch_login.js?v1"></script>
+<script src="/static/js/wapsite/angelcrunch_login.js?v2"></script>
 </html>
