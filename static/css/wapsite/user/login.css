@@ -75,7 +75,7 @@ label > i input{
     vertical-align: top;
     white-space: normal;
     width: 100%;
-    -webkit-transition:margin-left 0.4s ease;
+    -webkit-transition:margin-left 400ms ease;
 }
 .forget-page{
     height: 100%;
@@ -125,7 +125,7 @@ label > i input{
     vertical-align: top;
     white-space: normal;
     width: 100%;
-    -webkit-transition:margin-left 0.4s ease;
+    -webkit-transition:margin-left 400ms ease;
 }
 .forget-page .child-container .child-page.hidden{
     display: none;
