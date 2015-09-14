@@ -14,8 +14,7 @@
     };
 
     this.api = {
-        //basic:base_mobile+'v4/startup/base_info',
-        basic:'http://api.dubaoxing.com/angel_rewrite/base_info',
+        basic: base_mobile + 'v4/startup/base_info',
         detail:base_mobile+'v4/startup',
         info:base_mobile+'v4/startup/ops_info',
         follow:base_mobile+'v3/follow',

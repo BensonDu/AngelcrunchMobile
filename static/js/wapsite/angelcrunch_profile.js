@@ -1,0 +1,520 @@
+(function () {
+    log.type = 'profile';
+    this.api = {
+        profile: base_mobile + 'v2/home/user_info',
+        avatar: base_mobile + 'v4/settings/profile/save_avatar',
+        name: base_mobile + 'v4/settings/profile/save_name',
+        company: base_mobile + 'v4/settings/profile/save_com',
+        title: base_mobile + 'v4/settings/profile/save_title',
+        summary: base_mobile + 'v4/settings/profile/save_summary',
+        change: base_mobile + 'v4/settings/profile/save_pwd',
+        region_list: base_mobile + 'v4/settings/profile/getregionlist',
+        region: base_mobile + 'v4/settings/profile/save_region'
+    }
+}).call(_define('page_config'));
+//消息通知
+(function () {
+    var $n = $('.notification');
+
+    this.show = function (text, isalter) {
+        $n.fadeIn().children('.txt').html(text);
+        if (!!isalter) {
+            $n.removeClass('red').addClass('green');
+
+        }
+        else {
+            $n.removeClass('green').addClass('red');
+        }
+        setTimeout(function () {
+            $n.fadeOut();
+        }, 3000);
+    };
+}).call(_define('view_notification'));
+//数据获取
+(function () {
+    var self = this;
+    this.get = function (url, call, data) {
+        base_remote_data.ajaxjsonp(url, call, data, function () {
+            view_notification.show('网络错误')
+        });
+    };
+    this.request = function (url, call, data) {
+        self.get(url, call, $.extend({uid: account_info.id, access_token: account_info.token}, data));
+    }
+}).call(_define('data_model'));
+//个人信息
+(function () {
+    var self = this;
+    this.framework = avalon.define("profile", function (vm) {
+        vm.data = {};
+    });
+    window.account_hook = function (data) {
+        if (data.user) {
+            data.user.link = base_protocol + data.user.id + '.' + base_host;
+            self.framework.data = data.user;
+        }
+    }
+}).call(_define('profile_view'));
+//头像上传
+(function () {
+    var self = this,
+        $avatar = $('#avatar'),
+        $progress = $avatar.children('.process'),
+        $input = $avatar.children('input'),
+        uploader = simple.uploader({});
+    this.init = function (img) {
+        $progress.addClass('grey').css({
+            "background-image": 'url(' + img + ')',
+            "background-size": "70px",
+            "background-position": "bottom",
+            "height": 0
+        });
+    };
+    this.avatar = '';
+    //进度条显示
+    this.progress = {
+        start: function () {
+            if ($input[0].files && $input[0].files[0]) {
+                $progress.addClass('grey').css({
+                    "background-color": "#fff",
+                    "background-image": 'url(' + window.URL.createObjectURL($input[0].files[0]) + ')',
+                    "background-size": "70px",
+                    "background-position": "bottom",
+                    "height": 0
+                });
+            }
+            self.progress.during(5, 100);
+        },
+        during: function (loaded, total) {
+            return $progress.show().css('height', parseFloat(((loaded / total) * 100).toFixed(0)) + '%');
+        },
+        success: function () {
+            data_model.request(page_config.api.avatar, function (data) {
+                if (data.success) {
+                    view_notification.show('设置成功', true);
+                }
+                else {
+                    $progress.css('height', 0);
+                    view_notification.show(data.message || '设置失败')
+                }
+            }, {avatar: self.avatar});
+            return self.progress.during(100, 100), $progress.removeClass('grey');
+        }
+    };
+    //创建图片URL
+    this.create_url = function (id, option) {
+        return 'http://dn-xswe.qbox.me/' + id + '?imageMogr2' + (option ? "/crop/!" + get_crop(option) : "") + "/auto-orient/thumbnail/480x";
+    };
+    //初始化
+    uploader.on("beforeupload", function (e, file, r) {
+
+    });
+    //进行中
+    uploader.on("uploadprogress", function (e, file, loaded, total) {
+        self.progress.during(loaded * 0.9, total);
+    });
+    //成功
+    uploader.on("uploadsuccess", function (e, file, r) {
+        if (r.hasOwnProperty('key')) {
+            self.avatar = r.key;
+            self.progress.success();
+        }
+        else {
+            view_notification.show('上传失败');
+        }
+    });
+    //完成
+    uploader.on('uploadcomplete', function (e, file, r) {
+
+    });
+    //错误
+    uploader.on('uploaderror', function (e, file, xhr, status) {
+        view_notification.show('上传失败');
+    });
+    //执行上传
+    $input.change(function () {
+        var prev_file = $(this).attr('exist-file');
+        if (prev_file) {
+            uploader.cancel(prev_file);
+        }
+        self.progress.start();
+        uploader.upload(this.files);
+        $(this).attr('exist-file', $(this).val());
+    });
+}).call(_define('avatar_view'));
+//信息条目修改 常规
+(function () {
+    var self = this,
+        $cancel = $('.cancel'),
+        $edit = $('.edit'),
+        $save = $('.save');
+
+    this.name = function (text, ele) {
+        data_model.request(page_config.api.name, function (data) {
+            if (data.success) {
+                view_notification.show('保存成功', true);
+                ele.removeClass('active').prev('input').prop('disabled', true);
+                profile_view.framework.data.name = text;
+            }
+            else {
+                view_notification.show('保存失败');
+            }
+        }, {name: text});
+    };
+    this.company = function (text, ele) {
+        data_model.request(page_config.api.company, function (data) {
+            if (data.success) {
+                view_notification.show('保存成功', true);
+                ele.removeClass('active').prev('input').prop('disabled', true);
+                profile_view.framework.data.firmname = text;
+            }
+            else {
+                view_notification.show('保存失败');
+            }
+        }, {com: text});
+    };
+    this.title = function (text, ele) {
+        data_model.request(page_config.api.title, function (data) {
+            if (data.success) {
+                view_notification.show('保存成功', true);
+                ele.removeClass('active').prev('input').prop('disabled', true);
+                profile_view.framework.data.title = text;
+            }
+            else {
+                view_notification.show('保存失败');
+            }
+        }, {title: text});
+    };
+    $edit.touchtap(function () {
+        var p = $(this).parent('.handle'),
+            i = p.prev('input');
+        p.addClass('active');
+        i.prop('disabled', false).data('before', i.val()).focus();
+    }, 350);
+    $cancel.touchtap(function () {
+        var p = $(this).parent('.handle'),
+            i = p.prev('input');
+        p.removeClass('active');
+        i.prop('disabled', true).val(i.data('before')).focus();
+    }, 350);
+    $save.touchtap(function () {
+        var p = $(this).parent('.handle'),
+            type = p.data('type');
+        if (self.hasOwnProperty(type)) {
+            self[type](p.prev('input').val(), p);
+        }
+    }, 350);
+}).call(_define('item_view'));
+//条目信息修改 个人简介
+(function () {
+    var self = this,
+        $cancel = $('.att-cancel'),
+        $edit = $('.att-edit'),
+        $save = $('.att-save');
+
+    this.summary = function (text, call) {
+        data_model.request(page_config.api.summary, function (data) {
+            if (data.success) {
+                view_notification.show('保存成功', true);
+                call();
+            }
+            else {
+                view_notification.show('保存失败');
+            }
+        }, {summary: text});
+    };
+    $edit.touchtap(function () {
+        var p = $(this).parent('.handle'),
+            t = $('#' + p.data('type'));
+        p.addClass('active');
+        t.addClass('active').prop('disabled', false).data('before', t.val()).focus();
+    }, 350);
+    $cancel.touchtap(function () {
+        var p = $(this).parent('.handle'),
+            t = $('#' + p.data('type'));
+        p.removeClass('active');
+        t.removeClass('active').prop('disabled', true).val(t.data('before'));
+    }, 350);
+    $save.touchtap(function () {
+        var p = $(this).parent('.handle'),
+            type = p.data('type'),
+            t = $('#' + p.data('type'));
+        if (self.hasOwnProperty(type)) {
+            self[type](t.val(), function () {
+                p.removeClass('active');
+                t.removeClass('active').prop('disabled', true);
+            });
+        }
+    }, 350);
+}).call(_define('item_view'));
+//条目信息修改 修改密码
+(function () {
+    var self = this,
+        $old = $('#pwd-old'),
+        $old_eye = $old.next(),
+        $new = $('#pwd-new'),
+        $new_eye = $new.next(),
+        $repeat = $('#pwd-repeat'),
+        $repeat_eye = $repeat.next(),
+        $submit = $('#submit-change');
+
+    this.form = function (empty) {
+        return !!empty ? ($old.val(''), $new.val(''), $repeat.val('')) : {
+            old_pwd: $old.val(),
+            new_pwd: $new.val(),
+            new_pwd_: $repeat.val()
+        }
+    };
+    this.check = function () {
+        return $old.val().length >= 6 && $new.val().length >= 6 && $repeat.val().length >= 6;
+    };
+    this.active = function () {
+        if (self.check()) {
+            $submit.addClass('active');
+        }
+        else {
+            $submit.removeClass('active');
+        }
+    };
+    $submit.touchtap(function () {
+        if (self.check()) {
+            data_model.request(page_config.api.change, function (data) {
+                if (data.success) {
+                    self.form(true);
+                    view_notification.show('修改成功', true);
+                    history.go(-1);
+                }
+                else {
+                    view_notification.show(data.message || '修改成功');
+                }
+            }, self.form());
+        }
+    });
+    setInterval(self.active, 300);
+    $old_eye.on('touchstart mousedown', function () {
+        $old.attr('type', 'text')
+    });
+    $old_eye.on('touchend mouseup', function () {
+        $old.attr('type', 'password')
+    });
+    $new_eye.on('touchstart mousedown', function () {
+        $new.attr('type', 'text')
+    });
+    $new_eye.on('touchend mouseup', function () {
+        $new.attr('type', 'password')
+    });
+    $repeat_eye.on('touchstart mousedown', function () {
+        $repeat.attr('type', 'text')
+    });
+    $repeat_eye.on('touchend mouseup', function () {
+        $repeat.attr('type', 'password')
+    });
+}).call(_define('item_view'));
+//条目信息修改 选择区域
+(function () {
+    var self = this,
+        ori_list = [],
+        list = [],
+        province = [],
+        city = [],
+        act_province = 0,
+        active = 4295229440;
+
+    this.framework = avalon.define("region", function (vm) {
+        vm.province = [];
+        vm.city = [];
+    });
+    this.get_name = function (id) {
+        var l = list.length, p = '', c = '';
+        for (var i = 0; i < l; i++) {
+            if (list[i].id == id) {
+                p = list[i].parentid.length > 9 ? list[i].ancestornames : '';
+                c = list[i].name;
+            }
+        }
+        return p + ' ' + c;
+    };
+    this.get_active = function () {
+        return active;
+    };
+    this.update = function (id) {
+        active = id;
+        self.init();
+    };
+    this.init = function () {
+        list = ori_list.concat();
+        self.active();
+        self.devide();
+        self.render();
+    };
+    this.active = function (act) {
+        var l = list.length;
+        if (active && !act) {
+            for (var i = 0; i < l; i++) {
+                if (list[i].id == active) {
+                    list[i].active = true;
+                    if (list[i].parentid.length > 9) {
+                        act_province = list[i].parentid;
+                        self.active(list[i].parentid);
+                    }
+                    else {
+                        act_province = active;
+                    }
+                }
+                else {
+                    list[i].active = false;
+                }
+            }
+        }
+        if (act) {
+            for (var i = 0; i < l; i++) {
+                if (list[i].id == act) {
+                    list[i].active = true;
+                }
+            }
+        }
+
+    };
+    this.devide = function () {
+        var l = list.length;
+        province = [];
+        city = [{
+            parentid: act_province,
+            name: '不限',
+            id: act_province,
+            active: act_province == active
+        }];
+        for (var i = 0; i < l; i++) {
+            if (list[i].parentid.length < 10 && list[i].id.length >= 10) {
+                province.push(list[i]);
+            }
+            if (list[i].parentid.length == 10 && active && list[i].parentid == act_province) {
+                city.push(list[i]);
+            }
+        }
+    };
+    this.render = function () {
+        self.framework.province = province;
+        self.framework.city = city;
+    };
+    this.get_list = function () {
+        data_model.get(page_config.api.region_list, function (data) {
+            if (data.list) {
+                ori_list = data.list;
+                self.init();
+            }
+        })
+    };
+    self.get_list();
+}).call(_define('region_view'));
+//条目信息修改 选择区域 逻辑
+(function () {
+    var self = this,
+        $region = $('#region'),
+        $left = $region.children('.content').children('.left'),
+        $right = $region.children('.content').children('.right'),
+        $submit = $('#submit-region'),
+        lst = 0,
+        lsx = 0,
+        lsy = 0,
+        rst = 0,
+        rsx = 0,
+        rsy = 0;
+
+    this.tap_left = function (id) {
+        region_view.update(id);
+    };
+    this.tap_right = function (id) {
+        region_view.update(id);
+    };
+    this.submit = function () {
+        data_model.request(page_config.api.region, function (data) {
+            if (data.success) {
+                view_notification.show(data.message || '设置成功', true);
+                profile_view.framework.data.regionname = region_view.get_name(region_view.get_active());
+                history.go(-1);
+            }
+            else {
+                view_notification.show(data.message || '设置失败')
+            }
+        }, {region: region_view.get_active()});
+    };
+    $left.delegate("li", "touchstart", function (e) {
+        lsx = e.originalEvent.touches[0].pageX;
+        lsy = e.originalEvent.touches[0].pageY;
+        lst = new Date().getTime();
+    });
+    $left.delegate("li", "touchend", function (e) {
+        var event = e.originalEvent.changedTouches[0], move = Math.pow(event.pageX - lsx, 2) + Math.pow(event.pageY - lsy, 2), o = new Date().getTime();
+        if (o - lst < 150 && move < 81) {
+            self.tap_left($(this).data('id'));
+        }
+    });
+    $right.delegate("li", "touchstart", function (e) {
+        rsx = e.originalEvent.touches[0].pageX;
+        rsy = e.originalEvent.touches[0].pageY;
+        rst = new Date().getTime();
+    });
+    $right.delegate("li", "touchend", function (e) {
+        var event = e.originalEvent.changedTouches[0], move = Math.pow(event.pageX - rsx, 2) + Math.pow(event.pageY - rsy, 2), o = new Date().getTime();
+        if (o - rst < 150 && move < 81) {
+            self.tap_right($(this).data('id'));
+        }
+    });
+    $submit.touchtap(self.submit);
+
+}).call(_define('region_view'));
+//子侧栏控制
+(function () {
+    var self = this,
+        h = $(window).height(),
+        $main = $('#main-page'),
+        $change = $('#change-pwd'),
+        $region = $('#region'),
+        $region_content = $region.children('.content'),
+        sta = $();
+
+    this.style_syn = function () {
+        $region_content.css('height', ($(window).height() - 100) + 'px');
+    };
+    this.main_hide = function () {
+        $main.css('height', h + 'px').animate({'margin-left': -100 + '%'}, 400);
+    };
+    this.main_show = function () {
+        $main.css('height', 'auto').animate({'margin-left': 0 + '%'}, 400);
+    };
+    this.slide_change = function () {
+        return self.main_hide(), $change.addClass('active');
+    };
+    this.slide_region = function () {
+        return self.style_syn(), self.main_hide(), $region.addClass('active');
+    };
+    this.slide_back = function () {
+        return self.main_show(), setTimeout(function () {
+            sta.removeClass('active')
+        }, 400);
+    };
+    this.router = function () {
+        var type = '';
+        if (base_hash.getdata('child')) {
+            type = base_hash.getdata('child');
+            if (type == 'change') {
+                sta = self.slide_change();
+            }
+            else if (type == 'region') {
+                sta = self.slide_region();
+            }
+        }
+        else {
+            self.slide_back();
+        }
+    };
+    $region[0].addEventListener('touchmove', function (e) {
+        var nh = $(window).height();
+        if (nh != h) {
+            style_syn();
+        }
+    }, false);
+    window.onhashchange = self.router;
+    location.hash = '';
+}).call(_define('item_view'));

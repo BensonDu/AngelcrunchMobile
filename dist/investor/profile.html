@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="description" content="天使汇 | 让靠谱的项目找到靠谱的钱 | 创业，投资，找VC就上天使汇 | 中国天使合投第一平台"/>
+    <meta name="keywords" content="天使汇,创业,投资,找VC,上天使汇,中国天使合投第一平台"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+    <meta name="apple-touch-fullscreen" content="yes"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta name="author" content="http://angelcrunch.com"/>
+    <meta name="copyright" content="Copyright &copy;http://angelcrunch.com 版权所有"/>
+    <meta name="revisit-after" content="1 days"/>
+    <meta name="format-detection" content="email=no"/>
+    <meta name="format-detection" content="telephone=yes"/>
+    <title>天使汇 | 个人信息 | 让靠谱的项目找到靠谱的钱</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/ico"/>
+    <link rel="Bookmark" href="/favicon.ico"/>
+    <link href="/static/css/wapsite/base-css.css" rel="stylesheet"/>
+    <link href="/static/css/wapsite/investor/profile.css" rel="stylesheet"/>
+</head>
+<body>
+<div class="bk"></div>
+<div id="details" class="details">
+    <!--首页-->
+    <div id="main-page" class="main-page slide-page">
+        <!--头部-->
+        <div class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
+        <div id="head-container" class="head-container">
+            <div id="header" class="newhead">
+                <div class="logo touch-href" data-href="http://angelcrunch.com"></div>
+                <div class="options">
+                    <span></span>
+                    <ul class="hidden-menu">
+                        <li class="touch-href" data-href="http://angelcrunch.com/startup_financing">创业项目</li>
+                        <li class="touch-href" data-href="http://angelcrunch.com/angel">投资人</li>
+                    </ul>
+                </div>
+                <div class="account">
+                    <span></span>
+                    <ul class="hidden-menu"></ul>
+                </div>
+            </div>
+        </div>
+        <!--详情页-->
+        <div class="content" ms-controller="profile">
+            <div class="title"><h1>个人信息</h1></div>
+            <div class="summary">
+                <label id="avatar" class="avatar">
+                    <img ms-attr-src="data.avatar_big">
+                    <input type="file">
+
+                    <div class="process"></div>
+                    <p>点击更换</p>
+                </label>
+                <a ms-attr-href="data.link">
+                    <div id="profile" class="profile">
+                        <h3 ms-text="data.name"></h3>
+                        <h5><span ms-text="data.firmname"></span> · <span ms-text="data.title"></span></h5>
+                    </div>
+                    <em class="arrow"></em>
+                </a>
+            </div>
+            <div class="item">
+                <span class="item-name">真实姓名</span>
+                <input type="text" ms-attr-value="data.name" disabled>
+
+                <div class="handle" data-type="name">
+                    <span class="edit"></span>
+                    <span class="save"><a>确定</a></span>
+                    <span class="cancel"><a>取消</a></span>
+                </div>
+            </div>
+            <div class="item">
+                <span class="item-name">地区</span>
+                <input type="text" ms-attr-value="data.regionname" disabled>
+                <a href="#child:region">
+                    <div class="arrow">
+                        <em></em>
+                    </div>
+                </a>
+            </div>
+            <div class="item">
+                <span class="item-name">所在公司</span>
+                <input type="text" ms-attr-value="data.firmname" disabled>
+
+                <div class="handle" data-type="company">
+                    <span class="edit"></span>
+                    <span class="save"><a>确定</a></span>
+                    <span class="cancel"><a>取消</a></span>
+                </div>
+            </div>
+            <div class="item">
+                <span class="item-name">担任职位</span>
+                <input type="text" ms-attr-value="data.title" disabled>
+
+                <div class="handle" data-type="title">
+                    <span class="edit"></span>
+                    <span class="save"><a>确定</a></span>
+                    <span class="cancel"><a>取消</a></span>
+                </div>
+            </div>
+            <div class="item">
+                <span class="item-name">手机号码</span>
+                <input type="text" ms-attr-value="data.phone">
+            </div>
+            <div class="item">
+                <span class="item-name">修改密码</span>
+                <a href="#child:change">
+                    <div class="arrow"><em></em></div>
+                </a>
+            </div>
+            <div class="item">
+                <span class="item-name">个人简介</span>
+
+                <div class="handle" data-type="summary">
+                    <span class="att-edit"></span>
+                    <span class="att-save"><a>确定</a></span>
+                    <span class="att-cancel"><a>取消</a></span>
+                </div>
+            </div>
+            <div class="desc">
+                <textarea id="summary" ms-text="data.summary" disabled></textarea>
+            </div>
+        </div>
+    </div>
+    <!--密码修改-->
+    <div id="change-pwd" class="change-pwd slide-page">
+        <div class="header"><a href="javascript:history.go(-1)"></a>
+
+            <h3>修改密码</h3></div>
+        <label>
+            <span>旧密码</span>
+            <i><input id="pwd-old" type="password" name="password" value="" maxlength="16"><em
+                    class="vector-icons eye"></em></i>
+        </label>
+        <label>
+            <span>新密码</span>
+            <i><input id="pwd-new" type="password" name="password" value="" maxlength="16"><em
+                    class="vector-icons eye"></em></i>
+        </label>
+        <label>
+            <span>重复密码</span>
+            <i><input id="pwd-repeat" type="password" name="password" value="" maxlength="16"><em
+                    class="vector-icons eye"></em></i>
+        </label>
+        <button id="submit-change" class="btn submit-btn ci-link"></button>
+    </div>
+    <!--选择地区-->
+    <div id="region" class="region slide-page" ms-controller="region">
+        <div class="header"><a href="javascript:history.go(-1)"></a>
+
+            <h3>选择地区</h3></div>
+        <div class="content">
+            <ul class="left">
+                <li ms-repeat="province" ms-text="el.name" ms-attr-data-id="el.id"
+                    ms-attr-class="el.active?'active':''"></li>
+            </ul>
+            <ul class="right">
+                <li ms-repeat="city" ms-text="el.name" ms-attr-data-id="el.id"
+                    ms-attr-class="el.active?'active':''"></li>
+            </ul>
+        </div>
+        <div class="confirm"><a id="submit-region" class="btn">确定</a></div>
+    </div>
+</div>
+</body>
+<script src="http://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
+<script src="/static/js/lib/jquery-cookie.js"></script>
+<script src="/static/js/wapsite/angelcrunch_base.js"></script>
+<script src="/static/js/lib/image_upload.min.js"></script>
+<script src="https://dn-acac.qbox.me/avalon.mobile.min.js"></script>
+<script src="/static/js/wapsite/angelcrunch_profile.js"></script>
+</html>

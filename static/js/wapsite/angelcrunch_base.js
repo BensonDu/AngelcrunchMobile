@@ -1,6 +1,6 @@
 (function(){
     //定义类
-    this.define=function(s){
+    this.define = this._define = function (s) {
         return (typeof  s != 'undefined' && typeof  this[s] == 'undefined') ? this[s] = {} : (this[s] || {});
     };
     this.base_environment=(function(){
@@ -466,6 +466,7 @@
             base_remote_data.ajaxjsonp(api.user_info,function(data){
                 if(data.hasOwnProperty('user')){
                     $account.children('span').css('background',"url("+data.user.avatar_small+")");
+                    account_hook(data);
                 }
             },{'uid':account_info.id,'access_token':account_info.token});
             $account.addClass('active');
@@ -473,6 +474,9 @@
         notlogin:function(){
             //暂时木有不重刷 取消登录状态
         }
+    };
+    this.account_hook = function () {
+
     };
     if(account_info.is_login){
         if(account_info.role>1){
