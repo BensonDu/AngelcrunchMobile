@@ -152,7 +152,10 @@
                 d.message = d.financing_stage.financing_result.result_info;
             }
             else{
-                d.message = d.financing_stage.financing_progress.process_info;
+                d.message = d.financing_stage.financing_progress ? (d.financing_stage.financing_progress.process_info || '') : '';
+            }
+            if (!d.financing_stage.financing_result && !d.financing_stage.financing_progress) {
+                d.isfinish = null;
             }
         }
         //设置页面属性
