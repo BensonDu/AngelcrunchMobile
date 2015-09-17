@@ -466,7 +466,6 @@
             base_remote_data.ajaxjsonp(api.user_info,function(data){
                 if (data.hasOwnProperty('avatar_small')) {
                     $account.children('span').css('background', "url(" + data.avatar_small + ")");
-                    account_hook(data);
                 }
             },{'uid':account_info.id,'access_token':account_info.token});
             $account.addClass('active');
@@ -474,9 +473,6 @@
         notlogin:function(){
             //暂时木有不重刷 取消登录状态
         }
-    };
-    this.account_hook = function () {
-
     };
     if(account_info.is_login){
         if(account_info.role>1){

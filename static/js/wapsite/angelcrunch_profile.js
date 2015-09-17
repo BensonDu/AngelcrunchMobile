@@ -50,28 +50,35 @@
     this.framework = avalon.define("profile", function (vm) {
         vm.data = {};
     });
-    //绑定basejs获取用户信息方法
-    window.account_hook = function (data) {
+    this.get_info = function (call) {
+        data_model.request(api.user_info, function (data) {
+            call(data)
+        }, {});
+    };
+    this.show_info = function (data) {
         if (data.avatar_small) {
             data.link = base_protocol + data.id + '.' + base_host;
             data.region = '';
             self.framework.data = data;
             region_view.get_list(data.cityid || data.regionid);
         }
-    }
+    };
+    self.get_info(self.show_info);
 }).call(_define('profile_view'));
 //头像上传
 (function () {
     var self = this,
         $avatar = $('#avatar'),
+        $img = $avatar.children('img'),
         $progress = $avatar.children('.process'),
-        $input = $avatar.children('input'),
+        $input = $('#upload-input'),
         uploader = simple.uploader({});
     this.init = function (img) {
         $progress.addClass('grey').css({
             "background-image": 'url(' + img + ')',
             "background-size": "70px",
             "background-position": "bottom",
+            "background-repeat": "no-repeat",
             "height": 0
         });
     };
@@ -80,28 +87,27 @@
     this.progress = {
         start: function () {
             if ($input[0].files && $input[0].files[0]) {
-                $progress.addClass('grey').css({
-                    "background-color": "#fff",
-                    "background-image": 'url(' + window.URL.createObjectURL($input[0].files[0]) + ')',
-                    "background-size": "70px",
-                    "background-position": "bottom",
-                    "height": 0
-                });
+                $progress.addClass('active');
             }
             self.progress.during(5, 100);
         },
         during: function (loaded, total) {
-            return $progress.show().css('height', parseFloat(((loaded / total) * 100).toFixed(0)) + '%');
+
         },
-        success: function () {
+        success: function (url) {
             data_model.request(page_config.api.avatar, function (data) {
                 if (data.success) {
-                    view_notification.show('设置成功', true);
+                    $img.attr('src', url);
+                    $img.load(function () {
+                        $progress.removeClass('active');
+                        view_notification.show('设置成功', true);
+                    });
                 }
                 else {
-                    $progress.css('height', 0);
-                    view_notification.show(data.message || '设置失败')
+                    $progress.removeClass('active');
+                    view_notification.show(data.message || '设置失败');
                 }
+
             }, {avatar: self.avatar});
             return self.progress.during(100, 100), $progress.removeClass('grey');
         }
@@ -116,13 +122,13 @@
     });
     //进行中
     uploader.on("uploadprogress", function (e, file, loaded, total) {
-        self.progress.during(loaded * 0.9, total);
+
     });
     //成功
     uploader.on("uploadsuccess", function (e, file, r) {
         if (r.hasOwnProperty('key')) {
             self.avatar = r.key;
-            self.progress.success();
+            self.progress.success(self.create_url(r.key, r));
         }
         else {
             view_notification.show('上传失败');

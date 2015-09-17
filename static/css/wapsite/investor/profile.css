@@ -53,7 +53,9 @@
 }
 
 .content .summary .avatar input {
-    display: none;
+    display: inline-block;
+    width: 0;
+    height: 0;
 }
 
 .content .summary .avatar img {
@@ -64,18 +66,20 @@
 
 .content .summary .avatar .process {
     position: absolute;
-    bottom: 0;
+    display: none;
     left: 0;
+    top: 0;
     border-radius: 0;
-    width: 100%;
-    height: 0;
     z-index: 4;
+    width: 70px;
+    height: 70px;
+    background: url("http://dn-acac.qbox.me/mobile/public/preloader.gif") no-repeat center;
+    background-size: 70px;
 }
 
-.content .summary .avatar .process.grey {
-    -webkit-filter: grayscale(1);
+.content .summary .avatar .process.active {
+    display: inline-block;
 }
-
 .content .summary .avatar p {
     position: absolute;
     display: inline-block;
@@ -322,6 +326,9 @@ label > i input:focus {
     outline: none;
 }
 
+input[type="text"][disabled] {
+    color: #666;
+}
 /*选择区域*/
 .region {
     display: none;
@@ -363,16 +370,18 @@ label > i input:focus {
 }
 
 .region .content {
+    position: relative;
     width: 100%;
     overflow: hidden;
 }
 
 .region .content ul {
-    display: inline-block;
+    display: block;
     padding: 0 5%;
     width: 50%;
     height: 100%;
-    position: relative;
+    position: absolute;
+    top: 0;
     overflow-x: hidden;
     overflow-y: auto;
 }
@@ -382,7 +391,7 @@ label > i input:focus {
 }
 
 .region .content ul li {
-    display: inline-block;
+    display: block;
     height: 50px;
     width: 100%;
     line-height: 53px;
@@ -413,11 +422,11 @@ label > i input:focus {
 }
 
 .region .content ul.left {
-    float: left;
+    left: 0;
 }
 
 .region .content ul.right {
-    float: right;
+    right: 0;
 }
 
 .region .confirm {

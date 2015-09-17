@@ -19,7 +19,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/ico"/>
     <link rel="Bookmark" href="/favicon.ico"/>
     <link href="/static/css/wapsite/base-css.css" rel="stylesheet"/>
-    <link href="/static/css/wapsite/investor/profile.css" rel="stylesheet"/>
+    <link href="/static/css/wapsite/investor/profile.css?7" rel="stylesheet"/>
 </head>
 <body>
 <div class="bk"></div>
@@ -49,9 +49,8 @@
             <div class="title"><h1>个人信息</h1></div>
             <div class="summary">
                 <label id="avatar" class="avatar">
-                    <img ms-attr-src="data.avatar_big">
-                    <input type="file">
-
+                    <img class="loading" ms-attr-src="data.avatar_big">
+                    <input id="upload-input" type="file">
                     <div class="process"></div>
                     <p>点击更换</p>
                 </label>
@@ -85,7 +84,6 @@
             <div class="item">
                 <span class="item-name">所在公司</span>
                 <input class="input-basic" type="text" ms-attr-value="data.firmname" disabled>
-
                 <div class="handle" data-type="company">
                     <span class="edit"></span>
                     <span class="save"><a>确定</a></span>
@@ -172,5 +170,5 @@
 <script src="/static/js/wapsite/angelcrunch_base.js?v1"></script>
 <script src="/static/js/lib/image_upload.min.js"></script>
 <script src="https://dn-acac.qbox.me/avalon.mobile.min.js"></script>
-<script src="/static/js/wapsite/angelcrunch_profile.js?2"></script>
+<script src="/static/js/wapsite/angelcrunch_profile.js?3"></script>
 </html>
