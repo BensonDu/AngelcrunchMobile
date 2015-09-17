@@ -29,7 +29,7 @@
     this.api={
         login:this.base_mobile+'v2/home/login',
         log:'http://api.dubaoxing.com/angel/record',
-        user_info:this.base_mobile+'v2/home/user_info',
+        user_info: this.base_mobile + 'v4/home/profile',
         host_id:this.base_mobile+'v3/host_id',
         com_details:this.base_mobile+'v2/startup/m_detail',
         com_finace_info:this.base_mobile+'v2/startup/m_finance',
@@ -107,7 +107,7 @@
                     ret=JSON.parse(data);
                 }
                 catch(e){
-                    ret=data;
+                    ret = null;
                 }
 
             }
@@ -464,8 +464,8 @@
     this.account_portrait={
         login:function(){
             base_remote_data.ajaxjsonp(api.user_info,function(data){
-                if(data.hasOwnProperty('user')){
-                    $account.children('span').css('background',"url("+data.user.avatar_small+")");
+                if (data.hasOwnProperty('avatar_small')) {
+                    $account.children('span').css('background', "url(" + data.avatar_small + ")");
                     account_hook(data);
                 }
             },{'uid':account_info.id,'access_token':account_info.token});

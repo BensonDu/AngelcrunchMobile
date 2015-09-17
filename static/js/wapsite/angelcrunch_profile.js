@@ -1,8 +1,7 @@
 (function () {
     log.type = 'profile';
     this.api = {
-        profile: base_mobile + 'v2/home/user_info',
-        avatar: base_mobile + 'v4/settings/profile/save_avatar',
+        avatar: base_mobile + 'v4/settings/profile/_save_avatar',
         name: base_mobile + 'v4/settings/profile/save_name',
         company: base_mobile + 'v4/settings/profile/save_com',
         title: base_mobile + 'v4/settings/profile/save_title',
@@ -10,6 +9,9 @@
         change: base_mobile + 'v4/settings/profile/save_pwd',
         region_list: base_mobile + 'v4/settings/profile/getregionlist',
         region: base_mobile + 'v4/settings/profile/save_region'
+    };
+    if (!account_info.is_login) {
+        location.href = 'http://auth.angelcrunch.com';
     }
 }).call(_define('page_config'));
 //消息通知
@@ -48,10 +50,13 @@
     this.framework = avalon.define("profile", function (vm) {
         vm.data = {};
     });
+    //绑定basejs获取用户信息方法
     window.account_hook = function (data) {
-        if (data.user) {
-            data.user.link = base_protocol + data.user.id + '.' + base_host;
-            self.framework.data = data.user;
+        if (data.avatar_small) {
+            data.link = base_protocol + data.id + '.' + base_host;
+            data.region = '';
+            self.framework.data = data;
+            region_view.get_list(data.cityid || data.regionid);
         }
     }
 }).call(_define('profile_view'));
@@ -147,13 +152,14 @@
     var self = this,
         $cancel = $('.cancel'),
         $edit = $('.edit'),
-        $save = $('.save');
+        $save = $('.save'),
+        $input = $('.input-basic');
 
     this.name = function (text, ele) {
         data_model.request(page_config.api.name, function (data) {
             if (data.success) {
                 view_notification.show('保存成功', true);
-                ele.removeClass('active').prev('input').prop('disabled', true);
+                ele.removeClass('active').prev('input').blur().prop('disabled', true);
                 profile_view.framework.data.name = text;
             }
             else {
@@ -165,7 +171,7 @@
         data_model.request(page_config.api.company, function (data) {
             if (data.success) {
                 view_notification.show('保存成功', true);
-                ele.removeClass('active').prev('input').prop('disabled', true);
+                ele.removeClass('active').prev('input').blur().prop('disabled', true);
                 profile_view.framework.data.firmname = text;
             }
             else {
@@ -177,7 +183,7 @@
         data_model.request(page_config.api.title, function (data) {
             if (data.success) {
                 view_notification.show('保存成功', true);
-                ele.removeClass('active').prev('input').prop('disabled', true);
+                ele.removeClass('active').prev('input').blur().prop('disabled', true);
                 profile_view.framework.data.title = text;
             }
             else {
@@ -189,13 +195,16 @@
         var p = $(this).parent('.handle'),
             i = p.prev('input');
         p.addClass('active');
-        i.prop('disabled', false).data('before', i.val()).focus();
+        i.prop('disabled', false).data('before', i.val());
+        setTimeout(function () {
+            i.focus();
+        }, 200);
     }, 350);
     $cancel.touchtap(function () {
         var p = $(this).parent('.handle'),
             i = p.prev('input');
         p.removeClass('active');
-        i.prop('disabled', true).val(i.data('before')).focus();
+        i.blur().prop('disabled', true).val(i.data('before'));
     }, 350);
     $save.touchtap(function () {
         var p = $(this).parent('.handle'),
@@ -204,6 +213,14 @@
             self[type](p.prev('input').val(), p);
         }
     }, 350);
+    $input.on('keypress', function (e) {
+        var t = $(this),
+            p = t.next(),
+            type = p.data('type');
+        if (e.keyCode == 13 && self.hasOwnProperty(type)) {
+            self[type](p.prev('input').val(), p);
+        }
+    });
 }).call(_define('item_view'));
 //条目信息修改 个人简介
 (function () {
@@ -227,13 +244,13 @@
         var p = $(this).parent('.handle'),
             t = $('#' + p.data('type'));
         p.addClass('active');
-        t.addClass('active').prop('disabled', false).data('before', t.val()).focus();
+        t.addClass('active').prop('disabled', false).focus().data('before', t.val());
     }, 350);
     $cancel.touchtap(function () {
         var p = $(this).parent('.handle'),
             t = $('#' + p.data('type'));
         p.removeClass('active');
-        t.removeClass('active').prop('disabled', true).val(t.data('before'));
+        t.blur().removeClass('active').prop('disabled', true).val(t.data('before'));
     }, 350);
     $save.touchtap(function () {
         var p = $(this).parent('.handle'),
@@ -242,7 +259,7 @@
         if (self.hasOwnProperty(type)) {
             self[type](t.val(), function () {
                 p.removeClass('active');
-                t.removeClass('active').prop('disabled', true);
+                t.blur().removeClass('active').prop('disabled', true);
             });
         }
     }, 350);
@@ -318,12 +335,17 @@
         province = [],
         city = [],
         act_province = 0,
-        active = 4295229440;
+        active = 4295034880;
 
     this.framework = avalon.define("region", function (vm) {
         vm.province = [];
         vm.city = [];
     });
+    this.input = function () {
+        if (active > 0) {
+            profile_view.framework.data.region = self.get_name(active);
+        }
+    };
     this.get_name = function (id) {
         var l = list.length, p = '', c = '';
         for (var i = 0; i < l; i++) {
@@ -343,11 +365,11 @@
     };
     this.init = function () {
         list = ori_list.concat();
-        self.active();
+        self.active_func();
         self.devide();
         self.render();
     };
-    this.active = function (act) {
+    this.active_func = function (act) {
         var l = list.length;
         if (active && !act) {
             for (var i = 0; i < l; i++) {
@@ -355,7 +377,7 @@
                     list[i].active = true;
                     if (list[i].parentid.length > 9) {
                         act_province = list[i].parentid;
-                        self.active(list[i].parentid);
+                        self.active_func(list[i].parentid);
                     }
                     else {
                         act_province = active;
@@ -397,15 +419,25 @@
         self.framework.province = province;
         self.framework.city = city;
     };
-    this.get_list = function () {
-        data_model.get(page_config.api.region_list, function (data) {
-            if (data.list) {
-                ori_list = data.list;
-                self.init();
-            }
-        })
+    this.get_list = function (id) {
+        active = parseInt(id) > 100 ? parseInt(id) : active;
+        //本地缓存
+        if (!base_local_data.getdata('china_region_data_v1')) {
+            data_model.get(page_config.api.region_list, function (data) {
+                if (data.list) {
+                    ori_list = data.list;
+                    self.init();
+                    self.input();
+                    base_local_data.savedata('china_region_data_v1', data.list);
+                }
+            });
+        }
+        else {
+            ori_list = base_local_data.getdata('china_region_data_v1');
+            self.init();
+            self.input();
+        }
     };
-    self.get_list();
 }).call(_define('region_view'));
 //条目信息修改 选择区域 逻辑
 (function () {
@@ -431,7 +463,7 @@
         data_model.request(page_config.api.region, function (data) {
             if (data.success) {
                 view_notification.show(data.message || '设置成功', true);
-                profile_view.framework.data.regionname = region_view.get_name(region_view.get_active());
+                region_view.input();
                 history.go(-1);
             }
             else {
