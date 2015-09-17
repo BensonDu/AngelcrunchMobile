@@ -198,7 +198,7 @@
         i.prop('disabled', false).data('before', i.val());
         setTimeout(function () {
             i.focus();
-        }, 200);
+        }, 1000);
     }, 350);
     $cancel.touchtap(function () {
         var p = $(this).parent('.handle'),
