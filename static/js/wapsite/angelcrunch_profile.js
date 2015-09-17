@@ -73,15 +73,6 @@
         $progress = $avatar.children('.process'),
         $input = $('#upload-input'),
         uploader = simple.uploader({});
-    this.init = function (img) {
-        $progress.addClass('grey').css({
-            "background-image": 'url(' + img + ')',
-            "background-size": "70px",
-            "background-position": "bottom",
-            "background-repeat": "no-repeat",
-            "height": 0
-        });
-    };
     this.avatar = '';
     //进度条显示
     this.progress = {
