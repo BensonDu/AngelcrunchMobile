@@ -327,7 +327,7 @@ label > i input:focus {
 }
 
 input[type="text"][disabled] {
-    color: #666;
+    color: #333;
 }
 /*选择区域*/
 .region {
