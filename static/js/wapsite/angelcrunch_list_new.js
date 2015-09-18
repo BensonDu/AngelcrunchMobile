@@ -475,6 +475,7 @@
         if(!!data.type){
             self.record_history(data);
             self.default_display(data);
+            view_filter.filter_name_syn();
             if(data.type == 'search' && !!data.k){
                 return controll_list.search_list_index(p,data.k);
             }
@@ -521,7 +522,9 @@
     };
 
     window.onhashchange = self.core;
-    self.core();
+    setTimeout(function () {
+        self.core();
+    }, 0);
 }).call(define('route'));
 
 (function(){
@@ -595,15 +598,12 @@
             $select.eq(index).addClass('active');
         }
     };
-    this.debug=function(){
-        return $select;
-    };
     this.active_offset = 0;
     this.curret_type = 1;
-    this.type_transfer = function(){
-        var ret = '闪投项目';
-        if(!!hash_data.type){
-            switch (hash_data.type){
+    this.type_transfer = function (type) {
+        var ret = '闪投项目', t = type || hash_data.type;
+        if (!!t) {
+            switch (t) {
                 case 'com':
                     ret = '全部项目';
                     break;
@@ -618,9 +618,9 @@
         }
         return ret;
     };
-    this.transfer_type = function(){
-        var ret = 'sd';
-        switch (self.com_active){
+    this.transfer_type = function (type) {
+        var ret = 'sd', t = type || self.com_active;
+        switch (t) {
             case '全部项目':
                 ret = 'com';
                 break;
@@ -671,11 +671,11 @@
     this.sd_state_list = ['正在热投','完成融资'];
     this.order_list    =  ['热度排序','时间排序'];
     this.avalon_filter = avalon.define("list-filter", function (vm) {
-        vm.page_name= self.com_active;
-        vm.industry_name= self.industry_active;
-        vm.district_name= self.district_active;
-        vm.sd_state_name= self.sd_state_active;
-        vm.order_name = self.order_active;
+        vm.page_name = '';
+        vm.industry_name = '';
+        vm.district_name = '';
+        vm.sd_state_name = '';
+        vm.order_name = '';
         vm.list_content= self.page_list.concat();
         vm.list_page=function(){
             self.filter_acitve(0);
@@ -727,4 +727,15 @@
         };
 
     });
+    //URL 筛选名称对应
+    this.filter_name_syn = function () {
+        var hash_data_ = base_hash_model.get_data();
+        if (hash_data_.type) {
+            self.avalon_filter.page_name = self.type_transfer(hash_data_.type);
+            self.avalon_filter.industry_name = !!hash_data_.industry ? hash_data_.industry : '全部行业';
+            self.avalon_filter.district_name = !!hash_data_.district ? hash_data_.district : '全部地区';
+            self.avalon_filter.sd_state_name = (!!hash_data_.state && hash_data_.state == 'success') ? '完成融资' : '正在热投';
+            self.avalon_filter.order_name = (!!hash_data_.order && hash_data_.order == 'new') ? '时间排序' : '热度排序';
+        }
+    };
 }).call(define('view_filter'));
