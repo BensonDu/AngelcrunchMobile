@@ -193,9 +193,7 @@
             i = p.prev('input');
         p.addClass('active');
         i.prop('disabled', false).data('before', i.val());
-        setTimeout(function () {
-            i.focus();
-        }, 1000);
+
     }, 350);
     $cancel.touchtap(function () {
         var p = $(this).parent('.handle'),
