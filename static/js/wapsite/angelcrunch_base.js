@@ -410,7 +410,7 @@
         $bk=$('.bk'),
         $option=$head.children('.options'),
         $account=$head.children('.account'),
-        $container=$account.children('ul'),
+        $container=$('.options').children('ul'),
         $current=$(),
         sta=false,
         headoption_display={
@@ -426,7 +426,7 @@
             }
         },
         display_controll=function(){
-            $current=$(this);
+            $current=$option;
             if(!sta){
                 headoption_display.show();
             }
@@ -437,12 +437,12 @@
     this.account_center={
         default_item:{
             investor:[
-                [base_protocol+account_info.id+'.'+base_host,'个人主页'],
+                [base_protocol+base_host+'profile','个人中心'],
                 [base_protocol+base_host+'create','创建项目'],
                 ['javascript:account_operate.logoff()','退出登录']
             ],
             entre:   [
-                [base_protocol+account_info.id+'.'+base_host,'个人主页'],
+                [base_protocol+base_host+'profile','个人中心'],
                 [base_protocol+base_host+'create','创建项目'],
                 ['javascript:account_operate.logoff()','退出登录']
             ],
@@ -466,6 +466,7 @@
             base_remote_data.ajaxjsonp(api.user_info,function(data){
                 if (data.hasOwnProperty('avatar_small')) {
                     $account.children('span').css('background', "url(" + data.avatar_small + ")");
+                    base_user_info = data;
                 }
             },{'uid':account_info.id,'access_token':account_info.token});
             $account.addClass('active');
@@ -488,7 +489,7 @@
         account_center.item=account_center.default_item.notlogin;
         account_portrait.notlogin();
     }
-    $($container).append(account_center.create_item(account_center.item));
+    $container.append(account_center.create_item(account_center.item));
     //事件绑定
     $(document).ready(function(){
         $option.touchtap(display_controll);
