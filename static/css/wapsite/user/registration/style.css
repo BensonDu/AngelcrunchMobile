@@ -122,7 +122,7 @@
 
 .upload-playground .image-container.loading,
 .avatar-area .avatar.loading {
-  background-image: url(/static/images/wapsite/cssimage/preloader_12837189237.gif);
+  background-image: url(http://dn-acac.qbox.me/mobile/public/preloader.gif);
 }
 
 .avatar-area .avatar img {
