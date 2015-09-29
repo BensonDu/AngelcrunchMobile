@@ -237,23 +237,53 @@
     var self = this,
         $intention=$('.send-investment-btn'),
         $box = $('#none-investor'),
-        $close=$box.children('.close');
+        $close = $box.children('.close'),
+        $new_box = $('#new-none-investor'),
+        $new_close = $new_box.children('.close');
     this.is_sent = false;
     this.has_sent = function(){
         $intention.addClass('reverse').removeAttr('href').html('投资意向已发送');
         self.is_sent = true;
     };
-    $intention.touchtap(function(){
-        if(!self.is_sent){
-            if(account_info.role<1){
+    this.send_auth_check = function () {
+        if (!self.is_sent) {
+            if (account_info.role < 1) {
                 $box.show();
             }
-            else{
-                location.href='http://'+location.host+'/vc_new'
+            else {
+                location.href = 'http://' + location.host + '/vc_new'
             }
         }
-    });
+    };
+    this.send_auth_check_ = function () {
+        var linkparam = {
+            source: location.href,
+            title: '谢谢你通过天使汇向我提交投资意向。',
+            message: '请先注册或登录天使汇账户，以便我后续和你联系具体的投融资事宜。',
+            portrait: config.status.logo,
+            id: config.status.com_id
+        };
+        if (!self.is_sent) {
+            if (!account_info.is_login) {
+                location.href = 'http://auth.angelcrunch.com/reg' + base_create_param(linkparam);
+            }
+            else {
+                if (account_info.role < 1) {
+                    $new_box.show();
+                }
+                else {
+                    location.href = 'http://' + location.host + '/vc_new'
+                }
+            }
+        }
+    };
+    $intention.touchtap(function(){
+        self.send_auth_check();
+    }, 200);
     $close.touchtap(function(){$box.hide();});
+    $new_close.touchtap(function () {
+        $new_box.hide();
+    });
 }).call(define('intention_controll'));
 //分享二维码
 (function(){
