@@ -17,8 +17,9 @@
     <title>天使汇 | 项目列表 | 让靠谱的项目找到靠谱的钱</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/ico" />
     <link rel="Bookmark" href="/favicon.ico" />
-    <link href="/static/css/wapsite/base-css.css?v1" rel="stylesheet"/>
+    <link href="/static/css/wapsite/base-css.css?v2" rel="stylesheet"/>
     <link href="/static/css/wapsite/list/style.css?v1" rel="stylesheet" />
+    <link href="/static/css/wapsite/list/sd.css" rel="stylesheet" />
     <script>
         var _hmt = _hmt || [];
         (function() {
@@ -125,34 +126,36 @@
                 </section>
             </a>
         </div>
-
-        <div class="sd-list"  ms-controller="sd-list">
-            <a  ms-if="data" ms-repeat="data" ms-href="{{window.base_protocol}}{{el.id}}.{{window.base_host}}">
+        <div class="new-sd-list" ms-controller="sd-list">
+            <a ms-if="data" ms-repeat="data" ms-href="el.link">
                 <section>
+                    <div class="theme">
+                        <img class="default" src="http://dn-acac.qbox.me/mobile/public/sd_default.png">
+                        <img class="real" ms-src="el.bg_img">
+                        <div class="title">
+                            <p><span class="name" ms-text="el.name"></span><span class="slogan" ms-text="el.concept"></span><span class="location" ms-text="' '+el.region"></span></p>
+                        </div>
+                        <img class="logo" ms-src="el.logo">
+                        <div ms-attr-class="el.is_follow?'follow active':'follow'"><em class="follow_star" ms-attr-data-id="el.id"></em></div>
+                    </div>
                     <div class="info">
-                        <img class="theme" ms-src="el.image">
-                        <img class="occupy" src="http://dn-acac.qbox.me/SD_default_600x.png">
-                        <div class="slogan">
-                            <img class="logo" ms-src="el.logo">
-                            <p><span class="name" ms-text="el.name"></span><span class="concept" ms-text="el.concept"></span></p>
-                        </div>
-                    </div>
-                    <div class="new-progress-container" ms-if="el.coinveststatus>30 && el.coinveststatus<80">
-                        <div class="new-progress-group">
-                            <div class="new-progress">
-                                <div class="new-progress-bar" ms-css-width="(el.finishamount/el.amount > 1 ? 100 : el.finishamount/el.amount*100)+'%'"></div>
+                        <p class="need" ms-html="el.need"></p>
+                        <div class="new-progress-container" ms-if="el.progress">
+                            <div class="new-progress-group">
+                                <div class="new-progress">
+                                    <div class="new-progress-bar" ms-css-width="el.progress.percent"></div>
+                                </div>
+                                <div class="new-progress-sta"><p ms-text="el.progress.text"></p></div>
                             </div>
-                            <div class="new-progress-sta"><p ms-text="(el.finishamount/el.amount*100).toFixed(0)+'%'"></p></div>
+                            <p><em ms-text="el.progress.info"></em><em class="right" ms-if="el.progress.day>0" ms-text="'剩余'+el.progress.day+'天'"></em></p>
                         </div>
-                        <p><em ms-if="window.account_info.role>0" ms-text="'投资意向: '+el.finishamount+'万（预融资'+el.amount+'万)'"></em><em class="right" ms-text="'剩余'+el.day+'天'"></em></p>
-                    </div>
-                    <div class="success"  ms-if="el.coinveststatus>70">
-                        <p>已完成融资，已获得 <span ms-text="el.vc_list.splice(0,3).join(',')"></span><span ms-if="el.vc_list.length >4">等{{el.vc_list.length}}}人</span>投资</p>
+                        <div class="success" ms-if="el.success">
+                            <p >&nbsp;本轮融资已完成,<span ms-text="el.success"></span></p>
+                        </div>
                     </div>
                 </section>
             </a>
         </div>
-
     </div>
 </div>
 <div class="position-occupy"></div>
@@ -169,5 +172,5 @@
 <script src="/static/js/lib/avalon.mobile.min.js"></script>
 <script src="/static/js/wapsite/angelcrunch_base.js?v1"></script>
 <script src="/static/js/wapsite/angelcrunch_onepage.js"></script>
-<script src="/static/js/wapsite/angelcrunch_list_new.js?v"></script>
+<script src="/static/js/wapsite/angelcrunch_list_new.js?v1"></script>
 </html>

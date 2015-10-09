@@ -189,7 +189,6 @@ input::-webkit-input-placeholder {
     text-align: left;
     font-size:12px;
     margin-top: 8px;
-    margin-left: -2px;
 }
 .new-progress-container > p em {
     font-size: 12px;

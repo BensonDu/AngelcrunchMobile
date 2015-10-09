@@ -5,7 +5,9 @@
     this.api = {
         comlist:base_mobile+'v3/startup',
         searchlist:base_mobile+'v2/startup_search',
-        sdlist:base_mobile+'v3/speed_dating',
+        sdlist:base_mobile+'v4/speed_dating',
+        follow:base_mobile+'v4/follow',
+        unfollow:base_mobile+'v4/unfollow',
         ohm:'http://api.dubaoxing.com/angel_list/ohm',
         ohx:'http://api.dubaoxing.com/angel_list/ohx'
     };
@@ -241,7 +243,7 @@
 
 (function(){
     var self = this,
-        $sd_box = $('.sd-list'),
+        $sd_box = $('.new-sd-list'),
         $normal = $('.section-list'),
         $turning= $('.page-turn'),
         $prev   = $turning.children('.prev-page'),
@@ -338,6 +340,37 @@
         }
         return render;
     };
+    //闪投数据格式化
+    this.sd_list_render = function(data){
+        var d = data || [],l = d.length,r = [],c = {};
+        for(var i = 0; i < l; i++ ){
+            c = d[i];
+            if(c.base_info.viewapply)continue;
+            r.push({
+                id:c.base_info.id,
+                is_follow:c.interaction_info.isfans||false,
+                bg_img:c.base_info.sd.image||'',
+                logo:c.base_info.logo||'',
+                name:c.base_info.name||'',
+                concept:c.base_info.concept,
+                link:base_protocol+c.base_info.id+'.'+base_host,
+                region:c.base_info.region.split(' ')[0],
+                need:(function(d){
+                    return !d.financing_need?d.financing_view_info:"共发行"+d.financing_need.shares+"份 · 每份占股"+d.financing_need.stock_each+"% · 预计融资 <span>"+d.financing_need.shares+"</span> 万";
+                })(c.financing_need_info||{}),
+                progress:(function(d){
+                    return !d.financing_progress?null:{
+                        percent:(parseInt(d.financing_progress.percent)>100?100:parseInt(d.financing_progress.percent))+'%',
+                        text:d.financing_progress.percent+' %',
+                        info:d.financing_progress.progress_info,
+                        day:d.financing_progress.day
+                    };
+                })(c.financing_stage||{}),
+                success:!c.financing_stage.financing_progress? c.financing_stage.financing_result.result_info:null
+            });
+        }
+        return r;
+    };
 
     //全部项目 数据获取回调
     this.com_list_call = function(data){
@@ -386,7 +419,7 @@
     //闪投列表 数据回调
     this.sd_list_call = function(data){
         if(data.hasOwnProperty('list')){
-            self.sd_list.data = self.list_render(data.list);
+            self.sd_list.data = self.sd_list_render(data.list);
         }
         if(data.hasOwnProperty('total')){
             data.total==0 && view_dom.not_found.show();
@@ -739,3 +772,50 @@
         }
     };
 }).call(define('view_filter'));
+//关注项目
+(function(){
+    var self = this,
+        $base = $('.new-sd-list'),
+        touch = {
+            x:0,
+            y:0,
+            t:0
+        };
+    this.base = function(id,is_follow,call){
+        var api = !!is_follow?config.api.follow:config.api.unfollow;
+        base_remote_data.ajaxjsonp(api, call, {id:id, uid:account_info.id,access_token:account_info.token}, function(){view_dom.notification.show('网络错误');});
+    };
+    this.follow = function(id,ele){
+        self.base(id,true,function(data){
+            if(data.success){
+                ele.addClass('active');
+            }
+            else{
+                view_dom.notification.show(data.message || '操作失败');
+            }
+        });
+    };
+    this.unfollow = function(id,ele){
+        self.base(id,false,function(data){
+            if(data.success){
+                ele.removeClass('active');
+            }
+            else{
+                view_dom.notification.show(data.message || '操作失败');
+            }
+        });
+    };
+    $base.delegate(".follow_star","touchstart",function(e){
+        touch.x= e.originalEvent.touches[0].pageX;
+        touch.y= e.originalEvent.touches[0].pageY;
+        touch.t = new Date().getTime();
+    });
+    $base.delegate(".follow_star","touchend",function(e){
+        var event=e.originalEvent.changedTouches[0],move=Math.pow(event.pageX-touch.x,2)+Math.pow(event.pageY-touch.y,2),o = new Date().getTime();
+        e.preventDefault();
+        if(o-touch.t<150 && move<81){
+            $(this).parent().hasClass('active')?self.unfollow($(this).data('id'),$(this).parent()):self.follow($(this).data('id'),$(this).parent());
+        }
+    });
+
+}).call(define('view_follow'));
