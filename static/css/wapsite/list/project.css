@@ -1,3 +1,4 @@
+/*闪投列表*/
 .new-sd-list{
     position: relative;
     display: block;
@@ -156,6 +157,162 @@
 }
 .new-sd-list section .success p span{
     font-size: 14px;
+}
+
+/*普通项目*/
+.new-section-list {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    margin-top: 6px;
+}
+
+.new-section-list section {
+    position: relative;
+    width: 100%;
+    padding: 17px 5.6% 4px;
+    margin-bottom: 6px;
+    background: #FFF;
+    overflow: hidden;
+    -webkit-animation: fadeIn 0.7s linear 0s normal forwards;
+}
+
+.new-section-list section .follow {
+    position: absolute;
+    width: 34px;
+    height: 40px;
+    background: #f5f5f5;
+    z-index: 8;
+    right: 5%;
+    top: 0;
+    box-shadow: 0 2px 1px 0 #ccc;
+}
+
+.new-section-list section .follow em {
+    display: inline-block;
+    position: absolute;
+    bottom: 0;
+    width: 34px;
+    height: 34px;
+    padding: 8px;
+    background: url(http://dn-acac.qbox.me/mobile/public/stars_empty.png) no-repeat center;
+    background-size: 18px;
+}
+
+.new-section-list section .follow.active em {
+    background: url(http://dn-acac.qbox.me/mobile/public/stars_solid.png) no-repeat center;
+    background-size: 18px;
+}
+
+.new-section-list section .summary {
+    width: 100%;
+    height: 105px;
+}
+
+.new-section-list section .summary .logo {
+    float: left;
+    width: 66px;
+    height: 100%;
+}
+
+.new-section-list section .summary .logo img {
+    width: 66px;
+    height: 66px;
+    border-radius: 4px;
+    margin-top: 18px;
+}
+
+.new-section-list section .summary .info {
+    float: right;
+    width: 71.2%;
+    height: 100%;
+}
+
+.new-section-list section .summary .info .name {
+    font-size: 24px;
+    line-height: 24px;
+    margin-top: 10px;
+}
+
+.new-section-list section .summary .info .concept {
+    width: 100%;
+    line-height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.new-section-list section .summary .info div {
+    display: inline-block;
+    border-top: 1px dashed;
+    margin-top: 5px;
+    width: 100%;
+    height: 30px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.new-section-list section .summary .info div p {
+    display: inline-block;
+    font-size: 12px;
+    line-height: 30px;
+    font-weight: 500;
+    color: #212121;
+    text-overflow: ellipsis;
+}
+
+.new-section-list section .summary .info div .need span {
+    color: #ff3d00;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.new-section-list section .summary .info div .location {
+    float: right;
+    margin-right: 2%;
+    margin-top: 1px;
+    padding-left: 5px;
+}
+
+.new-section-list section .summary .info div .location:before {
+    content: '';
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    background: url(http://dn-acac.qbox.me/mobile/homepage/location.png) no-repeat center;
+    background-size: 14px;
+}
+
+.new-section-list section .success {
+    width: 100%;
+    height: 37px;
+}
+
+.new-section-list section .success p {
+    display: inline-block;
+    line-height: 40px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.new-section-list section .success p:before {
+    content: '';
+    position: relative;
+    display: inline-block;
+    height: 10px;
+    width: 10px;
+    background: url(https://dn-acac.qbox.me/mobile/public/done.png) no-repeat center;
+    background-size: 10px;
+}
+
+.new-section-list section .success p span {
+    font-size: 14px;
+}
+
+.new-section-list .summary .item-state {
+    display: inline-block;
+    height: 12px;
+    margin-top: 10px;
 }
 /*媒体查询*/
 @media only screen and (max-width: 359px) {

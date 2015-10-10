@@ -17,9 +17,9 @@
     <title>天使汇 | 项目列表 | 让靠谱的项目找到靠谱的钱</title>
     <link rel="shortcut icon" href="/favicon.ico" type="image/ico" />
     <link rel="Bookmark" href="/favicon.ico" />
-    <link href="/static/css/wapsite/base-css.css?v2" rel="stylesheet"/>
-    <link href="/static/css/wapsite/list/style.css?v1" rel="stylesheet" />
-    <link href="/static/css/wapsite/list/sd.css" rel="stylesheet" />
+    <link href="/static/css/wapsite/base-css.css?v3" rel="stylesheet"/>
+    <link href="/static/css/wapsite/list/style.css?v2" rel="stylesheet"/>
+    <link href="/static/css/wapsite/list/project.css?v3" rel="stylesheet"/>
     <script>
         var _hmt = _hmt || [];
         (function() {
@@ -104,29 +104,40 @@
                 <p>很抱歉，未找到与该筛选条件相匹配的结果</p>
             </div>
         </div>
-
-        <div class="section-list" ms-controller="list">
-            <a ms-if="data" ms-repeat="data" ms-href="{{window.base_protocol}}{{el.id}}.{{window.base_host}}">
+        <div class="new-section-list project-list" ms-controller="list">
+            <a ms-if="data" ms-repeat="data" ms-href="el.link">
                 <section>
-                    <div class="logo"><img src="" ms-src="el.logo||''" /></div>
+                    <div ms-attr-class="el.is_follow?'follow active':'follow'"><em class="follow_star"
+                                                                                   ms-attr-data-id="el.id"></em></div>
                     <div class="summary">
-                        <h3 ms-text="el.name"></h3>
-                        <p ms-text="el.concept"></p>
+                        <div class="logo"><img ms-src="el.logo"/></div>
+                        <div class="info">
+                            <p class="name" ms-text="el.name"></p>
+
+                            <p class="concept" ms-text="el.concept"></p>
+
+                            <div><p class="need" ms-html="el.need"></p>
+
+                                <p class="location" ms-text="' '+el.region"></p></div>
+                        </div>
                     </div>
-                    <div class="new-progress-container"  ms-if="el.coinveststatus>30 && el.coinveststatus<80">
+                    <div class="new-progress-container" ms-if="el.progress">
                         <div class="new-progress-group">
                             <div class="new-progress">
-                                <div class="new-progress-bar" ms-css-width="(el.finishamount/el.amount > 1 ? 100 : el.finishamount/el.amount*100)+'%'"></div>
+                                <div class="new-progress-bar" ms-css-width="el.progress.percent"></div>
                             </div>
-                            <div class="new-progress-sta"><p ms-text="(el.finishamount/el.amount*100).toFixed(0)+'%'"></p></div>
+                            <div class="new-progress-sta"><p ms-text="el.progress.text"></p></div>
                         </div>
-                        <p><em ms-if="window.account_info.role>0" ms-text="'投资意向: '+el.finishamount+'万（预融资'+el.amount+'万)'"></em><em class="right"  ms-if="el.day>0" ms-text="'剩余'+el.day+'天'"></em></p>
+                        <p><em ms-text="el.progress.info"></em><em class="right" ms-if="el.progress.day>0"
+                                                                   ms-text="'剩余'+el.progress.day+'天'"></em></p>
                     </div>
-                    <p class="new-progress-tag finish" ms-if="el.coinveststatus>=80">已完成</p>
+                    <div class="success" ms-if="el.success">
+                        <p>&nbsp;本轮融资已完成 <span ms-text="el.success"></span></p>
+                    </div>
                 </section>
             </a>
         </div>
-        <div class="new-sd-list" ms-controller="sd-list">
+        <div class="new-sd-list project-list" ms-controller="sd-list">
             <a ms-if="data" ms-repeat="data" ms-href="el.link">
                 <section>
                     <div class="theme">
@@ -172,5 +183,5 @@
 <script src="/static/js/lib/avalon.mobile.min.js"></script>
 <script src="/static/js/wapsite/angelcrunch_base.js?v1"></script>
 <script src="/static/js/wapsite/angelcrunch_onepage.js"></script>
-<script src="/static/js/wapsite/angelcrunch_list_new.js?v1"></script>
+<script src="/static/js/wapsite/angelcrunch_list_new.js?v2"></script>
 </html>

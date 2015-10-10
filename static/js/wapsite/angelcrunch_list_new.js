@@ -3,8 +3,8 @@
         search_record:'com_search_history'
     };
     this.api = {
-        comlist:base_mobile+'v3/startup',
-        searchlist:base_mobile+'v2/startup_search',
+        comlist: base_mobile + 'v4/startups',
+        searchlist: base_mobile + 'v4/startup_search',
         sdlist:base_mobile+'v4/speed_dating',
         follow:base_mobile+'v4/follow',
         unfollow:base_mobile+'v4/unfollow',
@@ -244,7 +244,7 @@
 (function(){
     var self = this,
         $sd_box = $('.new-sd-list'),
-        $normal = $('.section-list'),
+        $normal = $('.new-section-list'),
         $turning= $('.page-turn'),
         $prev   = $turning.children('.prev-page'),
         $next   = $turning.children('.next-page'),
@@ -324,54 +324,38 @@
     this.sd_list = avalon.define("sd-list", function (vm) {
         vm.data = [];
     });
-
-    //数据格式化
+    //项目数据格式化
     this.list_render = function(data){
-        var render=data,l;
-        l=render.length;
-        while(l){
-            if(typeof render[(l-1)].finishamount=='string'){
-                render[(l-1)].finishamount=parseInt(render[(l-1)].finishamount.replace(/\.0/,'').replace(/\,/g,'').replace(/0{4}$/,''));
-            }
-            if(typeof render[(l-1)].amount == 'string'){
-                render[(l-1)].amount=parseInt(render[(l-1)].amount.replace(/\,/g,'').replace(/0{4}$/,''));
-            }
-            l--;
-        }
-        return render;
-    };
-    //闪投数据格式化
-    this.sd_list_render = function(data){
-        var d = data || [],l = d.length,r = [],c = {};
-        for(var i = 0; i < l; i++ ){
+        var d = data || [], l = d.length, r = [], c = {};
+        for (var i = 0; i < l; i++) {
             c = d[i];
-            if(c.base_info.viewapply)continue;
+            if (c.base_info.viewapply)continue;
             r.push({
-                id:c.base_info.id,
-                is_follow:c.interaction_info.isfans||false,
-                bg_img:c.base_info.sd.image||'',
-                logo:c.base_info.logo||'',
-                name:c.base_info.name||'',
-                concept:c.base_info.concept,
-                link:base_protocol+c.base_info.id+'.'+base_host,
-                region:c.base_info.region.split(' ')[0],
-                need:(function(d){
-                    return !d.financing_need?d.financing_view_info:"共发行"+d.financing_need.shares+"份 · 每份占股"+d.financing_need.stock_each+"% · 预计融资 <span>"+d.financing_need.shares+"</span> 万";
-                })(c.financing_need_info||{}),
-                progress:(function(d){
-                    return !d.financing_progress?null:{
-                        percent:(parseInt(d.financing_progress.percent)>100?100:parseInt(d.financing_progress.percent))+'%',
-                        text:d.financing_progress.percent+' %',
-                        info:d.financing_progress.progress_info,
-                        day:d.financing_progress.day
+                id: c.base_info.id,
+                is_follow: c.interaction_info.isfans || false,
+                logo: c.base_info.logo || '',
+                bg_img: c.base_info.sd.image || '',
+                name: c.base_info.name || '',
+                concept: c.base_info.concept,
+                link: base_protocol + c.base_info.id + '.' + base_host,
+                region: c.base_info.region.split(' ')[0],
+                need: (function (d) {
+                    return !d.financing_need ? d.financing_view_info : "共发行" + d.financing_need.shares + "份 · 每份占股" + d.financing_need.stock_each + "% · 预计融资 <span>" + d.financing_need.shares + "</span> 万";
+                })(c.financing_need_info || {}),
+                progress: (function (d) {
+                    return !d.financing_progress ? null : {
+                        percent: (parseInt(d.financing_progress.percent) > 100 ? 100 : parseInt(d.financing_progress.percent)) + '%',
+                        text: d.financing_progress.percent + ' %',
+                        info: d.financing_progress.progress_info,
+                        day: d.financing_progress.day
                     };
-                })(c.financing_stage||{}),
-                success:!c.financing_stage.financing_progress? c.financing_stage.financing_result.result_info:null
+                })(c.financing_stage || {}),
+                success: (!c.financing_stage.financing_progress && !!c.financing_stage.financing_result) ? c.financing_stage.financing_result.result_info : null
             });
         }
+
         return r;
     };
-
     //全部项目 数据获取回调
     this.com_list_call = function(data){
         if(data.hasOwnProperty('list')){
@@ -386,7 +370,7 @@
     //ohm 数据获取回调
     this.ohm_list_call = function(data){
         if(data.hasOwnProperty('list')){
-            self.com_list.data= self.list_render(data.list);
+            self.com_list.data = data.list;
         }
         if(data.hasOwnProperty('total')){
             data.total==0 && view_dom.not_found.show();
@@ -397,7 +381,7 @@
     //ohx 数据获取回调
     this.ohx_list_call = function(data){
         if(data.hasOwnProperty('list')){
-            self.com_list.data= self.list_render(data.list);
+            self.com_list.data = data.list;
         }
         if(data.hasOwnProperty('total')){
             data.total==0 && view_dom.not_found.show();
@@ -419,7 +403,7 @@
     //闪投列表 数据回调
     this.sd_list_call = function(data){
         if(data.hasOwnProperty('list')){
-            self.sd_list.data = self.sd_list_render(data.list);
+            self.sd_list.data = self.list_render(data.list);
         }
         if(data.hasOwnProperty('total')){
             data.total==0 && view_dom.not_found.show();
@@ -775,7 +759,7 @@
 //关注项目
 (function(){
     var self = this,
-        $base = $('.new-sd-list'),
+        $base = $('.project-list'),
         touch = {
             x:0,
             y:0,
