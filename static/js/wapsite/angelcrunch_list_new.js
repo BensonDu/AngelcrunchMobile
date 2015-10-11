@@ -340,7 +340,7 @@
                 link: base_protocol + c.base_info.id + '.' + base_host,
                 region: c.base_info.region.split(' ')[0],
                 need: (function (d) {
-                    return !d.financing_need ? d.financing_view_info : "共发行" + d.financing_need.shares + "份 · 每份占股" + d.financing_need.stock_each + "% · 预计融资 <span>" + d.financing_need.shares + "</span> 万";
+                    return !d.financing_need ? d.financing_view_info : "共发行" + d.financing_need.shares + "份 · 每份占股" + d.financing_need.stock_each + "% · 预计融资 <span>" + d.financing_need.amount.replace(/\,/g, '').replace(/0{4}$/, '') + "</span> 万";
                 })(c.financing_need_info || {}),
                 progress: (function (d) {
                     return !d.financing_progress ? null : {
