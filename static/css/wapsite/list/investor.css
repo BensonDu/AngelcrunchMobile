@@ -125,16 +125,18 @@
     width: 100%;
     text-align: left;
 }
-.investor-list section .summary .text .basic{
+
+.investor-list section .summary .text .basic span {
+    display: inline-block;
 }
 .investor-list section .summary .text .basic .name{
     font-size: 25px;
+    margin-right: 1em;
     white-space: nowrap;
 }
 .investor-list section .summary .text .basic .title{
     font-size: 16px;
     color: #757575;
-    margin-left: 1em;
 }
 
 .investor-list section .summary .text .desc{
