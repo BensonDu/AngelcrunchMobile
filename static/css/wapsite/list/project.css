@@ -20,8 +20,9 @@
 }
 .new-sd-list section .theme .default{
     position: relative;
+    display: block;
     z-index: 0;
-    width: 98%;
+    width: 100%;
     height: auto;
 }
 .new-sd-list section .theme .real{
