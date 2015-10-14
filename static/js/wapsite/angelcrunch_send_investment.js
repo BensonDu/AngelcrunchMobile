@@ -179,17 +179,9 @@
 (function(){
     var $addition=$('.other-value').children('textarea'),
         $agreement=$('.mentos-container'),
-        $submitbtn=$('.submit-btn'),
+        $submitbtn = $('#submit-btn'),
         $sendresult=$('#sendresult');
 
-    $agreement.click(function(){
-        if($(this).hasClass('checked')){
-            $submitbtn.addClass('active');
-        }
-        else{
-            $submitbtn.removeClass('active');
-        }
-    });
     $sendresult.children('.close').touchtap(function(){
         $sendresult.hide();
         location.href=location.origin;
@@ -217,6 +209,15 @@
             }, $.extend(true,page_status.get_com_id(),data));
         }
     });
+    setInterval(function () {
+        if ($agreement.hasClass('checked')) {
+            $submitbtn.addClass('active');
+        }
+        else {
+            $submitbtn.removeClass('active');
+        }
+
+    }, 300);
 }).call(this);
 
 //过渡 协议同意
