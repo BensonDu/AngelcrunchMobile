@@ -420,7 +420,7 @@
             pageindex:index || 1,
             industryid:industry || '',
             regionid:district || '',
-            order:(!!order && order == 'new')?'new':'heat'
+            order: (!!order && order == 'heat') ? 'heat' : 'new'
         };
         self.com_list_get(post);
     };
@@ -655,7 +655,7 @@
     this.industry_active = !!hash_data.industry ? hash_data.industry : '全部行业';
     this.district_active = !!hash_data.district ? hash_data.district : '全部地区';
     this.sd_state_active = (!!hash_data.state && hash_data.state == 'success')?'完成融资':'正在热投';
-    this.order_active = (!!hash_data.order && hash_data.order == 'new')?'时间排序':'热度排序';
+    this.order_active = (!!hash_data.order && hash_data.order == 'heat') ? '热度排序' : '时间排序';
 
     this.check_active = function(array,k,t){
       self.curret_type = t;
@@ -752,7 +752,7 @@
             self.avalon_filter.industry_name = !!hash_data_.industry ? hash_data_.industry : '全部行业';
             self.avalon_filter.district_name = !!hash_data_.district ? hash_data_.district : '全部地区';
             self.avalon_filter.sd_state_name = (!!hash_data_.state && hash_data_.state == 'success') ? '完成融资' : '正在热投';
-            self.avalon_filter.order_name = (!!hash_data_.order && hash_data_.order == 'new') ? '时间排序' : '热度排序';
+            self.avalon_filter.order_name = (!!hash_data_.order && hash_data_.order == 'heat') ? '热度排序' : '时间排序';
         }
     };
 }).call(define('view_filter'));
