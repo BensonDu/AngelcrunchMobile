@@ -8,7 +8,9 @@
         summary: base_mobile + 'v4/settings/profile/save_summary',
         change: base_mobile + 'v4/settings/profile/save_pwd',
         region_list: base_mobile + 'v4/settings/profile/getregionlist',
-        region: base_mobile + 'v4/settings/profile/save_region'
+        region: base_mobile + 'v4/settings/profile/save_region',
+        verify: base_mobile + 'v4/home/new_phone',
+        bind: base_mobile + 'v4/home/phone_bind_on_account'
     };
     if (!account_info.is_login) {
         location.href = 'http://auth.angelcrunch.com';
@@ -259,6 +261,108 @@
         }
     }, 350);
 }).call(_define('item_view'));
+//条目信息修改 手机号码绑定
+(function () {
+    var self = this,
+        $pwd = $('#bind-pwd'),
+        $phone = $('#bind-phone'),
+        $verify_btn = $('#bind-verify-btn'),
+        $verify_code = $('#bind-verify-code'),
+        $submit_btn = $('#bind-submit-btn'),
+        $pwd_eye = $pwd.next(),
+        send_time = 0,
+        timer = 0,
+        btn_lock = false;
+
+    this.form = function () {
+        return {
+            'password': $pwd.val(),
+            'phone': $phone.val(),
+            'captcha': $verify_code.val()
+        }
+    };
+    this.check_form = function () {
+        var form = self.form();
+        return (form.password.length >= 6 && base_regex().phone.test(form.phone) && form.captcha != '');
+    };
+    this.check_verify = function () {
+        var form = self.form();
+        return (form.password.length >= 6 && base_regex().phone.test(form.phone));
+    };
+    this.verify_btn_active = function (active) {
+        if (active) {
+            $verify_btn.prop('disabled', false).removeClass('disable');
+        }
+        else {
+            $verify_btn.prop('disabled', true).addClass('disable');
+        }
+    };
+    this.submit_btn_active = function (active) {
+        return !!active ? $submit_btn.addClass('active') : $submit_btn.removeClass('active');
+    };
+    this.submit_verify = function () {
+        $phone.blur();
+        if (self.check_verify() && !btn_lock) {
+            data_model.request(page_config.api.verify, function (data) {
+                if (data.success) {
+                    self.already_sent();
+                }
+                else {
+                    view_notification.show(data.message || '操作失败');
+                }
+            }, self.form());
+        }
+    };
+    this.already_sent = function () {
+        $phone.prop('disabled', true);
+        $verify_btn.prop('disabled', true).addClass('disable');
+        $verify_code.prop('disabled', false);
+        btn_lock = true;
+        send_time = new Date().getTime();
+        timer && clearInterval(timer);
+        timer = setInterval(function () {
+            var down = 60 - (new Date().getTime() - send_time) / 1000;
+
+            if (down >= 0) {
+                $verify_btn.html(Math.floor(down) + ' s');
+            }
+            else {
+                $phone.prop('disabled', false);
+                $verify_btn.prop('disabled', false).removeClass('disable');
+                $verify_btn.html('重新发送');
+                clearInterval(timer);
+                btn_lock = false;
+            }
+
+        }, 500);
+    };
+    this.form_event = function () {
+        self.check_verify() ? self.verify_btn_active(true) : self.verify_btn_active(false);
+        return self.check_form() ? self.submit_btn_active(true) : self.submit_btn_active(false);
+    };
+    this.submit_form = function () {
+        if (self.check_form()) {
+            data_model.request(page_config.api.bind, function (data) {
+                if (data.success) {
+                    view_notification.show('绑定手机号成功');
+                    profile_view.framework.data.phone = $phone.val();
+                }
+                else {
+                    view_notification.show(data.message || '绑定失败', true);
+                }
+            }, self.form());
+        }
+    };
+    setInterval(self.form_event, 300);
+    $pwd_eye.on('touchstart mousedown', function () {
+        $pwd.attr('type', 'text')
+    });
+    $pwd_eye.on('touchend mouseup', function () {
+        $pwd.attr('type', 'password')
+    });
+    $submit_btn.touchtap(self.submit_form);
+    $verify_btn.touchtap(self.submit_verify);
+}).call(_define('bind_view'));
 //条目信息修改 修改密码
 (function () {
     var self = this,
@@ -498,6 +602,7 @@
         $main = $('#main-page'),
         $change = $('#change-pwd'),
         $region = $('#region'),
+        $phone = $('#change-phone'),
         $region_content = $region.children('.content'),
         sta = $();
 
@@ -516,6 +621,9 @@
     this.slide_region = function () {
         return self.style_syn(), self.main_hide(), $region.addClass('active');
     };
+    this.slide_phone = function () {
+        return self.main_hide(), $phone.addClass('active');
+    };
     this.slide_back = function () {
         return self.main_show(), setTimeout(function () {
             sta.removeClass('active')
@@ -530,6 +638,9 @@
             }
             else if (type == 'region') {
                 sta = self.slide_region();
+            }
+            else if (type == 'phone') {
+                sta = self.slide_phone();
             }
         }
         else {

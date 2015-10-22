@@ -18,7 +18,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/ico"/>
     <link rel="Bookmark" href="/favicon.ico"/>
     <link href="/static/css/wapsite/base-css.css?v1" rel="stylesheet"/>
-    <link href="/static/css/wapsite/investor/profile.css?8" rel="stylesheet"/>
+    <link href="/static/css/wapsite/investor/profile.css?9" rel="stylesheet"/>
 </head>
 <body>
 <div class="bk"></div>
@@ -106,6 +106,9 @@
             <div class="item">
                 <span class="item-name">手机号码</span>
                 <input type="text" ms-attr-value="data.phone" disabled>
+                <a href="#child:phone">
+                    <div class="arrow"><em></em></div>
+                </a>
             </div>
             <div class="item">
                 <span class="item-name">修改密码</span>
@@ -150,6 +153,34 @@
         <a id="submit-change" class="submit-new-btn"><img
                 src="http://dn-acac.qbox.me/mobile/homepage/btn-arrow-left.png"></a>
     </div>
+    <!--手机号码修改-->
+    <div id="change-phone" class="change-pwd slide-page">
+        <div class="header"><a href="javascript:history.go(-1)"></a>
+
+            <h3>手机绑定</h3></div>
+        <label>
+            <span>登录密码</span>
+            <i><input id="bind-pwd" type="password" name="password" value="" maxlength="16"/><em
+                    class="vector-icons eye"></em></i>
+        </label>
+
+        <label>
+            <span>手机号码</span>
+            <i>
+                <input id="bind-phone" type="tel" name="phone" placeholder="待绑定手机号码" value="" maxlength="11"/>
+                <button id="bind-verify-btn" class="verify-btn btn disable">获取验证码</button>
+            </i>
+        </label>
+
+        <label>
+            <span>验证码</span>
+            <i><input id="bind-verify-code" type="number" name="code" value="" maxlength="6" placeholder="请输入短信验证码"
+                      disabled/></i>
+        </label>
+
+        <a id="bind-submit-btn" class="submit-new-btn"><img
+                src="http://dn-acac.qbox.me/mobile/homepage/btn-arrow-left.png"></a>
+    </div>
     <!--选择地区-->
     <div id="region" class="region slide-page" ms-controller="region">
         <div class="header"><a href="javascript:history.go(-1)"></a>
@@ -174,5 +205,5 @@
 <script src="/static/js/wapsite/angelcrunch_base.js?v3"></script>
 <script src="/static/js/lib/image_upload.min.js"></script>
 <script src="https://dn-acac.qbox.me/avalon.mobile.min.js"></script>
-<script src="/static/js/wapsite/angelcrunch_profile.js?4"></script>
+<script src="/static/js/wapsite/angelcrunch_profile.js?5"></script>
 </html>
