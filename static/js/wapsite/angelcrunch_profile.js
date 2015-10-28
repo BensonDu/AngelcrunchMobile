@@ -155,6 +155,9 @@
         $input = $('.input-basic');
 
     this.name = function (text, ele) {
+        if (text == '') {
+            return view_notification.show('不能为空');
+        }
         data_model.request(page_config.api.name, function (data) {
             if (data.success) {
                 view_notification.show('保存成功', true);
