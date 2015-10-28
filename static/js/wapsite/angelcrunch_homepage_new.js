@@ -366,5 +366,64 @@
     };
     this.framework().data = data[new Date().getTime()%3];
 }).call(define('view_after'));
+/*天使汇跟投基金*/
+(function () {
+    return false;
+    var self = this,
+        localstorage_key = 'jijin',
+        dom = document.getElementById('jijin'),
+        href = "http://t.cn/RU4ni0i",
+        touch = {
+            x: 0,
+            y: 0,
+            t: 0
+        };
+    this.save_key = function () {
+        window.save_cookie(localstorage_key, true);
+    };
+    this.is_exist_key = function () {
+        return window.get_cookie(localstorage_key);
+    };
+    this.event_fun = function (ret) {
+        self.save_key();
+        if (ret) {
+            location.href = href;
+        }
+        else {
+            $(dom).fadeOut(200);
+        }
+    };
+    this.start = function (event) {
+        var e = event || window.event;
+        touch.x = e.touches[0].pageX;
+        touch.y = e.touches[0].pageY;
+        touch.t = new Date().getTime();
+    };
+
+    this.end = function (event) {
+        var e = event || window.event,
+            move = Math.pow(e.pageX - touch.x, 2) + Math.pow(e.pageY - touch.y, 2),
+            o = new Date().getTime(),
+            target = e.target || e.srcElement,
+            dom_tree = [target, target.parentNode, target.parentNode.parentNode], ret = false;
+        for (var i in dom_tree) {
+            if (dom_tree[i].hasAttribute('is-entry')) {
+                ret = true;
+                break;
+            }
+        }
+        if (o - touch.t < 150 && move < 81 && ret) {
+            self.event_fun(ret);
+        }
+        else {
+            self.event_fun(ret);
+        }
+    };
+    if (!self.is_exist_key() || $_GET.hasOwnProperty('jijin')) {
+        $(dom).show();
+    }
+    dom.addEventListener('touchstart', self.start, false);
+    dom.addEventListener('touchend', self.end, false);
+}).call(_define('view_jijin'));
 
 

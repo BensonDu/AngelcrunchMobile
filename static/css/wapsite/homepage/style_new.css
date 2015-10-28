@@ -1231,7 +1231,47 @@
     padding: 10px 20px;
     cursor:pointer;
 }
-    /*公共动画*/
+
+/*投资指数基金*/
+.jijin {
+    background: rgba(0, 0, 0, 0.52);
+}
+
+.jijin .mg {
+    width: 100%;
+    height: 15%;
+}
+
+.jijin .con {
+    position: relative;
+    width: 90%;
+    display: inline-block;
+    overflow: visible;
+}
+
+.jijin .con img {
+    width: 100%;
+    height: 100%;
+}
+
+.jijin .con .hide {
+    display: inline-block;
+    position: absolute;
+    right: -12px;
+    top: -12px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #dc2b01;
+    color: #fff;
+    font-size: 26px;
+}
+
+.jijin .btn-group {
+    width: 90%;
+}
+
+/*公共动画*/
 .pub-fadein{
     -webkit-animation:pubfadein 0.3s linear 0s normal forwards;
     animation:pubfadein 0.3s linear 0s normal forwards;
