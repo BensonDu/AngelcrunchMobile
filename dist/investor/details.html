@@ -18,7 +18,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/ico" />
     <link rel="Bookmark" href="/favicon.ico" />
     <link href="/static/css/wapsite/base-css.css?v1" rel="stylesheet"/>
-    <link href="/static/css/wapsite/investor/details_new.css?5" rel="stylesheet"/>
+    <link href="/static/css/wapsite/investor/details_new.css?6" rel="stylesheet"/>
     <script>
         var _hmt = _hmt || [];
         (function() {
@@ -66,7 +66,9 @@
                 </div>
                 <div class="new-progress-sta"><p ms-text="(data.percent)+'%'"></p></div>
             </div>
-            <p><em ms-if="window.account_info.role>0" ms-text="data.message"></em><em class="right"  ms-if="data.day>0" ms-text="'剩余'+data.day+'天'"></em></p>
+            <p ms-if="data.message || data.day"><em ms-text="data.message"></em><em class="right" ms-if="data.day>0"
+                                                                                    ms-text="'剩余'+data.day+'天'"></em>
+            </p>
         </div>
     </div>
 
@@ -282,6 +284,6 @@
 <script src="/static/js/lib/jquery-cookie.js"></script>
 <script src="https://dn-acac.qbox.me/avalon.mobile.min.js"></script>
 <script src="/static/js/wapsite/angelcrunch_base.js?v1"></script>
-<script src="/static/js/wapsite/angelcrunch_details_new.js?8"></script>
+<script src="/static/js/wapsite/angelcrunch_details_new.js?9"></script>
 <script src="http://dn-acac.qbox.me/qrcode.js" async="async"></script>
 </html>

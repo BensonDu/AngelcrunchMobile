@@ -368,7 +368,6 @@
 }).call(define('view_after'));
 /*天使汇跟投基金*/
 (function () {
-    return false;
     var self = this,
         localstorage_key = 'jijin',
         dom = document.getElementById('jijin'),
