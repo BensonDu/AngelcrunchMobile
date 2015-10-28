@@ -153,7 +153,7 @@
         state: 'online',
         industryid: '',
         regionid: ''
-    })
+    });
 
     this.info = function(index){
         var c = {},f = 1,h = 1;
