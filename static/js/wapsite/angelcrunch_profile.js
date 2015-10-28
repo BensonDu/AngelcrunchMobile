@@ -156,7 +156,7 @@
 
     this.name = function (text, ele) {
         if (text == '') {
-            return view_notification.show('不能为空');
+            return view_notification.show('姓名不能为空');
         }
         data_model.request(page_config.api.name, function (data) {
             if (data.success) {
