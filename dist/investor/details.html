@@ -18,7 +18,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/ico" />
     <link rel="Bookmark" href="/favicon.ico" />
     <link href="/static/css/wapsite/base-css.css?v1" rel="stylesheet"/>
-    <link href="/static/css/wapsite/investor/details_new.css?4" rel="stylesheet" />
+    <link href="/static/css/wapsite/investor/details_new.css?5" rel="stylesheet"/>
     <script>
         var _hmt = _hmt || [];
         (function() {
@@ -69,16 +69,7 @@
             <p><em ms-if="window.account_info.role>0" ms-text="data.message"></em><em class="right"  ms-if="data.day>0" ms-text="'剩余'+data.day+'天'"></em></p>
         </div>
     </div>
-    <div class="page-action">
-        <div class="btn-group">
-            <div class="btn-group-social">
-                <a id="follow-btn" class="follow-btn"><i></i><span>关注</span></a>
-                <a id="share-wechat" class="share-wechat"><i></i><span>分享</span></a>
-            </div>
 
-            <a class="btn btn-small orange send-investment-btn">发送投资意向</a>
-        </div>
-    </div>
     <div id="pic-list" class="slider-container" ms-controller="details" ms-if="array_empty(data.pics)">
         <ul>
             <li ms-repeat="data.pics" ms-attr-pic-index="$index"><img ms-attr-vid="el.vid||false" ms-src="el.small"/></li>
@@ -224,12 +215,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="bottom-send-investment" >
-            <div class="btn-group">
-                <a class="btn orange send-investment-btn">发送投资意向</a>
-            </div>
-        </div>
     </div>
 </div>
 <div id="PA-layer" class="wechat-PA">
@@ -285,11 +270,18 @@
         </div>
     </div>
 </div>
+<!--关注 分享 发送意向-->
+<div class="fixed-page-action-occupy"></div>
+<div class="fixed-page-action">
+    <a id="follow-btn" class="follow"><em></em><span>关注</span></a>
+    <a id="share-wechat" class="share"><em></em><span>分享</span></a>
+    <a id="send-intention" class="send-intention"><span>发送投资意向</span></a>
+</div>
 </body>
 <script src="https://dn-acac.qbox.me/jquery-2.1.4.min.js"></script>
 <script src="/static/js/lib/jquery-cookie.js"></script>
 <script src="https://dn-acac.qbox.me/avalon.mobile.min.js"></script>
 <script src="/static/js/wapsite/angelcrunch_base.js?v1"></script>
-<script src="/static/js/wapsite/angelcrunch_details_new.js?7"></script>
+<script src="/static/js/wapsite/angelcrunch_details_new.js?8"></script>
 <script src="http://dn-acac.qbox.me/qrcode.js" async="async"></script>
 </html>

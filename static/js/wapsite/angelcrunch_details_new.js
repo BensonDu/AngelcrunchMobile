@@ -235,14 +235,14 @@
 //发送投资意向
 (function(){
     var self = this,
-        $intention=$('.send-investment-btn'),
+        $intention = $('#send-intention'),
         $box = $('#none-investor'),
         $close = $box.children('.close'),
         $new_box = $('#new-none-investor'),
         $new_close = $new_box.children('.close');
     this.is_sent = false;
     this.has_sent = function(){
-        $intention.addClass('reverse').removeAttr('href').html('投资意向已发送');
+        $intention.addClass('done').removeAttr('href').html('投资意向已发送');
         self.is_sent = true;
     };
     this.send_auth_check = function () {
@@ -335,12 +335,10 @@
         has_follow = false;
     this.follow = function(){
         $follow.addClass('active');
-        $follow.children('span').html('已关注');
         has_follow = true;
     };
     this.unfollow = function(){
         $follow.removeClass('active');
-        $follow.children('span').html('关注');
         has_follow = false
     };
     this.do_follow = function(){
