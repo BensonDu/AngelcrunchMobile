@@ -1,0 +1,100 @@
+{% extends './../template/layout.html' %}
+
+{% block title %}{$title$}{%endblock%}
+
+{% block keywords %}{$keywords$}{% endblock %}
+
+{% block description %}{$description$}{% endblock %}
+
+{% block style %}<link href="/css/regist-620ba92398.css" rel="stylesheet"/>{%endblock%}
+
+{% block content %}<div class="bk"></div>
+<div id="details" class="details">
+    <div class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
+    <div id="head-container" class="head-container">
+        <div id="header" class="newhead">
+            <div class="logo touch-href" data-href="/"></div>
+        </div>
+    </div>
+    <div class="tab"><a id="login-link" class="left">登录</a><a class="right active">注册</a></div>
+    <div class="registration modules">
+        <label>
+            <span>真实姓名</span>
+            <i><input id="user-name" type="text" name="name" value=""/></i>
+        </label>
+
+        <label>
+            <span>手机号码</span>
+            <i>
+                <input id="phone" type="tel" name="phone" value="" maxlength="11" placeholder="将作为登录账号" />
+                <button id="verify-btn" class="verify-btn btn disable">验证</button>
+            </i>
+        </label>
+
+        <label>
+            <span>验证码</span>
+            <i><input id="verify-code" type="tel" name="code" value="" maxlength="6"  placeholder="请输入短信验证码" disabled/></i>
+        </label>
+
+        <label>
+            <span>密码</span>
+            <i><input id="pwd" type="password" name="password" value="" maxlength="16" /><em class="vector-icons eye"></em></i>
+        </label>
+
+        <label>
+            <span>重复密码</span>
+            <i><input id="pwdrepeat" type="password" name="password" value="" maxlength="16" /><em class="vector-icons eye"></em></i>
+        </label>
+        <div class="addition-agreement">
+            <p>我已知晓 <a href="/agreement/service">《天使汇用户服务协议》</a> 及其附件 <a class="ci-link" href="/agreement/risk">《风险揭示书》</a> 中的所有内容 ，并愿意自己承担投资带来的风险。</p>
+            <div id="agreement-checkbox" class="modules">
+                <div class="mentos-container">
+                    <label class="label">
+                        <em class="tracks">
+                            <em class="slider-button">
+                                <i>×</i>
+                                <i></i>
+                            </em>
+                        </em>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <button id="submit-btn" class="btn submit-btn ci-link"></button>
+    </div>
+    <!--消息提示-->
+    <div id="regist-reason" class="new-page-result">
+        <div class="close yesiknow">×</div>
+        <div class="portrait"><img src="http://dn-xswe.qbox.me/13065529?imageMogr2/crop/!690x690a0a0/thumbnail/75x"></div>
+        <div class="content">
+            <h3></h3>
+            <h4></h4>
+        </div>
+        <div class="btn-group"><a class="yesiknow">下一步</a></div>
+    </div>
+    <!--注册成功-->
+    <div id="regist-success" class="new-page-result regist-success">
+        <div class="close">×</div>
+        <div class="mg"></div>
+        <div class="img"><img src="http://dn-acac.qbox.me/mobile/public/icon_done_1.png"></div>
+        <h3>成功注册并登录</h3>
+        <div class="content">
+            <h6>接下来，您可以：</h6>
+            <div class="arrow-group">
+                <a id="go-back" class="back hidden">返回注册前页面</a>
+                <a href="http://m.angelcrunch.com/angel_vip">我是投资人，立即申请认证</a>
+                <a href="http://angelcrunch.com/app">下载天使汇APP</a>
+                <a href="/startup/create">我是创业者，立即创建项目</a>
+                <a href="/startup#type:com-industry:-district:-order:heat">查看创业项目</a>
+                <a href="http://help.angelcrunch.com/college">创业培训</a>
+                <a href="/startup">浏览闪投精选</a>
+                <a href="/investor">查看投资人</a>
+                <a href="http://help.angelcrunch.com/sd">了解闪投</a>
+                <a class="back" href="/">首页</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}<script src="/js/regist-1ab02623ec.js"></script>{% endblock %}

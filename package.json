@@ -1,0 +1,17 @@
+{
+  "name": "ac-m",
+  "description": "ac-m",
+  "version": "3.2.1",
+  "scripts": {
+    "dev": "node index.js"
+  },
+  "private": true,
+  "dependencies": {
+    "express": "4.x",
+    "request": "^2.67.0",
+    "swig": "^1.4.2"
+  },
+  "devDependencies": {
+    "laravel-elixir": "^6.0.0-11"
+  }
+}

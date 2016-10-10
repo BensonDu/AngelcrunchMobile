@@ -1,0 +1,8 @@
+{
+  "apps" : [{
+    "name"        : "m",
+    "script"      : "index.js",
+    "watch"       : ["config","controller","public","views","index.js","package.json"],
+    "log_date_format"  : "YYYY-MM-DD HH:mm Z"
+  }]
+}

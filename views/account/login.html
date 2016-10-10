@@ -1,0 +1,97 @@
+{% extends './../template/layout.html' %}
+
+{% block title %}{$title$}{%endblock%}
+
+{% block keywords %}{$keywords$}{% endblock %}
+
+{% block description %}{$description$}{% endblock %}
+
+{% block style %}<link href="/css/login-4d0b9c4177.css" rel="stylesheet"/>{%endblock%}
+
+{% block content %}<div class="bk"></div>
+<div class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
+<div id="details" class="details">
+    <!--登陆部分-->
+    <div id="login-page" class="main-page slide-page">
+        <div id="head-container" class="head-container">
+            <div id="header" class="newhead">
+                <div class="logo touch-href" data-href="/"></div>
+            </div>
+        </div>
+        <div class="tab"><a class="left active">登录</a><a id="regist_link" class="right">注册</a></div>
+        <div class="login-container">
+            <form action="/" method="post">
+                <label><span>邮箱/手机</span><i><input id="account" type="text" name="account" value="" /></i></label>
+                <label><span>密码</span><i><input id="pwd" type="password" name="password" value="" /></i></label>
+            </form>
+            <div class="forget"><a href="#forget:1">忘记密码？</a></div>
+            <a id="subbmit-btn" class="submit-new-btn"><img src="http://dn-acac.qbox.me/mobile/homepage/btn-arrow-left.png"></a>
+        </div>
+    </div>
+    <!--登陆部分结束-->
+    <!--找回密码开始-->
+    <div id="forget-page" class="forget-page slide-page grey">
+        <!--找回密码头部-->
+        <div class="header"><a href="javascript:history.go(-1)"></a><h3>选择找回方式</h3></div>
+        <div class="child-container">
+            <!--选择找回方式-->
+            <div id="forget-choose" class="choose child-page">
+                <ul>
+                    <a href="#forget:2"><li id="item-phone" class="phone"><p>&nbsp;&nbsp;&nbsp;通过手机号码找回密码</p></li></a>
+                    <a href="#forget:3"><li id="item-mail" class="mail"><p>&nbsp;&nbsp;&nbsp;通过验证邮箱找回密码</p></li></a>
+                </ul>
+            </div>
+            <!--手机号码找回-->
+            <div id="phone-form" class="phone-form modules child-page hidden">
+                <label>
+                    <span>手机号码</span>
+                    <i>
+                        <input id="forget-phone" type="tel" name="phone" value="" maxlength="11"  />
+                        <button id="forget-verify-btn" class="verify-btn btn disable">验证</button>
+                    </i>
+                </label>
+
+                <label>
+                    <span>验证码</span>
+                    <i><input id="forget-verify-code" type="number" name="code" value="" maxlength="6"  placeholder="请输入短信验证码" disabled/></i>
+                </label>
+
+                <label>
+                    <span>新密码</span>
+                    <i><input id="forget-pwd" type="password" name="password" value="" maxlength="16" /><em class="vector-icons eye"></em></i>
+                </label>
+
+                <label>
+                    <span>重复密码</span>
+                    <i><input id="forget-pwdrepeat" type="password" name="password" value="" maxlength="16" /><em class="vector-icons eye"></em></i>
+                </label>
+                <a id="forget-submit-btn-phone" class="submit-new-btn"><img src="http://dn-acac.qbox.me/mobile/homepage/btn-arrow-left.png"></a>
+            </div>
+            <!--邮箱找回-->
+            <div id="mail-form" class="mail-form child-page hidden">
+                <label>
+                    <span>邮箱</span>
+                    <i><input id="forget-mail" type="email" value="" placeholder="输入注册邮箱"/></i>
+                </label>
+                <div></div>
+                <a id="forget-submit-btn-mail" class="submit-new-btn"><img src="http://dn-acac.qbox.me/mobile/homepage/btn-arrow-left.png"></a>
+            </div>
+        </div>
+    </div>
+    <!--找回密码结束-->
+</div>
+<!--弹出层 找回密码结果-->
+<div id="forget-success" class="new-page-result get-pwd-success">
+    <div class="close">×</div>
+    <div class="mg"></div>
+    <div class="img"><img src="http://dn-acac.qbox.me/mobile/public/icon_done_1.png"></div>
+    <h3></h3>
+    <h6></h6>
+    <div class="btn-group">
+        <a></a>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}<script src="/js/login-f2b7c2270e.js"></script>
+{% endblock %}

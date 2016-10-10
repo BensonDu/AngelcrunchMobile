@@ -1,0 +1,71 @@
+{% extends './../template/layout.html' %}
+
+{% block title %}{$title$}{%endblock%}
+
+{% block keywords %}{$keywords$}{% endblock %}
+
+{% block description %}{$description$}{% endblock %}
+
+{% block style %}{% parent %}
+<link href="/css/user_detail.css" rel="stylesheet" />{%endblock%}
+
+{% block content %}<div class="bk"></div>
+<div class="details entrepreneurs" ms-controller="entrepreneurs-details">
+    <div id="login-failed" class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
+    <div id="header" class="newhead">
+        <div class="logo touch-href" data-href="/"></div>
+        <div class="options">
+            <span></span>
+            <ul class="hidden-menu">
+                <li class="touch-href" data-href="/startup">闪投项目</li>
+                <li class="touch-href" data-href="/startup#type:com-industry:-district:-order:new">最新项目</li>
+                <li class="touch-href border" data-href="/investor">投资人</li>
+                <li class="line"></li>
+            </ul>
+        </div>
+        <div class="account">
+            <span></span>
+            <ul class="hidden-menu"></ul>
+        </div>
+    </div>
+    <div class="personal-info">
+        <img ms-src="data.avatar" width="100%" height="auto">
+    </div>
+    <div class="personal-brief">
+        <h3><span ms-text="data.name"></span><span ms-if="data.company.length+data.title.length>0">·</span><span ms-text="data.company"></span><span>&nbsp;</span><span ms-text="data.title"></span></h3>
+        <h4><span ms-text="data.business"></span></h4>
+    </div>
+    <div class="pesonal-info">
+        <div ms-if="data.summary.length">
+            <h1>简介</h1>
+            <p ms-html="data.summary"></p>
+        </div>
+    </div>
+    <div class="pesonal-info entre-info">
+        <section ms-if="data.style.length">
+            <h1>创业理念</h1>
+            <p ms-text="data.style"></p>
+        </section>
+        <section ms-if="data.career.length">
+            <h1>工作经历</h1>
+            <p ms-repeat="data.career" ms-text="el.company+'·'+el.title"></p>
+        </section>
+        <section ms-if="data.edu.length">
+            <h1>教育经历</h1>
+            <p ms-repeat="data.edu" ms-text="el.school+'&nbsp;'+el.degress+'&nbsp;'+el.major"></p>
+        </section>
+    </div>
+    <div id="page-action" class="page-action">
+        <div class="btn-group center">
+            <button id="follow-btn" class="btn btn-small white-border" data-btn-reverse-text="已关注">关注该创业者</button>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}{% parent %}
+<script src="http://dn-acac.qbox.me/avalon.mobile.min.js"></script>
+<script src="/js/base.js?"></script>
+<script src="/js/entre_detail.js"></script>
+{% endblock %}
+{% block analysis %}{% parent %}{% endblock %}

@@ -1,0 +1,40 @@
+{% extends './../template/layout.html' %}
+
+{% block title %}{$title$}{%endblock%}
+
+{% block keywords %}{$keywords$}{% endblock %}
+
+{% block description %}{$description$}{% endblock %}
+
+{% block style %}<link href="/css/bp-417790a6f4.css" rel="stylesheet" />{%endblock%}
+
+{% block content %}<div class="no-authority">
+    <div class="mg"></div>
+    <div class="logo">
+        <img src="http://dn-xswe.qbox.me/13168760?imageMogr2/thumbnail/340x">
+    </div>
+    <p>商业计划书<br>仅对天使汇<span>认证投资人</span>公开</p>
+    <div class="btn-group">
+        <a id="apply">申请成为天使汇认证投资人</a>
+    </div>
+</div>
+<div class="error">
+    <div class="mg"></div>
+    <div class="logo">
+        <img src="http://dn-acac.qbox.me/404_atm.png">
+    </div>
+    <p>资源请求出错！</p>
+    <div class="btn-group">
+        <a href="http://angelcrunch.com">返回首页</a>
+    </div>
+</div>
+<div class="page-num">
+    <p><span id="page-num-index">1</span><span>/</span><span id="page-num-total">30</span></p>
+</div>
+<div class="details">
+    <ul id="list-container" class="bp-container"></ul>
+</div>
+{% endblock %}
+
+{% block script %}<script src="/js/bp-2e3675e885.js"></script>{% endblock %}
+{% block analysis %}{% parent %}{% endblock %}

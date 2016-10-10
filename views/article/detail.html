@@ -1,0 +1,233 @@
+{% extends './../template/layout.html' %}
+
+{% block title %}{$title$}{%endblock%}
+
+{% block keywords %}{$keywords$}{% endblock %}
+
+{% block description %}{$description$}{% endblock %}
+
+{% block style %}<style>
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    a, abbr, acronym, address, big, cite, code,
+    del, dfn, em, font, ins, kbd, bdi, q, s, samp,
+    small, strike, strong, sub, sup, tt, var,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td {
+        border: 0;
+        margin: 0;
+        outline: 0;
+        padding: 0;
+        color: #333;
+        font-size: 14px;
+        font-family: "Lucida Grande","Lucida Sans Unicode","Helvetica","Arial","Verdana","sans-serif";
+        font-style: inherit;
+        font-weight: inherit;
+        -webkit-tap-highlight-color: rgba(255,255,255,0);
+    }
+
+    *,
+    *:before,
+    *:after {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    img {
+        border:0;
+        width: 100% !important;
+    }
+    figure{
+        margin: 5px 0 !important;
+    }
+
+    li,a{
+        overflow:hidden;
+    }
+
+    a{
+        text-decoration:none;
+    }
+
+    li{
+        list-style-type:none;
+        float:left;
+    }
+
+    i {
+        font-style:normal;
+    }
+
+    body {
+        background:#FFF;
+    }
+
+    .details {
+        width:100%;
+        background:#FFF;
+        padding: 3% 5%;
+    }
+
+    .header{
+        width: 100%;
+        padding: 15px 5% 0;
+    }
+    .header h3{
+        font-size: 16px;
+        font-weight: 900;
+        line-height: 22px;
+    }
+    .header p{
+        font-size: 12px;
+        line-height: 20px;
+        margin-top: 10px;
+        color: #999;
+    }
+    .header div{
+        width: 100%;
+        height: 10px;
+        border-bottom: 1px dashed #999;
+    }
+    .footer{
+        width: 100%;
+        padding: 0 4%;
+        margin-top: 20px;
+    }
+    .footer img{
+        display: inline-block;
+        width: 100%;
+        height: auto;
+    }
+    .ac-tag{
+        font-size: inherit;
+        line-height: inherit;
+        color: #039be6;
+    }
+
+</style>{%endblock%}
+
+{% block content %}<div class="header">
+    <h3>{$title$}</h3>
+    <p>{$time$}&nbsp;&nbsp;&nbsp;&nbsp;{$author$}</p>
+    <div></div>
+</div>
+<div class="details">
+    {$content|safe$}
+</div>
+{% if !from_app %}
+<div class="footer">
+    <a href="http://angelcrunch.com/app">
+        <img src="http://dn-acac.qbox.me/mobile/public/Article_download.png">
+    </a>
+</div>
+{% endif %}
+{% endblock %}
+{% block script %}
+<script>
+    window.app = {};
+    window.jump = {};
+    (function(){
+        var self = this,
+                queue = [];
+
+        (function(callback){
+            if (window.WebViewJavascriptBridge) {
+                self.support = true;
+                callback(WebViewJavascriptBridge);
+            } else {
+                document.addEventListener('WebViewJavascriptBridgeReady', function() {
+                    self.support = true;
+                    self.rsyn_task();
+                    callback(WebViewJavascriptBridge);
+                }, false)
+            }
+        })(function(bridge){
+            bridge.init(function(message, responseCallback) {
+                if (responseCallback) {
+                    responseCallback('success');
+                }
+            });
+        });
+
+        this.support = false;
+
+        this.rsyn_task = function(){
+            var fun;
+            if(queue.length > 0){
+                fun = queue.pop();
+                typeof fun == 'function' && fun();
+                self.rsyn_task();
+            }
+            return true;
+        };
+
+        this.ready = function(fun){
+            return queue.unshift(fun);
+        };
+
+        this.call = function(handler,data,response){
+            var callback = function(ret){
+                var data = {};
+                try{data = JSON.parse(ret);} catch(e){}
+                return typeof response == 'function' && response(data);
+            };
+            if(!window.WebViewJavascriptBridge){
+                return self.ready(function(){
+                    window.WebViewJavascriptBridge.callHandler(handler,data, callback);
+                });
+            }
+            return window.WebViewJavascriptBridge.callHandler(handler,data, callback);
+        };
+
+        this.getData = function(type,param,response){
+            return self.call('getData',{
+                type : type,
+                param : param
+            },response);
+        };
+
+        this.putData = function(type,param,response){
+            return self.call('putData',{
+                type : type,
+                param : param
+            },response);
+        };
+
+        this.gotoNative = function(type,param,response){
+            return self.call('gotoNative',{
+                type : type,
+                param : param
+            },response);
+        };
+
+        this.gotoWebview = function(url,param,response){
+            var fun = typeof param == 'function' ? param : (typeof response ==  'function' ? response : function(){}),
+                    data = typeof  param == 'object' ? {param : param}: {param : {}};
+            data.param.url = url;
+            return self.call('gotoWebview',data,response);
+        };
+
+        this.doAction = function(type,param,response){
+            return self.call('doAction',{
+                type : type,
+                param : param
+            },response);
+        };
+
+    }).call(app);
+    //跳转处理
+    (function(){
+        var self = this,
+            login = !!location.href.split('?')[1] ? '?'+location.href.split('?')[1] : '';
+
+        this.gotoProject = function(id){
+            return app.support ? app.gotoNative('projectdetail',{project_id:id}):location.href='http://m.angelcrunch.com/startup/'+id+login
+        };
+        this.gotoInvestor = function(id){
+            return app.support ? app.gotoNative('investordetail',{uid:id}):location.href='http://m.angelcrunch.com/investor/'+id+login
+        };
+    }).call(jump);
+</script>{% endblock %}
+{% block analysis %}{% parent %}{% endblock %}

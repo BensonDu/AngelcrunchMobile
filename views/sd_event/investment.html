@@ -1,0 +1,164 @@
+{% extends './../template/layout.html' %}
+
+{% block title %}{$title$}{%endblock%}
+
+{% block keywords %}{$keywords$}{% endblock %}
+
+{% block description %}{$description$}{% endblock %}
+
+{% block style %}{% parent %}
+<link href="/css/detail.css" rel="stylesheet" />
+<link href="/css/investment.css" rel="stylesheet" />{%endblock%}
+
+{% block content %}<div class="bk"></div>
+<div id="details" class="details">
+    <div class="notification red"><i class="txt">关注失败, 请稍后重试.</i><i class="close">×</i></div>
+    <div id="header" class="newhead">
+        <div class="logo touch-href" data-href="/"></div>
+        <div class="options">
+            <span></span>
+            <ul class="hidden-menu">
+                <li class="touch-href" data-href="/startup">闪投项目</li>
+                <li class="touch-href" data-href="/startup#type:com-industry:-district:-order:new">最新项目
+                </li>
+                <li class="touch-href border" data-href="/investor">投资人</li>
+                <li class="line"></li>
+            </ul>
+        </div>
+        <div class="account">
+            <span></span>
+            <ul class="hidden-menu"></ul>
+        </div>
+    </div>
+
+    <div class="branding-head" ms-controller="basic-info">
+        <div class="icon"><img ms-src="data.logo||''" /></div>
+        <div class="brand-info">
+            <h1 ms-text="data.name"></h1>
+            <p ms-text="data.concept"></p>
+            <p class="extra" ms-text="data.industry"></p>
+        </div>
+        <div class="new-progress-container">
+            <div class="new-progress-group">
+                <div class="new-progress">
+                    <div class="new-progress-bar" ms-css-width="(data.finance_percent > 100 ? 100 : data.finance_percent)+'%'"></div>
+                </div>
+                <div class="new-progress-sta"><p ms-text="data.finance_percent+'%'"></p></div>
+            </div>
+            <p><em ms-if="window.account_info.role>0" ms-text="'投资意向: '+data.amount+'万（预融资'+data.hope_amount+'万)'"></em><em class="right"  ms-if="data.day>0" ms-text="'剩余'+data.day+'天'"></em></p>
+        </div>
+    </div>
+
+    <div class="logged-in">
+
+        <div class="value-info"  ms-controller="buydetails">
+            <div class="before">
+                <div class="text-container">
+                    <p class="amount">{{data.totalprice || 0}}万</p>
+                    <p class="desc">融资前估值</p>
+                </div>
+                <div class="icon-container"><i></i></div>
+            </div>
+            <div class="percent">
+                <div class="icon-container"><i></i></div>
+                <div class="text-container">
+                    <p class="amount">{{data.totalprecent || 0}}%</p>
+                    <p class="desc">出让股权比例</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="choose-bar" ms-controller="buydetails">
+            <p class="desc">每份占股{{data.partprecent}}%，每份最低价格{{data.lowprice}}万人民币</p>
+            <p class="title">认购价格</p>
+            <div class="bar-body">
+                <a class="sta">{{data.partprice}}万元人民币/份</a>
+            </div>
+        </div>
+
+        <div class="choose-bar" ms-controller="buydetails">
+            <p class="title">选择认购的份数</p>
+            <div class="bar-body">
+                <a class="min handle"  ms-on-tap="event.minparts()">-</a>
+                <a class="sta">{{data.parts}}份</a>
+                <a class="add handle"  ms-on-tap="event.addparts()">+</a>
+            </div>
+        </div>
+
+        <div class="calculate-result" ms-controller="buydetails">
+            <div class="left">
+                <div class="icon-container"><i></i></div>
+                <div class="text-container"><p>投资金额￥{{data.total}}万元</p></div>
+            </div>
+            <div class="right">
+                <div class="icon-container"><i></i></div>
+                <div class="text-container"><p>预计占股{{data.precent}}%</p></div>
+            </div>
+        </div>
+
+        <div class="other-value">
+            <textarea placeholder="您能提供的附加价值"></textarea>
+        </div>
+
+        <div class="self-form">
+            <span>姓名</span><i>*</i>
+            <input id="self-form-name">
+        </div>
+
+        <div class="addition-agreement">
+            <p>我已知晓 <a href="/agreement/online">《天使汇在线投资服务协议》</a> 及其附件 <a href="/agreement/risk">《风险揭示书》</a> 中的所有内容 ，并愿意自己承担投资带来的风险。</p>
+            <div class="modules">
+                <div class="mentos-container">
+                    <label class="label">
+                        <input class="mentos" type="checkbox" name="additionalAgreement" value="1" />
+                        <em class="tracks">
+                            <em class="slider-button">
+                                <i>×</i>
+                                <i></i>
+                            </em>
+                        </em>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <a id="submit-btn" class="submit-new-btn"><img src="http://dn-acac.qbox.me/mobile/homepage/btn-arrow-left.png"></a>
+
+    </div>
+
+    <div id="sendresult" class="new-page-result">
+        <div class="content">
+            <img width="56px" height="43px" src="http://dn-acac.qbox.me/mobile/public/success_cross.png">
+            <h1>意向已记录</h1>
+            <br>
+            <h4>我们的投资服务团队会在一个工作日内与您联系，确认投资意向细节。</h4>
+            <div class="btn-group" style="width: 100%; text-align: center; margin-top: 40px;">
+                <a href="javascript: window.history.go(-1)" style="display: inline-block; padding:6px 30% 3px; border: 1px solid #000; border-radius: 3px; font-size: 16px; line-height: 20px;">返回</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="not-open" class="self_notice">
+        <div class="mg"></div>
+        <div class="image"><img src="http://dn-xswe.qbox.me/13168760?imageMogr2/thumbnail/240x"></div>
+        <div class="text">
+            <p><br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;快速认购通道已关闭。您可以<a id="normal-link" href="">［进入该项目首页］</a>，按照正常流程进行项目筛选、发送投资意向。</p>
+        </div>
+        <div class="btn-group">
+            <a href="http://m.angelcrunch.com/">返回首页</a>
+        </div>
+    </div>
+
+    <div class="banner-footer">
+        <p>AngelCrunch.com</p>
+        <p>天使汇 - 让靠谱的项目找到靠谱的钱</p>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}{% parent %}
+<script src="http://dn-acac.qbox.me/avalon.mobile.min.js"></script>
+<script src="/js/base.js?"></script>
+<script src="/js/sd_event/investment.js"></script>
+{% endblock %}
+{% block analysis %}{% parent %}{% endblock %}

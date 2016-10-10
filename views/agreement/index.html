@@ -1,0 +1,132 @@
+{% extends './../template/layout.html' %}
+
+{% block title %}{$title$}{%endblock%}
+
+{% block keywords %}{$keywords$}{% endblock %}
+
+{% block description %}{$description$}{% endblock %}
+
+{% block style %}<style>
+    html, body, div, span, applet, object, iframe,
+    h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+    a, abbr, acronym, address, big, cite, code,
+    del, dfn, em, font, ins, kbd, bdi, q, s, samp,
+    small, strike, strong, sub, sup, tt, var,
+    dl, dt, dd, ol, ul, li,
+    fieldset, form, label, legend,
+    table, caption, tbody, tfoot, thead, tr, th, td {
+        border: 0;
+        margin: 0;
+        outline: 0;
+        padding: 0;
+        color: #333;
+        font-size: 14px;
+        font-family: "Lucida Grande","Lucida Sans Unicode","Helvetica","Arial","Verdana","sans-serif";
+        font-style: inherit;
+        font-weight: inherit;
+        -webkit-tap-highlight-color: rgba(255,255,255,0);
+    }
+
+    *,
+    *:before,
+    *:after {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    img {
+        border:0;
+        width: 100% !important;
+    }
+    figure{
+        margin: 5px 0 !important;
+    }
+
+    li,a{
+        overflow:hidden;
+    }
+
+    a{
+        text-decoration:none;
+    }
+
+    li{
+        list-style-type:none;
+        float:left;
+    }
+
+    i {
+        font-style:normal;
+    }
+
+    body {
+        background:#FFF;
+    }
+
+    .details {
+        width:100%;
+        background:#FFF;
+        padding: 3% 5%;
+    }
+
+    .header{
+        width: 100%;
+        padding: 15px 5% 0;
+    }
+    .header h3{
+        font-size: 24px;
+        line-height: 35px;
+        text-align: center;
+    }
+    .header h5{
+        font-size: 20px;
+        line-height: 40px;
+        text-align: center;
+    }
+    .header div{
+        width: 100%;
+        height: 10px;
+        border-bottom: 1px dashed #999;
+    }
+    .header p{
+        font-size: 12px;
+        line-height: 20px;
+        margin-top: 10px;
+        color: #999;
+    }
+    .footer{
+        width: 100%;
+        padding: 0 4%;
+        margin-top: 20px;
+    }
+    .footer img{
+        display: inline-block;
+        width: 100%;
+        height: auto;
+    }
+    @media only screen and (max-width: 370px){
+        .header h3{
+            font-size: 18px;
+            line-height: 30px;
+        }
+        .header h5{
+            font-size: 16px;
+            line-height: 30px;
+        }
+
+    }
+
+</style>{%endblock%}
+
+{% block content %}<div class="header">
+    <h3>{$author$}</h3>
+    <h5>{$title$}</h5>
+    <div></div>
+</div>
+<div class="details">
+    {$content|safe$}
+</div>
+{% endblock %}
+{% block script %}{% endblock %}
+{% block analysis %}{% parent %}{% endblock %}
